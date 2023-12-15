@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HDR Codec &mdash; tinycio a documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=92fd9be5" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/patch.css?v=77628c61" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=c0846a87"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="White balance" href="scripts_white_balance.html" />
+    <link rel="prev" title="Color to color" href="scripts_color2color.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/tinycio_sm.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">How to:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="howto_hello.html">Hello Color</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_wavelength.html">Look up a wavelength</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_color_value.html">Look up a color value</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_color_space.html">Change an image’s color space</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_hdr.html">Encode HDR data as RGBA PNG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_tone_map.html">Tone map HDR images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_white_balance.html">Apply white balance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_ccbasic.html">Apply basic color correction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_apply_lut.html">Apply LUTs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_bake_lut.html">Bake color correction to a LUT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_autograde.html">Color grade by example</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="example_sweeps.html">Color sweeps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_image_manip.html">Lower-level image manipulation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tinycio.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about_release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about_modules.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Scripts:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="scripts_color2color.html">Color to color</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">HDR Codec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scripts_white_balance.html">White balance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scripts_img2cube.html">Image to CUBE LUT</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/Sam-Izdat/tinycio">GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://pypi.org/project/tinycio/">PyPi</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">tinycio</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">HDR Codec</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/source/scripts_hdr_codec.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="hdr-codec">
+<h1>HDR Codec<a class="headerlink" href="#hdr-codec" title="Permalink to this heading"></a></h1>
+<p>Encode and decode HDR color data to and from low-bit-depth RGBA files.</p>
+<p class="rubric">Summary:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>usage: hdr_codec.py [-h] (--encode | --decode) [--igf ] [--ogf ] [--format {logluv}] input output
+
+Encode and decode high dynamic range color data.
+
+positional arguments:
+  input              Input image file path
+  output             Output image file path
+
+optional arguments:
+  -h, --help         show this help message and exit
+  --encode, -e       Encode mode
+  --decode, -d       Decode mode
+  --igf []           Input graphics format (default: unknown)
+                     CHOICES:
+                         sfloat16, sfloat32
+                         uint8, uint16, uint32
+  --ogf []           Output graphics format (default: unknown)
+                     CHOICES: [same as above]
+  --format {logluv}  Format
+</pre></div>
+</div>
+<p class="rubric">Example usage:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>./hdr_codec.py<span class="w"> </span>--encode<span class="w"> </span>hdr_image.exr<span class="w"> </span>encoded_image.png
+</pre></div>
+</div>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>./hdr_codec.py<span class="w"> </span>--decode<span class="w"> </span>encoded_image.png<span class="w"> </span>hdr_image.exr
+</pre></div>
+</div>
+<p class="rubric">Script:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="sd">&quot;&quot;&quot;Encode and decode high dynamic range color data.&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">from</span> <span class="nn">argparse</span> <span class="kn">import</span> <span class="n">RawTextHelpFormatter</span>
+<span class="kn">from</span> <span class="nn">tinycio</span> <span class="kn">import</span> <span class="n">fsio</span><span class="p">,</span> <span class="n">Codec</span>
+
+<span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="vm">__doc__</span><span class="p">,</span> <span class="n">formatter_class</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">RawTextHelpFormatter</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;input&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Input image file path&#39;</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;output&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Output image file path&#39;</span><span class="p">)</span>
+<span class="n">mode</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">add_mutually_exclusive_group</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">mode</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--encode&#39;</span><span class="p">,</span> <span class="s1">&#39;-e&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Encode mode&#39;</span><span class="p">)</span>
+<span class="n">mode</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--decode&#39;</span><span class="p">,</span> <span class="s1">&#39;-d&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Decode mode&#39;</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+    <span class="s1">&#39;--igf&#39;</span><span class="p">,</span> 
+    <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> 
+    <span class="n">default</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span> 
+    <span class="n">const</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span>
+    <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;?&#39;</span><span class="p">,</span>
+    <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;sfloat16&#39;</span><span class="p">,</span><span class="s1">&#39;sfloat32&#39;</span><span class="p">,</span><span class="s1">&#39;uint8&#39;</span><span class="p">,</span><span class="s1">&#39;uint16&#39;</span><span class="p">,</span><span class="s1">&#39;uint32&#39;</span><span class="p">],</span>
+    <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> 
+    <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Input graphics format (default: </span><span class="si">%(default)s</span><span class="s1">)</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+        <span class="s1">&#39;CHOICES:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+        <span class="s1">&#39;    sfloat16, sfloat32 </span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+        <span class="s1">&#39;    uint8, uint16, uint32 </span><span class="se">\n</span><span class="s1">&#39;</span>
+    <span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+    <span class="s1">&#39;--ogf&#39;</span><span class="p">,</span>
+    <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> 
+    <span class="n">default</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span> 
+    <span class="n">const</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span>
+    <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;?&#39;</span><span class="p">,</span>
+    <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;sfloat16&#39;</span><span class="p">,</span><span class="s1">&#39;sfloat32&#39;</span><span class="p">,</span><span class="s1">&#39;uint8&#39;</span><span class="p">,</span><span class="s1">&#39;uint16&#39;</span><span class="p">,</span><span class="s1">&#39;uint32&#39;</span><span class="p">],</span>
+    <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Output graphics format (default: </span><span class="si">%(default)s</span><span class="s1">)</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+        <span class="s1">&#39;CHOICES: [same as above]&#39;</span>
+    <span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+    <span class="s1">&#39;--format&#39;</span><span class="p">,</span> 
+    <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> 
+    <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;logluv&#39;</span><span class="p">],</span>
+    <span class="n">default</span><span class="o">=</span><span class="s1">&#39;logluv&#39;</span><span class="p">,</span>
+    <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Format&#39;</span>
+    <span class="p">)</span>
+<span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+
+<span class="n">fp_in</span>   <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">input</span><span class="p">)</span>
+<span class="n">fp_out</span>  <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
+<span class="n">gf_in</span>   <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">igf</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+<span class="n">gf_out</span>  <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">ogf</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">format</span> <span class="o">==</span> <span class="s1">&#39;logluv&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">encode</span><span class="p">:</span>
+            <span class="n">im_hdr</span> <span class="o">=</span> <span class="n">fsio</span><span class="o">.</span><span class="n">load_image</span><span class="p">(</span><span class="n">fp_in</span><span class="p">,</span> <span class="n">graphics_format</span><span class="o">=</span><span class="n">fsio</span><span class="o">.</span><span class="n">GraphicsFormat</span><span class="p">[</span><span class="n">gf_in</span><span class="p">])</span>
+            <span class="n">im_hdr</span> <span class="o">=</span> <span class="n">fsio</span><span class="o">.</span><span class="n">truncate_image</span><span class="p">(</span><span class="n">im_hdr</span><span class="p">)</span>
+            <span class="n">im_logluv</span> <span class="o">=</span> <span class="n">Codec</span><span class="o">.</span><span class="n">logluv_encode</span><span class="p">(</span><span class="n">im_hdr</span><span class="p">)</span>
+            <span class="n">fsio</span><span class="o">.</span><span class="n">save_image</span><span class="p">(</span><span class="n">im_logluv</span><span class="p">,</span> <span class="n">fp_out</span><span class="p">)</span> 
+        <span class="k">elif</span> <span class="n">args</span><span class="o">.</span><span class="n">decode</span><span class="p">:</span>
+            <span class="n">im_logluv</span> <span class="o">=</span> <span class="n">fsio</span><span class="o">.</span><span class="n">load_image</span><span class="p">(</span><span class="n">fp_in</span><span class="p">,</span> <span class="n">graphics_format</span><span class="o">=</span><span class="n">fsio</span><span class="o">.</span><span class="n">GraphicsFormat</span><span class="p">[</span><span class="n">gf_in</span><span class="p">])</span>
+            <span class="n">im_hdr</span> <span class="o">=</span> <span class="n">Codec</span><span class="o">.</span><span class="n">logluv_decode</span><span class="p">(</span><span class="n">im_logluv</span><span class="p">)</span>
+            <span class="n">fsio</span><span class="o">.</span><span class="n">save_image</span><span class="p">(</span><span class="n">im_hdr</span><span class="p">,</span> <span class="n">fp_out</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;unexpected mode&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;unexpected format&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;saved image to: </span><span class="si">{</span><span class="n">fp_out</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;cannot encode/decode: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="scripts_color2color.html" class="btn btn-neutral float-left" title="Color to color" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="scripts_white_balance.html" class="btn btn-neutral float-right" title="White balance" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

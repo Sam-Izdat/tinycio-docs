@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tinycio.correction &mdash; tinycio a documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=92fd9be5" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/patch.css?v=77628c61" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=c0846a87"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/tinycio_sm.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">How to:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_hello.html">Hello Color</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_wavelength.html">Look up a wavelength</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_color_value.html">Look up a color value</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_color_space.html">Change an image’s color space</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_hdr.html">Encode HDR data as RGBA PNG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_tone_map.html">Tone map HDR images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_white_balance.html">Apply white balance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_ccbasic.html">Apply basic color correction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_apply_lut.html">Apply LUTs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_bake_lut.html">Bake color correction to a LUT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_autograde.html">Color grade by example</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/example_sweeps.html">Color sweeps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/example_image_manip.html">Lower-level image manipulation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/tinycio.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/about_release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/about_modules.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">Index</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Scripts:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/scripts_color2color.html">Color to color</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/scripts_hdr_codec.html">HDR Codec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/scripts_white_balance.html">White balance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/scripts_img2cube.html">Image to CUBE LUT</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/Sam-Izdat/tinycio">GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://pypi.org/project/tinycio/">PyPi</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">tinycio</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">tinycio.correction</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for tinycio.correction</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+<span class="kn">import</span> <span class="nn">typing</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
+<span class="kn">from</span> <span class="nn">contextlib</span> <span class="kn">import</span> <span class="n">nullcontext</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">toml</span>
+
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.optim</span> <span class="k">as</span> <span class="nn">optim</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">.numerics</span> <span class="kn">import</span> <span class="n">Float2</span><span class="p">,</span> <span class="n">Float3</span><span class="p">,</span> <span class="n">saturate</span>
+<span class="kn">from</span> <span class="nn">.util.colorutil</span> <span class="kn">import</span> <span class="n">apply_hue_oklab</span><span class="p">,</span> <span class="n">srgb_luminance</span><span class="p">,</span> <span class="n">col_rgb_to_hsv</span><span class="p">,</span> <span class="n">col_hsv_to_rgb</span><span class="p">,</span> <span class="n">col_okhsv_to_srgb</span>
+<span class="kn">from</span> <span class="nn">.util.miscutil</span> <span class="kn">import</span> <span class="n">version_check_minor</span>
+<span class="kn">from</span> <span class="nn">.colorspace</span> <span class="kn">import</span> <span class="n">ColorSpace</span>
+<span class="kn">from</span> <span class="nn">.lut</span> <span class="kn">import</span> <span class="n">LookupTable</span>
+<span class="kn">from</span> <span class="nn">.fsio.format</span> <span class="kn">import</span> <span class="n">LUTFormat</span>
+<span class="kn">from</span> <span class="nn">.loss</span> <span class="kn">import</span> <span class="n">feature_moments_caculation</span>
+<span class="kn">from</span> <span class="nn">.globals</span> <span class="kn">import</span> <span class="n">TINYCIO_VERSION</span>
+
+<div class="viewcode-block" id="ColorCorrection"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.ColorCorrection">[docs]</a><span class="k">class</span> <span class="nc">ColorCorrection</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;    </span>
+<span class="sd">    Apply color correction to an image. Example:</span>
+
+<span class="sd">    .. highlight:: python</span>
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">        cc = ColorCorrection()</span>
+<span class="sd">        cc.set_contrast(1.3)</span>
+<span class="sd">        im_corrected = cc.apply(im_cc)</span>
+
+<span class="sd">    .. note::</span>
+<span class="sd">        Any *hue* and *saturation* parameters use perceptually linear values of the OKHSV color space.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">__contrast_midpoint</span>         <span class="o">=</span> <span class="mf">0.5</span>
+    <span class="n">__eps</span>                       <span class="o">=</span> <span class="mf">1e-5</span>
+
+    <span class="n">__range_exposure_bias</span>       <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">5.</span><span class="p">,</span> <span class="o">+</span><span class="mf">5.</span><span class="p">)</span>
+    <span class="n">__range_color_filter_h</span>      <span class="o">=</span> <span class="p">(</span><span class="o">+</span><span class="mf">0.</span><span class="p">,</span> <span class="o">+</span><span class="mf">1.</span><span class="p">)</span>
+    <span class="n">__range_color_filter_s</span>      <span class="o">=</span> <span class="p">(</span><span class="o">+</span><span class="mf">0.</span><span class="p">,</span> <span class="o">+</span><span class="mf">1.</span><span class="p">)</span>
+    <span class="n">__range_hue_delta</span>           <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span> <span class="o">+</span><span class="mf">1.</span><span class="p">)</span>
+    <span class="n">__range_saturation</span>          <span class="o">=</span> <span class="p">(</span><span class="o">+</span><span class="mf">0.</span><span class="p">,</span> <span class="o">+</span><span class="mf">4.</span><span class="p">)</span>
+    <span class="n">__range_contrast</span>            <span class="o">=</span> <span class="p">(</span><span class="o">+</span><span class="mf">0.</span><span class="p">,</span> <span class="o">+</span><span class="mf">4.</span><span class="p">)</span>
+    <span class="n">__range_shadow_color_h</span>      <span class="o">=</span> <span class="p">(</span><span class="o">+</span><span class="mf">0.</span><span class="p">,</span> <span class="o">+</span><span class="mf">1.</span><span class="p">)</span>
+    <span class="n">__range_shadow_color_s</span>      <span class="o">=</span> <span class="p">(</span><span class="o">+</span><span class="mf">0.</span><span class="p">,</span> <span class="o">+</span><span class="mf">1.</span><span class="p">)</span>
+    <span class="n">__range_midtone_color_h</span>     <span class="o">=</span> <span class="p">(</span><span class="o">+</span><span class="mf">0.</span><span class="p">,</span> <span class="o">+</span><span class="mf">1.</span><span class="p">)</span>
+    <span class="n">__range_midtone_color_s</span>     <span class="o">=</span> <span class="p">(</span><span class="o">+</span><span class="mf">0.</span><span class="p">,</span> <span class="o">+</span><span class="mf">1.</span><span class="p">)</span>
+    <span class="n">__range_highlight_color_h</span>   <span class="o">=</span> <span class="p">(</span><span class="o">+</span><span class="mf">0.</span><span class="p">,</span> <span class="o">+</span><span class="mf">1.</span><span class="p">)</span>
+    <span class="n">__range_highlight_color_s</span>   <span class="o">=</span> <span class="p">(</span><span class="o">+</span><span class="mf">0.</span><span class="p">,</span> <span class="o">+</span><span class="mf">1.</span><span class="p">)</span>
+    <span class="n">__range_shadow_offs</span>         <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">2.</span><span class="p">,</span> <span class="o">+</span><span class="mf">2.</span><span class="p">)</span>
+    <span class="n">__range_midtone_offs</span>        <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">2.</span><span class="p">,</span> <span class="o">+</span><span class="mf">2.</span><span class="p">)</span>
+    <span class="n">__range_highlight_offs</span>      <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">2.</span><span class="p">,</span> <span class="o">+</span><span class="mf">2.</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">exposure_bias</span>      <span class="o">=</span> <span class="mf">0.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">color_filter</span>       <span class="o">=</span> <span class="n">Float3</span><span class="p">(</span><span class="mf">1.</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hue_delta</span>          <span class="o">=</span> <span class="mf">0.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">saturation</span>         <span class="o">=</span> <span class="mf">1.</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">contrast</span>           <span class="o">=</span> <span class="mf">1.</span>
+
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">shadow_color</span>       <span class="o">=</span> <span class="n">Float3</span><span class="p">(</span><span class="mf">0.</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">midtone_color</span>      <span class="o">=</span> <span class="n">Float3</span><span class="p">(</span><span class="mf">0.</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">highlight_color</span>    <span class="o">=</span> <span class="n">Float3</span><span class="p">(</span><span class="mf">0.</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">shadow_offset</span>      <span class="o">=</span> <span class="mf">0.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">midtone_offset</span>     <span class="o">=</span> <span class="mf">0.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">highlight_offset</span>   <span class="o">=</span> <span class="mf">0.</span>
+
+
+<div class="viewcode-block" id="ColorCorrection.apply"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.ColorCorrection.apply">[docs]</a>    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">im</span><span class="p">:</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Apply color correction to image tensor in ACEScc color space.</span>
+
+<span class="sd">        :param im: Image tensor sized [C=3, H, W] in ACEScc color space.</span>
+<span class="sd">        :return: Color corrected image tensor.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__eval_all</span><span class="p">(</span><span class="n">im</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ColorCorrection.fit_to_image"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.ColorCorrection.fit_to_image">[docs]</a>    <span class="k">def</span> <span class="nf">fit_to_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+        <span class="n">im_source</span><span class="p">:</span><span class="n">Union</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">ColorImage</span><span class="p">],</span> 
+        <span class="n">im_target</span><span class="p">:</span><span class="n">Union</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">ColorImage</span><span class="p">],</span> 
+        <span class="n">steps</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> 
+        <span class="n">learning_rate</span><span class="p">:</span><span class="nb">float</span><span class="o">=</span><span class="mf">0.003</span><span class="p">,</span>
+        <span class="n">strength</span><span class="p">:</span><span class="nb">float</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span>
+        <span class="n">allow_hue_shift</span><span class="p">:</span><span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">fit_height</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span>
+        <span class="n">fit_width</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span>
+        <span class="n">device</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s1">&#39;cuda&#39;</span><span class="p">,</span>
+        <span class="n">context</span><span class="p">:</span><span class="nb">callable</span><span class="o">=</span><span class="kc">None</span>
+        <span class="p">)</span>  <span class="o">-&gt;</span> <span class="n">ColorCorrection</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Perform gradient descent on the color correction settings, so that the appearance  </span>
+<span class="sd">        of the source image matches the target.</span>
+
+<span class="sd">        :param im_source: Source image tensor. Values must be in range [0, 1].</span>
+<span class="sd">        :type im_source: torch.Tensor | ColorImage</span>
+<span class="sd">        :param im_target: Target image tensor.</span>
+<span class="sd">        :type im_target: torch.Tensor | ColorImage</span>
+<span class="sd">        :param steps: Number of optimization steps.</span>
+<span class="sd">        :param learning_rate: Learning rate for gradient descent.</span>
+<span class="sd">        :param strength: Strength of the effect in range [0, 1].</span>
+<span class="sd">        :param allow_hue_shift: Allow the optimizer to shift the hue.</span>
+<span class="sd">        :param fit_height: Image tensors will be interpolated to this height for evaluation.</span>
+<span class="sd">        :param fit_width: Image tensors will be interpolated to this width for evaluation.</span>
+<span class="sd">        :param device: Device for gradient descent (if None will use input tensor device).</span>
+<span class="sd">        :return: True when completed</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="mf">0.</span> <span class="o">&lt;=</span> <span class="n">strength</span> <span class="o">&lt;=</span> <span class="mf">1.</span><span class="p">,</span> <span class="s2">&quot;strength must be in range [0, 1]&quot;</span>
+        <span class="n">im_source</span> <span class="o">=</span> <span class="n">im_source</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+        <span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="n">device</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span> <span class="k">if</span> <span class="n">device</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">im_source</span><span class="o">.</span><span class="n">device</span>
+        <span class="n">im_source</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span>
+            <span class="n">im_source</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> 
+            <span class="n">size</span><span class="o">=</span><span class="p">[</span><span class="n">fit_height</span><span class="p">,</span> <span class="n">fit_width</span><span class="p">],</span> 
+            <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;bicubic&#39;</span><span class="p">,</span> 
+            <span class="n">align_corners</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="mf">1.</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+        
+        <span class="n">im_target</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span>
+            <span class="n">im_target</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> 
+            <span class="n">size</span><span class="o">=</span><span class="p">[</span><span class="n">fit_height</span><span class="p">,</span> <span class="n">fit_width</span><span class="p">],</span> 
+            <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;bicubic&#39;</span><span class="p">,</span> 
+            <span class="n">align_corners</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="mf">1.</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+        <span class="n">__ctx</span> <span class="o">=</span> <span class="n">context</span> <span class="k">if</span> <span class="n">context</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">callable</span><span class="p">(</span><span class="n">context</span><span class="p">)</span> <span class="k">else</span> <span class="n">nullcontext</span>
+        <span class="n">r_exp</span>   <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__range_exposure_bias</span>
+        <span class="n">r_hue</span>   <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__range_hue_delta</span>
+        <span class="n">r_con</span>   <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__range_contrast</span>
+        <span class="n">r_sat</span>   <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__range_saturation</span>
+        <span class="n">r_sho</span>   <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__range_shadow_offs</span>
+        <span class="n">r_mio</span>   <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__range_midtone_offs</span>
+        <span class="n">r_hio</span>   <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__range_highlight_offs</span>
+
+        <span class="k">with</span> <span class="n">__ctx</span><span class="p">()</span> <span class="k">as</span> <span class="n">ctx</span><span class="p">:</span> <span class="c1">#, torch.autograd.set_detect_anomaly(True):</span>
+            <span class="n">cb_callable</span> <span class="o">=</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="s1">&#39;update_fit_status&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">callable</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">update_fit_status</span><span class="p">)</span>
+            <span class="n">cb</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">update_fit_status</span> <span class="k">if</span> <span class="n">cb_callable</span> <span class="k">else</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">:</span> <span class="kc">None</span>
+
+            <span class="n">cc_ten</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">19</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+            <span class="n">cc_ten</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">exposure_bias</span><span class="p">)</span>
+            <span class="n">cc_ten</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">color_filter</span><span class="o">.</span><span class="n">r</span><span class="p">)</span>
+            <span class="n">cc_ten</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">color_filter</span><span class="o">.</span><span class="n">g</span><span class="p">)</span>
+            <span class="n">cc_ten</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">color_filter</span><span class="o">.</span><span class="n">b</span><span class="p">)</span>
+            <span class="n">cc_ten</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hue_delta</span><span class="p">)</span>
+            <span class="n">cc_ten</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">saturation</span><span class="p">)</span>
+            <span class="n">cc_ten</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">contrast</span><span class="p">)</span>
+            <span class="n">cc_ten</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shadow_color</span><span class="o">.</span><span class="n">r</span><span class="p">)</span>
+            <span class="n">cc_ten</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shadow_color</span><span class="o">.</span><span class="n">g</span><span class="p">)</span>
+            <span class="n">cc_ten</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shadow_color</span><span class="o">.</span><span class="n">b</span><span class="p">)</span>
+            <span class="n">cc_ten</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">midtone_color</span><span class="o">.</span><span class="n">r</span><span class="p">)</span>
+            <span class="n">cc_ten</span><span class="p">[</span><span class="mi">11</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">midtone_color</span><span class="o">.</span><span class="n">g</span><span class="p">)</span>
+            <span class="n">cc_ten</span><span class="p">[</span><span class="mi">12</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">midtone_color</span><span class="o">.</span><span class="n">b</span><span class="p">)</span>
+            <span class="n">cc_ten</span><span class="p">[</span><span class="mi">13</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">highlight_color</span><span class="o">.</span><span class="n">r</span><span class="p">)</span>
+            <span class="n">cc_ten</span><span class="p">[</span><span class="mi">14</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">highlight_color</span><span class="o">.</span><span class="n">g</span><span class="p">)</span>
+            <span class="n">cc_ten</span><span class="p">[</span><span class="mi">15</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">highlight_color</span><span class="o">.</span><span class="n">b</span><span class="p">)</span>
+            <span class="n">cc_ten</span><span class="p">[</span><span class="mi">16</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shadow_offset</span><span class="p">)</span>
+            <span class="n">cc_ten</span><span class="p">[</span><span class="mi">17</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">midtone_offset</span><span class="p">)</span>
+            <span class="n">cc_ten</span><span class="p">[</span><span class="mi">18</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">highlight_offset</span><span class="p">)</span>
+            <span class="n">ccs</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">cc_ten</span><span class="p">)</span>
+            <span class="n">ccs</span><span class="o">.</span><span class="n">requires_grad_</span><span class="p">()</span>
+            <span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">([</span><span class="n">ccs</span><span class="p">],</span> <span class="n">lr</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">)</span>
+
+            <span class="n">area</span> <span class="o">=</span> <span class="n">fit_height</span> <span class="o">*</span> <span class="n">fit_height</span>
+            <span class="n">fm_mean_scale</span> <span class="o">=</span> <span class="n">area</span>
+            <span class="n">fm_p2_scale</span> <span class="o">=</span> <span class="n">area</span> <span class="o">/</span> <span class="mf">32.</span>
+            <span class="n">fm_p3_scale</span> <span class="o">=</span> <span class="n">area</span> <span class="o">/</span> <span class="mf">64.</span>
+            <span class="n">selfsim_scale</span> <span class="o">=</span> <span class="n">area</span>
+            <span class="n">sat_scale</span> <span class="o">=</span> <span class="n">area</span> <span class="o">/</span> <span class="mf">2.</span>
+
+            <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">steps</span><span class="p">):</span>
+                <span class="n">t_source</span> <span class="o">=</span> <span class="n">im_source</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+                <span class="n">t_source</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__eval_exposure</span><span class="p">(</span><span class="n">t_source</span><span class="p">,</span> 
+                    <span class="n">exposure_bias</span><span class="o">=</span><span class="n">ccs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="n">r_exp</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">r_exp</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> 
+                    <span class="n">color_filter</span><span class="o">=</span><span class="p">(</span>
+                        <span class="n">ccs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">),</span> 
+                        <span class="n">ccs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">),</span> 
+                        <span class="n">ccs</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)))</span>
+                <span class="k">if</span> <span class="n">allow_hue_shift</span><span class="p">:</span>
+                    <span class="n">t_source</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__eval_hue</span><span class="p">(</span><span class="n">t_source</span><span class="p">,</span> 
+                        <span class="n">hue_delta</span><span class="o">=</span><span class="n">ccs</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="n">r_hue</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">r_hue</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+                <span class="n">t_source</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__eval_saturation</span><span class="p">(</span><span class="n">t_source</span><span class="p">,</span> 
+                    <span class="n">saturation</span><span class="o">=</span><span class="n">ccs</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="n">r_sat</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">r_sat</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+                <span class="n">t_source</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__eval_contrast</span><span class="p">(</span><span class="n">t_source</span><span class="p">,</span> 
+                    <span class="n">contrast</span><span class="o">=</span><span class="n">ccs</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="n">r_con</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">r_con</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+                <span class="n">t_source</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__eval_lift_gamma_gain</span><span class="p">(</span><span class="n">t_source</span><span class="p">,</span>
+                    <span class="n">shc</span><span class="o">=</span><span class="p">(</span><span class="n">ccs</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">),</span> 
+                        <span class="n">ccs</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">),</span> 
+                        <span class="n">ccs</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)),</span>
+                    <span class="n">mic</span><span class="o">=</span><span class="p">(</span><span class="n">ccs</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">),</span> 
+                        <span class="n">ccs</span><span class="p">[</span><span class="mi">11</span><span class="p">]</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">),</span> 
+                        <span class="n">ccs</span><span class="p">[</span><span class="mi">12</span><span class="p">]</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)),</span> 
+                    <span class="n">hic</span><span class="o">=</span><span class="p">(</span><span class="n">ccs</span><span class="p">[</span><span class="mi">13</span><span class="p">]</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">),</span> 
+                        <span class="n">ccs</span><span class="p">[</span><span class="mi">14</span><span class="p">]</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">),</span> 
+                        <span class="n">ccs</span><span class="p">[</span><span class="mi">15</span><span class="p">]</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)),</span>
+                    <span class="n">sho</span><span class="o">=</span><span class="n">ccs</span><span class="p">[</span><span class="mi">16</span><span class="p">]</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="n">r_sho</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">r_sho</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> 
+                    <span class="n">mio</span><span class="o">=</span><span class="n">ccs</span><span class="p">[</span><span class="mi">17</span><span class="p">]</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="n">r_mio</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">r_mio</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> 
+                    <span class="n">hio</span><span class="o">=</span><span class="n">ccs</span><span class="p">[</span><span class="mi">18</span><span class="p">]</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="n">r_hio</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">r_hio</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+                    <span class="p">)</span>
+
+                <span class="n">loss</span> <span class="o">=</span> <span class="mf">0.</span>
+
+                <span class="c1"># Main feature loss</span>
+                <span class="n">feat_source_mean</span><span class="p">,</span> <span class="n">feat_source_p2</span><span class="p">,</span> <span class="n">feat_source_p3</span> <span class="o">=</span> <span class="n">feature_moments_caculation</span><span class="p">(</span><span class="n">t_source</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+                <span class="n">feat_target_mean</span><span class="p">,</span> <span class="n">feat_target_p2</span><span class="p">,</span> <span class="n">feat_target_p3</span> <span class="o">=</span> <span class="n">feature_moments_caculation</span><span class="p">(</span><span class="n">im_target</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+                <span class="n">loss</span> <span class="o">+=</span> <span class="n">F</span><span class="o">.</span><span class="n">mse_loss</span><span class="p">(</span><span class="n">feat_source_mean</span><span class="p">,</span> <span class="n">feat_target_mean</span><span class="p">)</span> <span class="o">*</span> <span class="n">fm_mean_scale</span> <span class="o">*</span> <span class="n">strength</span> 
+                <span class="n">loss</span> <span class="o">+=</span> <span class="n">F</span><span class="o">.</span><span class="n">mse_loss</span><span class="p">(</span><span class="n">feat_source_p2</span><span class="p">,</span> <span class="n">feat_target_p2</span><span class="p">)</span> <span class="o">*</span> <span class="n">fm_p2_scale</span> <span class="o">*</span> <span class="n">strength</span> 
+                <span class="n">loss</span> <span class="o">+=</span> <span class="n">F</span><span class="o">.</span><span class="n">mse_loss</span><span class="p">(</span><span class="n">feat_source_p3</span><span class="p">,</span> <span class="n">feat_target_p3</span><span class="p">)</span> <span class="o">*</span> <span class="n">fm_p3_scale</span> <span class="o">*</span> <span class="n">strength</span> 
+
+                  
+                <span class="c1"># Additional saturation-focused loss</span>
+                <span class="n">sat_s</span> <span class="o">=</span> <span class="n">srgb_luminance</span><span class="p">(</span><span class="n">t_source</span><span class="p">)</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">t_source</span>
+                <span class="n">sat_t</span> <span class="o">=</span> <span class="n">srgb_luminance</span><span class="p">(</span><span class="n">im_target</span><span class="p">)</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">im_target</span>
+                <span class="n">loss</span> <span class="o">+=</span> <span class="n">F</span><span class="o">.</span><span class="n">mse_loss</span><span class="p">(</span><span class="n">sat_s</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">sat_t</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> <span class="o">*</span> <span class="n">sat_scale</span> <span class="o">*</span> <span class="n">strength</span> 
+                <span class="n">loss</span> <span class="o">+=</span> <span class="n">F</span><span class="o">.</span><span class="n">mse_loss</span><span class="p">(</span><span class="n">sat_s</span><span class="o">.</span><span class="n">std</span><span class="p">(),</span> <span class="n">sat_t</span><span class="o">.</span><span class="n">std</span><span class="p">())</span> <span class="o">*</span> <span class="n">sat_scale</span> <span class="o">*</span> <span class="n">strength</span> 
+
+
+                <span class="c1"># Self-similarity loss</span>
+                <span class="k">if</span> <span class="n">strength</span> <span class="o">&lt;</span> <span class="mf">1.</span><span class="p">:</span> <span class="n">loss</span> <span class="o">+=</span> <span class="n">F</span><span class="o">.</span><span class="n">mse_loss</span><span class="p">(</span><span class="n">t_source</span><span class="p">,</span> <span class="n">im_source</span><span class="p">)</span> <span class="o">*</span> <span class="n">selfsim_scale</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">-</span> <span class="n">strength</span><span class="p">)</span>
+
+                <span class="c1"># Perform backpropagation and optimization step</span>
+                <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+                <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+                <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+                <span class="k">if</span> <span class="n">step</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="n">cb</span><span class="p">(</span><span class="n">step</span> <span class="o">//</span> <span class="mi">10</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">steps</span><span class="p">,</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+
+            <span class="n">res</span> <span class="o">=</span> <span class="n">ccs</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">exposure_bias</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="n">r_exp</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">r_exp</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">color_filter</span> <span class="o">=</span> <span class="n">Float3</span><span class="p">(</span>
+                <span class="n">res</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span> 
+                <span class="n">res</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span> 
+                <span class="n">res</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">hue_delta</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="n">r_hue</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">r_hue</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">saturation</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="n">r_sat</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">r_sat</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">contrast</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="n">r_con</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">r_con</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">shadow_color</span> <span class="o">=</span> <span class="n">Float3</span><span class="p">(</span>
+                <span class="n">res</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span>
+                <span class="n">res</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span>
+                <span class="n">res</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">midtone_color</span> <span class="o">=</span> <span class="n">Float3</span><span class="p">(</span>
+                <span class="n">res</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span>
+                <span class="n">res</span><span class="p">[</span><span class="mi">11</span><span class="p">]</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span>
+                <span class="n">res</span><span class="p">[</span><span class="mi">12</span><span class="p">]</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">highlight_color</span>    <span class="o">=</span> <span class="n">Float3</span><span class="p">(</span>
+                <span class="n">res</span><span class="p">[</span><span class="mi">13</span><span class="p">]</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span>
+                <span class="n">res</span><span class="p">[</span><span class="mi">14</span><span class="p">]</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span>
+                <span class="n">res</span><span class="p">[</span><span class="mi">15</span><span class="p">]</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">shadow_offset</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="mi">16</span><span class="p">]</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="n">r_sho</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">r_sho</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">midtone_offset</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="mi">17</span><span class="p">]</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="n">r_mio</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">r_mio</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">highlight_offset</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="mi">18</span><span class="p">]</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="n">r_hio</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">r_hio</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+
+            <span class="k">return</span> <span class="bp">self</span></div>
+
+<div class="viewcode-block" id="ColorCorrection.save"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.ColorCorrection.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fp</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Save color correction settings to a *toml* file.</span>
+<span class="sd">        </span>
+<span class="sd">        :param fp: Output file path of *toml* file to be saved.</span>
+<span class="sd">        :return: True if successful.</span>
+
+<span class="sd">        .. warning:: </span>
+<span class="sd">            This will overwrite existing files.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">fp</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;domain&quot;</span><span class="p">:</span> <span class="s2">&quot;tinycio&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;tinycio_version&quot;</span><span class="p">:</span> <span class="n">TINYCIO_VERSION</span><span class="p">,</span>
+            <span class="s2">&quot;format&quot;</span><span class="p">:</span> <span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+            <span class="s2">&quot;cc_settings&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;exposure_bias&quot;</span><span class="p">:</span>    <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">exposure_bias</span><span class="p">),</span>
+                <span class="s2">&quot;color_filter&quot;</span><span class="p">:</span>     <span class="p">[</span>
+                    <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">color_filter</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+                    <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">color_filter</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+                    <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">color_filter</span><span class="p">[</span><span class="mi">2</span><span class="p">])],</span>
+                <span class="s2">&quot;hue_delta&quot;</span><span class="p">:</span>        <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hue_delta</span><span class="p">),</span>
+                <span class="s2">&quot;saturation&quot;</span><span class="p">:</span>       <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">saturation</span><span class="p">),</span>
+                <span class="s2">&quot;contrast&quot;</span><span class="p">:</span>         <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">contrast</span><span class="p">),</span>
+                <span class="s2">&quot;shadow_color&quot;</span><span class="p">:</span>     <span class="p">[</span>
+                    <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shadow_color</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+                    <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shadow_color</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+                    <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shadow_color</span><span class="p">[</span><span class="mi">2</span><span class="p">])],</span>
+                <span class="s2">&quot;midtone_color&quot;</span><span class="p">:</span>    <span class="p">[</span>
+                    <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">midtone_color</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+                    <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">midtone_color</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+                    <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">midtone_color</span><span class="p">[</span><span class="mi">2</span><span class="p">])],</span>
+                <span class="s2">&quot;highlight_color&quot;</span><span class="p">:</span>  <span class="p">[</span>
+                    <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">highlight_color</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+                    <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">highlight_color</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+                    <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">highlight_color</span><span class="p">[</span><span class="mi">2</span><span class="p">])],</span>
+                <span class="s2">&quot;shadow_offset&quot;</span><span class="p">:</span>    <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shadow_offset</span><span class="p">),</span>
+                <span class="s2">&quot;midtone_offset&quot;</span><span class="p">:</span>   <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">midtone_offset</span><span class="p">),</span>
+                <span class="s2">&quot;highlight_offset&quot;</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">highlight_offset</span><span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">tf</span><span class="p">:</span>
+            <span class="n">toml</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">tf</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="ColorCorrection.load"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.ColorCorrection.load">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">fp</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">force</span><span class="p">:</span><span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ColorCorrection</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Load color correction settings from *toml* file.</span>
+<span class="sd">        </span>
+<span class="sd">        :param fp: File path of *toml* file to be loaded.</span>
+<span class="sd">        :param force: If set to True, ignores version mismatch forces loading the file.</span>
+<span class="sd">        :return: :class:`.ColorCorrection` object with settings loaded.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">fp</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span> <span class="k">as</span> <span class="n">tf</span><span class="p">:</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">toml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">tf</span><span class="p">)</span>
+
+            <span class="n">domain</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;domain&#39;</span><span class="p">])</span>
+            <span class="n">dfmt</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;format&#39;</span><span class="p">])</span>
+            <span class="n">version_check</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">force</span><span class="p">:</span> <span class="n">version_check</span> <span class="o">=</span> <span class="n">version_check_minor</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;tinycio_version&#39;</span><span class="p">]))</span>
+            <span class="k">assert</span> <span class="n">domain</span> <span class="o">==</span> <span class="s2">&quot;tinycio&quot;</span><span class="p">,</span> <span class="s2">&quot;unrecognized toml file&quot;</span>
+            <span class="k">assert</span> <span class="n">version_check</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;minor version mismatch; expected </span><span class="si">{</span><span class="n">TINYCIO_VERSION</span><span class="si">}</span><span class="s2">, got </span><span class="si">{</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;tinycio_version&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="k">assert</span> <span class="n">dfmt</span> <span class="o">==</span> <span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="s2">&quot;unrecognized data format&quot;</span>
+
+            <span class="n">cc</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">()</span>
+            <span class="n">settings</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;cc_settings&#39;</span><span class="p">]</span>
+
+            <span class="c1"># no setters on precomputed color </span>
+            <span class="n">cc</span><span class="o">.</span><span class="n">set_exposure_bias</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s1">&#39;exposure_bias&#39;</span><span class="p">]))</span>
+            <span class="n">cc</span><span class="o">.</span><span class="n">color_filter</span>     <span class="o">=</span> <span class="n">Float3</span><span class="p">(</span>
+                <span class="nb">float</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s1">&#39;color_filter&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]),</span>
+                <span class="nb">float</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s1">&#39;color_filter&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]),</span>
+                <span class="nb">float</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s1">&#39;color_filter&#39;</span><span class="p">][</span><span class="mi">2</span><span class="p">]))</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span>
+            <span class="n">cc</span><span class="o">.</span><span class="n">set_hue_delta</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s1">&#39;hue_delta&#39;</span><span class="p">]))</span>
+            <span class="n">cc</span><span class="o">.</span><span class="n">set_saturation</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s1">&#39;saturation&#39;</span><span class="p">]))</span>
+            <span class="n">cc</span><span class="o">.</span><span class="n">set_contrast</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s1">&#39;contrast&#39;</span><span class="p">]))</span>
+            <span class="n">cc</span><span class="o">.</span><span class="n">shadow_color</span>     <span class="o">=</span> <span class="n">Float3</span><span class="p">(</span>
+                <span class="nb">float</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s1">&#39;shadow_color&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]),</span>
+                <span class="nb">float</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s1">&#39;shadow_color&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]),</span>
+                <span class="nb">float</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s1">&#39;shadow_color&#39;</span><span class="p">][</span><span class="mi">2</span><span class="p">]))</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span>
+            <span class="n">cc</span><span class="o">.</span><span class="n">midtone_color</span>    <span class="o">=</span> <span class="n">Float3</span><span class="p">(</span>
+                <span class="nb">float</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s1">&#39;midtone_color&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]),</span>
+                <span class="nb">float</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s1">&#39;midtone_color&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]),</span>
+                <span class="nb">float</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s1">&#39;midtone_color&#39;</span><span class="p">][</span><span class="mi">2</span><span class="p">]))</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span>
+            <span class="n">cc</span><span class="o">.</span><span class="n">highlight_color</span>  <span class="o">=</span> <span class="n">Float3</span><span class="p">(</span>
+                <span class="nb">float</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s1">&#39;highlight_color&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]),</span>
+                <span class="nb">float</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s1">&#39;highlight_color&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]),</span>
+                <span class="nb">float</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s1">&#39;highlight_color&#39;</span><span class="p">][</span><span class="mi">2</span><span class="p">],))</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span>
+            <span class="n">cc</span><span class="o">.</span><span class="n">set_shadow_offset</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s1">&#39;shadow_offset&#39;</span><span class="p">]))</span>
+            <span class="n">cc</span><span class="o">.</span><span class="n">set_midtone_offset</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s1">&#39;midtone_offset&#39;</span><span class="p">]))</span>
+            <span class="n">cc</span><span class="o">.</span><span class="n">set_highlight_offset</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">settings</span><span class="p">[</span><span class="s1">&#39;highlight_offset&#39;</span><span class="p">]))</span>
+
+            <span class="k">return</span> <span class="n">cc</span></div>
+
+<div class="viewcode-block" id="ColorCorrection.info"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.ColorCorrection.info">[docs]</a>    <span class="k">def</span> <span class="nf">info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">printout</span><span class="p">:</span><span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Print or return a string describing the current color correction settings.</span>
+
+<span class="sd">        :param printout: Print string if True, return string if False</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">infostr</span> <span class="o">=</span> <span class="s2">&quot;CC DESCRIPTION:&quot;</span>
+        <span class="n">infostr</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">===============&quot;</span>
+        <span class="n">infostr</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">CLASS            &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+        <span class="n">infostr</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">EXPOSURE BIAS    &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">exposure_bias</span><span class="p">)</span>
+        <span class="n">infostr</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">COLOR FILTER     &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">color_filter</span><span class="p">)</span>
+        <span class="n">infostr</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">HUE DELTA        &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hue_delta</span><span class="p">)</span>
+        <span class="n">infostr</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">SATURATION       &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">saturation</span><span class="p">)</span>
+        <span class="n">infostr</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">CONTRAST         &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">contrast</span><span class="p">)</span>
+        <span class="n">infostr</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">SHADOW COLOR     &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shadow_color</span><span class="p">)</span>
+        <span class="n">infostr</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">MIDTONE COLOR    &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">midtone_color</span><span class="p">)</span>
+        <span class="n">infostr</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">HIGHLIGHT COLOR  &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">highlight_color</span><span class="p">)</span>
+        <span class="n">infostr</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">SHADOW OFFSET    &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shadow_offset</span><span class="p">)</span>
+        <span class="n">infostr</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">MIDTONE OFFSET   &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">midtone_offset</span><span class="p">)</span>
+        <span class="n">infostr</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">HIGHLIGHT OFFSET &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">highlight_offset</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">printout</span><span class="p">:</span> 
+            <span class="nb">print</span><span class="p">(</span><span class="n">infostr</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="k">return</span> <span class="n">infostr</span></div>
+
+<div class="viewcode-block" id="ColorCorrection.bake_lut"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.ColorCorrection.bake_lut">[docs]</a>    <span class="k">def</span> <span class="nf">bake_lut</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
+        <span class="n">lut_size</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> 
+        <span class="n">lut_color_space</span><span class="p">:</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="p">]</span><span class="o">=</span><span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">ACESCC</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LookupTable</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Bake color correction to a CUBE LUT. </span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">            Regardless of working color space, the LUT will be limited to a [0, 1] range of values.</span>
+
+<span class="sd">        :param lut_size: Size of the LUT. Range [4, 512].</span>
+<span class="sd">        :param lut_color_space: The color space that the LUT should be baked for, as string or IntEnum.</span>
+<span class="sd">        :return: The baked LUT.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="mi">4</span> <span class="o">&lt;=</span> <span class="n">lut_size</span> <span class="o">&lt;=</span> <span class="mi">512</span><span class="p">,</span> <span class="s2">&quot;lut_size must be in range [4, 512]&quot;</span>
+
+        <span class="n">lut</span> <span class="o">=</span> <span class="n">LookupTable</span><span class="o">.</span><span class="n">get_linear</span><span class="p">(</span><span class="n">lut_size</span><span class="p">)</span>
+        <span class="n">lattice</span> <span class="o">=</span> <span class="n">lut</span><span class="o">.</span><span class="n">lattice</span><span class="o">.</span><span class="n">permute</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">cs_lut</span> <span class="o">=</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="p">[</span><span class="n">lut_color_space</span><span class="p">]</span> <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">lut_color_space</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span> <span class="k">else</span> <span class="n">lut_color_space</span>
+        <span class="n">cs_cc</span> <span class="o">=</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">ACESCC</span>
+        <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">lut_size</span><span class="p">):</span>
+            <span class="n">slice_cc</span> <span class="o">=</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">lattice</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">d</span><span class="p">],</span> <span class="n">cs_lut</span><span class="p">,</span> <span class="n">cs_cc</span><span class="p">)</span>
+            <span class="n">lattice</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">d</span><span class="p">]</span> <span class="o">=</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">slice_cc</span><span class="p">),</span> <span class="n">cs_cc</span><span class="p">,</span> <span class="n">cs_lut</span><span class="p">)</span>
+
+        <span class="n">lattice</span> <span class="o">=</span> <span class="n">lattice</span><span class="o">.</span><span class="n">permute</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span>
+        <span class="n">lut_out</span> <span class="o">=</span> <span class="n">LookupTable</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="n">lut_size</span><span class="p">,</span> <span class="n">lattice</span><span class="o">=</span><span class="n">lattice</span><span class="p">,</span> <span class="n">lut_format</span><span class="o">=</span><span class="n">LUTFormat</span><span class="o">.</span><span class="n">CUBE_3D</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">lut_out</span></div>
+
+
+<div class="viewcode-block" id="ColorCorrection.set_color_filter"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.ColorCorrection.set_color_filter">[docs]</a>    <span class="k">def</span> <span class="nf">set_color_filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hue</span><span class="p">:</span><span class="nb">float</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">saturation</span><span class="p">:</span><span class="nb">float</span><span class="o">=</span><span class="mf">0.</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set a color filter. Idempotent assignment.</span>
+
+<span class="sd">        :param hue: Filter hue - perceptually linear (the H from OKHSV). Range [0, 1].</span>
+<span class="sd">        :param saturation: Filter saturation - perceptually linear (the S from OKHSV).</span>
+<span class="sd">            Range [0, 1].</span>
+<span class="sd">        :return: True if successful</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cfhr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__range_color_filter_h</span>
+        <span class="n">cfsr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__range_color_filter_s</span>
+        <span class="k">assert</span> <span class="n">cfhr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">hue</span> <span class="o">&lt;=</span> <span class="n">cfhr</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="sa">f</span><span class="s2">&quot;hue must be in range [</span><span class="si">{</span><span class="n">cfhr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">cfhr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">]&quot;</span>
+        <span class="k">assert</span> <span class="n">cfsr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">saturation</span> <span class="o">&lt;=</span> <span class="n">cfsr</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="sa">f</span><span class="s2">&quot;saturation must be in range [</span><span class="si">{</span><span class="n">cfsr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">cfsr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">]&quot;</span>
+        <span class="n">color_filter_srgb</span> <span class="o">=</span> <span class="n">col_okhsv_to_srgb</span><span class="p">(</span><span class="n">Float3</span><span class="p">(</span><span class="n">hue</span><span class="p">,</span> <span class="n">saturation</span><span class="p">,</span> <span class="mf">1.</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">color_filter</span> <span class="o">=</span> <span class="n">color_filter_srgb</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="ColorCorrection.set_exposure_bias"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.ColorCorrection.set_exposure_bias">[docs]</a>    <span class="k">def</span> <span class="nf">set_exposure_bias</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exposure_bias</span><span class="p">:</span><span class="nb">float</span><span class="o">=</span><span class="mf">0.</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the exposure bias. Idempotent assignment.</span>
+
+<span class="sd">        :param exposure_bias: Exposure bias in f-stops. Range [-5, 5].</span>
+<span class="sd">        :return: True if successful</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ebr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__range_exposure_bias</span>
+        <span class="k">assert</span> <span class="n">ebr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">exposure_bias</span> <span class="o">&lt;=</span> <span class="n">ebr</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="sa">f</span><span class="s2">&quot;exposure_bias must be in range [</span><span class="si">{</span><span class="n">ebr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">ebr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">]&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">exposure_bias</span> <span class="o">=</span> <span class="n">exposure_bias</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="ColorCorrection.set_hue_delta"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.ColorCorrection.set_hue_delta">[docs]</a>    <span class="k">def</span> <span class="nf">set_hue_delta</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hue_delta</span><span class="p">:</span><span class="nb">float</span><span class="o">=</span><span class="mf">0.</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the hue delta, shifting an image&#39;s hues. Idempotent assignment.</span>
+
+<span class="sd">        :param hue_delta: Amount of hue shift - perceptually linear. Range [-1, 1].</span>
+<span class="sd">        :return: True if successful</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">hdr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__range_exposure_bias</span>
+        <span class="k">assert</span> <span class="n">hdr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">hue_delta</span> <span class="o">&lt;=</span> <span class="n">hdr</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="sa">f</span><span class="s2">&quot;hue delta must be in range [</span><span class="si">{</span><span class="n">hdr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">hdr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">]&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hue_delta</span> <span class="o">=</span> <span class="n">hue_delta</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="ColorCorrection.set_saturation"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.ColorCorrection.set_saturation">[docs]</a>    <span class="k">def</span> <span class="nf">set_saturation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">saturation</span><span class="p">:</span><span class="nb">float</span><span class="o">=</span><span class="mf">1.</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the color saturation. Idempotent assignment.</span>
+
+<span class="sd">        :param saturation: Amount of saturation. Range [0, 4].</span>
+<span class="sd">        :return: True if successful</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">sr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__range_saturation</span>
+        <span class="k">assert</span> <span class="n">sr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">saturation</span> <span class="o">&lt;=</span> <span class="n">sr</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="sa">f</span><span class="s2">&quot;saturation must be in range [</span><span class="si">{</span><span class="n">sr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">sr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">]&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">saturation</span> <span class="o">=</span> <span class="n">saturation</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="ColorCorrection.set_contrast"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.ColorCorrection.set_contrast">[docs]</a>    <span class="k">def</span> <span class="nf">set_contrast</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">contrast</span><span class="p">:</span><span class="nb">float</span><span class="o">=</span><span class="mf">1.</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the contrast. Idempotent assignment.</span>
+
+<span class="sd">        :param contrast: Contrast. Range [0, 4].</span>
+<span class="sd">        :return: True if successful</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__range_contrast</span>
+        <span class="k">assert</span> <span class="n">cr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">contrast</span> <span class="o">&lt;=</span> <span class="n">cr</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="sa">f</span><span class="s2">&quot;contrast must be in range [</span><span class="si">{</span><span class="n">cr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">cr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">]&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">contrast</span> <span class="o">=</span> <span class="n">contrast</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="ColorCorrection.set_shadow_color"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.ColorCorrection.set_shadow_color">[docs]</a>    <span class="k">def</span> <span class="nf">set_shadow_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hue</span><span class="p">:</span><span class="nb">float</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">saturation</span><span class="p">:</span><span class="nb">float</span><span class="o">=</span><span class="mf">0.</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the shadow color. Uses OKHSV model - value fixed at 1. Idempotent assignment.</span>
+<span class="sd">        </span>
+<span class="sd">        :param hue: Shadow hue in range [0, 1] - perceptually linear (the H from OKHSV)</span>
+<span class="sd">        :param saturation: Shadow saturation  in range [0, 1] - perceptually linear (the S from OKHSV)</span>
+<span class="sd">        :return: True if successful</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">schr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__range_shadow_color_h</span>
+        <span class="n">scsr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__range_shadow_color_s</span>
+        <span class="k">assert</span> <span class="n">schr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">hue</span> <span class="o">&lt;=</span> <span class="n">schr</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="sa">f</span><span class="s2">&quot;shadow color hue must be in range [</span><span class="si">{</span><span class="n">schr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">schr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">]&quot;</span>
+        <span class="k">assert</span> <span class="n">scsr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">saturation</span> <span class="o">&lt;=</span> <span class="n">scsr</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="sa">f</span><span class="s2">&quot;shadow color saturation must be in range [</span><span class="si">{</span><span class="n">scsr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">scsr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">]&quot;</span>
+        <span class="n">shadow_color_srgb</span> <span class="o">=</span> <span class="n">col_okhsv_to_srgb</span><span class="p">(</span><span class="n">Float3</span><span class="p">(</span><span class="n">hue</span><span class="p">,</span> <span class="n">saturation</span><span class="p">,</span> <span class="mf">1.</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shadow_color</span> <span class="o">=</span> <span class="n">shadow_color_srgb</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="ColorCorrection.set_midtone_color"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.ColorCorrection.set_midtone_color">[docs]</a>    <span class="k">def</span> <span class="nf">set_midtone_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hue</span><span class="p">:</span><span class="nb">float</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">saturation</span><span class="p">:</span><span class="nb">float</span><span class="o">=</span><span class="mf">0.</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the midtone color. Uses OKHSV model - value fixed at 1. Idempotent assignment.</span>
+<span class="sd">        </span>
+<span class="sd">        :param hue: Midtone hue in range [0, 1]  - perceptually linear (the H from OKHSV)</span>
+<span class="sd">        :param saturation: Midtone saturation  in range [0, 1] - perceptually linear (the S from OKHSV)</span>
+<span class="sd">        :return: True if successful</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">mihr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__range_midtone_color_h</span>
+        <span class="n">misr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__range_color_filter_s</span>
+        <span class="k">assert</span> <span class="n">mihr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">hue</span> <span class="o">&lt;=</span> <span class="n">mihr</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="sa">f</span><span class="s2">&quot;midtone color hue must be in range [</span><span class="si">{</span><span class="n">mihr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">mihr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">]&quot;</span>
+        <span class="k">assert</span> <span class="n">misr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">saturation</span> <span class="o">&lt;=</span> <span class="n">misr</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="sa">f</span><span class="s2">&quot;midtone color saturation must be in range [</span><span class="si">{</span><span class="n">misr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">misr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">]&quot;</span>
+        <span class="n">midtone_color_srgb</span> <span class="o">=</span> <span class="n">col_okhsv_to_srgb</span><span class="p">(</span><span class="n">Float3</span><span class="p">(</span><span class="n">hue</span><span class="p">,</span> <span class="n">saturation</span><span class="p">,</span> <span class="mf">1.</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">midtone_color</span> <span class="o">=</span> <span class="n">midtone_color_srgb</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="ColorCorrection.set_highlight_color"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.ColorCorrection.set_highlight_color">[docs]</a>    <span class="k">def</span> <span class="nf">set_highlight_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hue</span><span class="p">:</span><span class="nb">float</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">saturation</span><span class="p">:</span><span class="nb">float</span><span class="o">=</span><span class="mf">0.</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the highlight color. Uses OKHSV model - value fixed at 1. Idempotent assignment.</span>
+<span class="sd">        </span>
+<span class="sd">        :param hue: Highlight hue in range [0, 1]  - perceptually linear (the H from OKHSV)</span>
+<span class="sd">        :param saturation: Highlight saturation in range [0, 1]  - perceptually linear (the S from OKHSV)</span>
+<span class="sd">        :return: True if successful</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">hihr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__range_shadow_color_h</span>
+        <span class="n">hisr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__range_shadow_color_s</span>
+        <span class="k">assert</span> <span class="n">hihr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">hue</span> <span class="o">&lt;=</span> <span class="n">hihr</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="sa">f</span><span class="s2">&quot;highlight hue must be in range [</span><span class="si">{</span><span class="n">hihr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">hihr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">]&quot;</span>
+        <span class="k">assert</span> <span class="n">hisr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">saturation</span> <span class="o">&lt;=</span> <span class="n">hisr</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="sa">f</span><span class="s2">&quot;highlight saturation must be in range [</span><span class="si">{</span><span class="n">hisr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">hisr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">]&quot;</span>
+        <span class="n">highlight_color_srgb</span> <span class="o">=</span> <span class="n">col_okhsv_to_srgb</span><span class="p">(</span><span class="n">Float3</span><span class="p">(</span><span class="n">hue</span><span class="p">,</span> <span class="n">saturation</span><span class="p">,</span> <span class="mf">1.</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">highlight_color</span> <span class="o">=</span> <span class="n">highlight_color_srgb</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+    <span class="c1"># TODO: I don&#39;t know what acceptable ranges here would be or how to make the descriptions useful.</span>
+<div class="viewcode-block" id="ColorCorrection.set_shadow_offset"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.ColorCorrection.set_shadow_offset">[docs]</a>    <span class="k">def</span> <span class="nf">set_shadow_offset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">offset</span><span class="p">:</span><span class="nb">float</span><span class="o">=</span><span class="mf">0.</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the shadow offset in range [-2, 2]. Idempotent assignment.</span>
+<span class="sd">        </span>
+<span class="sd">        :param offset: Shadow offset.</span>
+<span class="sd">        :return: True if successful</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">shor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__range_shadow_offs</span>
+        <span class="k">assert</span> <span class="n">shor</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">offset</span> <span class="o">&lt;=</span> <span class="n">shor</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="sa">f</span><span class="s2">&quot;shadow offset must be in range [</span><span class="si">{</span><span class="n">shor</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">shor</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">]&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shadow_offset</span> <span class="o">=</span> <span class="n">offset</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="ColorCorrection.set_midtone_offset"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.ColorCorrection.set_midtone_offset">[docs]</a>    <span class="k">def</span> <span class="nf">set_midtone_offset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">offset</span><span class="p">:</span><span class="nb">float</span><span class="o">=</span><span class="mf">0.</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the shadow offset in range [-2, 2]. Idempotent assignment.</span>
+<span class="sd">        </span>
+<span class="sd">        :param offset: Midtone offset.</span>
+<span class="sd">        :return: True if successful</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">mior</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__range_midtone_offs</span>
+        <span class="k">assert</span> <span class="n">mior</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">offset</span> <span class="o">&lt;=</span> <span class="n">mior</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="sa">f</span><span class="s2">&quot;midtone offset must be in range [</span><span class="si">{</span><span class="n">mior</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">mior</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">]&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">midtone_offset</span> <span class="o">=</span> <span class="n">offset</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="ColorCorrection.set_highlight_offset"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.ColorCorrection.set_highlight_offset">[docs]</a>    <span class="k">def</span> <span class="nf">set_highlight_offset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">offset</span><span class="p">:</span><span class="nb">float</span><span class="o">=</span><span class="mf">0.</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the shadow offset in range [-2, 2]. Idempotent assignment.</span>
+<span class="sd">        </span>
+<span class="sd">        :param offset: Highlight offset.</span>
+<span class="sd">        :return: True if successful</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">hior</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__range_highlight_offs</span>
+        <span class="k">assert</span> <span class="n">hior</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">offset</span> <span class="o">&lt;=</span> <span class="n">hior</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="sa">f</span><span class="s2">&quot;highlight offset must be in range [</span><span class="si">{</span><span class="n">hior</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">hior</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">]&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">highlight_offset</span> <span class="o">=</span> <span class="n">offset</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+    <span class="c1"># Redundant, but potentially needed as usertypes shan&#39;t be imported</span>
+    <span class="k">def</span> <span class="nf">__srgb_to_acescc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">srgb</span><span class="p">:</span><span class="n">Float3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Float3</span><span class="p">:</span>        
+        <span class="n">cs_srgb_lin</span> <span class="o">=</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">SRGB_LIN</span>
+        <span class="n">cs_acc</span> <span class="o">=</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">ACESCC</span>
+        <span class="n">ten</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">srgb</span><span class="p">)</span>
+        <span class="n">ten</span> <span class="o">=</span> <span class="n">ten</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">ten</span> <span class="o">=</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">ten</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">cs_srgb_lin</span><span class="p">,</span> <span class="n">destination</span><span class="o">=</span><span class="n">cs_acc</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">Float3</span><span class="p">(</span><span class="n">ten</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__acescg_to_acescc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cg</span><span class="p">:</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">cg</span> <span class="o">&lt;</span> <span class="mf">0.00003051757</span><span class="p">,</span> 
+            <span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="mf">0.00001525878</span> <span class="o">+</span> <span class="n">cg</span> <span class="o">*</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">+</span> <span class="mf">9.72</span><span class="p">)</span> <span class="o">/</span> <span class="mf">17.52</span><span class="p">,</span> 
+            <span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">cg</span><span class="p">)</span> <span class="o">+</span> <span class="mf">9.72</span><span class="p">)</span> <span class="o">/</span> <span class="mf">17.52</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">res</span>
+
+    <span class="k">def</span> <span class="nf">__acescc_to_acescg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cc</span><span class="p">:</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">cc</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mf">0.3013698630</span><span class="p">,</span> 
+            <span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">exp2</span><span class="p">(</span><span class="n">cc</span> <span class="o">*</span> <span class="mf">17.52</span> <span class="o">-</span> <span class="mf">9.72</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.00001525878</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">exp2</span><span class="p">(</span><span class="n">cc</span> <span class="o">*</span> <span class="mf">17.52</span> <span class="o">-</span> <span class="mf">9.72</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">res</span>
+
+    <span class="k">def</span> <span class="nf">__eval_all</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">im</span><span class="p">:</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">settings_tensor</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">im</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+        <span class="n">f3_one</span> <span class="o">=</span>  <span class="n">Float3</span><span class="p">(</span><span class="mf">1.</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">settings_tensor</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">exposure_bias</span> <span class="o">!=</span> <span class="mf">0.</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">color_filter</span><span class="p">,</span> <span class="n">f3_one</span><span class="p">):</span>
+                <span class="n">im</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__eval_exposure</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">hue_delta</span> <span class="o">!=</span> <span class="mf">0.</span><span class="p">:</span>    <span class="n">im</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__eval_hue</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">saturation</span> <span class="o">!=</span> <span class="mf">1.</span><span class="p">:</span>   <span class="n">im</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__eval_saturation</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">contrast</span> <span class="o">!=</span> <span class="mf">1.</span><span class="p">:</span>     <span class="n">im</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__eval_contrast</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shadow_color</span><span class="p">,</span> <span class="n">f3_one</span><span class="p">)</span> \
+                <span class="ow">or</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">midtone_color</span><span class="p">,</span> <span class="n">f3_one</span><span class="p">)</span> \
+                <span class="ow">or</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">highlight_color</span><span class="p">,</span> <span class="n">f3_one</span><span class="p">)</span> \
+                <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">shadow_offset</span> <span class="o">!=</span> <span class="mf">0.</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">midtone_offset</span> <span class="o">!=</span> <span class="mf">0.</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">highlight_offset</span> <span class="o">!=</span> <span class="mf">0.</span><span class="p">:</span>
+                <span class="n">im</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__eval_lift_gamma_gain</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">im</span>
+
+    <span class="k">def</span> <span class="nf">__eval_exposure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
+        <span class="n">im</span><span class="p">:</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> 
+        <span class="n">exposure_bias</span><span class="p">:</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+        <span class="n">color_filter</span><span class="p">:</span><span class="nb">tuple</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">exposure_bias</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="n">exposure_bias</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">exposure_bias</span>
+        <span class="n">color_filter</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">color_filter</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">device</span><span class="p">)</span> <span class="k">if</span> <span class="n">color_filter</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">color_filter</span>
+
+        <span class="n">im</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__acescc_to_acescg</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+        <span class="n">im</span> <span class="o">=</span> <span class="n">im</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">__ef3</span><span class="p">(</span><span class="n">color_filter</span><span class="p">,</span> <span class="n">im</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mf">2.</span> <span class="o">**</span> <span class="n">exposure_bias</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__acescg_to_acescc</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__eval_hue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">im</span><span class="p">:</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">hue_delta</span><span class="p">:</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">hue_delta</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="n">hue_delta</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">hue_delta</span>
+        <span class="n">cs_srgb_lin</span> <span class="o">=</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">SRGB_LIN</span>
+        <span class="n">cs_oklab</span> <span class="o">=</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">OKLAB</span>
+        <span class="n">im</span> <span class="o">=</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">cs_srgb_lin</span><span class="p">,</span> <span class="n">destination</span><span class="o">=</span><span class="n">cs_oklab</span><span class="p">)</span>
+        <span class="n">im</span> <span class="o">=</span> <span class="n">apply_hue_oklab</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">hue_delta</span><span class="p">)</span>
+        <span class="n">im</span> <span class="o">=</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">cs_oklab</span><span class="p">,</span> <span class="n">destination</span><span class="o">=</span><span class="n">cs_srgb_lin</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">im</span>
+        
+    <span class="k">def</span> <span class="nf">__eval_saturation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">im</span><span class="p">:</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">saturation</span><span class="p">:</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">saturation</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="n">saturation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">saturation</span>
+        <span class="n">luma</span> <span class="o">=</span> <span class="n">srgb_luminance</span><span class="p">(</span><span class="n">im</span><span class="p">)</span> <span class="c1"># TODO: should this be ACEScc-specific?</span>
+        <span class="n">luma</span> <span class="o">=</span> <span class="n">luma</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">luma</span> <span class="o">+</span> <span class="n">saturation</span> <span class="o">*</span> <span class="p">(</span><span class="n">im</span> <span class="o">-</span> <span class="n">luma</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__eval_contrast</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">im</span><span class="p">:</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">contrast</span><span class="p">:</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">contrast</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span> <span class="n">contrast</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">contrast</span> 
+        <span class="n">im</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__comp_log_contrast</span><span class="p">(</span><span class="n">im</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">contrast</span><span class="p">)</span>
+        <span class="n">im</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__comp_log_contrast</span><span class="p">(</span><span class="n">im</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">contrast</span><span class="p">)</span>
+        <span class="n">im</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__comp_log_contrast</span><span class="p">(</span><span class="n">im</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">contrast</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">im</span>
+
+    <span class="k">def</span> <span class="nf">__eval_lift_gamma_gain</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">im</span><span class="p">:</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> 
+        <span class="n">shc</span><span class="p">:</span><span class="nb">tuple</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+        <span class="n">mic</span><span class="p">:</span><span class="nb">tuple</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+        <span class="n">hic</span><span class="p">:</span><span class="nb">tuple</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+        <span class="n">sho</span><span class="p">:</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+        <span class="n">mio</span><span class="p">:</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+        <span class="n">hio</span><span class="p">:</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+        <span class="n">shadow_color</span>        <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">shc</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">device</span><span class="p">)</span> <span class="k">if</span> <span class="n">shc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">shadow_color</span>
+        <span class="n">midtone_color</span>       <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">mic</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">device</span><span class="p">)</span> <span class="k">if</span> <span class="n">mic</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">midtone_color</span>
+        <span class="n">highlight_color</span>     <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">hic</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">im</span><span class="o">.</span><span class="n">device</span><span class="p">)</span> <span class="k">if</span> <span class="n">hic</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">highlight_color</span>
+
+        <span class="n">shadow_offset</span>       <span class="o">=</span> <span class="n">sho</span> <span class="k">if</span> <span class="n">sho</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">shadow_offset</span>
+        <span class="n">midtone_offset</span>      <span class="o">=</span> <span class="n">mio</span> <span class="k">if</span> <span class="n">mio</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">midtone_offset</span>
+        <span class="n">highlight_offset</span>    <span class="o">=</span> <span class="n">hio</span> <span class="k">if</span> <span class="n">hio</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">highlight_offset</span>
+
+        <span class="n">c_lift</span>  <span class="o">=</span> <span class="n">shadow_color</span> <span class="o">-</span> <span class="n">shadow_color</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+        <span class="n">c_gamma</span> <span class="o">=</span> <span class="n">midtone_color</span> <span class="o">-</span> <span class="n">midtone_color</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+        <span class="n">c_gain</span>  <span class="o">=</span> <span class="n">highlight_color</span> <span class="o">-</span> <span class="n">highlight_color</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+        <span class="n">eps</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__eps</span>
+        <span class="n">mid_grey</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">+</span> <span class="n">c_gamma</span> <span class="o">+</span> <span class="n">midtone_offset</span><span class="p">)</span> <span class="o">+</span> <span class="n">eps</span>
+
+        <span class="n">adj_lift</span> <span class="o">=</span> <span class="mf">0.</span> <span class="o">+</span> <span class="n">c_lift</span> <span class="o">+</span> <span class="n">shadow_offset</span>
+        <span class="n">adj_gain</span> <span class="o">=</span> <span class="mf">1.</span> <span class="o">+</span> <span class="n">c_gain</span> <span class="o">+</span> <span class="n">highlight_offset</span>
+        <span class="n">adj_gamma</span> <span class="o">=</span> <span class="n">midtone_color</span> <span class="o">*</span> <span class="mf">0.</span> <span class="c1"># for autograd</span>
+
+        <span class="n">adj_gamma</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__epsat</span><span class="p">((</span><span class="mf">0.5</span> <span class="o">-</span> <span class="n">adj_lift</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">adj_gain</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">adj_lift</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">__epsat</span><span class="p">(</span><span class="n">mid_grey</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">adj_gamma</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__epsat</span><span class="p">((</span><span class="mf">0.5</span> <span class="o">-</span> <span class="n">adj_lift</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">adj_gain</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">adj_lift</span><span class="p">[</span><span class="mi">1</span><span class="p">])))</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">__epsat</span><span class="p">(</span><span class="n">mid_grey</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">adj_gamma</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__epsat</span><span class="p">((</span><span class="mf">0.5</span> <span class="o">-</span> <span class="n">adj_lift</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">adj_gain</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">adj_lift</span><span class="p">[</span><span class="mi">2</span><span class="p">])))</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">__epsat</span><span class="p">(</span><span class="n">mid_grey</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+
+        <span class="n">im_c1</span><span class="p">,</span> <span class="n">im_c2</span><span class="p">,</span> <span class="n">im_c3</span> <span class="o">=</span> <span class="n">im</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">im</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">im</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="c1"># necessary to avoid in-place operation</span>
+        <span class="n">im_c1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__comp_lift_gamm_gain</span><span class="p">(</span><span class="n">im_c1</span><span class="p">,</span> <span class="n">adj_lift</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mf">1.</span><span class="o">/</span><span class="n">adj_gamma</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">adj_gain</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">im_c2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__comp_lift_gamm_gain</span><span class="p">(</span><span class="n">im_c2</span><span class="p">,</span> <span class="n">adj_lift</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mf">1.</span><span class="o">/</span><span class="n">adj_gamma</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">adj_gain</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">im_c3</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__comp_lift_gamm_gain</span><span class="p">(</span><span class="n">im_c3</span><span class="p">,</span> <span class="n">adj_lift</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="mf">1.</span><span class="o">/</span><span class="n">adj_gamma</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">adj_gain</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">im_c1</span><span class="p">,</span> <span class="n">im_c2</span><span class="p">,</span> <span class="n">im_c3</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__comp_log_contrast</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">im</span><span class="p">:</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">contrast</span><span class="p">:</span><span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+        <span class="n">adj_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__contrast_midpoint</span> <span class="o">+</span> <span class="p">(</span><span class="n">im</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">__contrast_midpoint</span><span class="p">)</span> <span class="o">*</span> <span class="n">contrast</span>
+        <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">im</span> <span class="o">*</span> <span class="mf">0.</span><span class="p">,</span> <span class="p">(</span><span class="n">adj_x</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">__eps</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__comp_contrast_rev</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">im</span><span class="p">:</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+        <span class="n">log_x</span> <span class="o">=</span> <span class="n">im</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">__eps</span>
+        <span class="n">adj_x</span> <span class="o">=</span> <span class="p">(</span><span class="n">log_x</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">__contrast_midpoint</span><span class="p">)</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">contrast</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">__contrast_midpoint</span><span class="p">;</span>
+        <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">im</span> <span class="o">*</span> <span class="mf">0.</span><span class="p">,</span> <span class="n">adj_x</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">__eps</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">__comp_offset_power_slope</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">im</span><span class="p">:</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">offset</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">power</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">slope</span><span class="p">:</span><span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+        <span class="n">so</span> <span class="o">=</span> <span class="n">im</span> <span class="o">*</span> <span class="n">slope</span> <span class="o">+</span> <span class="n">offset</span>
+        <span class="c1"># so = torch.where(so &gt; 0., torch.pow(so, power), so)</span>
+        <span class="n">so</span><span class="p">[</span><span class="n">so</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="n">so</span><span class="p">[</span><span class="n">so</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">],</span> <span class="n">power</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">so</span>
+
+    <span class="k">def</span> <span class="nf">__comp_lift_gamm_gain</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">im</span><span class="p">,</span> <span class="n">lift</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">inv_gamma</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">gain</span><span class="p">:</span><span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+        <span class="n">power</span> <span class="o">=</span> <span class="n">inv_gamma</span>
+        <span class="n">offset</span> <span class="o">=</span> <span class="n">lift</span> <span class="o">*</span> <span class="n">gain</span>
+        <span class="n">slope</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">-</span> <span class="n">lift</span><span class="p">)</span> <span class="o">*</span> <span class="n">gain</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__comp_offset_power_slope</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="n">power</span><span class="p">,</span> <span class="n">slope</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__epsat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">saturate</span><span class="p">(</span><span class="n">val</span><span class="p">),</span> <span class="n">val</span> <span class="o">*</span> <span class="mf">0.</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">__eps</span><span class="p">)</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">is_tensor</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> \
+            <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">saturate</span><span class="p">(</span><span class="n">val</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">__eps</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">res</span>
+
+    <span class="k">def</span> <span class="nf">__ef3</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span><span class="n">Union</span><span class="p">[</span><span class="n">Float3</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">],</span> <span class="n">ten</span><span class="p">:</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Expand as torch tensor&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">torch</span><span class="o">.</span><span class="n">is_tensor</span><span class="p">(</span><span class="n">v</span><span class="p">):</span> <span class="n">v</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">v</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">expand_as</span><span class="p">(</span><span class="n">ten</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

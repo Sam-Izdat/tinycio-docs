@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apply LUTs &mdash; tinycio a documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=92fd9be5" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/patch.css?v=77628c61" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=c0846a87"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Bake color correction to a LUT" href="howto_bake_lut.html" />
+    <link rel="prev" title="Apply basic color correction" href="howto_ccbasic.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/tinycio_sm.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">How to:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="howto_hello.html">Hello Color</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_wavelength.html">Look up a wavelength</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_color_value.html">Look up a color value</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_color_space.html">Change an image’s color space</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_hdr.html">Encode HDR data as RGBA PNG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_tone_map.html">Tone map HDR images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_white_balance.html">Apply white balance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_ccbasic.html">Apply basic color correction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Apply LUTs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_bake_lut.html">Bake color correction to a LUT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_autograde.html">Color grade by example</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="example_sweeps.html">Color sweeps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_image_manip.html">Lower-level image manipulation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tinycio.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about_release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about_modules.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Scripts:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="scripts_color2color.html">Color to color</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scripts_hdr_codec.html">HDR Codec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scripts_white_balance.html">White balance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scripts_img2cube.html">Image to CUBE LUT</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/Sam-Izdat/tinycio">GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://pypi.org/project/tinycio/">PyPi</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">tinycio</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Apply LUTs</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/source/howto_apply_lut.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="apply-luts">
+<h1>Apply LUTs<a class="headerlink" href="#apply-luts" title="Permalink to this heading"></a></h1>
+<a class="reference internal image-reference" href="../_images/lut_example.jpg"><img alt="Example image with two LUTs applied" src="../_images/lut_example.jpg" style="width: 700px;" /></a>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tinycio</span> <span class="kn">import</span> <span class="n">ColorImage</span>
+
+<span class="n">ColorImage</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;my/image.png&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">lut</span><span class="p">(</span><span class="s1">&#39;my/lut.cube&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;my/new_image.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<p>If this is for a batch of images, it would be more performant to load and reuse the LUT.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tinycio</span> <span class="kn">import</span> <span class="n">LookupTable</span><span class="p">,</span> <span class="n">ColorImage</span>
+
+<span class="n">mylut</span> <span class="o">=</span> <span class="n">LookupTable</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;my/lut.cube&#39;</span><span class="p">)</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">ColorImage</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;my/image.png&#39;</span><span class="p">)</span>
+<span class="n">im</span><span class="o">.</span><span class="n">lut</span><span class="p">(</span><span class="n">mylut</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;my/new_image.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If the LUT is meant for a particular log profile, it may be necessary to use a transfer function.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tinycio</span> <span class="kn">import</span> <span class="n">LookupTable</span><span class="p">,</span> <span class="n">ColorImage</span><span class="p">,</span> <span class="n">TransferFunction</span>
+
+<span class="n">lut</span> <span class="o">=</span> <span class="n">LookupTable</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;my/log_c_lut.cube&#39;</span><span class="p">)</span>
+
+<span class="c1"># Load and linearize</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">ColorImage</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;my/image.png&#39;</span><span class="p">,</span> <span class="s1">&#39;SRGB&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to_color_space</span><span class="p">(</span><span class="s1">&#39;SRGB_LIN&#39;</span><span class="p">)</span>
+
+<span class="c1"># Apply desired curve</span>
+<span class="n">im_log_c</span> <span class="o">=</span> <span class="n">TransferFunction</span><span class="o">.</span><span class="n">log_c_oetf</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+
+<span class="c1"># Apply LUT</span>
+<span class="n">im_log_c</span> <span class="o">=</span> <span class="n">lut</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">im_log_c</span><span class="p">)</span>
+
+<span class="c1"># Back to linear (only if needed - a display-ready LUT should have the transform baked-in)</span>
+<span class="n">im_out</span> <span class="o">=</span> <span class="n">TransferFunction</span><span class="o">.</span><span class="n">log_c_eotf</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+
+<span class="c1"># Apply sRGB gamma curve (if needed) and save</span>
+<span class="n">ColorImage</span><span class="p">(</span><span class="n">im_out</span><span class="p">,</span> <span class="s1">&#39;SRGB_LIN&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to_color_space</span><span class="p">(</span><span class="s1">&#39;SRGB&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;my/new_image.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Although the above hypothetically loads a 24-bit sRGB PNG file, this probably makes more sense to do with uncompressed or minimally-compressed image data, in whatever representation the LUT requires. LUTs have many uses for DCC, but processing <a class="reference external" href="https://github.com/ncruces/dcraw">raw</a> photographic image data is beyond the scope of this library.</p>
+<p>See: <a class="reference internal" href="tinycio.html#tinycio.ColorImage.lut" title="tinycio.ColorImage.lut"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ColorImage.lut()</span></code></a>, <a class="reference internal" href="tinycio.html#tinycio.LookupTable" title="tinycio.LookupTable"><code class="xref py py-class docutils literal notranslate"><span class="pre">LookupTable</span></code></a></p>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="howto_ccbasic.html" class="btn btn-neutral float-left" title="Apply basic color correction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="howto_bake_lut.html" class="btn btn-neutral float-right" title="Bake color correction to a LUT" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

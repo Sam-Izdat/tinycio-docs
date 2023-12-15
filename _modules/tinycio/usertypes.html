@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tinycio.usertypes &mdash; tinycio a documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=92fd9be5" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/patch.css?v=77628c61" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=c0846a87"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/tinycio_sm.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">How to:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_hello.html">Hello Color</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_wavelength.html">Look up a wavelength</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_color_value.html">Look up a color value</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_color_space.html">Change an image’s color space</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_hdr.html">Encode HDR data as RGBA PNG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_tone_map.html">Tone map HDR images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_white_balance.html">Apply white balance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_ccbasic.html">Apply basic color correction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_apply_lut.html">Apply LUTs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_bake_lut.html">Bake color correction to a LUT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_autograde.html">Color grade by example</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/example_sweeps.html">Color sweeps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/example_image_manip.html">Lower-level image manipulation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/tinycio.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/about_release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/about_modules.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">Index</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Scripts:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/scripts_color2color.html">Color to color</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/scripts_hdr_codec.html">HDR Codec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/scripts_white_balance.html">White balance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/scripts_img2cube.html">Image to CUBE LUT</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/Sam-Izdat/tinycio">GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://pypi.org/project/tinycio/">PyPi</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">tinycio</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">tinycio.usertypes</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for tinycio.usertypes</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+<span class="kn">import</span> <span class="nn">typing</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">.numerics</span> <span class="kn">import</span> <span class="n">Float2</span><span class="p">,</span> <span class="n">Float3</span>
+<span class="kn">from</span> <span class="nn">.colorspace</span> <span class="kn">import</span> <span class="n">ColorSpace</span>
+<span class="kn">from</span> <span class="nn">.balance</span> <span class="kn">import</span> <span class="n">WhiteBalance</span>
+<span class="kn">from</span> <span class="nn">.tonemapping</span> <span class="kn">import</span> <span class="n">ToneMapping</span>
+<span class="kn">from</span> <span class="nn">.lut</span> <span class="kn">import</span> <span class="n">LookupTable</span>
+<span class="kn">from</span> <span class="nn">.fsio.imagefile</span> <span class="kn">import</span> <span class="n">_infer_image_file_format</span><span class="p">,</span> <span class="n">load_image</span><span class="p">,</span> <span class="n">save_image</span><span class="p">,</span> <span class="n">truncate_image</span>
+<span class="kn">from</span> <span class="nn">.fsio.format</span> <span class="kn">import</span> <span class="n">GraphicsFormat</span><span class="p">,</span> <span class="n">ImageFileFormat</span><span class="p">,</span> <span class="n">LUTFormat</span>
+<span class="kn">from</span> <span class="nn">.correction</span> <span class="kn">import</span> <span class="n">ColorCorrection</span>
+<span class="kn">from</span> <span class="nn">.util.colorutil</span> <span class="kn">import</span> <span class="n">apply_hue_oklab</span><span class="p">,</span> <span class="n">apply_gamma</span><span class="p">,</span> <span class="n">col_okhsv_to_srgb</span><span class="p">,</span> <span class="n">col_srgb_to_okhsv</span><span class="p">,</span> \
+    <span class="n">col_okhsl_to_srgb</span><span class="p">,</span> <span class="n">col_srgb_to_okhsl</span>
+
+<span class="c1"># NOTE: This module SHOULD NOT be imported by other internal modules. </span>
+<span class="c1"># It is a user-facing abstraction layer. The rest of the code should be oblivious to it. </span>
+<span class="c1"># Typing can use __future__.annotation so that its types can be listed in the docs where applicable.</span>
+
+<div class="viewcode-block" id="Chromaticity"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.Chromaticity">[docs]</a><span class="k">class</span> <span class="nc">Chromaticity</span><span class="p">(</span><span class="n">Float2</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    2-component float32 CIE xy chromaticity type. Convenience wrapper around :class:`.Float2`, </span>
+<span class="sd">    which is in turn a shape [2] numpy.ndarray.</span>
+
+
+<span class="sd">    :param option1_param0: x component</span>
+<span class="sd">    :type option1_param0: float</span>
+<span class="sd">    :param option1_param1: y component</span>
+<span class="sd">    :type option1_param1: float</span>
+
+<span class="sd">    :param option2_param0: value of both components</span>
+<span class="sd">    :type option2_param0: float</span>
+
+<span class="sd">    :param option3_param0: 2-component tensor or array </span>
+<span class="sd">        (a 2D tensor/array image is allowed if the number of pixel values is 1)</span>
+<span class="sd">    :type option3_param0: torch.Tensor | numpy.ndarray | Float2</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">Chromaticity</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Chromaticity.to_xyy"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.Chromaticity.to_xyy">[docs]</a>    <span class="k">def</span> <span class="nf">to_xyy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">luminance</span><span class="p">:</span><span class="nb">float</span><span class="o">=</span><span class="mf">0.</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Color</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns CIE xyY color</span>
+
+<span class="sd">        :param luminance: Y luminance</span>
+<span class="sd">        :return: CIE xyY color</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">luminance</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Chromaticity.to_xyz"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.Chromaticity.to_xyz">[docs]</a>    <span class="k">def</span> <span class="nf">to_xyz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">luminance</span><span class="p">:</span><span class="nb">float</span><span class="o">=</span><span class="mf">0.</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Color</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns CIE XYZ color</span>
+
+<span class="sd">        :param luminance: Y luminance</span>
+<span class="sd">        :return: CIE XYZ color</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="n">luminance</span> <span class="o">/</span> <span class="bp">self</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="bp">self</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">z</span> <span class="o">=</span> <span class="p">(</span><span class="n">luminance</span> <span class="o">/</span> <span class="bp">self</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">luminance</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span></div></div>
+
+<div class="viewcode-block" id="ColorImage"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.ColorImage">[docs]</a><span class="k">class</span> <span class="nc">ColorImage</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    2D 3-channel color image using float32. Convenience wrapper around a [C=3, H, W] sized PyTorch image tensor. </span>
+<span class="sd">    This is the most hands-off abstraction, as it automatically handles color space conversion as needed.</span>
+
+<span class="sd">    .. note::</span>
+<span class="sd">        All transformative methods will return a new :class:`ColorImage` instance without </span>
+<span class="sd">        overwriting data. To overwrite use as e.g. :code:`im = im.to_color_space(cs_dst)`</span>
+
+<span class="sd">    .. note:: </span>
+<span class="sd">        Assumes size/shape [C, H, W] for both PyTorch tensor or NumPy array inputs.</span>
+
+<span class="sd">    :param param0: [C=3, H, W] sized tensor/array</span>
+<span class="sd">    :type param0: torch.Tensor | numpy.ndarray</span>
+<span class="sd">    :param color_space: the color space of the image</span>
+<span class="sd">    :type color_space: str | ColorSpace.Variant</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">color_space</span> <span class="o">=</span> <span class="kc">None</span>
+    
+    <span class="n">meta_channel_names</span>  <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;unknown&#39;</span><span class="p">,</span> <span class="s1">&#39;unknown&#39;</span><span class="p">,</span> <span class="s1">&#39;uknown&#39;</span><span class="p">]</span>
+    <span class="n">meta_white_point</span>    <span class="o">=</span> <span class="s1">&#39;unknown&#39;</span>
+    <span class="n">meta_gamut</span>          <span class="o">=</span> <span class="s1">&#39;unknown&#39;</span>
+    <span class="n">meta_peceptual</span>      <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">meta_negative</span>       <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">meta_scene_linear</span>   <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">and</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="n">ten</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">torch</span><span class="o">.</span><span class="n">is_tensor</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">size</span><span class="p">())</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">and</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="n">ten</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">requires_grad_</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;ColorImage must be a [C=3, H, W] sized image tensor.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># There is a reason why this has to be here, in this order, and why this hangs &quot;color_space&quot; on &quot;new&quot;.</span>
+        <span class="c1"># Setting it prematurely on cls will corrupt the metadata of the instance being transitioned to a new cs.</span>
+        <span class="c1"># We want to retain old instances, intact.</span>
+        <span class="n">new</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">ColorImage</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">ten</span><span class="p">)</span>
+        <span class="n">new</span><span class="o">.</span><span class="n">color_space</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;color_space&quot;</span><span class="p">,</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">UNKNOWN</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">new</span><span class="o">.</span><span class="n">color_space</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">:</span> <span class="n">new</span><span class="o">.</span><span class="n">color_space</span> <span class="o">=</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="p">[</span><span class="n">new</span><span class="o">.</span><span class="n">color_space</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()]</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">new</span><span class="o">.</span><span class="n">color_space</span><span class="p">,</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="p">),</span> <span class="s2">&quot;Invalid color space&quot;</span>
+        <span class="n">new</span><span class="o">.</span><span class="n">_set_meta</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">new</span>
+
+    <span class="k">def</span> <span class="nf">_set_meta</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Meta variables are only used for a debug printout at this time</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">color_space</span><span class="p">:</span> <span class="k">return</span>
+        <span class="n">cs</span> <span class="o">=</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">color_space</span> <span class="o">&amp;</span> <span class="n">cs</span><span class="o">.</span><span class="n">MODEL_RGB</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">meta_channel_names</span>  <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">color_space</span> <span class="o">==</span> <span class="n">cs</span><span class="o">.</span><span class="n">CIE_XYZ</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">meta_channel_names</span>  <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="s1">&#39;Z&#39;</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">color_space</span> <span class="o">==</span> <span class="n">cs</span><span class="o">.</span><span class="n">CIE_XYY</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">meta_channel_names</span>  <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">color_space</span> <span class="o">==</span> <span class="n">cs</span><span class="o">.</span><span class="n">LMS</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">meta_channel_names</span>  <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;long&#39;</span><span class="p">,</span> <span class="s1">&#39;medium&#39;</span><span class="p">,</span> <span class="s1">&#39;short&#39;</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">color_space</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">cs</span><span class="o">.</span><span class="n">OKLAB</span> <span class="o">|</span> <span class="n">cs</span><span class="o">.</span><span class="n">CIELAB</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">meta_channel_names</span>  <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;L*&#39;</span><span class="p">,</span> <span class="s1">&#39;a*&#39;</span><span class="p">,</span> <span class="s1">&#39;b*&#39;</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">color_space</span> <span class="o">==</span> <span class="n">cs</span><span class="o">.</span><span class="n">CIELUV</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">meta_channel_names</span>  <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;L*&#39;</span><span class="p">,</span> <span class="s1">&#39;u*&#39;</span><span class="p">,</span> <span class="s1">&#39;v*&#39;</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">color_space</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">cs</span><span class="o">.</span><span class="n">HSL</span> <span class="o">|</span> <span class="n">cs</span><span class="o">.</span><span class="n">OKHSL</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">meta_channel_names</span>  <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;hue&#39;</span><span class="p">,</span> <span class="s1">&#39;saturation&#39;</span><span class="p">,</span> <span class="s1">&#39;lightness&#39;</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">color_space</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">cs</span><span class="o">.</span><span class="n">HSV</span> <span class="o">|</span> <span class="n">cs</span><span class="o">.</span><span class="n">OKHSV</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">meta_channel_names</span>  <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;hue&#39;</span><span class="p">,</span> <span class="s1">&#39;saturation&#39;</span><span class="p">,</span> <span class="s1">&#39;value&#39;</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">meta_channel_names</span>  <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;unknown&#39;</span><span class="p">,</span> <span class="s1">&#39;unknown&#39;</span><span class="p">,</span> <span class="s1">&#39;unknown&#39;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">color_space</span> <span class="o">&amp;</span> <span class="n">cs</span><span class="o">.</span><span class="n">GAMUT_SRGB</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">meta_gamut</span> <span class="o">=</span> <span class="s2">&quot;sRGB&quot;</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">color_space</span> <span class="o">&amp;</span> <span class="n">cs</span><span class="o">.</span><span class="n">GAMUT_AP0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">meta_gamut</span> <span class="o">=</span> <span class="s2">&quot;AP0&quot;</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">color_space</span> <span class="o">&amp;</span> <span class="n">cs</span><span class="o">.</span><span class="n">GAMUT_AP1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">meta_gamut</span> <span class="o">=</span> <span class="s2">&quot;AP1&quot;</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">color_space</span> <span class="o">&amp;</span> <span class="n">cs</span><span class="o">.</span><span class="n">GAMUT_REC2020</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">meta_gamut</span> <span class="o">=</span> <span class="s2">&quot;Rec. 2020 / BT. 2020&quot;</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">color_space</span> <span class="o">&amp;</span> <span class="n">cs</span><span class="o">.</span><span class="n">GAMUT_DCI_P3</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">meta_gamut</span> <span class="o">=</span> <span class="s2">&quot;DCI-P3&quot;</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">color_space</span> <span class="o">&amp;</span> <span class="n">cs</span><span class="o">.</span><span class="n">GAMUT_DISPLAY_P3</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">meta_gamut</span> <span class="o">=</span> <span class="s2">&quot;Display P3&quot;</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">color_space</span> <span class="o">&amp;</span> <span class="n">cs</span><span class="o">.</span><span class="n">GAMUT_OKLAB</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">meta_gamut</span> <span class="o">=</span> <span class="s2">&quot;OKLAB&quot;</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">color_space</span> <span class="o">&amp;</span> <span class="n">cs</span><span class="o">.</span><span class="n">GAMUT_CIE_XYZ</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">meta_gamut</span> <span class="o">=</span> <span class="s2">&quot;CIE 1931 XYZ&quot;</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">color_space</span> <span class="o">&amp;</span> <span class="n">cs</span><span class="o">.</span><span class="n">GAMUT_CIELAB</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">meta_gamut</span> <span class="o">=</span> <span class="s2">&quot;CIELAB&quot;</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">color_space</span> <span class="o">&amp;</span> <span class="n">cs</span><span class="o">.</span><span class="n">GAMUT_CIELUV</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">meta_gamut</span> <span class="o">=</span> <span class="s2">&quot;CIELUV&quot;</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">color_space</span> <span class="o">&amp;</span> <span class="n">cs</span><span class="o">.</span><span class="n">GAMUT_OTHER</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">meta_gamut</span> <span class="o">=</span> <span class="s2">&quot;other&quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">meta_gamut</span> <span class="o">=</span> <span class="s2">&quot;unknown&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">color_space</span> <span class="o">&amp;</span> <span class="n">cs</span><span class="o">.</span><span class="n">WP_D65</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">meta_white_point</span>    <span class="o">=</span> <span class="s1">&#39;D65&#39;</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">color_space</span> <span class="o">&amp;</span> <span class="n">cs</span><span class="o">.</span><span class="n">WP_CCT_6300</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">meta_white_point</span>    <span class="o">=</span> <span class="s1">&#39;~6300K&#39;</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">color_space</span> <span class="o">&amp;</span> <span class="n">cs</span><span class="o">.</span><span class="n">WP_CCT_6000</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">meta_white_point</span>    <span class="o">=</span> <span class="s1">&#39;~6000K (a.k.a. &quot;D60&quot;)&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">meta_white_point</span>    <span class="o">=</span> <span class="s2">&quot;other/unknown/non-applicable&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">meta_scene_linear</span>  <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">color_space</span> <span class="o">&amp;</span> <span class="n">cs</span><span class="o">.</span><span class="n">SCENE_LINEAR</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">meta_peceptual</span>     <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">color_space</span> <span class="o">&amp;</span> <span class="n">cs</span><span class="o">.</span><span class="n">PERCEPTUAL</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">meta_negative</span>      <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">color_space</span> <span class="o">&amp;</span> <span class="n">cs</span><span class="o">.</span><span class="n">NEGATIVE</span>
+
+
+<div class="viewcode-block" id="ColorImage.info"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.ColorImage.info">[docs]</a>    <span class="k">def</span> <span class="nf">info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">printout</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Print or return a string describing the properties of the image for debugging.</span>
+
+<span class="sd">        :param printout: Print string if True, return string if False</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">infostr</span> <span class="o">=</span> <span class="s2">&quot;IMAGE DESCRIPTION&quot;</span>
+        <span class="n">infostr</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=================&quot;</span>
+        <span class="n">infostr</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">COLOR SPACE          &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">color_space</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">infostr</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">GAMUT                &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">meta_gamut</span><span class="p">)</span>
+        <span class="n">infostr</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">WHITE POINT          &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">meta_white_point</span><span class="p">)</span>
+        <span class="n">infostr</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">SCENE-LINEAR         &quot;</span> <span class="o">+</span> <span class="p">(</span><span class="s2">&quot;YES&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">meta_scene_linear</span> <span class="k">else</span> <span class="s2">&quot;NO/unknown/non-applicable&quot;</span><span class="p">)</span>
+        <span class="n">infostr</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">PERCEPTUAL           &quot;</span> <span class="o">+</span> <span class="p">(</span><span class="s2">&quot;YES&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">meta_peceptual</span> <span class="k">else</span> <span class="s2">&quot;NO&quot;</span><span class="p">)</span>
+        <span class="n">infostr</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">CAN GO NEGATIVE      &quot;</span> <span class="o">+</span> <span class="p">(</span><span class="s2">&quot;YES&quot;</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">meta_negative</span> <span class="k">else</span> <span class="s2">&quot;NO&quot;</span><span class="p">)</span>
+        <span class="n">infostr</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">CHANNELS             &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+        <span class="n">infostr</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">CHANNEL NAMES        &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">meta_channel_names</span><span class="p">))</span>
+        <span class="n">infostr</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">WIDTH                &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+        <span class="n">infostr</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">HEIGHT               &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">infostr</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">DTYPE                &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">printout</span><span class="p">:</span> 
+            <span class="nb">print</span><span class="p">(</span><span class="n">infostr</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">infostr</span></div>
+
+<div class="viewcode-block" id="ColorImage.load"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.ColorImage.load">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span>
+        <span class="n">fp</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> 
+        <span class="n">color_space</span><span class="p">:</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="p">]</span><span class="o">=</span><span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">UNKNOWN</span><span class="p">,</span>
+        <span class="n">graphics_format</span><span class="p">:</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">GraphicsFormat</span><span class="p">]</span><span class="o">=</span><span class="n">GraphicsFormat</span><span class="o">.</span><span class="n">UNKNOWN</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ColorImage</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Load image from file</span>
+
+<span class="sd">        :param fp: image file path</span>
+<span class="sd">        :param color_space: image color space</span>
+<span class="sd">        :type color_space: str | ColorSpace.Variant</span>
+<span class="sd">        :param graphics_format: image graphics format</span>
+<span class="sd">        :type graphics_format: str | fsio.GraphicsFormat</span>
+<span class="sd">        :return: New :class:`ColorImage` loaded from file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">fp</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+        <span class="n">fn</span><span class="p">,</span> <span class="n">fnext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+        <span class="n">ext</span> <span class="o">=</span> <span class="n">_infer_image_file_format</span><span class="p">(</span><span class="n">fnext</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">graphics_format</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">:</span> <span class="n">graphics_format</span> <span class="o">=</span> <span class="n">GraphicsFormat</span><span class="p">[</span><span class="n">graphics_format</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()]</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">graphics_format</span><span class="p">,</span> <span class="n">GraphicsFormat</span><span class="p">),</span> <span class="s2">&quot;Invalid graphics format&quot;</span>
+
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">color_space</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">:</span> <span class="n">color_space</span> <span class="o">=</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="p">[</span><span class="n">color_space</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()]</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">color_space</span><span class="p">,</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="p">),</span> <span class="s2">&quot;Invalid color space&quot;</span>
+
+        <span class="k">if</span> <span class="n">graphics_format</span> <span class="o">==</span> <span class="n">GraphicsFormat</span><span class="o">.</span><span class="n">UNKNOWN</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">ext</span> <span class="o">&amp;</span> <span class="n">ImageFileFormat</span><span class="o">.</span><span class="n">UINT8</span><span class="p">:</span>
+                <span class="c1"># if file format is conventionally 8 bpc, assume uint8</span>
+                <span class="n">graphics_format</span> <span class="o">=</span> <span class="n">GraphicsFormat</span><span class="o">.</span><span class="n">R8G8B8_UINT</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># otherwise assume float32</span>
+                <span class="n">graphics_format</span> <span class="o">=</span> <span class="n">GraphicsFormat</span><span class="o">.</span><span class="n">R32G32B32_SFLOAT</span>
+        <span class="k">if</span> <span class="n">color_space</span> <span class="o">==</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">UNKNOWN</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">ext</span> <span class="o">&amp;</span> <span class="n">ImageFileFormat</span><span class="o">.</span><span class="n">UINT8</span><span class="p">:</span>
+                <span class="c1"># if file format is conventionally 8 bpc, assume sRGB gamma curve</span>
+                <span class="n">color_space</span><span class="o">=</span><span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">SRGB</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># otherwise assume sRGB linear</span>
+                <span class="n">color_space</span><span class="o">=</span><span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">SRGB_LIN</span>
+
+        <span class="k">return</span> <span class="n">ColorImage</span><span class="p">(</span><span class="n">truncate_image</span><span class="p">(</span><span class="n">load_image</span><span class="p">(</span><span class="n">fp</span><span class="p">)),</span> <span class="n">color_space</span><span class="o">=</span><span class="n">color_space</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ColorImage.save"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.ColorImage.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fp</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">graphics_format</span><span class="p">:</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">GraphicsFormat</span><span class="p">]</span><span class="o">=</span><span class="n">GraphicsFormat</span><span class="o">.</span><span class="n">UNKNOWN</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Save image to file</span>
+<span class="sd">        </span>
+<span class="sd">        .. warning:: </span>
+<span class="sd">            This will overwrite existing files.</span>
+
+<span class="sd">        :param fp: image file path</span>
+<span class="sd">        :param graphics_format: image graphics format</span>
+<span class="sd">        :type graphics_format: str | fsio.GraphicsFormat</span>
+<span class="sd">        :return: True if successful</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">fp</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+        <span class="n">dp</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+        <span class="n">fn</span><span class="p">,</span> <span class="n">fnext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+        <span class="n">ext</span> <span class="o">=</span> <span class="n">_infer_image_file_format</span><span class="p">(</span><span class="n">fnext</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">dp</span><span class="p">):</span> <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;directory </span><span class="si">{</span><span class="n">dp</span><span class="si">}</span><span class="s2"> does not exist&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">graphics_format</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">:</span> <span class="n">graphics_format</span> <span class="o">=</span> <span class="n">GraphicsFormat</span><span class="p">[</span><span class="n">graphics_format</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()]</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">graphics_format</span><span class="p">,</span> <span class="n">GraphicsFormat</span><span class="p">),</span> <span class="s2">&quot;Invalid graphics format&quot;</span>
+
+        <span class="n">save_image</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">clone</span><span class="p">(),</span> <span class="n">fp</span><span class="p">,</span> <span class="n">graphics_format</span><span class="o">=</span><span class="n">graphics_format</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="ColorImage.to_color_space"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.ColorImage.to_color_space">[docs]</a>    <span class="k">def</span> <span class="nf">to_color_space</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color_space</span><span class="p">:</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">ColorImage</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Convert the image to a different color space and return as new :class:`ColorImage`.</span>
+
+<span class="sd">        :param color_space: the destination color space</span>
+<span class="sd">        :type color_space: str | ColorSpace.Variant</span>
+<span class="sd">        :return: New :class:`ColorImage` in designated color space.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">color_space</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">:</span> <span class="n">color_space</span> <span class="o">=</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="p">[</span><span class="n">color_space</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()]</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">color_space</span><span class="p">,</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="p">),</span> <span class="s2">&quot;Invalid color space&quot;</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">clone</span><span class="p">(),</span> <span class="n">source</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">color_space</span><span class="p">,</span> <span class="n">destination</span><span class="o">=</span><span class="n">color_space</span><span class="p">)</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">ColorImage</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">color_space</span><span class="o">=</span><span class="n">color_space</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">res</span></div>
+
+<div class="viewcode-block" id="ColorImage.tone_map"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.ColorImage.tone_map">[docs]</a>    <span class="k">def</span> <span class="nf">tone_map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tone_mapper</span><span class="p">:</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span><span class="n">ToneMapping</span><span class="o">.</span><span class="n">Variant</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">ColorImage</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Apply tone mapping and return as new :class:`ColorImage`.</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">            Any needed color space conversion will be handled automatically.</span>
+
+<span class="sd">        :param tone_mapper: the tone mapper to use</span>
+<span class="sd">        :type tone_mapper: str | ToneMapping.Variant</span>
+<span class="sd">        :return: New tone mapped :class:`ColorImage`.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">tone_mapper</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">:</span> <span class="n">tone_mapper</span> <span class="o">=</span> <span class="n">ToneMapping</span><span class="o">.</span><span class="n">Variant</span><span class="p">[</span><span class="n">tone_mapper</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()]</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tone_mapper</span><span class="p">,</span> <span class="n">ToneMapping</span><span class="o">.</span><span class="n">Variant</span><span class="p">),</span> <span class="s2">&quot;Invalid tone mapper&quot;</span>
+        <span class="n">ip</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">tone_mapper</span> <span class="o">==</span> <span class="n">ToneMapping</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">ACESCG</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">color_space</span> <span class="o">!=</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">ACESCG</span><span class="p">:</span>
+            <span class="n">ip</span> <span class="o">=</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">ip</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">color_space</span><span class="p">,</span> <span class="n">destination</span><span class="o">=</span><span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">ACESCG</span><span class="p">)</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">ToneMapping</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">ip</span><span class="p">,</span> <span class="n">tone_mapper</span><span class="o">=</span><span class="n">tone_mapper</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ColorImage</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">color_space</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">color_space</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ColorImage.lut"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.ColorImage.lut">[docs]</a>    <span class="k">def</span> <span class="nf">lut</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lut</span><span class="p">:</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">LookupTable</span><span class="p">],</span> <span class="n">lut_format</span><span class="o">=</span><span class="n">LUTFormat</span><span class="o">.</span><span class="n">UNKNOWN</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ColorImage</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Apply a :class:`LookupTable` and return as new :class:`ColorImage`.</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">            Any needed color space conversion will be handled automatically.</span>
+
+<span class="sd">        :param lut: :class:`.LookupTable` or LUT file path</span>
+<span class="sd">        :param lut_format: Format of the LUT, if loading from file.</span>
+<span class="sd">        :return: New :class:`ColorImage` with LUT applied.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">lut</span><span class="p">,</span> <span class="n">LookupTable</span><span class="p">):</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">lut</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">clone</span><span class="p">())</span>
+        <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">lut</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="n">lut</span> <span class="o">=</span> <span class="n">LookupTable</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">lut</span><span class="p">,</span> <span class="n">lut_format</span><span class="o">=</span><span class="n">lut_format</span><span class="p">)</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">lut</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">clone</span><span class="p">())</span>
+
+        <span class="k">return</span> <span class="n">ColorImage</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">color_space</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">color_space</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ColorImage.white_balance"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.ColorImage.white_balance">[docs]</a>    <span class="k">def</span> <span class="nf">white_balance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
+        <span class="n">source_white</span><span class="p">:</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Float2</span><span class="p">,</span> <span class="n">Chromaticity</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">WhiteBalance</span><span class="o">.</span><span class="n">Illuminant</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span> 
+        <span class="n">target_white</span><span class="p">:</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Float2</span><span class="p">,</span> <span class="n">Chromaticity</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">WhiteBalance</span><span class="o">.</span><span class="n">Illuminant</span><span class="p">]</span><span class="o">=</span><span class="n">WhiteBalance</span><span class="o">.</span><span class="n">Illuminant</span><span class="o">.</span><span class="n">NONE</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ColorImage</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        White balance the image and return as new :class:`ColorImage`.</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">            Any needed color space conversion will be handled automatically.</span>
+<span class="sd">            </span>
+<span class="sd">        :param source_white: Source white point - can be any of: </span>
+
+<span class="sd">            * *string* &quot;auto&quot; for automatic (:py:meth:`~WhiteBalance.wp_from_image`)</span>
+<span class="sd">            * *int* for correlated color temperature (:py:meth:`~WhiteBalance.wp_from_cct`)</span>
+<span class="sd">            * :class:`~WhiteBalance.Illuminant` or matching *string* (:py:meth:`~WhiteBalance.wp_from_illuminant`)</span>
+<span class="sd">            * CIE 1931 xy coordinates as :class:`.Float2`/:class:`.Chromaticity`</span>
+
+<span class="sd">        :param target_white: Target white point - can be any of:</span>
+
+<span class="sd">            * *int* for correlated color temperature (:py:meth:`~WhiteBalance.wp_from_cct`)</span>
+<span class="sd">            * :class:`~WhiteBalance.Illuminant` or matching *string* (:py:meth:`~WhiteBalance.wp_from_illuminant`)</span>
+<span class="sd">            * CIE 1931 xy coordinates as :class:`.Float2`/:class:`.Chromaticity`</span>
+
+<span class="sd">        :return: New :class:`ColorImage` with white balance applied.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="n">target_white</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">WhiteBalance</span><span class="o">.</span><span class="n">Illuminant</span><span class="o">.</span><span class="n">NONE</span><span class="p">,</span> <span class="s2">&quot;target white point cannot be NONE&quot;</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">source_white</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span> <span class="ow">and</span> <span class="n">source_white</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;AUTO&quot;</span><span class="p">:</span>
+            <span class="n">source_white</span> <span class="o">=</span> <span class="n">WhiteBalance</span><span class="o">.</span><span class="n">wp_from_image</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">to_color_space</span><span class="p">(</span><span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">CIE_XYZ</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">source_white</span><span class="p">)</span> <span class="ow">in</span> <span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+            <span class="n">source_white</span> <span class="o">=</span> <span class="n">WhiteBalance</span><span class="o">.</span><span class="n">wp_from_cct</span><span class="p">(</span><span class="n">source_white</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">source_white</span><span class="p">,</span> <span class="n">WhiteBalance</span><span class="o">.</span><span class="n">Illuminant</span><span class="p">):</span>
+            <span class="n">source_white</span> <span class="o">=</span> <span class="n">WhiteBalance</span><span class="o">.</span><span class="n">wp_from_illuminant</span><span class="p">(</span><span class="n">source_white</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">source_white</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="n">source_white</span> <span class="o">=</span> <span class="n">WhiteBalance</span><span class="o">.</span><span class="n">Illuminant</span><span class="p">[</span><span class="n">source_white</span><span class="p">]</span>
+            <span class="n">source_white</span> <span class="o">=</span> <span class="n">WhiteBalance</span><span class="o">.</span><span class="n">wp_from_illuminant</span><span class="p">(</span><span class="n">source_white</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">source_white</span><span class="p">,</span> <span class="n">Float2</span><span class="p">):</span>
+            <span class="k">pass</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;could not interpret source white point&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">target_white</span><span class="p">)</span> <span class="ow">in</span> <span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+            <span class="n">target_white</span> <span class="o">=</span> <span class="n">WhiteBalance</span><span class="o">.</span><span class="n">wp_from_cct</span><span class="p">(</span><span class="n">target_white</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">target_white</span><span class="p">,</span> <span class="n">WhiteBalance</span><span class="o">.</span><span class="n">Illuminant</span><span class="p">):</span>
+            <span class="n">target_white</span> <span class="o">=</span> <span class="n">WhiteBalance</span><span class="o">.</span><span class="n">wp_from_illuminant</span><span class="p">(</span><span class="n">target_white</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">target_white</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="n">target_white</span> <span class="o">=</span> <span class="n">WhiteBalance</span><span class="o">.</span><span class="n">Illuminant</span><span class="p">[</span><span class="n">target_white</span><span class="p">]</span>
+            <span class="n">target_white</span> <span class="o">=</span> <span class="n">WhiteBalance</span><span class="o">.</span><span class="n">wp_from_illuminant</span><span class="p">(</span><span class="n">target_white</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">target_white</span><span class="p">,</span> <span class="n">Float2</span><span class="p">):</span>
+            <span class="k">pass</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;could not interpret target white point&quot;</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">source_white</span><span class="p">,</span> <span class="n">Float2</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">target_white</span><span class="p">,</span> <span class="n">Float2</span><span class="p">),</span> <span class="s2">&quot;failed to acquire valid white point&quot;</span>
+
+        <span class="n">im_lms</span> <span class="o">=</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">clone</span><span class="p">(),</span> <span class="n">source</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">color_space</span><span class="p">,</span> <span class="n">destination</span><span class="o">=</span><span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">LMS</span><span class="p">)</span>
+        <span class="n">im_lms</span> <span class="o">=</span> <span class="n">WhiteBalance</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">im_lms</span><span class="p">,</span> <span class="n">source_white</span><span class="o">=</span><span class="n">source_white</span><span class="p">,</span> <span class="n">target_white</span><span class="o">=</span><span class="n">target_white</span><span class="p">)</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">im_lms</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">LMS</span><span class="p">,</span> <span class="n">destination</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">color_space</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ColorImage</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">color_space</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">color_space</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ColorImage.correct"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.ColorImage.correct">[docs]</a>    <span class="k">def</span> <span class="nf">correct</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cc</span><span class="p">:</span><span class="n">ColorCorrection</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ColorImage</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Apply color correction and return as new :class:`ColorImage`.</span>
+
+<span class="sd">        :param cc: Color correction object.</span>
+<span class="sd">        :return: New :class:`ColorImage` with color correction applied.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cs_acescc</span> <span class="o">=</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">ACESCC</span>
+        <span class="n">im</span> <span class="o">=</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">clone</span><span class="p">(),</span> <span class="n">source</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">color_space</span><span class="p">,</span> <span class="n">destination</span><span class="o">=</span><span class="n">cs_acescc</span><span class="p">)</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">cc</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">cs_acescc</span><span class="p">,</span> <span class="n">destination</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">color_space</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ColorImage</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">color_space</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">color_space</span><span class="p">)</span></div></div>
+
+<div class="viewcode-block" id="MonoImage"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.MonoImage">[docs]</a><span class="k">class</span> <span class="nc">MonoImage</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    2D monochromatic image using float32. Convenience wrapper around a [C=1, H, W] sized PyTorch image tensor. </span>
+<span class="sd">    This is a utility class that has no built-in functionality beyond enforcing a single channel for initial inputs. </span>
+<span class="sd">    Can be converted to :class:`ColorImage` with :code:`ColorImage(mono_im.repeat(3,1,1))`.</span>
+
+<span class="sd">    .. note:: </span>
+<span class="sd">        Assumes size/shape [C, H, W] for both PyTorch tensor or NumPy array inputs.</span>
+
+<span class="sd">    :param param0: [C=1, H, W] sized tensor/array</span>
+<span class="sd">    :type param0: torch.Tensor | numpy.ndarray</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">and</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">ten</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">torch</span><span class="o">.</span><span class="n">is_tensor</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">size</span><span class="p">())</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">and</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">ten</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">float</span><span class="p">()</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">requires_grad_</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;MonoImage must be a [C=1, H, W] sized image tensor.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">MonoImage</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">ten</span><span class="p">)</span>
+
+<div class="viewcode-block" id="MonoImage.info"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.MonoImage.info">[docs]</a>    <span class="k">def</span> <span class="nf">info</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">printout</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Print or return a string describing the properties of the image for debugging.</span>
+
+<span class="sd">        :param printout: Print string if True, return string if False</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">infostr</span> <span class="o">=</span> <span class="s2">&quot;IMAGE DESCRIPTION&quot;</span>
+        <span class="n">infostr</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">=================&quot;</span>
+        <span class="n">infostr</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">CLASS              &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+        <span class="n">infostr</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">COLOR SPACE          N/A&quot;</span>
+        <span class="n">infostr</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">CHANNELS             &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+        <span class="n">infostr</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">WIDTH                &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+        <span class="n">infostr</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">HEIGHT               &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">infostr</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">DTYPE                &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">printout</span><span class="p">:</span> 
+            <span class="nb">print</span><span class="p">(</span><span class="n">infostr</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">infostr</span></div></div>
+
+<div class="viewcode-block" id="Color"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.Color">[docs]</a><span class="k">class</span> <span class="nc">Color</span><span class="p">(</span><span class="n">Float3</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    3-component float32 color type. Convenience wrapper around :class:`.Float3`, </span>
+<span class="sd">    which is in turn a shape [3] numpy.ndarray. Example:</span>
+
+<span class="sd">    .. highlight:: python</span>
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">        a = Color(1, 2, 3)</span>
+<span class="sd">        b = Color(torch.tensor([1, 2, 3]))</span>
+<span class="sd">        c = Color(numpy.array([1, 2, 3]))</span>
+<span class="sd">        d = Color(torch.tensor([1, 2, 3]).unsqueeze(-1).unsqueeze(-1))</span>
+<span class="sd">        numpy.array_equal(a,b) &amp; numpy.array_equal(b,c) &amp; numpy.array_equal(c,d) # True</span>
+
+<span class="sd">    .. note:: </span>
+<span class="sd">        This data type is color space agnostic until a :class:`.ColorImage` is requested. </span>
+<span class="sd">        Swizzling is allowed, but a numeric type will be returned if the number of </span>
+<span class="sd">        swizzled components is not 3.</span>
+
+<span class="sd">    :param option1_param0: x/r component</span>
+<span class="sd">    :type option1_param0: float</span>
+<span class="sd">    :param option1_param1: y/g component</span>
+<span class="sd">    :type option1_param1: float</span>
+<span class="sd">    :param option1_param2: z/b component</span>
+<span class="sd">    :type option1_param2: float</span>
+
+<span class="sd">    :param option2_param0: value of every component</span>
+<span class="sd">    :type option2_param0: float</span>
+
+<span class="sd">    :param option3_param0: 3-component tensor or array </span>
+<span class="sd">        (a 2D tensor/array image is allowed if the number of pixel values is 1)</span>
+<span class="sd">    :type option3_param0: torch.Tensor | numpy.ndarray | Float3</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">Color</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Color.convert"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.Color.convert">[docs]</a>    <span class="k">def</span> <span class="nf">convert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
+        <span class="n">source</span><span class="p">:</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="p">],</span> 
+        <span class="n">destination</span><span class="p">:</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Color</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Convert color value from one color space to another.</span>
+
+<span class="sd">        :param source: color space to convert from</span>
+<span class="sd">        :type source: str | ColorSpace.Variant</span>
+<span class="sd">        :param destination: color space to convert to</span>
+<span class="sd">        :type destination: str | ColorSpace.Variant</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">source</span> <span class="o">==</span> <span class="n">destination</span><span class="p">:</span> <span class="k">return</span> <span class="bp">self</span>
+
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">source</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">:</span> <span class="n">source</span> <span class="o">=</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="p">[</span><span class="n">source</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()]</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="p">),</span> <span class="s2">&quot;Invalid source color space&quot;</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">destination</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">:</span> <span class="n">destination</span> <span class="o">=</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="p">[</span><span class="n">destination</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()]</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">destination</span><span class="p">,</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="p">),</span> <span class="s2">&quot;Invalid source color space&quot;</span>
+
+        <span class="n">col</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="c1"># This is dirty, but we need to check for what&#39;s unsupported by ColorSpace.convert</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">source</span> <span class="o">&amp;</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">SUPPORTED</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">destination</span> <span class="o">&amp;</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">SUPPORTED</span><span class="p">):</span>
+            <span class="c1"># Both source and destination supported by ColorSpace.convert - the general case</span>
+            <span class="n">im_col</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">image</span><span class="p">(</span><span class="n">color_space</span><span class="o">=</span><span class="n">source</span><span class="p">)</span>
+            <span class="n">im_col</span> <span class="o">=</span> <span class="n">im_col</span><span class="o">.</span><span class="n">to_color_space</span><span class="p">(</span><span class="n">destination</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="n">im_col</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">source</span> <span class="o">==</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">SRGB_LIN</span> <span class="ow">and</span> <span class="n">destination</span> <span class="o">==</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">OKHSV</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="n">col_srgb_to_okhsv</span><span class="p">(</span><span class="n">col</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="n">source</span> <span class="o">==</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">SRGB_LIN</span> <span class="ow">and</span> <span class="n">destination</span> <span class="o">==</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">OKHSL</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="n">col_srgb_to_okhsl</span><span class="p">(</span><span class="n">col</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="n">source</span> <span class="o">==</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">OKHSV</span> <span class="ow">and</span> <span class="n">destination</span> <span class="o">==</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">SRGB_LIN</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="n">col_okhsv_to_srgb</span><span class="p">(</span><span class="n">col</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="n">source</span> <span class="o">==</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">OKHSL</span> <span class="ow">and</span> <span class="n">destination</span> <span class="o">==</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">SRGB_LIN</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="n">col_okhsl_to_srgb</span><span class="p">(</span><span class="n">col</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="n">source</span> <span class="o">==</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">OKHSV</span><span class="p">:</span>
+            <span class="c1"># Reroute to SRGB_LIN-to-X</span>
+            <span class="n">col</span> <span class="o">=</span> <span class="n">Color</span><span class="p">(</span><span class="n">col_okhsv_to_srgb</span><span class="p">(</span><span class="n">col</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">col</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">SRGB_LIN</span><span class="p">,</span> <span class="n">destination</span><span class="o">=</span><span class="n">destination</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">source</span> <span class="o">==</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">OKHSL</span><span class="p">:</span>
+            <span class="c1"># Reroute to SRGB_LIN-to-X</span>
+            <span class="n">col</span> <span class="o">=</span> <span class="n">Color</span><span class="p">(</span><span class="n">col_okhsl_to_srgb</span><span class="p">(</span><span class="n">col</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">col</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">source</span><span class="o">=</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">SRGB_LIN</span><span class="p">,</span> <span class="n">destination</span><span class="o">=</span><span class="n">destination</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">source</span> <span class="o">&amp;</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">SUPPORTED</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">destination</span> <span class="o">&amp;</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">UNSUPPORTED</span><span class="p">):</span>
+            <span class="c1"># Reroute to recursive X-to-SRGB</span>
+            <span class="n">col</span> <span class="o">=</span> <span class="n">col</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">source</span><span class="p">,</span> <span class="n">destination</span><span class="o">=</span><span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">SRGB_LIN</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">col</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">SRGB_LIN</span><span class="p">,</span> <span class="n">destination</span><span class="o">=</span><span class="n">destination</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s2">&quot;unsupported color conversion&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="Color.image"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.Color.image">[docs]</a>    <span class="k">def</span> <span class="nf">image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color_space</span><span class="p">:</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="p">]</span><span class="o">=</span><span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">UNKNOWN</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ColorImage</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Unsqueeze to a [C=3, H, W] sized PyTorch image tensor.</span>
+
+<span class="sd">        :param color_space: the color space of the image</span>
+<span class="sd">        :type color_space: str | ColorSpace.Variant</span>
+<span class="sd">        :return: Expanded [C=3, H=1, W=1] float32 &quot;image&quot; tensor</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">color_space</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">:</span> <span class="n">color_space</span> <span class="o">=</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="p">[</span><span class="n">color_space</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()]</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">color_space</span><span class="p">,</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="p">),</span> <span class="s2">&quot;Invalid color space&quot;</span>
+        <span class="n">ten</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="bp">self</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="p">[</span><span class="mi">2</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ColorImage</span><span class="p">(</span><span class="n">ten</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">color_space</span><span class="o">=</span><span class="n">color_space</span><span class="p">)</span></div>
+
+    <span class="c1"># We intercept these:</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">xxx</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">xxy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">xxz</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">xyx</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">xyy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">xyz</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="bp">self</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">xzx</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">xzy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">xzz</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">yxx</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">yxy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">yxz</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">yyx</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">yyy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">yyz</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">yzx</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">yzy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">yzz</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">zxx</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">zxy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">zxz</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">zyx</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">zyy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">zyz</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">zzx</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">zzy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">zzz</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">z</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">rrr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">rrg</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">g</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">rrb</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">rgr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">g</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">rgg</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">g</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">g</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">rgb</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="bp">self</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">rbr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">rbg</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">g</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">rbb</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">grr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">g</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">grg</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">g</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">g</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">grb</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">g</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">ggr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">g</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">g</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">ggg</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">g</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">g</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">g</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">ggb</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">g</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">g</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">gbr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">g</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">gbg</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">g</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">g</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">gbb</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">g</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">brr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">brg</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">g</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">brb</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">bgr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">g</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">bgg</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">g</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">g</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">bgb</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">g</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">bbr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">bbg</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">g</span><span class="p">)</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">bbb</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">b</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

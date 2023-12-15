@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>fsio module &mdash; tinycio a documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=92fd9be5" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/patch.css?v=77628c61" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=c0846a87"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="numerics module" href="numerics.html" />
+    <link rel="prev" title="API Reference" href="tinycio.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/tinycio_sm.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">How to:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="howto_hello.html">Hello Color</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_wavelength.html">Look up a wavelength</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_color_value.html">Look up a color value</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_color_space.html">Change an image’s color space</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_hdr.html">Encode HDR data as RGBA PNG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_tone_map.html">Tone map HDR images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_white_balance.html">Apply white balance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_ccbasic.html">Apply basic color correction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_apply_lut.html">Apply LUTs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_bake_lut.html">Bake color correction to a LUT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_autograde.html">Color grade by example</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="example_sweeps.html">Color sweeps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_image_manip.html">Lower-level image manipulation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="tinycio.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="tinycio.html#tinycio.ColorImage"><code class="docutils literal notranslate"><span class="pre">ColorImage</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tinycio.html#tinycio.MonoImage"><code class="docutils literal notranslate"><span class="pre">MonoImage</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tinycio.html#tinycio.Color"><code class="docutils literal notranslate"><span class="pre">Color</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tinycio.html#tinycio.Chromaticity"><code class="docutils literal notranslate"><span class="pre">Chromaticity</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tinycio.html#tinycio.ColorSpace"><code class="docutils literal notranslate"><span class="pre">ColorSpace</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tinycio.html#tinycio.TransferFunction"><code class="docutils literal notranslate"><span class="pre">TransferFunction</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tinycio.html#tinycio.ToneMapping"><code class="docutils literal notranslate"><span class="pre">ToneMapping</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tinycio.html#tinycio.ColorCorrection"><code class="docutils literal notranslate"><span class="pre">ColorCorrection</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tinycio.html#tinycio.LookupTable"><code class="docutils literal notranslate"><span class="pre">LookupTable</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tinycio.html#tinycio.WhiteBalance"><code class="docutils literal notranslate"><span class="pre">WhiteBalance</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tinycio.html#tinycio.Spectral"><code class="docutils literal notranslate"><span class="pre">Spectral</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tinycio.html#tinycio.Codec"><code class="docutils literal notranslate"><span class="pre">Codec</span></code></a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">fsio module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.fsio.GraphicsFormat"><code class="docutils literal notranslate"><span class="pre">GraphicsFormat</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.fsio.LUTFormat"><code class="docutils literal notranslate"><span class="pre">LUTFormat</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.fsio.load_image"><code class="docutils literal notranslate"><span class="pre">load_image()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.fsio.save_image"><code class="docutils literal notranslate"><span class="pre">save_image()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.fsio.load_lut"><code class="docutils literal notranslate"><span class="pre">load_lut()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.fsio.save_lut"><code class="docutils literal notranslate"><span class="pre">save_lut()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.fsio.truncate_image"><code class="docutils literal notranslate"><span class="pre">truncate_image()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="numerics.html">numerics module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util.html">util module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="about_release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about_modules.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Scripts:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="scripts_color2color.html">Color to color</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scripts_hdr_codec.html">HDR Codec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scripts_white_balance.html">White balance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scripts_img2cube.html">Image to CUBE LUT</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/Sam-Izdat/tinycio">GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://pypi.org/project/tinycio/">PyPi</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">tinycio</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="tinycio.html">API Reference</a></li>
+      <li class="breadcrumb-item active">fsio module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/source/fsio.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="fsio-module">
+<h1>fsio module<a class="headerlink" href="#fsio-module" title="Permalink to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<span class="target" id="module-tinycio.fsio"></span><p>File system input and output.</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tinycio.fsio.GraphicsFormat" title="tinycio.fsio.GraphicsFormat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GraphicsFormat</span></code></a>(value)</p></td>
+<td><p>The graphics format of an image file to be saved or loaded.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tinycio.fsio.LUTFormat" title="tinycio.fsio.LUTFormat"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LUTFormat</span></code></a>(value)</p></td>
+<td><p>Lookup table format.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tinycio.fsio.load_image" title="tinycio.fsio.load_image"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_image</span></code></a>(fp[, graphics_format])</p></td>
+<td><p>Load image file as [C, H, W] float32 PyTorch image tensor.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tinycio.fsio.save_image" title="tinycio.fsio.save_image"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_image</span></code></a>(im, fp[, graphics_format])</p></td>
+<td><p>Save [C, H, W] float32 PyTorch image tensor as image file.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tinycio.fsio.load_lut" title="tinycio.fsio.load_lut"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_lut</span></code></a>(fp[, lut_format])</p></td>
+<td><p>Load LUT from file.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tinycio.fsio.save_lut" title="tinycio.fsio.save_lut"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_lut</span></code></a>(lattice, fp[, lut_format])</p></td>
+<td><p>Save LUT to a file.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tinycio.fsio.truncate_image" title="tinycio.fsio.truncate_image"><code class="xref py py-obj docutils literal notranslate"><span class="pre">truncate_image</span></code></a>(im)</p></td>
+<td><p>Returns the first three color channels of a multi-channel image.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="tinycio.fsio.GraphicsFormat">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tinycio.fsio.</span></span><span class="sig-name descname"><span class="pre">GraphicsFormat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/fsio/format.html#GraphicsFormat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.fsio.GraphicsFormat" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code></p>
+<p>The graphics format of an image file to be saved or loaded. Available options are:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>- UNKNOWN
+- R8_UINT
+- R8G8_UINT
+- R8G8B8_UINT
+- R8G8B8A8_UINT
+- R16_UINT
+- R16G16_UINT
+- R16G16B16_UINT
+- R16G16B16A16_UINT
+- R32_UINT
+- R32G32_UINT
+- R32G32B32_UINT
+- R32G32B32A32_UINT
+- R16_SFLOAT
+- R16G16_SFLOAT
+- R16G16B16_SFLOAT
+- R16G16B16A16_SFLOAT
+- R32_SFLOAT
+- R32G32_SFLOAT
+- R32G32B32_SFLOAT
+- R32G32B32A32_SFLOAT
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="tinycio.fsio.LUTFormat">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tinycio.fsio.</span></span><span class="sig-name descname"><span class="pre">LUTFormat</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/fsio/format.html#LUTFormat"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.fsio.LUTFormat" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code></p>
+<p>Lookup table format. Available options are:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>- UNKNOWN
+- CUBE_3D
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tinycio.fsio.load_image">
+<span class="sig-prename descclassname"><span class="pre">tinycio.fsio.</span></span><span class="sig-name descname"><span class="pre">load_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graphics_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">GraphicsFormat.UNKNOWN</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/fsio/imagefile.html#load_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.fsio.load_image" title="Permalink to this definition"></a></dt>
+<dd><p>Load image file as [C, H, W] float32 PyTorch image tensor.
+If the graphics format is not specified, we take a guess. Unsigned int
+data is automatically converted to float32 in [0, 1] range. Floating
+point data is converted to float32 if needed, but is otherwise undisturbed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fp</strong> (<em>str</em>) – File path to load from (including name and extension).</p></li>
+<li><p><strong>graphics_format</strong> (<a class="reference internal" href="#tinycio.fsio.GraphicsFormat" title="tinycio.fsio.GraphicsFormat"><em>GraphicsFormat</em></a>) – Graphics format of the image.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>[C, H, W] sized image tensor</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tinycio.fsio.save_image">
+<span class="sig-prename descclassname"><span class="pre">tinycio.fsio.</span></span><span class="sig-name descname"><span class="pre">save_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">im</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graphics_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">GraphicsFormat.UNKNOWN</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/fsio/imagefile.html#save_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.fsio.save_image" title="Permalink to this definition"></a></dt>
+<dd><p>Save [C, H, W] float32 PyTorch image tensor as image file.
+File format is inferred from extension by imageio. If a graphics format is not
+specified, we take a guess.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This will overwrite existing files.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>im</strong> (<em>torch.Tensor</em>) – Image tensor.</p></li>
+<li><p><strong>fp</strong> (<em>str</em>) – File path for saving the image (including name and extension).</p></li>
+<li><p><strong>graphics_format</strong> (<a class="reference internal" href="#tinycio.fsio.GraphicsFormat" title="tinycio.fsio.GraphicsFormat"><em>GraphicsFormat</em></a>) – Graphics format of the image.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if successful</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tinycio.fsio.load_lut">
+<span class="sig-prename descclassname"><span class="pre">tinycio.fsio.</span></span><span class="sig-name descname"><span class="pre">load_lut</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lut_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">LUTFormat.UNKNOWN</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/fsio/lutfile.html#load_lut"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.fsio.load_lut" title="Permalink to this definition"></a></dt>
+<dd><p>Load LUT from file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fp</strong> (<em>str</em>) – File path to load from.</p></li>
+<li><p><strong>lut_format</strong> (<a class="reference internal" href="#tinycio.fsio.LUTFormat" title="tinycio.fsio.format.LUTFormat"><em>LUTFormat</em></a>) – Format of the LUT.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>lattice as PyTorch tensor</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tinycio.fsio.save_lut">
+<span class="sig-prename descclassname"><span class="pre">tinycio.fsio.</span></span><span class="sig-name descname"><span class="pre">save_lut</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lattice</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lut_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">LUTFormat.UNKNOWN</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/fsio/lutfile.html#save_lut"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.fsio.save_lut" title="Permalink to this definition"></a></dt>
+<dd><p>Save LUT to a file.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This will overwrite existing files.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lattice</strong> (<em>torch.Tensor</em>) – PyTorch tensor representing the LUT.</p></li>
+<li><p><strong>fp</strong> (<em>str</em>) – File path for saving the LUT.</p></li>
+<li><p><strong>lut_format</strong> (<a class="reference internal" href="#tinycio.fsio.LUTFormat" title="tinycio.fsio.format.LUTFormat"><em>LUTFormat</em></a>) – Format of the LUT.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if successful</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tinycio.fsio.truncate_image">
+<span class="sig-prename descclassname"><span class="pre">tinycio.fsio.</span></span><span class="sig-name descname"><span class="pre">truncate_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">im</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/fsio/imagefile.html#truncate_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.fsio.truncate_image" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the first three color channels of a multi-channel image. If the tensor is sized [N=1, C, H, W],
+a [C=3, H, W] tensor will be returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>im</strong> (<em>torch.Tensor</em>) – Multi-channel image tensor.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>3-channel image tensor.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="tinycio.html" class="btn btn-neutral float-left" title="API Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="numerics.html" class="btn btn-neutral float-right" title="numerics module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

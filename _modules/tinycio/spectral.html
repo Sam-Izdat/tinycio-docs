@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tinycio.spectral &mdash; tinycio a documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=92fd9be5" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/patch.css?v=77628c61" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=c0846a87"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/tinycio_sm.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">How to:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_hello.html">Hello Color</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_wavelength.html">Look up a wavelength</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_color_value.html">Look up a color value</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_color_space.html">Change an image’s color space</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_hdr.html">Encode HDR data as RGBA PNG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_tone_map.html">Tone map HDR images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_white_balance.html">Apply white balance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_ccbasic.html">Apply basic color correction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_apply_lut.html">Apply LUTs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_bake_lut.html">Bake color correction to a LUT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_autograde.html">Color grade by example</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/example_sweeps.html">Color sweeps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/example_image_manip.html">Lower-level image manipulation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/tinycio.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/about_release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/about_modules.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">Index</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Scripts:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/scripts_color2color.html">Color to color</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/scripts_hdr_codec.html">HDR Codec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/scripts_white_balance.html">White balance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/scripts_img2cube.html">Image to CUBE LUT</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/Sam-Izdat/tinycio">GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://pypi.org/project/tinycio/">PyPi</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">tinycio</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">tinycio.spectral</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for tinycio.spectral</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">typing</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">io</span>
+
+<span class="kn">from</span> <span class="nn">.numerics</span> <span class="kn">import</span> <span class="n">Float3</span>
+<span class="kn">from</span> <span class="nn">.colorspace</span> <span class="kn">import</span> <span class="n">ColorSpace</span><span class="p">,</span> <span class="n">TransferFunction</span>
+<span class="kn">from</span> <span class="nn">.tonemapping</span> <span class="kn">import</span> <span class="n">ToneMapping</span>
+
+<div class="viewcode-block" id="Spectral"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.Spectral">[docs]</a><span class="k">class</span> <span class="nc">Spectral</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Spectral color matching functions. Example:</span>
+
+<span class="sd">    .. highlight:: python</span>
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">        xyz_col = Spectral.wl_to_xyz(550)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">wl_to_xyz_tab</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">        380 0.0014 0.0000 0.0065</span>
+<span class="s2">        385 0.0022 0.0001 0.0105</span>
+<span class="s2">        390 0.0042 0.0001 0.0201</span>
+<span class="s2">        395 0.0076 0.0002 0.0362</span>
+<span class="s2">        400 0.0143 0.0004 0.0679</span>
+<span class="s2">        405 0.0232 0.0006 0.1102</span>
+<span class="s2">        410 0.0435 0.0012 0.2074</span>
+<span class="s2">        415 0.0776 0.0022 0.3713</span>
+<span class="s2">        420 0.1344 0.0040 0.6456</span>
+<span class="s2">        425 0.2148 0.0073 1.0391</span>
+<span class="s2">        430 0.2839 0.0116 1.3856</span>
+<span class="s2">        435 0.3285 0.0168 1.6230</span>
+<span class="s2">        440 0.3483 0.0230 1.7471</span>
+<span class="s2">        445 0.3481 0.0298 1.7826</span>
+<span class="s2">        450 0.3362 0.0380 1.7721</span>
+<span class="s2">        455 0.3187 0.0480 1.7441</span>
+<span class="s2">        460 0.2908 0.0600 1.6692</span>
+<span class="s2">        465 0.2511 0.0739 1.5281</span>
+<span class="s2">        470 0.1954 0.0910 1.2876</span>
+<span class="s2">        475 0.1421 0.1126 1.0419</span>
+<span class="s2">        480 0.0956 0.1390 0.8130</span>
+<span class="s2">        485 0.0580 0.1693 0.6162</span>
+<span class="s2">        490 0.0320 0.2080 0.4652</span>
+<span class="s2">        495 0.0147 0.2586 0.3533</span>
+<span class="s2">        500 0.0049 0.3230 0.2720</span>
+<span class="s2">        505 0.0024 0.4073 0.2123</span>
+<span class="s2">        510 0.0093 0.5030 0.1582</span>
+<span class="s2">        515 0.0291 0.6082 0.1117</span>
+<span class="s2">        520 0.0633 0.7100 0.0782</span>
+<span class="s2">        525 0.1096 0.7932 0.0573</span>
+<span class="s2">        530 0.1655 0.8620 0.0422</span>
+<span class="s2">        535 0.2257 0.9149 0.0298</span>
+<span class="s2">        540 0.2904 0.9540 0.0203</span>
+<span class="s2">        545 0.3597 0.9803 0.0134</span>
+<span class="s2">        550 0.4334 0.9950 0.0087</span>
+<span class="s2">        555 0.5121 1.0000 0.0057</span>
+<span class="s2">        560 0.5945 0.9950 0.0039</span>
+<span class="s2">        565 0.6784 0.9786 0.0027</span>
+<span class="s2">        570 0.7621 0.9520 0.0021</span>
+<span class="s2">        575 0.8425 0.9154 0.0018</span>
+<span class="s2">        580 0.9163 0.8700 0.0017</span>
+<span class="s2">        585 0.9786 0.8163 0.0014</span>
+<span class="s2">        590 1.0263 0.7570 0.0011</span>
+<span class="s2">        595 1.0567 0.6949 0.0010</span>
+<span class="s2">        600 1.0622 0.6310 0.0008</span>
+<span class="s2">        605 1.0456 0.5668 0.0006</span>
+<span class="s2">        610 1.0026 0.5030 0.0003</span>
+<span class="s2">        615 0.9384 0.4412 0.0002</span>
+<span class="s2">        620 0.8544 0.3810 0.0002</span>
+<span class="s2">        625 0.7514 0.3210 0.0001</span>
+<span class="s2">        630 0.6424 0.2650 0.0000</span>
+<span class="s2">        635 0.5419 0.2170 0.0000</span>
+<span class="s2">        640 0.4479 0.1750 0.0000</span>
+<span class="s2">        645 0.3608 0.1382 0.0000</span>
+<span class="s2">        650 0.2835 0.1070 0.0000</span>
+<span class="s2">        655 0.2187 0.0816 0.0000</span>
+<span class="s2">        660 0.1649 0.0610 0.0000</span>
+<span class="s2">        665 0.1212 0.0446 0.0000</span>
+<span class="s2">        670 0.0874 0.0320 0.0000</span>
+<span class="s2">        675 0.0636 0.0232 0.0000</span>
+<span class="s2">        680 0.0468 0.0170 0.0000</span>
+<span class="s2">        685 0.0329 0.0119 0.0000</span>
+<span class="s2">        690 0.0227 0.0082 0.0000</span>
+<span class="s2">        695 0.0158 0.0057 0.0000</span>
+<span class="s2">        700 0.0114 0.0041 0.0000</span>
+<span class="s2">        705 0.0081 0.0029 0.0000</span>
+<span class="s2">        710 0.0058 0.0021 0.0000</span>
+<span class="s2">        715 0.0041 0.0015 0.0000</span>
+<span class="s2">        720 0.0029 0.0010 0.0000</span>
+<span class="s2">        725 0.0020 0.0007 0.0000</span>
+<span class="s2">        730 0.0014 0.0005 0.0000</span>
+<span class="s2">        735 0.0010 0.0004 0.0000</span>
+<span class="s2">        740 0.0007 0.0002 0.0000</span>
+<span class="s2">        745 0.0005 0.0002 0.0000</span>
+<span class="s2">        750 0.0003 0.0001 0.0000</span>
+<span class="s2">        755 0.0002 0.0001 0.0000</span>
+<span class="s2">        760 0.0002 0.0001 0.0000</span>
+<span class="s2">        765 0.0001 0.0000 0.0000</span>
+<span class="s2">        770 0.0001 0.0000 0.0000</span>
+<span class="s2">        775 0.0001 0.0000 0.0000</span>
+<span class="s2">        780 0.0000 0.0000 0.0000&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Spectral.cm_table"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.Spectral.cm_table">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">cm_table</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">normalize_xyz</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns color matching table as tensor of size [81, 3]. </span>
+<span class="sd">        The table contains CIE XYZ values, arranged by wavelength, </span>
+<span class="sd">        in increments of 5nm, from 380nm to 780nm.</span>
+
+<span class="sd">        :param bool normalize_xyz: Normalize XYZ color, such that X=X/(X+Y+Z), etc</span>
+<span class="sd">        :return: Color matching function table</span>
+<span class="sd">        :rtype: torch.Tensor</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">f_handler</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">StringIO</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">wl_to_xyz_tab</span><span class="p">)</span>
+        <span class="n">tab</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">f_handler</span><span class="p">,</span> <span class="n">usecols</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)))</span>
+        <span class="k">if</span> <span class="n">normalize_xyz</span><span class="p">:</span>
+            <span class="n">X</span> <span class="o">=</span> <span class="n">tab</span><span class="p">[</span><span class="o">...</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">Y</span> <span class="o">=</span> <span class="n">tab</span><span class="p">[</span><span class="o">...</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+            <span class="n">Z</span> <span class="o">=</span> <span class="n">tab</span><span class="p">[</span><span class="o">...</span><span class="p">,</span><span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">X</span> <span class="o">/</span> <span class="p">(</span><span class="n">X</span> <span class="o">+</span> <span class="n">Y</span> <span class="o">+</span> <span class="n">Z</span><span class="p">)</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">Y</span> <span class="o">/</span> <span class="p">(</span><span class="n">X</span> <span class="o">+</span> <span class="n">Y</span> <span class="o">+</span> <span class="n">Z</span><span class="p">)</span>
+            <span class="n">z</span> <span class="o">=</span> <span class="n">Z</span> <span class="o">/</span> <span class="p">(</span><span class="n">X</span> <span class="o">+</span> <span class="n">Y</span> <span class="o">+</span> <span class="n">Z</span><span class="p">)</span>
+            <span class="n">mask</span> <span class="o">=</span> <span class="n">tab</span> <span class="o">&gt;</span> <span class="mi">0</span>
+            <span class="n">tab</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="n">mask</span><span class="p">]</span>
+        <span class="n">f_handler</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">tab</span></div>
+
+<div class="viewcode-block" id="Spectral.wl_to_xyz"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.Spectral.wl_to_xyz">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">wl_to_xyz</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">wl</span><span class="p">:</span><span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Float3</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Wavelength (nm) to CIE XYZ color, linearly interpolated. </span>
+<span class="sd">        Precision is limited to interpolated 5nm increments.</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">            These coordinates will often fall outside the sRGB gamut. </span>
+<span class="sd">            Direct color space conversion will yield invalid sRGB values.</span>
+
+<span class="sd">        :param float wl: wavelength in nm</span>
+<span class="sd">        :return: CIE XYZ color</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="mi">380</span> <span class="o">&lt;=</span> <span class="n">wl</span> <span class="o">&lt;</span> <span class="mi">780</span><span class="p">,</span> <span class="s2">&quot;wavelength (nm) must be in range [380, 780]&quot;</span>
+        <span class="n">cm_tab</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">cm_table</span><span class="p">()</span>
+        <span class="n">wl_values</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">380</span><span class="p">,</span> <span class="mi">780</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+
+        <span class="c1"># Find the two closest wavelengths in the table</span>
+        <span class="n">closest_idx</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">wl_values</span> <span class="o">-</span> <span class="n">wl</span><span class="p">))</span>
+        <span class="n">second_closest_idx</span> <span class="o">=</span> <span class="n">closest_idx</span> <span class="o">+</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">closest_idx</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">wl_values</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">closest_idx</span> <span class="o">-</span> <span class="mi">1</span>
+
+        <span class="c1"># Get the XYZ values for the two closest wavelengths</span>
+        <span class="n">closest_xyz</span> <span class="o">=</span> <span class="n">cm_tab</span><span class="p">[</span><span class="n">closest_idx</span><span class="p">]</span>
+        <span class="n">second_closest_xyz</span> <span class="o">=</span> <span class="n">cm_tab</span><span class="p">[</span><span class="n">second_closest_idx</span><span class="p">]</span>
+
+        <span class="c1"># Linear interpolation</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="n">wl</span> <span class="o">-</span> <span class="n">wl_values</span><span class="p">[</span><span class="n">closest_idx</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">wl_values</span><span class="p">[</span><span class="n">second_closest_idx</span><span class="p">]</span> <span class="o">-</span> <span class="n">wl_values</span><span class="p">[</span><span class="n">closest_idx</span><span class="p">])</span>
+        <span class="n">interpolated_xyz</span> <span class="o">=</span> <span class="n">closest_xyz</span> <span class="o">+</span> <span class="n">t</span> <span class="o">*</span> <span class="p">(</span><span class="n">second_closest_xyz</span> <span class="o">-</span> <span class="n">closest_xyz</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">Float3</span><span class="p">(</span><span class="n">interpolated_xyz</span><span class="p">)</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Spectral.wl_to_srgb_linear"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.Spectral.wl_to_srgb_linear">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">wl_to_srgb_linear</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">wl</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Float3</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Wavelength (nm) to normalized, approximate linear sRGB color, clamped to [0, 1] range.</span>
+
+<span class="sd">        :param wl: wavelength in nm</span>
+<span class="sd">        :param normalize: normalize sRGB color</span>
+<span class="sd">        :return: sRGB linear color</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">xyz</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">wl_to_xyz</span><span class="p">(</span><span class="n">wl</span><span class="p">)</span>
+        <span class="n">cs</span> <span class="o">=</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span>
+        <span class="n">srgb</span> <span class="o">=</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">xyz</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]),</span> <span class="n">cs</span><span class="o">.</span><span class="n">CIE_XYZ</span><span class="p">,</span> <span class="n">cs</span><span class="o">.</span><span class="n">SRGB_LIN</span><span class="p">)</span>
+        <span class="n">srgb</span> <span class="o">=</span> <span class="n">Float3</span><span class="p">(</span><span class="n">srgb</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">normalize</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">srgb</span> <span class="o">&lt;</span> <span class="mf">0.</span><span class="p">):</span> <span class="n">srgb</span> <span class="o">-=</span> <span class="n">srgb</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">srgb</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.</span><span class="p">:</span> <span class="n">srgb</span> <span class="o">/=</span> <span class="n">srgb</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">srgb</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Spectral.wl_to_srgb"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.Spectral.wl_to_srgb">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">wl_to_srgb</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">wl</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Float3</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Wavelength (nm) to normalized, approximate sRGB color, </span>
+<span class="sd">        clamped to [0, 1] range, with sRGB gamma curve.</span>
+
+<span class="sd">        .. note::</span>
+<span class="sd">            Wolfram Alpha doesn&#39;t quite agree, but it&#39;s rather close. This produces a </span>
+<span class="sd">            plausible-looking spectrum, but there is probably some missing (pre?) normalization step. </span>
+<span class="sd">            Take the RGB outputs with a grain of salt.</span>
+
+<span class="sd">        :param wl: wavelength in nm</span>
+<span class="sd">        :param normalize: normalize sRGB color</span>
+<span class="sd">        :return: sRGB linear color</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">lin</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">wl_to_srgb_linear</span><span class="p">(</span><span class="n">wl</span><span class="p">,</span> <span class="n">normalize</span><span class="p">)</span>
+        <span class="n">ten</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">from_numpy</span><span class="p">(</span><span class="n">lin</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">Float3</span><span class="p">(</span><span class="n">TransferFunction</span><span class="o">.</span><span class="n">srgb_oetf</span><span class="p">(</span><span class="n">ten</span><span class="p">))</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

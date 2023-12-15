@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tinycio &mdash; tinycio a documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=92fd9be5" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/css/patch.css?v=77628c61" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=c0846a87"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Hello Color" href="source/howto_hello.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#">
+            
+              <img src="_static/tinycio_sm.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">How to:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="source/howto_hello.html">Hello Color</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/howto_wavelength.html">Look up a wavelength</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/howto_color_value.html">Look up a color value</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/howto_color_space.html">Change an image’s color space</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/howto_hdr.html">Encode HDR data as RGBA PNG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/howto_tone_map.html">Tone map HDR images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/howto_white_balance.html">Apply white balance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/howto_ccbasic.html">Apply basic color correction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/howto_apply_lut.html">Apply LUTs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/howto_bake_lut.html">Bake color correction to a LUT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/howto_autograde.html">Color grade by example</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="source/example_sweeps.html">Color sweeps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/example_image_manip.html">Lower-level image manipulation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="source/tinycio.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/about_release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/about_modules.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Scripts:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="source/scripts_color2color.html">Color to color</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/scripts_hdr_codec.html">HDR Codec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/scripts_white_balance.html">White balance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="source/scripts_img2cube.html">Image to CUBE LUT</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/Sam-Izdat/tinycio">GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://pypi.org/project/tinycio/">PyPi</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">tinycio</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">tinycio</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="tinycio">
+<h1>tinycio<a class="headerlink" href="#tinycio" title="Permalink to this heading"></a></h1>
+<p class="rubric">color stuff for people who don’t science too good</p>
+<p>A primitive, lightweight Python color library for PyTorch-involved projects. It implements color space conversion, tone mapping, LUT usage and creation, basic color correction and color balancing, and HDR-LDR encoding/decoding.</p>
+<section id="getting-started">
+<h2>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Recommended: set up a clean Python environment</p></li>
+<li><p><a class="reference external" href="https://pytorch.org/get-started/locally/">Install PyTorch  as instructed here</a></p></li>
+<li><p>Run <code class="code docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">tinycio</span></code></p></li>
+<li><p>Run <code class="code docutils literal notranslate"><span class="pre">imageio_download_bin</span> <span class="pre">freeimage</span></code> (<a class="reference external" href="https://imageio.readthedocs.io/en/stable/_autosummary/imageio.plugins.freeimage.html#module-imageio.plugins.freeimage">iio docs on fi</a>)</p></li>
+</ul>
+</section>
+<section id="about">
+<h2>About<a class="headerlink" href="#about" title="Permalink to this heading"></a></h2>
+<p>Release version
+0.5.0
+a</p>
+<p class="rubric">Requires</p>
+<ul class="simple">
+<li><p>PyTorch &gt;=2.0 (earlier versions untested)</p></li>
+<li><p>NumPy &gt;=1.21</p></li>
+<li><p>imageio &gt;=2.9 (with PNG-FI FreeImage plugin)</p></li>
+<li><p>tqdm &gt;=4.64</p></li>
+<li><p>toml &gt;=0.10</p></li>
+</ul>
+<p>As pip has a tendency to screw up PyTorch installations, torch is deliberately left out of
+the explicit package requirements; install it whichever way is most appropriate, if you
+haven’t done so already.</p>
+<p class="rubric">Note on limitations</p>
+<p>I feel like a disclaimer is in order.</p>
+<ul class="simple">
+<li><p>This package is (obviously) not suitable for realtime rendering</p></li>
+<li><p>This package is <em>generally</em> not suitable for differentiable rendering</p></li>
+<li><p>I am not a color expert and can’t guarantee scientific accuracy</p></li>
+</ul>
+<p>This package was motivated by a frustration with the staggering complexities of digital color and put together
+as part of a larger project, already using PyTorch, to minimize external dependencies. In self-flattering terms,
+the goal here is a kind of spartan-utilitarian approach to color for image processing with some light machine learning.
+In less self-flattering terms, I have no idea what I’m doing. This is not meant to be a replacement for a proper
+color management solution.</p>
+<p>While the code was tested within reason, some things are likely still not quite correct. For dependable color management,
+<a class="reference external" href="https://opencolorio.org/">defer to OCIO</a> or consider a more comprehensive and scientifically-minded Python
+project like <a class="reference external" href="https://www.colour-science.org/">Colour</a>.</p>
+<p class="rubric">Supported color spaces (and other things treated as if they were):</p>
+<ul class="simple">
+<li><p>CIE XYZ</p></li>
+<li><p>CIE xyY</p></li>
+<li><p>sRGB</p></li>
+<li><p>Rec. 709</p></li>
+<li><p>sRGB / Rec. 709 (scene-linear)</p></li>
+<li><p>Rec. 2020</p></li>
+<li><p>Rec. 2020 (scene-linear)</p></li>
+<li><p>DCI-P3</p></li>
+<li><p>DCI-P3 (scene-linear)</p></li>
+<li><p>Display P3</p></li>
+<li><p>ACEScg</p></li>
+<li><p>ACEScc</p></li>
+<li><p>ACES 2065-1</p></li>
+<li><p>LMS</p></li>
+<li><p>OKLAB</p></li>
+<li><p>CIELAB</p></li>
+<li><p>HSL</p></li>
+<li><p>HSV</p></li>
+<li><p>OKHSL</p></li>
+<li><p>OKHSV</p></li>
+</ul>
+<p class="rubric">Supported tone mappers:</p>
+<ul class="simple">
+<li><p>AgX / AgX punchy</p></li>
+<li><p>ACEScg (fitted RRT+ODT)</p></li>
+<li><p>Hable (a.k.a. Uncharted 2)</p></li>
+<li><p>Reinhard (extended)</p></li>
+</ul>
+<p class="rubric">Supported LUT formats:</p>
+<ul class="simple">
+<li><p>CUBE</p></li>
+</ul>
+<p class="rubric">License</p>
+<p><a class="reference internal" href="source/license.html"><span class="doc">MIT License</span></a> on all original code - see source for details</p>
+</section>
+<section id="special-thanks">
+<h2>Special thanks<a class="headerlink" href="#special-thanks" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Certain color space conversions are from <a class="reference external" href="https://github.com/stefanLeong/S2CRNet">S2CRNet</a>, <a class="reference external" href="https://github.com/CairX/convert-colors-py">convert-colors-py</a> and <a class="reference external" href="https://github.com/windingwind/seal-3d">seal-3d</a>.</p></li>
+<li><p>CCT calculation is from <a class="reference external" href="https://github.com/colour-science/">colour-science</a>.</p></li>
+<li><p>The AgX implementation is owed to <a class="reference external" href="https://github.com/sobotka/AgX-S2O3">Troy James Sobotka</a> and <a class="reference external" href="https://github.com/MrLixm/AgXc">Liam Collod</a>.</p></li>
+<li><p>Some loss computations are borrowed from <a class="reference external" href="https://github.com/semchan/NLUT/tree/main">NLUT</a>.</p></li>
+<li><p>Thanks to the <a class="reference external" href="https://64.github.io/tonemapping/">&#64;64 blog</a> for explaining common tone mapping algorithms.</p></li>
+<li><p>The white balancing and the von Kries transform were kindly explained by <a class="reference external" href="https://pbr-book.org/4ed/Cameras_and_Film/Film_and_Imaging">pbrt</a>.</p></li>
+<li><p>The <a class="reference external" href="https://bottosson.github.io/posts/oklab/">OKLAB</a> color space was developed by <a class="reference external" href="https://bottosson.github.io/">Björn Ottosson</a></p></li>
+<li><p>The <a class="reference external" href="https://bottosson.github.io/posts/colorpicker/">OKHSL and OKHSV</a> color space conversions originally by  <a class="reference external" href="https://github.com/holbrookdev">Brian Holbrook</a></p></li>
+<li><p><a class="reference external" href="./_images/wb4k6k12k.jpg">Test photograph</a> from <a class="reference external" href="https://www.pexels.com/&#64;biancasalgado/">Bianca Salgado</a></p></li>
+</ul>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="source/howto_hello.html" class="btn btn-neutral float-right" title="Hello Color" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

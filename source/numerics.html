@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>numerics module &mdash; tinycio a documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=92fd9be5" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/patch.css?v=77628c61" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=c0846a87"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="util module" href="util.html" />
+    <link rel="prev" title="fsio module" href="fsio.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/tinycio_sm.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">How to:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="howto_hello.html">Hello Color</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_wavelength.html">Look up a wavelength</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_color_value.html">Look up a color value</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_color_space.html">Change an image’s color space</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_hdr.html">Encode HDR data as RGBA PNG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_tone_map.html">Tone map HDR images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_white_balance.html">Apply white balance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_ccbasic.html">Apply basic color correction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_apply_lut.html">Apply LUTs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_bake_lut.html">Bake color correction to a LUT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_autograde.html">Color grade by example</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="example_sweeps.html">Color sweeps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_image_manip.html">Lower-level image manipulation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="tinycio.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="tinycio.html#tinycio.ColorImage"><code class="docutils literal notranslate"><span class="pre">ColorImage</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tinycio.html#tinycio.MonoImage"><code class="docutils literal notranslate"><span class="pre">MonoImage</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tinycio.html#tinycio.Color"><code class="docutils literal notranslate"><span class="pre">Color</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tinycio.html#tinycio.Chromaticity"><code class="docutils literal notranslate"><span class="pre">Chromaticity</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tinycio.html#tinycio.ColorSpace"><code class="docutils literal notranslate"><span class="pre">ColorSpace</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tinycio.html#tinycio.TransferFunction"><code class="docutils literal notranslate"><span class="pre">TransferFunction</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tinycio.html#tinycio.ToneMapping"><code class="docutils literal notranslate"><span class="pre">ToneMapping</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tinycio.html#tinycio.ColorCorrection"><code class="docutils literal notranslate"><span class="pre">ColorCorrection</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tinycio.html#tinycio.LookupTable"><code class="docutils literal notranslate"><span class="pre">LookupTable</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tinycio.html#tinycio.WhiteBalance"><code class="docutils literal notranslate"><span class="pre">WhiteBalance</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tinycio.html#tinycio.Spectral"><code class="docutils literal notranslate"><span class="pre">Spectral</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tinycio.html#tinycio.Codec"><code class="docutils literal notranslate"><span class="pre">Codec</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="fsio.html">fsio module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">numerics module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.numerics.Float2"><code class="docutils literal notranslate"><span class="pre">Float2</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.numerics.Float3"><code class="docutils literal notranslate"><span class="pre">Float3</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.numerics.Float4"><code class="docutils literal notranslate"><span class="pre">Float4</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.numerics.Int2"><code class="docutils literal notranslate"><span class="pre">Int2</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.numerics.Int3"><code class="docutils literal notranslate"><span class="pre">Int3</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.numerics.Int4"><code class="docutils literal notranslate"><span class="pre">Int4</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.numerics.lerp"><code class="docutils literal notranslate"><span class="pre">lerp()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.numerics.saturate"><code class="docutils literal notranslate"><span class="pre">saturate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.numerics.sign"><code class="docutils literal notranslate"><span class="pre">sign()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.numerics.normalize"><code class="docutils literal notranslate"><span class="pre">normalize()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.numerics.reflect"><code class="docutils literal notranslate"><span class="pre">reflect()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="util.html">util module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="about_release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about_modules.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Scripts:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="scripts_color2color.html">Color to color</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scripts_hdr_codec.html">HDR Codec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scripts_white_balance.html">White balance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scripts_img2cube.html">Image to CUBE LUT</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/Sam-Izdat/tinycio">GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://pypi.org/project/tinycio/">PyPi</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">tinycio</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="tinycio.html">API Reference</a></li>
+      <li class="breadcrumb-item active">numerics module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/source/numerics.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="numerics-module">
+<h1>numerics module<a class="headerlink" href="#numerics-module" title="Permalink to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<span class="target" id="module-tinycio.numerics"></span><div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The FloatX/IntX types here are Python wrappers around numpy arrays.
+They are glacially slow and should only be used for convenience
+inside of Python scope and well outside of any high-traffic loops.</p>
+</div>
+<p>The numerics module offers shading-language-like syntax for float and int vector data types,
+as well as a few utility functions. These types are an extension of numpy arrays, and you
+can use them as such. Matrices are not natively supported.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tinycio.numerics</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+
+<span class="c1"># Several possible inputs</span>
+<span class="n">Float4</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>             <span class="c1"># Float4([4., 3., 2., 1.])</span>
+<span class="n">Float4</span><span class="p">(</span><span class="mf">1.23</span><span class="p">)</span>                <span class="c1"># Float4([1.23, 1.23, 1.23, 1.23])</span>
+<span class="n">Float4</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]))</span> <span class="c1"># Float4([3., 2., 1., 0.])</span>
+<span class="n">Float4</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>       <span class="c1"># Float4([0.22407186, 0.26193792, 0.89055574, 0.57386285])</span>
+<span class="n">Float4</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>   <span class="c1"># Float4([0.99545109, 0.46160549, 0.78145427, 0.02302521])</span>
+
+<span class="c1"># Swizzling</span>
+<span class="n">foo</span> <span class="o">=</span> <span class="n">Float3</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">foo</span><span class="o">.</span><span class="n">y</span>                       <span class="c1"># 2.0 (float)</span>
+<span class="n">foo</span><span class="o">.</span><span class="n">rg</span>                      <span class="c1"># Float2([1., 2.])</span>
+<span class="n">foo</span><span class="o">.</span><span class="n">bgr</span>                     <span class="c1"># Float3([3., 2., 1.])</span>
+<span class="n">foo</span><span class="o">.</span><span class="n">xxyx</span>                    <span class="c1"># Float4([1., 1., 2., 1.])</span>
+
+<span class="c1"># Utility functions</span>
+<span class="n">bar</span> <span class="o">=</span> <span class="n">Float3</span><span class="o">.</span><span class="n">y_axis</span><span class="p">()</span>       <span class="c1"># Float3([0., 1., 0.])</span>
+<span class="n">lerp</span><span class="p">(</span><span class="n">foo</span><span class="o">.</span><span class="n">bbb</span><span class="p">,</span> <span class="n">bar</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>     <span class="c1"># Float3([1.5, 2. , 1.5])</span>
+<span class="n">saturate</span><span class="p">(</span><span class="n">Float2</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>      <span class="c1"># Float2([0., 1.])</span>
+<span class="n">sign</span><span class="p">(</span><span class="n">Float2</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>          <span class="c1"># Float2([-1.,  1.])</span>
+<span class="n">Float4</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">Float4</span><span class="o">.</span><span class="n">one</span><span class="p">()</span>   <span class="c1"># Float4([ True,  True,  True,  True])</span>
+</pre></div>
+</div>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tinycio.numerics.Float2" title="tinycio.numerics.Float2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Float2</span></code></a>(*args)</p></td>
+<td><p>Float2 type using numpy.ndarray.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tinycio.numerics.Float3" title="tinycio.numerics.Float3"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Float3</span></code></a>(*args)</p></td>
+<td><p>Float3 type using numpy.ndarray.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tinycio.numerics.Float4" title="tinycio.numerics.Float4"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Float4</span></code></a>(*args)</p></td>
+<td><p>Float4 type using numpy.ndarray.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tinycio.numerics.Int2" title="tinycio.numerics.Int2"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Int2</span></code></a>(*args)</p></td>
+<td><p>Int2 type using numpy.ndarray.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tinycio.numerics.Int3" title="tinycio.numerics.Int3"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Int3</span></code></a>(*args)</p></td>
+<td><p>Int3 type using numpy.ndarray.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tinycio.numerics.Int4" title="tinycio.numerics.Int4"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Int4</span></code></a>(*args)</p></td>
+<td><p>Int4 type using numpy.ndarray.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tinycio.numerics.lerp" title="tinycio.numerics.lerp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">lerp</span></code></a>(a, b, w)</p></td>
+<td><p>Linearly interpolate two values.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tinycio.numerics.saturate" title="tinycio.numerics.saturate"><code class="xref py py-obj docutils literal notranslate"><span class="pre">saturate</span></code></a>(x)</p></td>
+<td><p>Saturate x, such that x is clamped to range [0, 1].</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tinycio.numerics.sign" title="tinycio.numerics.sign"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sign</span></code></a>(x)</p></td>
+<td><p>Sign of x as 1, -1 or 0.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tinycio.numerics.normalize" title="tinycio.numerics.normalize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">normalize</span></code></a>(v)</p></td>
+<td><p>Normalize vector v to a unit vector.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tinycio.numerics.reflect" title="tinycio.numerics.reflect"><code class="xref py py-obj docutils literal notranslate"><span class="pre">reflect</span></code></a>(n, l)</p></td>
+<td><p>Reflect vector l over n.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="tinycio.numerics.Float2">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tinycio.numerics.</span></span><span class="sig-name descname"><span class="pre">Float2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/numerics/vector.html#Float2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.numerics.Float2" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></p>
+<p>Float2 type using numpy.ndarray.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="tinycio.numerics.Float3">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tinycio.numerics.</span></span><span class="sig-name descname"><span class="pre">Float3</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/numerics/vector.html#Float3"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.numerics.Float3" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></p>
+<p>Float3 type using numpy.ndarray.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="tinycio.numerics.Float4">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tinycio.numerics.</span></span><span class="sig-name descname"><span class="pre">Float4</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/numerics/vector.html#Float4"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.numerics.Float4" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></p>
+<p>Float4 type using numpy.ndarray.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="tinycio.numerics.Int2">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tinycio.numerics.</span></span><span class="sig-name descname"><span class="pre">Int2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/numerics/vector.html#Int2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.numerics.Int2" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></p>
+<p>Int2 type using numpy.ndarray.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="tinycio.numerics.Int3">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tinycio.numerics.</span></span><span class="sig-name descname"><span class="pre">Int3</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/numerics/vector.html#Int3"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.numerics.Int3" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></p>
+<p>Int3 type using numpy.ndarray.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="tinycio.numerics.Int4">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tinycio.numerics.</span></span><span class="sig-name descname"><span class="pre">Int4</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/numerics/vector.html#Int4"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.numerics.Int4" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></p>
+<p>Int4 type using numpy.ndarray.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tinycio.numerics.lerp">
+<span class="sig-prename descclassname"><span class="pre">tinycio.numerics.</span></span><span class="sig-name descname"><span class="pre">lerp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">w</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/numerics/linalg.html#lerp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.numerics.lerp" title="Permalink to this definition"></a></dt>
+<dd><p>Linearly interpolate two values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>a</strong> (<em>float</em><em> | </em><em>list</em><em> | </em><em>numpy.ndarray</em><em> | </em><em>torch.Tensor</em>) – first value or list to interpolate</p></li>
+<li><p><strong>b</strong> (<em>float</em><em> | </em><em>list</em><em> | </em><em>numpy.ndarray</em><em> | </em><em>torch.Tensor</em>) – second value or list to interpolate</p></li>
+<li><p><strong>w</strong> (<em>float</em><em> | </em><em>list</em><em> | </em><em>numpy.ndarray</em><em> | </em><em>torch.Tensor</em>) – 0-1 weight ratio of first to second value</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>linearly interpolated value(s)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float | list | numpy.ndarray | torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tinycio.numerics.saturate">
+<span class="sig-prename descclassname"><span class="pre">tinycio.numerics.</span></span><span class="sig-name descname"><span class="pre">saturate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/numerics/linalg.html#saturate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.numerics.saturate" title="Permalink to this definition"></a></dt>
+<dd><p>Saturate x, such that x is clamped to range [0, 1].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>float</em><em> | </em><em>list</em><em> | </em><em>numpy.ndarray</em><em> | </em><em>torch.Tensor</em>) – input value</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>saturated input value(s)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float | list | numpy.ndarray | torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tinycio.numerics.sign">
+<span class="sig-prename descclassname"><span class="pre">tinycio.numerics.</span></span><span class="sig-name descname"><span class="pre">sign</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/numerics/linalg.html#sign"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.numerics.sign" title="Permalink to this definition"></a></dt>
+<dd><p>Sign of x as 1, -1 or 0. Returns:</p>
+<ul class="simple">
+<li><p>0 if/where x == 0</p></li>
+<li><p>1 if/where x &gt; 0</p></li>
+<li><p>-1 if/where x &lt; 0</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>x</strong> (<em>float</em><em> | </em><em>list</em><em> | </em><em>numpy.ndarray</em><em> | </em><em>torch.Tensor</em>) – input value</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>sign(s) of input values</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float | list | numpy.ndarray | torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tinycio.numerics.normalize">
+<span class="sig-prename descclassname"><span class="pre">tinycio.numerics.</span></span><span class="sig-name descname"><span class="pre">normalize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/numerics/linalg.html#normalize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.numerics.normalize" title="Permalink to this definition"></a></dt>
+<dd><p>Normalize vector v to a unit vector.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> (<em>numpy.ndarray</em><em> | </em><em>torch.Tensor</em>) – input vector</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>normalized vector</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray | torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tinycio.numerics.reflect">
+<span class="sig-prename descclassname"><span class="pre">tinycio.numerics.</span></span><span class="sig-name descname"><span class="pre">reflect</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">l</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/numerics/linalg.html#reflect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.numerics.reflect" title="Permalink to this definition"></a></dt>
+<dd><p>Reflect vector l over n.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>l</strong> (<em>numpy.ndarray</em><em> or </em><em>torch.Tensor</em>) – input “light” vector</p></li>
+<li><p><strong>n</strong> (<em>numpy.ndarray</em><em> | </em><em>torch.Tensor</em>) – input normal vector</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>reflected vector</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray | torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="fsio.html" class="btn btn-neutral float-left" title="fsio module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="util.html" class="btn btn-neutral float-right" title="util module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

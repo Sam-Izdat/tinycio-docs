@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tinycio.balance &mdash; tinycio a documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=92fd9be5" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/patch.css?v=77628c61" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=c0846a87"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/tinycio_sm.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">How to:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_hello.html">Hello Color</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_wavelength.html">Look up a wavelength</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_color_value.html">Look up a color value</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_color_space.html">Change an image’s color space</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_hdr.html">Encode HDR data as RGBA PNG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_tone_map.html">Tone map HDR images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_white_balance.html">Apply white balance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_ccbasic.html">Apply basic color correction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_apply_lut.html">Apply LUTs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_bake_lut.html">Bake color correction to a LUT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_autograde.html">Color grade by example</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/example_sweeps.html">Color sweeps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/example_image_manip.html">Lower-level image manipulation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/tinycio.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/about_release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/about_modules.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">Index</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Scripts:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/scripts_color2color.html">Color to color</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/scripts_hdr_codec.html">HDR Codec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/scripts_white_balance.html">White balance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/scripts_img2cube.html">Image to CUBE LUT</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/Sam-Izdat/tinycio">GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://pypi.org/project/tinycio/">PyPi</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">tinycio</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">tinycio.balance</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for tinycio.balance</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+<span class="kn">import</span> <span class="nn">typing</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">IntEnum</span>
+
+<span class="kn">from</span> <span class="nn">.colorspace</span> <span class="kn">import</span> <span class="n">ColorSpace</span>
+<span class="kn">from</span> <span class="nn">.numerics</span> <span class="kn">import</span> <span class="n">Float2</span><span class="p">,</span> <span class="n">matmul_tl</span> <span class="k">as</span> <span class="n">mm</span>
+
+<div class="viewcode-block" id="WhiteBalance"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.WhiteBalance">[docs]</a><span class="k">class</span> <span class="nc">WhiteBalance</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;    </span>
+<span class="sd">    Adjust white balance of an image. Example:</span>
+
+<span class="sd">    .. highlight:: python</span>
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">       source_white = WhiteBalance.wp_from_image(input_image)</span>
+<span class="sd">       target_white = WhiteBalance.wp_from_illuminant(WhiteBalance.Illuminant.NORTH_SKY)</span>
+<span class="sd">       white_balanced_image = WhiteBalance.apply(input_image, source_white, target_white)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="WhiteBalance.Illuminant"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.WhiteBalance.Illuminant">[docs]</a>    <span class="k">class</span> <span class="nc">Illuminant</span><span class="p">(</span><span class="n">IntEnum</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        CIE 1931 2° standard illuminant. Available options are:</span>
+
+<span class="sd">        .. highlight:: text</span>
+<span class="sd">        .. code-block:: text</span>
+<span class="sd">        </span>
+<span class="sd">            - NONE</span>
+<span class="sd">            - A (INCANDESCENT, TUNGSTEN) </span>
+<span class="sd">            - D50 (HORIZON)</span>
+<span class="sd">            - D55 (MIDMORNING)</span>
+<span class="sd">            - D65 (DAYLIGHT_NOON)</span>
+<span class="sd">            - D75 (NORTH SKY)</span>
+<span class="sd">            - D93 (BLUE_PHOSPHOR)</span>
+<span class="sd">            - E (EQUAL_ENERGY)</span>
+<span class="sd">            - F1 (FLUORESCENT_DAYLIGHT1)</span>
+<span class="sd">            - F2 (FLUORESCENT_COOL_WHITE)</span>
+<span class="sd">            - F3 (FLUORESCENT_WHITE)</span>
+<span class="sd">            - F4 (FLUORESCENT_WARM_WHITE)</span>
+<span class="sd">            - F5 (FLUORESCENT_DAYLIGHT2)</span>
+<span class="sd">            - F6 (FLUORESCENT_LIGHT_WHITE)</span>
+<span class="sd">            - F7 (D65_SIMULATOR, DAYLIGHT_SIMULATOR)</span>
+<span class="sd">            - F8 (D50_SIMULATOR, SYLVANIA_F40)</span>
+<span class="sd">            - F9 (FLOURESCENT_COOL_WHITE_DELUXE)</span>
+<span class="sd">            - F10 (PHILIPS_TL85, ULTRALUME_50)</span>
+<span class="sd">            - F11 (PHILIPS_TL84, ULTRALUME_40)</span>
+<span class="sd">            - F12 (PHILIPS_TL83, ULTRALUME_30)</span>
+<span class="sd">            - LED_B1 (PHOSPHOR_CONVERTED_BLUE1)</span>
+<span class="sd">            - LED_B2 (PHOSPHOR_CONVERTED_BLUE2)</span>
+<span class="sd">            - LED_B3 (PHOSPHOR_CONVERTED_BLUE3)</span>
+<span class="sd">            - LED_B4 (PHOSPHOR_CONVERTED_BLUE4)</span>
+<span class="sd">            - LED_B5 (PHOSPHOR_CONVERTED_BLUE5)</span>
+<span class="sd">            - LED_BH1</span>
+<span class="sd">            - LED_RGB1</span>
+<span class="sd">            - LED_V1 (LED_VIOLET1)</span>
+<span class="sd">            - LED_V2 (LED_VIOLET2)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">NONE</span>        <span class="o">=</span> <span class="mi">0</span> 
+        <span class="n">A</span>           <span class="o">=</span> <span class="mi">1</span> 
+        <span class="n">D50</span>         <span class="o">=</span> <span class="mi">2</span>
+        <span class="n">D55</span>         <span class="o">=</span> <span class="mi">3</span>
+        <span class="n">D65</span>         <span class="o">=</span> <span class="mi">4</span>
+        <span class="n">D75</span>         <span class="o">=</span> <span class="mi">5</span>
+        <span class="n">D93</span>         <span class="o">=</span> <span class="mi">6</span>
+        <span class="n">E</span>           <span class="o">=</span> <span class="mi">7</span>
+        <span class="n">F1</span>          <span class="o">=</span> <span class="mi">8</span>
+        <span class="n">F2</span>          <span class="o">=</span> <span class="mi">9</span>
+        <span class="n">F3</span>          <span class="o">=</span> <span class="mi">10</span>
+        <span class="n">F4</span>          <span class="o">=</span> <span class="mi">11</span>
+        <span class="n">F5</span>          <span class="o">=</span> <span class="mi">12</span>
+        <span class="n">F6</span>          <span class="o">=</span> <span class="mi">13</span>
+        <span class="n">F7</span>          <span class="o">=</span> <span class="mi">14</span>
+        <span class="n">F8</span>          <span class="o">=</span> <span class="mi">15</span>
+        <span class="n">F9</span>          <span class="o">=</span> <span class="mi">16</span>
+        <span class="n">F10</span>         <span class="o">=</span> <span class="mi">17</span>
+        <span class="n">F11</span>         <span class="o">=</span> <span class="mi">18</span>
+        <span class="n">F12</span>         <span class="o">=</span> <span class="mi">19</span>
+        <span class="n">LED_B1</span>      <span class="o">=</span> <span class="mi">20</span>
+        <span class="n">LED_B2</span>      <span class="o">=</span> <span class="mi">21</span>
+        <span class="n">LED_B3</span>      <span class="o">=</span> <span class="mi">22</span>
+        <span class="n">LED_B4</span>      <span class="o">=</span> <span class="mi">23</span>
+        <span class="n">LED_B5</span>      <span class="o">=</span> <span class="mi">24</span>
+        <span class="n">LED_BH1</span>     <span class="o">=</span> <span class="mi">25</span>
+        <span class="n">LED_RGB1</span>    <span class="o">=</span> <span class="mi">26</span>
+        <span class="n">LED_V1</span>      <span class="o">=</span> <span class="mi">27</span>
+        <span class="n">LED_V2</span>      <span class="o">=</span> <span class="mi">28</span>
+
+        <span class="n">INCANDESCENT</span>                    <span class="o">=</span> <span class="n">A</span>
+        <span class="n">TUNGSTEN</span>                        <span class="o">=</span> <span class="n">A</span>
+        <span class="n">HORIZON</span>                         <span class="o">=</span> <span class="n">D50</span>
+        <span class="n">MIDMORNING</span>                      <span class="o">=</span> <span class="n">D55</span>
+        <span class="n">DAYLIGHT_NOON</span>                   <span class="o">=</span> <span class="n">D65</span>
+        <span class="n">NORTH_SKY</span>                       <span class="o">=</span> <span class="n">D75</span>
+        <span class="n">BLUE_PHOSPHOR</span>                   <span class="o">=</span> <span class="n">D93</span>
+        <span class="n">EQUAL_ENERGY</span>                    <span class="o">=</span> <span class="n">E</span>
+        <span class="n">FLUORESCENT_DAYLIGHT1</span>           <span class="o">=</span> <span class="n">F1</span>
+        <span class="n">FLUORESCENT_COOL_WHITE</span>          <span class="o">=</span> <span class="n">F2</span>
+        <span class="n">FLUORESCENT_WHITE</span>               <span class="o">=</span> <span class="n">F3</span>
+        <span class="n">FLUORESCENT_WARM_WHITE</span>          <span class="o">=</span> <span class="n">F4</span>
+        <span class="n">FLUORESCENT_DAYLIGHT2</span>           <span class="o">=</span> <span class="n">F5</span>
+        <span class="n">FLUORESCENT_LIGHT_WHITE</span>         <span class="o">=</span> <span class="n">F6</span>
+        <span class="n">D65_SIMULATOR</span>                   <span class="o">=</span> <span class="n">F7</span>
+        <span class="n">DAYLIGHT_SIMULATOR</span>              <span class="o">=</span> <span class="n">F7</span>
+        <span class="n">D50_SIMULATOR</span>                   <span class="o">=</span> <span class="n">F8</span>
+        <span class="n">SYLVANIA_F40</span>                    <span class="o">=</span> <span class="n">F8</span>
+        <span class="n">FLOURESCENT_COOL_WHITE_DELUXE</span>   <span class="o">=</span> <span class="n">F9</span>
+        <span class="n">PHILIPS_TL85</span>                    <span class="o">=</span> <span class="n">F10</span>
+        <span class="n">ULTRALUME_50</span>                    <span class="o">=</span> <span class="n">F10</span>
+        <span class="n">PHILIPS_TL84</span>                    <span class="o">=</span> <span class="n">F11</span>
+        <span class="n">ULTRALUME_40</span>                    <span class="o">=</span> <span class="n">F11</span>
+        <span class="n">PHILIPS_TL83</span>                    <span class="o">=</span> <span class="n">F12</span>
+        <span class="n">ULTRALUME_30</span>                    <span class="o">=</span> <span class="n">F12</span>
+        <span class="n">PHOSPHOR_CONVERTED_BLUE1</span>        <span class="o">=</span> <span class="n">LED_B1</span>
+        <span class="n">PHOSPHOR_CONVERTED_BLUE2</span>        <span class="o">=</span> <span class="n">LED_B2</span>
+        <span class="n">PHOSPHOR_CONVERTED_BLUE3</span>        <span class="o">=</span> <span class="n">LED_B3</span>
+        <span class="n">PHOSPHOR_CONVERTED_BLUE4</span>        <span class="o">=</span> <span class="n">LED_B4</span>
+        <span class="n">PHOSPHOR_CONVERTED_BLUE5</span>        <span class="o">=</span> <span class="n">LED_B5</span>
+        <span class="n">LED_VIOLET1</span>                     <span class="o">=</span> <span class="n">LED_V1</span>
+        <span class="n">LED_VIOLET2</span>                     <span class="o">=</span> <span class="n">LED_V2</span></div>
+
+<div class="viewcode-block" id="WhiteBalance.wp_from_illuminant"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.WhiteBalance.wp_from_illuminant">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">wp_from_illuminant</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">illuminant</span><span class="p">:</span><span class="n">Illuminant</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Float2</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Look up chromaticity coordinates (white point) of a CIE 1931 2° standard illuminant.</span>
+
+<span class="sd">        :param illuminant: Standard illuminant</span>
+<span class="sd">        :return: White point coordinates (CIE xy)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># https://en.wikipedia.org/wiki/Standard_illuminant</span>
+        <span class="n">ilm</span> <span class="o">=</span> <span class="n">illuminant</span>
+        <span class="k">if</span>   <span class="n">ilm</span> <span class="o">==</span> <span class="bp">cls</span><span class="o">.</span><span class="n">Illuminant</span><span class="o">.</span><span class="n">A</span><span class="p">:</span>        <span class="k">return</span> <span class="n">Float2</span><span class="p">(</span><span class="mf">0.44757</span><span class="p">,</span> <span class="mf">0.40745</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ilm</span> <span class="o">==</span> <span class="bp">cls</span><span class="o">.</span><span class="n">Illuminant</span><span class="o">.</span><span class="n">D50</span><span class="p">:</span>      <span class="k">return</span> <span class="n">Float2</span><span class="p">(</span><span class="mf">0.34567</span><span class="p">,</span> <span class="mf">0.35850</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ilm</span> <span class="o">==</span> <span class="bp">cls</span><span class="o">.</span><span class="n">Illuminant</span><span class="o">.</span><span class="n">D55</span><span class="p">:</span>      <span class="k">return</span> <span class="n">Float2</span><span class="p">(</span><span class="mf">0.33242</span><span class="p">,</span> <span class="mf">0.34743</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ilm</span> <span class="o">==</span> <span class="bp">cls</span><span class="o">.</span><span class="n">Illuminant</span><span class="o">.</span><span class="n">D65</span><span class="p">:</span>      <span class="k">return</span> <span class="n">Float2</span><span class="p">(</span><span class="mf">0.31271</span><span class="p">,</span> <span class="mf">0.32902</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ilm</span> <span class="o">==</span> <span class="bp">cls</span><span class="o">.</span><span class="n">Illuminant</span><span class="o">.</span><span class="n">D75</span><span class="p">:</span>      <span class="k">return</span> <span class="n">Float2</span><span class="p">(</span><span class="mf">0.29902</span><span class="p">,</span> <span class="mf">0.31485</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ilm</span> <span class="o">==</span> <span class="bp">cls</span><span class="o">.</span><span class="n">Illuminant</span><span class="o">.</span><span class="n">D93</span><span class="p">:</span>      <span class="k">return</span> <span class="n">Float2</span><span class="p">(</span><span class="mf">0.28315</span><span class="p">,</span> <span class="mf">0.29711</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ilm</span> <span class="o">==</span> <span class="bp">cls</span><span class="o">.</span><span class="n">Illuminant</span><span class="o">.</span><span class="n">E</span><span class="p">:</span>        <span class="k">return</span> <span class="n">Float2</span><span class="p">(</span><span class="mf">0.33333</span><span class="p">,</span> <span class="mf">0.33333</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ilm</span> <span class="o">==</span> <span class="bp">cls</span><span class="o">.</span><span class="n">Illuminant</span><span class="o">.</span><span class="n">F1</span><span class="p">:</span>       <span class="k">return</span> <span class="n">Float2</span><span class="p">(</span><span class="mf">0.31310</span><span class="p">,</span> <span class="mf">0.33727</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ilm</span> <span class="o">==</span> <span class="bp">cls</span><span class="o">.</span><span class="n">Illuminant</span><span class="o">.</span><span class="n">F2</span><span class="p">:</span>       <span class="k">return</span> <span class="n">Float2</span><span class="p">(</span><span class="mf">0.37208</span><span class="p">,</span> <span class="mf">0.37529</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ilm</span> <span class="o">==</span> <span class="bp">cls</span><span class="o">.</span><span class="n">Illuminant</span><span class="o">.</span><span class="n">F3</span><span class="p">:</span>       <span class="k">return</span> <span class="n">Float2</span><span class="p">(</span><span class="mf">0.40910</span><span class="p">,</span> <span class="mf">0.39430</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ilm</span> <span class="o">==</span> <span class="bp">cls</span><span class="o">.</span><span class="n">Illuminant</span><span class="o">.</span><span class="n">F4</span><span class="p">:</span>       <span class="k">return</span> <span class="n">Float2</span><span class="p">(</span><span class="mf">0.44018</span><span class="p">,</span> <span class="mf">0.40329</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ilm</span> <span class="o">==</span> <span class="bp">cls</span><span class="o">.</span><span class="n">Illuminant</span><span class="o">.</span><span class="n">F5</span><span class="p">:</span>       <span class="k">return</span> <span class="n">Float2</span><span class="p">(</span><span class="mf">0.31379</span><span class="p">,</span> <span class="mf">0.34531</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ilm</span> <span class="o">==</span> <span class="bp">cls</span><span class="o">.</span><span class="n">Illuminant</span><span class="o">.</span><span class="n">F6</span><span class="p">:</span>       <span class="k">return</span> <span class="n">Float2</span><span class="p">(</span><span class="mf">0.37790</span><span class="p">,</span> <span class="mf">0.38835</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ilm</span> <span class="o">==</span> <span class="bp">cls</span><span class="o">.</span><span class="n">Illuminant</span><span class="o">.</span><span class="n">F7</span><span class="p">:</span>       <span class="k">return</span> <span class="n">Float2</span><span class="p">(</span><span class="mf">0.31292</span><span class="p">,</span> <span class="mf">0.32933</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ilm</span> <span class="o">==</span> <span class="bp">cls</span><span class="o">.</span><span class="n">Illuminant</span><span class="o">.</span><span class="n">F8</span><span class="p">:</span>       <span class="k">return</span> <span class="n">Float2</span><span class="p">(</span><span class="mf">0.34588</span><span class="p">,</span> <span class="mf">0.35875</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ilm</span> <span class="o">==</span> <span class="bp">cls</span><span class="o">.</span><span class="n">Illuminant</span><span class="o">.</span><span class="n">F9</span><span class="p">:</span>       <span class="k">return</span> <span class="n">Float2</span><span class="p">(</span><span class="mf">0.37417</span><span class="p">,</span> <span class="mf">0.37281</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ilm</span> <span class="o">==</span> <span class="bp">cls</span><span class="o">.</span><span class="n">Illuminant</span><span class="o">.</span><span class="n">F10</span><span class="p">:</span>      <span class="k">return</span> <span class="n">Float2</span><span class="p">(</span><span class="mf">0.34609</span><span class="p">,</span> <span class="mf">0.35986</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ilm</span> <span class="o">==</span> <span class="bp">cls</span><span class="o">.</span><span class="n">Illuminant</span><span class="o">.</span><span class="n">F11</span><span class="p">:</span>      <span class="k">return</span> <span class="n">Float2</span><span class="p">(</span><span class="mf">0.38052</span><span class="p">,</span> <span class="mf">0.37713</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ilm</span> <span class="o">==</span> <span class="bp">cls</span><span class="o">.</span><span class="n">Illuminant</span><span class="o">.</span><span class="n">F12</span><span class="p">:</span>      <span class="k">return</span> <span class="n">Float2</span><span class="p">(</span><span class="mf">0.43695</span><span class="p">,</span> <span class="mf">0.40441</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ilm</span> <span class="o">==</span> <span class="bp">cls</span><span class="o">.</span><span class="n">Illuminant</span><span class="o">.</span><span class="n">LED_B1</span><span class="p">:</span>   <span class="k">return</span> <span class="n">Float2</span><span class="p">(</span><span class="mf">0.4560</span><span class="p">,</span> <span class="mf">0.4078</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ilm</span> <span class="o">==</span> <span class="bp">cls</span><span class="o">.</span><span class="n">Illuminant</span><span class="o">.</span><span class="n">LED_B2</span><span class="p">:</span>   <span class="k">return</span> <span class="n">Float2</span><span class="p">(</span><span class="mf">0.4357</span><span class="p">,</span> <span class="mf">0.4012</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ilm</span> <span class="o">==</span> <span class="bp">cls</span><span class="o">.</span><span class="n">Illuminant</span><span class="o">.</span><span class="n">LED_B3</span><span class="p">:</span>   <span class="k">return</span> <span class="n">Float2</span><span class="p">(</span><span class="mf">0.3756</span><span class="p">,</span> <span class="mf">0.3723</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ilm</span> <span class="o">==</span> <span class="bp">cls</span><span class="o">.</span><span class="n">Illuminant</span><span class="o">.</span><span class="n">LED_B4</span><span class="p">:</span>   <span class="k">return</span> <span class="n">Float2</span><span class="p">(</span><span class="mf">0.3422</span><span class="p">,</span> <span class="mf">0.3502</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ilm</span> <span class="o">==</span> <span class="bp">cls</span><span class="o">.</span><span class="n">Illuminant</span><span class="o">.</span><span class="n">LED_B5</span><span class="p">:</span>   <span class="k">return</span> <span class="n">Float2</span><span class="p">(</span><span class="mf">0.3118</span><span class="p">,</span> <span class="mf">0.3236</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ilm</span> <span class="o">==</span> <span class="bp">cls</span><span class="o">.</span><span class="n">Illuminant</span><span class="o">.</span><span class="n">LED_BH1</span><span class="p">:</span>  <span class="k">return</span> <span class="n">Float2</span><span class="p">(</span><span class="mf">0.4474</span><span class="p">,</span> <span class="mf">0.4066</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ilm</span> <span class="o">==</span> <span class="bp">cls</span><span class="o">.</span><span class="n">Illuminant</span><span class="o">.</span><span class="n">LED_RGB1</span><span class="p">:</span> <span class="k">return</span> <span class="n">Float2</span><span class="p">(</span><span class="mf">0.4557</span><span class="p">,</span> <span class="mf">0.4211</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ilm</span> <span class="o">==</span> <span class="bp">cls</span><span class="o">.</span><span class="n">Illuminant</span><span class="o">.</span><span class="n">LED_V1</span><span class="p">:</span>   <span class="k">return</span> <span class="n">Float2</span><span class="p">(</span><span class="mf">0.4560</span><span class="p">,</span> <span class="mf">0.4548</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ilm</span> <span class="o">==</span> <span class="bp">cls</span><span class="o">.</span><span class="n">Illuminant</span><span class="o">.</span><span class="n">LED_V2</span><span class="p">:</span>   <span class="k">return</span> <span class="n">Float2</span><span class="p">(</span><span class="mf">0.3781</span><span class="p">,</span> <span class="mf">0.3775</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid illuminant: </span><span class="si">{</span><span class="n">illuminant</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="WhiteBalance.wp_from_cct"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.WhiteBalance.wp_from_cct">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">wp_from_cct</span><span class="p">(</span><span class="n">cct</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Float2</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compute CIE xy chromaticity coordinates (white point) from correlated colour temperature.</span>
+
+<span class="sd">        :param cct: Correlated colour temperature in range [4000, 25000]</span>
+<span class="sd">        :return: White point coordinates (CIE xy)</span>
+<span class="sd">        &quot;&quot;&quot;</span>    
+        <span class="c1"># https://github.com/colour-science/colour/blob/develop/colour/temperature/cie_d.py</span>
+        <span class="c1"># BSD-3-Clause license:</span>
+
+        <span class="c1"># Copyright 2013 Colour Developers</span>
+
+        <span class="c1"># Redistribution and use in source and binary forms, with or without modification, </span>
+        <span class="c1"># are permitted provided that the following conditions are met:</span>
+
+        <span class="c1"># 1. Redistributions of source code must retain the above copyright notice, this </span>
+        <span class="c1"># list of conditions and the following disclaimer.</span>
+
+        <span class="c1"># 2. Redistributions in binary form must reproduce the above copyright notice, </span>
+        <span class="c1"># this list of conditions and the following disclaimer in the documentation and/or </span>
+        <span class="c1"># other materials provided with the distribution.</span>
+
+        <span class="c1"># 3. Neither the name of the copyright holder nor the names of its contributors </span>
+        <span class="c1"># may be used to endorse or promote products derived from this software without </span>
+        <span class="c1"># specific prior written permission.</span>
+
+        <span class="c1"># THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” </span>
+        <span class="c1"># AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED </span>
+        <span class="c1"># WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. </span>
+        <span class="c1"># IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, </span>
+        <span class="c1"># INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, </span>
+        <span class="c1"># BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, </span>
+        <span class="c1"># DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY </span>
+        <span class="c1"># OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING </span>
+        <span class="c1"># NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, </span>
+        <span class="c1"># EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE</span>
+        <span class="k">assert</span> <span class="mi">4000</span> <span class="o">&lt;=</span> <span class="n">cct</span> <span class="o">&lt;=</span> <span class="mi">25000</span><span class="p">,</span> <span class="s2">&quot;Correlated color temperature must be in range [4000, 25000]&quot;</span>
+        <span class="n">cct</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">cct</span><span class="p">)</span>
+
+        <span class="n">cct_3</span> <span class="o">=</span> <span class="n">cct</span><span class="o">**</span><span class="mi">3</span>
+        <span class="n">cct_2</span> <span class="o">=</span> <span class="n">cct</span><span class="o">**</span><span class="mi">2</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="mf">0.</span>
+        <span class="k">if</span> <span class="n">cct</span> <span class="o">&lt;=</span> <span class="mf">7000.</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="o">-</span><span class="mf">4.607</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**</span><span class="mi">9</span> <span class="o">/</span> <span class="n">cct_3</span> \
+            <span class="o">+</span> <span class="mf">2.9678</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span> <span class="o">/</span> <span class="n">cct_2</span> \
+            <span class="o">+</span> <span class="mf">0.09911</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**</span><span class="mi">3</span> <span class="o">/</span> <span class="n">cct</span> \
+            <span class="o">+</span> <span class="mf">0.244063</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="o">-</span><span class="mf">2.0064</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**</span><span class="mi">9</span> <span class="o">/</span> <span class="n">cct_3</span> \
+            <span class="o">+</span> <span class="mf">1.9018</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**</span><span class="mi">6</span> <span class="o">/</span> <span class="n">cct_2</span> \
+            <span class="o">+</span> <span class="mf">0.24748</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**</span><span class="mi">3</span> <span class="o">/</span> <span class="n">cct</span> \
+            <span class="o">+</span> <span class="mf">0.23704</span>
+
+        <span class="n">y</span> <span class="o">=</span> <span class="o">-</span><span class="mf">3.000</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mf">2.870</span> <span class="o">*</span> <span class="n">x</span> <span class="o">-</span> <span class="mf">0.275</span>
+
+        <span class="k">return</span> <span class="n">Float2</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="WhiteBalance.wp_from_image"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.WhiteBalance.wp_from_image">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">wp_from_image</span><span class="p">(</span><span class="n">im_xyz</span><span class="p">:</span><span class="n">Union</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">ColorImage</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Float2</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Estimate the dominant illuminant of an environment map or a target image directly and return its </span>
+<span class="sd">        approximate CIE xy chromaticity coordinates (white point).</span>
+
+<span class="sd">        .. warning:: </span>
+<span class="sd">            This is a lazy method that just averages the pixels in the image tensor. </span>
+<span class="sd">            There is no spherical mapping, nor PCA, nor any serious attempt to analyze the image.</span>
+
+<span class="sd">        :param im_xyz: Image tensor in CIE XYZ color space</span>
+<span class="sd">        :type im_xyz: torch.Tensor | ColorImage</span>
+<span class="sd">        :return: Estimated white point coordinates (CIE xy)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">mean_color</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[[</span><span class="n">im_xyz</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">im_xyz</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">im_xyz</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()]]])</span><span class="o">.</span><span class="n">permute</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">csum</span> <span class="o">=</span> <span class="n">mean_color</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">mean_color</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">mean_color</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">mean_color</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/=</span> <span class="n">csum</span>
+        <span class="n">mean_color</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/=</span> <span class="n">csum</span>
+        <span class="k">return</span> <span class="n">Float2</span><span class="p">(</span><span class="n">mean_color</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span> <span class="n">mean_color</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="WhiteBalance.apply"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.WhiteBalance.apply">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span>
+        <span class="n">im_lms</span><span class="p">:</span><span class="n">Union</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">ColorImage</span><span class="p">],</span> 
+        <span class="n">source_white</span><span class="p">:</span><span class="n">Union</span><span class="p">[</span><span class="n">Float2</span><span class="p">,</span> <span class="n">Chromaticity</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span> 
+        <span class="n">target_white</span><span class="p">:</span><span class="n">Union</span><span class="p">[</span><span class="n">Float2</span><span class="p">,</span> <span class="n">Chromaticity</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Apply white balance.</span>
+
+<span class="sd">        :param im_lms: Image tensor in LMS color space</span>
+<span class="sd">        :type im_lms: torch.Tensor | ColorImage</span>
+<span class="sd">        :param source_white: Source white point coordinates (CIE xy)</span>
+<span class="sd">        :type source_white: Float2 | Chromaticity | torch.Tensor | numpy.ndarray</span>
+<span class="sd">        :param target_white: Target white point coordinates (CIE xy)</span>
+<span class="sd">        :type target_white: Float2 | Chromaticity | torch.Tensor | numpy.ndarray</span>
+<span class="sd">        :return: White balanced image tensor</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">source</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[[</span><span class="n">source_white</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">source_white</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mf">1.</span><span class="p">]]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span><span class="o">.</span><span class="n">permute</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">target</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[[</span><span class="n">target_white</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">target_white</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mf">1.</span><span class="p">]]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span><span class="o">.</span><span class="n">permute</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">src_lms</span> <span class="o">=</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">CIE_XYY</span><span class="p">,</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">LMS</span><span class="p">)</span>
+        <span class="n">dst_lms</span> <span class="o">=</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">CIE_XYY</span><span class="p">,</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">LMS</span><span class="p">)</span>
+
+        <span class="n">mat</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">[</span><span class="n">dst_lms</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="o">/</span><span class="n">src_lms</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="n">dst_lms</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="o">/</span><span class="n">src_lms</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span> <span class="mf">0.</span><span class="p">],</span>
+            <span class="p">[</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="n">dst_lms</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="o">/</span><span class="n">src_lms</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">item</span><span class="p">()]]</span>
+
+        <span class="n">corrected</span> <span class="o">=</span> <span class="n">mm</span><span class="p">(</span><span class="n">im_lms</span><span class="p">,</span> <span class="n">mat</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">corrected</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

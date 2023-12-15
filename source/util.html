@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>util module &mdash; tinycio a documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=92fd9be5" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/patch.css?v=77628c61" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=c0846a87"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Release notes" href="about_release_notes.html" />
+    <link rel="prev" title="numerics module" href="numerics.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/tinycio_sm.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">How to:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="howto_hello.html">Hello Color</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_wavelength.html">Look up a wavelength</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_color_value.html">Look up a color value</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_color_space.html">Change an image’s color space</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_hdr.html">Encode HDR data as RGBA PNG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_tone_map.html">Tone map HDR images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_white_balance.html">Apply white balance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_ccbasic.html">Apply basic color correction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_apply_lut.html">Apply LUTs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_bake_lut.html">Bake color correction to a LUT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_autograde.html">Color grade by example</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="example_sweeps.html">Color sweeps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_image_manip.html">Lower-level image manipulation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="tinycio.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="tinycio.html#tinycio.ColorImage"><code class="docutils literal notranslate"><span class="pre">ColorImage</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tinycio.html#tinycio.MonoImage"><code class="docutils literal notranslate"><span class="pre">MonoImage</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tinycio.html#tinycio.Color"><code class="docutils literal notranslate"><span class="pre">Color</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tinycio.html#tinycio.Chromaticity"><code class="docutils literal notranslate"><span class="pre">Chromaticity</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tinycio.html#tinycio.ColorSpace"><code class="docutils literal notranslate"><span class="pre">ColorSpace</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tinycio.html#tinycio.TransferFunction"><code class="docutils literal notranslate"><span class="pre">TransferFunction</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tinycio.html#tinycio.ToneMapping"><code class="docutils literal notranslate"><span class="pre">ToneMapping</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tinycio.html#tinycio.ColorCorrection"><code class="docutils literal notranslate"><span class="pre">ColorCorrection</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tinycio.html#tinycio.LookupTable"><code class="docutils literal notranslate"><span class="pre">LookupTable</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tinycio.html#tinycio.WhiteBalance"><code class="docutils literal notranslate"><span class="pre">WhiteBalance</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tinycio.html#tinycio.Spectral"><code class="docutils literal notranslate"><span class="pre">Spectral</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="tinycio.html#tinycio.Codec"><code class="docutils literal notranslate"><span class="pre">Codec</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="fsio.html">fsio module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="numerics.html">numerics module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">util module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.util.progress_bar"><code class="docutils literal notranslate"><span class="pre">progress_bar()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.util.apply_gamma"><code class="docutils literal notranslate"><span class="pre">apply_gamma()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.util.apply_hue_oklab"><code class="docutils literal notranslate"><span class="pre">apply_hue_oklab()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.util.srgb_luminance"><code class="docutils literal notranslate"><span class="pre">srgb_luminance()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.util.col_hsv_to_rgb"><code class="docutils literal notranslate"><span class="pre">col_hsv_to_rgb()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.util.col_rgb_to_hsv"><code class="docutils literal notranslate"><span class="pre">col_rgb_to_hsv()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.util.col_oklab_to_linear_srgb"><code class="docutils literal notranslate"><span class="pre">col_oklab_to_linear_srgb()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.util.col_linear_srgb_to_oklab"><code class="docutils literal notranslate"><span class="pre">col_linear_srgb_to_oklab()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.util.col_okhsv_to_srgb"><code class="docutils literal notranslate"><span class="pre">col_okhsv_to_srgb()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.util.col_srgb_to_okhsv"><code class="docutils literal notranslate"><span class="pre">col_srgb_to_okhsv()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.util.col_okhsl_to_srgb"><code class="docutils literal notranslate"><span class="pre">col_okhsl_to_srgb()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.util.col_srgb_to_okhsl"><code class="docutils literal notranslate"><span class="pre">col_srgb_to_okhsl()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="about_release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about_modules.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Scripts:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="scripts_color2color.html">Color to color</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scripts_hdr_codec.html">HDR Codec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scripts_white_balance.html">White balance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scripts_img2cube.html">Image to CUBE LUT</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/Sam-Izdat/tinycio">GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://pypi.org/project/tinycio/">PyPi</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">tinycio</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="tinycio.html">API Reference</a></li>
+      <li class="breadcrumb-item active">util module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/source/util.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="util-module">
+<h1>util module<a class="headerlink" href="#util-module" title="Permalink to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<span class="target" id="module-tinycio.util"></span><div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Using the color functions here directly is not advised, if an interface exists in the root module.</p>
+</div>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tinycio.util.progress_bar" title="tinycio.util.progress_bar"><code class="xref py py-obj docutils literal notranslate"><span class="pre">progress_bar</span></code></a>()</p></td>
+<td><p>Context to display a progressbar with tqdm.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tinycio.util.apply_gamma" title="tinycio.util.apply_gamma"><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply_gamma</span></code></a>(im, gamma)</p></td>
+<td><p>Apply arbitrary gamma correction.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tinycio.util.apply_hue_oklab" title="tinycio.util.apply_hue_oklab"><code class="xref py py-obj docutils literal notranslate"><span class="pre">apply_hue_oklab</span></code></a>(im_oklab, hue_delta)</p></td>
+<td><p>Manually shift hue of an image by a -1 to +1 delta value.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tinycio.util.srgb_luminance" title="tinycio.util.srgb_luminance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">srgb_luminance</span></code></a>(im_srgb)</p></td>
+<td><p>Return relative luminance of linear sRGB image.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tinycio.util.col_hsv_to_rgb" title="tinycio.util.col_hsv_to_rgb"><code class="xref py py-obj docutils literal notranslate"><span class="pre">col_hsv_to_rgb</span></code></a>(hsv)</p></td>
+<td><p>Convert HSV color to RGB.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tinycio.util.col_rgb_to_hsv" title="tinycio.util.col_rgb_to_hsv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">col_rgb_to_hsv</span></code></a>(rgb)</p></td>
+<td><p>Convert RGB color to HSV.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tinycio.util.col_oklab_to_linear_srgb" title="tinycio.util.col_oklab_to_linear_srgb"><code class="xref py py-obj docutils literal notranslate"><span class="pre">col_oklab_to_linear_srgb</span></code></a>(lab)</p></td>
+<td><p>Convert OKLAB color to linear sRGB.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tinycio.util.col_linear_srgb_to_oklab" title="tinycio.util.col_linear_srgb_to_oklab"><code class="xref py py-obj docutils literal notranslate"><span class="pre">col_linear_srgb_to_oklab</span></code></a>(srgb)</p></td>
+<td><p>Convert linear sRGB color to OKLAB.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tinycio.util.col_okhsv_to_srgb" title="tinycio.util.col_okhsv_to_srgb"><code class="xref py py-obj docutils literal notranslate"><span class="pre">col_okhsv_to_srgb</span></code></a>(hsv)</p></td>
+<td><p>Convert OKHSV color to linear sRGB.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tinycio.util.col_srgb_to_okhsv" title="tinycio.util.col_srgb_to_okhsv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">col_srgb_to_okhsv</span></code></a>(srgb)</p></td>
+<td><p>Convert linear sRGB color to OKHSV.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tinycio.util.col_okhsl_to_srgb" title="tinycio.util.col_okhsl_to_srgb"><code class="xref py py-obj docutils literal notranslate"><span class="pre">col_okhsl_to_srgb</span></code></a>(hsl)</p></td>
+<td><p>Convert OKHSL color to linear sRGB.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tinycio.util.col_srgb_to_okhsl" title="tinycio.util.col_srgb_to_okhsl"><code class="xref py py-obj docutils literal notranslate"><span class="pre">col_srgb_to_okhsl</span></code></a>(srgb)</p></td>
+<td><p>Convert linear sRGB color to OKHSL.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt class="sig sig-object py" id="tinycio.util.progress_bar">
+<span class="sig-prename descclassname"><span class="pre">tinycio.util.</span></span><span class="sig-name descname"><span class="pre">progress_bar</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/util/miscutil.html#progress_bar"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.util.progress_bar" title="Permalink to this definition"></a></dt>
+<dd><p>Context to display a progressbar with tqdm.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tinycio.util.apply_gamma">
+<span class="sig-prename descclassname"><span class="pre">tinycio.util.</span></span><span class="sig-name descname"><span class="pre">apply_gamma</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">im</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">gamma</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/util/colorutil.html#apply_gamma"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.util.apply_gamma" title="Permalink to this definition"></a></dt>
+<dd><p>Apply arbitrary gamma correction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>im</strong> (<em>torch.Tensor</em><em> | </em><a class="reference internal" href="tinycio.html#tinycio.ColorImage" title="tinycio.ColorImage"><em>ColorImage</em></a>) – Image tensor</p></li>
+<li><p><strong>gamma</strong> (<em>float</em>) – Gamma correction (should be in the range [0.1, 10.0])</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Gamma-corrected image tensor</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tinycio.util.apply_hue_oklab">
+<span class="sig-prename descclassname"><span class="pre">tinycio.util.</span></span><span class="sig-name descname"><span class="pre">apply_hue_oklab</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">im_oklab</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hue_delta</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/util/colorutil.html#apply_hue_oklab"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.util.apply_hue_oklab" title="Permalink to this definition"></a></dt>
+<dd><p>Manually shift hue of an image by a -1 to +1 delta value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>im_oklab</strong> (<em>torch.Tensor</em><em> | </em><a class="reference internal" href="tinycio.html#tinycio.ColorImage" title="tinycio.ColorImage"><em>ColorImage</em></a>) – Image tensor in OKLAB color space</p></li>
+<li><p><strong>hue_delta</strong> (<em>float</em>) – Hue shift value in the range [-1., 1.]</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Image tensor in OKLAB color space with adjusted hue</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tinycio.util.srgb_luminance">
+<span class="sig-prename descclassname"><span class="pre">tinycio.util.</span></span><span class="sig-name descname"><span class="pre">srgb_luminance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">im_srgb</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/util/colorutil.html#srgb_luminance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.util.srgb_luminance" title="Permalink to this definition"></a></dt>
+<dd><p>Return relative luminance of linear sRGB image.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>im_srgb</strong> (<em>torch.Tensor</em><em> | </em><a class="reference internal" href="tinycio.html#tinycio.ColorImage" title="tinycio.ColorImage"><em>ColorImage</em></a>) – [C=3, H, W] color image tensor in sRGB color space</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>[C=1, H, W] image tensor</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tinycio.util.col_hsv_to_rgb">
+<span class="sig-prename descclassname"><span class="pre">tinycio.util.</span></span><span class="sig-name descname"><span class="pre">col_hsv_to_rgb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hsv</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/util/colorutil.html#col_hsv_to_rgb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.util.col_hsv_to_rgb" title="Permalink to this definition"></a></dt>
+<dd><p>Convert HSV color to RGB.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>hsv</strong> (<a class="reference internal" href="numerics.html#tinycio.numerics.Float3" title="tinycio.numerics.Float3"><em>Float3</em></a><em> | </em><a class="reference internal" href="tinycio.html#tinycio.Color" title="tinycio.Color"><em>Color</em></a>) – HSV color</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="numerics.html#tinycio.numerics.Float3" title="tinycio.numerics.Float3">Float3</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tinycio.util.col_rgb_to_hsv">
+<span class="sig-prename descclassname"><span class="pre">tinycio.util.</span></span><span class="sig-name descname"><span class="pre">col_rgb_to_hsv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rgb</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/util/colorutil.html#col_rgb_to_hsv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.util.col_rgb_to_hsv" title="Permalink to this definition"></a></dt>
+<dd><p>Convert RGB color to HSV.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>rgb</strong> (<a class="reference internal" href="numerics.html#tinycio.numerics.Float3" title="tinycio.numerics.Float3"><em>Float3</em></a><em> | </em><a class="reference internal" href="tinycio.html#tinycio.Color" title="tinycio.Color"><em>Color</em></a>) – RGB color</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="numerics.html#tinycio.numerics.Float3" title="tinycio.numerics.Float3">Float3</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tinycio.util.col_oklab_to_linear_srgb">
+<span class="sig-prename descclassname"><span class="pre">tinycio.util.</span></span><span class="sig-name descname"><span class="pre">col_oklab_to_linear_srgb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lab</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/util/colorutil.html#col_oklab_to_linear_srgb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.util.col_oklab_to_linear_srgb" title="Permalink to this definition"></a></dt>
+<dd><p>Convert OKLAB color to linear sRGB.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>lab</strong> (<a class="reference internal" href="numerics.html#tinycio.numerics.Float3" title="tinycio.numerics.Float3"><em>Float3</em></a><em> | </em><a class="reference internal" href="tinycio.html#tinycio.Color" title="tinycio.Color"><em>Color</em></a>) – OKLAB color</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="numerics.html#tinycio.numerics.Float3" title="tinycio.numerics.Float3">Float3</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tinycio.util.col_linear_srgb_to_oklab">
+<span class="sig-prename descclassname"><span class="pre">tinycio.util.</span></span><span class="sig-name descname"><span class="pre">col_linear_srgb_to_oklab</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">srgb</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/util/colorutil.html#col_linear_srgb_to_oklab"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.util.col_linear_srgb_to_oklab" title="Permalink to this definition"></a></dt>
+<dd><p>Convert linear sRGB color to OKLAB.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>srgb</strong> (<a class="reference internal" href="numerics.html#tinycio.numerics.Float3" title="tinycio.numerics.Float3"><em>Float3</em></a><em> | </em><a class="reference internal" href="tinycio.html#tinycio.Color" title="tinycio.Color"><em>Color</em></a>) – linear sRGB color</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="numerics.html#tinycio.numerics.Float3" title="tinycio.numerics.Float3">Float3</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tinycio.util.col_okhsv_to_srgb">
+<span class="sig-prename descclassname"><span class="pre">tinycio.util.</span></span><span class="sig-name descname"><span class="pre">col_okhsv_to_srgb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hsv</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/util/colorutil.html#col_okhsv_to_srgb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.util.col_okhsv_to_srgb" title="Permalink to this definition"></a></dt>
+<dd><p>Convert OKHSV color to linear sRGB.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>hsv</strong> (<a class="reference internal" href="numerics.html#tinycio.numerics.Float3" title="tinycio.numerics.Float3"><em>Float3</em></a><em> | </em><a class="reference internal" href="tinycio.html#tinycio.Color" title="tinycio.Color"><em>Color</em></a>) – OKHSV color</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="numerics.html#tinycio.numerics.Float3" title="tinycio.numerics.Float3">Float3</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tinycio.util.col_srgb_to_okhsv">
+<span class="sig-prename descclassname"><span class="pre">tinycio.util.</span></span><span class="sig-name descname"><span class="pre">col_srgb_to_okhsv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">srgb</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/util/colorutil.html#col_srgb_to_okhsv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.util.col_srgb_to_okhsv" title="Permalink to this definition"></a></dt>
+<dd><p>Convert linear sRGB color to OKHSV.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>srgb</strong> (<a class="reference internal" href="numerics.html#tinycio.numerics.Float3" title="tinycio.numerics.Float3"><em>Float3</em></a><em> | </em><a class="reference internal" href="tinycio.html#tinycio.Color" title="tinycio.Color"><em>Color</em></a>) – linear sRGB color</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="numerics.html#tinycio.numerics.Float3" title="tinycio.numerics.Float3">Float3</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tinycio.util.col_okhsl_to_srgb">
+<span class="sig-prename descclassname"><span class="pre">tinycio.util.</span></span><span class="sig-name descname"><span class="pre">col_okhsl_to_srgb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hsl</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/util/colorutil.html#col_okhsl_to_srgb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.util.col_okhsl_to_srgb" title="Permalink to this definition"></a></dt>
+<dd><p>Convert OKHSL color to linear sRGB.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>hsl</strong> (<a class="reference internal" href="numerics.html#tinycio.numerics.Float3" title="tinycio.numerics.Float3"><em>Float3</em></a><em> | </em><a class="reference internal" href="tinycio.html#tinycio.Color" title="tinycio.Color"><em>Color</em></a>) – OKHSL color</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="numerics.html#tinycio.numerics.Float3" title="tinycio.numerics.Float3">Float3</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tinycio.util.col_srgb_to_okhsl">
+<span class="sig-prename descclassname"><span class="pre">tinycio.util.</span></span><span class="sig-name descname"><span class="pre">col_srgb_to_okhsl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">srgb</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/util/colorutil.html#col_srgb_to_okhsl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.util.col_srgb_to_okhsl" title="Permalink to this definition"></a></dt>
+<dd><p>Convert linear sRGB color to OKHSL.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>srgb</strong> (<a class="reference internal" href="numerics.html#tinycio.numerics.Float3" title="tinycio.numerics.Float3"><em>Float3</em></a><em> | </em><a class="reference internal" href="tinycio.html#tinycio.Color" title="tinycio.Color"><em>Color</em></a>) – linear sRGB color</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="numerics.html#tinycio.numerics.Float3" title="tinycio.numerics.Float3">Float3</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="numerics.html" class="btn btn-neutral float-left" title="numerics module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="about_release_notes.html" class="btn btn-neutral float-right" title="Release notes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

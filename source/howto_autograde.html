@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Color grade by example &mdash; tinycio a documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=92fd9be5" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/patch.css?v=77628c61" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=c0846a87"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Color sweeps" href="example_sweeps.html" />
+    <link rel="prev" title="Bake color correction to a LUT" href="howto_bake_lut.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/tinycio_sm.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">How to:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="howto_hello.html">Hello Color</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_wavelength.html">Look up a wavelength</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_color_value.html">Look up a color value</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_color_space.html">Change an image’s color space</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_hdr.html">Encode HDR data as RGBA PNG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_tone_map.html">Tone map HDR images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_white_balance.html">Apply white balance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_ccbasic.html">Apply basic color correction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_apply_lut.html">Apply LUTs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_bake_lut.html">Bake color correction to a LUT</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Color grade by example</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#what-this-is-doing">What this is doing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lut-the-brute-force-approach">LUT: the brute-force approach</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#settings-a-little-finesse">Settings: a little finesse</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#limitations">Limitations</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="example_sweeps.html">Color sweeps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_image_manip.html">Lower-level image manipulation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tinycio.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about_release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about_modules.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Scripts:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="scripts_color2color.html">Color to color</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scripts_hdr_codec.html">HDR Codec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scripts_white_balance.html">White balance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scripts_img2cube.html">Image to CUBE LUT</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/Sam-Izdat/tinycio">GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://pypi.org/project/tinycio/">PyPi</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">tinycio</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Color grade by example</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/source/howto_autograde.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="color-grade-by-example">
+<h1>Color grade by example<a class="headerlink" href="#color-grade-by-example" title="Permalink to this heading"></a></h1>
+<figure class="align-default" id="id16">
+<a class="reference internal image-reference" href="../_images/autograde_example.jpg"><img alt="Automatic by-example color correction" src="../_images/autograde_example.jpg" style="width: 700px;" /></a>
+<figcaption>
+<p><span class="caption-text">painting by Simon Stålenhag <a class="footnote-reference brackets" href="#id9" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></span><a class="headerlink" href="#id16" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tinycio</span> <span class="kn">import</span> <span class="n">ColorImage</span><span class="p">,</span> <span class="n">ColorCorrection</span><span class="p">,</span> <span class="n">LookupTable</span>
+<span class="kn">from</span> <span class="nn">tinycio.util</span> <span class="kn">import</span> <span class="n">progress_bar</span>
+
+<span class="n">im_src</span> <span class="o">=</span> <span class="n">ColorImage</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;my/source.exr&#39;</span><span class="p">,</span> <span class="s1">&#39;SRGB_LIN&#39;</span><span class="p">)</span>
+<span class="n">im_tgt</span> <span class="o">=</span> <span class="n">ColorImage</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;my/target.exr&#39;</span><span class="p">,</span> <span class="s1">&#39;SRGB_LIN&#39;</span><span class="p">)</span>
+<span class="n">im_src_cc</span> <span class="o">=</span> <span class="n">im_src</span><span class="o">.</span><span class="n">to_color_space</span><span class="p">(</span><span class="s1">&#39;ACESCC&#39;</span><span class="p">)</span>
+<span class="n">im_tgt_cc</span> <span class="o">=</span> <span class="n">im_tgt</span><span class="o">.</span><span class="n">to_color_space</span><span class="p">(</span><span class="s1">&#39;ACESCC&#39;</span><span class="p">)</span>
+
+<span class="c1"># Option 1</span>
+<span class="n">auto_lut</span> <span class="o">=</span> <span class="n">LookupTable</span><span class="o">.</span><span class="n">get_linear</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="mi">64</span><span class="p">)</span>
+<span class="n">auto_lut</span><span class="o">.</span><span class="n">fit_to_image</span><span class="p">(</span><span class="n">im_src</span><span class="p">,</span> <span class="n">im_tgt</span><span class="p">,</span> <span class="n">context</span> <span class="o">=</span> <span class="n">progress_bar</span><span class="p">)</span>
+<span class="n">auto_lut</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;my/auto_lut.cube&#39;</span><span class="p">)</span>
+<span class="n">im_src</span><span class="o">.</span><span class="n">lut</span><span class="p">(</span><span class="n">auto_lut</span><span class="p">)</span><span class="o">.</span><span class="n">to_color_space</span><span class="p">(</span><span class="s1">&#39;SRGB&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;my/result1.png&#39;</span><span class="p">)</span>
+
+<span class="c1"># Option 2</span>
+<span class="n">auto_cc</span> <span class="o">=</span> <span class="n">ColorCorrection</span><span class="p">()</span>
+<span class="n">auto_cc</span><span class="o">.</span><span class="n">fit_to_image</span><span class="p">(</span><span class="n">im_src_cc</span><span class="p">,</span> <span class="n">im_tgt_cc</span><span class="p">,</span> <span class="n">context</span> <span class="o">=</span> <span class="n">progress_bar</span><span class="p">)</span>
+<span class="n">auto_cc</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;my/auto_cc.toml&#39;</span><span class="p">)</span>
+<span class="n">im_src</span><span class="o">.</span><span class="n">correct</span><span class="p">(</span><span class="n">auto_cc</span><span class="p">)</span><span class="o">.</span><span class="n">to_color_space</span><span class="p">(</span><span class="s1">&#39;SRGB&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;my/result2.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<section id="what-this-is-doing">
+<h2>What this is doing<a class="headerlink" href="#what-this-is-doing" title="Permalink to this heading"></a></h2>
+<p>I would like to call it “differentiable color grading” – and if that doesn’t catch on, I propose
+“autograde.” There is no artificial neural network involed in the process. In fact, no neural network
+is needed to perform gradient descent directly on a target. We have two such targets and, as it turns
+out, both are adequate choices with a relatively simple loss calculation.</p>
+<p>The first approach creates a color grading 3D LUT by aligning the appearance of a source image to that
+of a target image. The second does the same, only by optimizing color correction settings instead of
+directly optimizing a 3D LUT.</p>
+<p>Let’s try to undo a simple transformation by fitting a LUT to the original image as target.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cc</span> <span class="o">=</span> <span class="n">ColorCorrection</span><span class="p">()</span>
+<span class="n">cc</span><span class="o">.</span><span class="n">set_color_filter</span><span class="p">(</span><span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">)</span>
+<span class="n">cc</span><span class="o">.</span><span class="n">set_contrast</span><span class="p">(</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">cc</span><span class="o">.</span><span class="n">set_exposure_bias</span><span class="p">(</span><span class="mf">0.8</span><span class="p">)</span>
+</pre></div>
+</div>
+<figure class="align-default" id="id17">
+<a class="reference internal image-reference" href="../_images/autograde_error1.jpg"><img alt="Automatic by-example color correction" src="../_images/autograde_error1.jpg" style="width: 700px;" /></a>
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="tinycio.html#tinycio.LookupTable" title="tinycio.LookupTable"><code class="xref py py-class docutils literal notranslate"><span class="pre">LookupTable</span></code></a> optimization: source image, transformation, recovery, error (photograph by saso ucitelj <a class="footnote-reference brackets" href="#id10" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>)</span><a class="headerlink" href="#id17" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Keep in mind that we can’t rely on pixel-for-pixel comparisons. So, if we push it too far,
+this approach obviously breaks.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cc</span> <span class="o">=</span> <span class="n">ColorCorrection</span><span class="p">()</span>
+<span class="n">cc</span><span class="o">.</span><span class="n">set_color_filter</span><span class="p">(</span><span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">)</span>
+<span class="n">cc</span><span class="o">.</span><span class="n">set_saturation</span><span class="p">(</span><span class="mf">1.4</span><span class="p">)</span>
+<span class="n">cc</span><span class="o">.</span><span class="n">set_shadow_color</span><span class="p">(</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">cc</span><span class="o">.</span><span class="n">set_hue_delta</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
+</pre></div>
+</div>
+<figure class="align-default" id="id18">
+<a class="reference internal image-reference" href="../_images/autograde_error2.jpg"><img alt="Automatic by-example color correction" src="../_images/autograde_error2.jpg" style="width: 700px;" /></a>
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="tinycio.html#tinycio.LookupTable" title="tinycio.LookupTable"><code class="xref py py-class docutils literal notranslate"><span class="pre">LookupTable</span></code></a> optimization: source image, transformation, recovery, error</span><a class="headerlink" href="#id18" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Optimizing the color correction controls instead, on the other hand, is significantly more resilient.</p>
+<figure class="align-default" id="id19">
+<a class="reference internal image-reference" href="../_images/autograde_error3.jpg"><img alt="Automatic by-example color correction" src="../_images/autograde_error3.jpg" style="width: 700px;" /></a>
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="tinycio.html#tinycio.ColorCorrection" title="tinycio.ColorCorrection"><code class="xref py py-class docutils literal notranslate"><span class="pre">ColorCorrection</span></code></a> optimization: source image, transformation, recovery, error</span><a class="headerlink" href="#id19" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="lut-the-brute-force-approach">
+<h2>LUT: the brute-force approach<a class="headerlink" href="#lut-the-brute-force-approach" title="Permalink to this heading"></a></h2>
+<p>Optimizing the CUBE LUT directly is straighforward:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a linear lookup table (output matches input one-to-one)</span>
+<span class="n">auto_lut</span> <span class="o">=</span> <span class="n">LookupTable</span><span class="o">.</span><span class="n">get_linear</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="mi">64</span><span class="p">)</span>
+
+<span class="c1"># Gradient descent on LUT, with source and target images to evaluate loss</span>
+<span class="n">auto_lut</span><span class="o">.</span><span class="n">fit_to_image</span><span class="p">(</span><span class="n">im_src</span><span class="p">,</span> <span class="n">im_tgt</span><span class="p">,</span> <span class="n">context</span> <span class="o">=</span> <span class="n">progress_bar</span><span class="p">)</span>
+
+<span class="c1"># Save the LUT to disk when completed</span>
+<span class="n">auto_lut</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;my/auto_lut.cube&#39;</span><span class="p">)</span>
+
+<span class="c1"># Apply the LUT to the source image and save it</span>
+<span class="n">im_src</span><span class="o">.</span><span class="n">lut</span><span class="p">(</span><span class="n">auto_lut</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;my/result1.png&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<figure class="align-default" id="id20">
+<a class="reference internal image-reference" href="../_images/autograde_f4.jpg"><img alt="Automatic by-example color correction" src="../_images/autograde_f4.jpg" style="width: 700px;" /></a>
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="tinycio.html#tinycio.LookupTable" title="tinycio.LookupTable"><code class="xref py py-class docutils literal notranslate"><span class="pre">LookupTable</span></code></a> optimization
+(photographs by Bruno Kraler <a class="footnote-reference brackets" href="#id14" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a> and Pepe Caspers <a class="footnote-reference brackets" href="#id15" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a> respectively)</span><a class="headerlink" href="#id20" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>See: <a class="reference internal" href="tinycio.html#tinycio.LookupTable.fit_to_image" title="tinycio.LookupTable.fit_to_image"><code class="xref py py-meth docutils literal notranslate"><span class="pre">LookupTable.fit_to_image()</span></code></a></p>
+</section>
+<section id="settings-a-little-finesse">
+<h2>Settings: a little finesse<a class="headerlink" href="#settings-a-little-finesse" title="Permalink to this heading"></a></h2>
+<p>The second option is to give autograd the keys and let it drive color correction:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a new ColorCorrection object</span>
+<span class="n">auto_cc</span> <span class="o">=</span> <span class="n">ColorCorrection</span><span class="p">()</span>
+
+<span class="c1"># Gradient descent on settings, with source and target images to evaluate loss</span>
+<span class="n">auto_cc</span><span class="o">.</span><span class="n">fit_to_image</span><span class="p">(</span><span class="n">im_src</span><span class="p">,</span> <span class="n">im_tgt</span><span class="p">,</span> <span class="n">context</span> <span class="o">=</span> <span class="n">progress_bar</span><span class="p">)</span>
+
+<span class="c1"># Save the settings to disk when completed</span>
+<span class="n">auto_cc</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;my/auto_cc.toml&#39;</span><span class="p">)</span>
+
+<span class="c1"># Apply the color correction to the source and save it</span>
+<span class="n">im_src</span><span class="o">.</span><span class="n">correct</span><span class="p">(</span><span class="n">auto_cc</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;my/result2.png&#39;</span><span class="p">)</span>
+
+<span class="c1"># Print out the settings</span>
+<span class="n">auto_cc</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+
+<span class="c1"># Prints e.g.:</span>
+
+<span class="c1"># CC DESCRIPTION:</span>
+<span class="c1"># ===============</span>
+<span class="c1"># CLASS            ColorCorrection</span>
+<span class="c1"># EXPOSURE BIAS    -0.17404550313949585</span>
+<span class="c1"># COLOR FILTER     [0.808641   0.81534934 0.9074043 ]</span>
+<span class="c1"># HUE DELTA        0.0</span>
+<span class="c1"># SATURATION       1.5330744981765747</span>
+<span class="c1"># CONTRAST         1.2529858350753784</span>
+<span class="c1"># SHADOW COLOR     [0.         0.         0.22277994]</span>
+<span class="c1"># MIDTONE COLOR    [0.16701505 0.16309454 0.        ]</span>
+<span class="c1"># HIGHLIGHT COLOR  [0.         0.         0.09913802]</span>
+<span class="c1"># SHADOW OFFSET    -0.2189391404390335</span>
+<span class="c1"># MIDTONE OFFSET   0.14226016402244568</span>
+<span class="c1"># HIGHLIGHT OFFSET 0.007211057469248772</span>
+
+<span class="c1"># And if you like:</span>
+<span class="n">auto_cc</span><span class="o">.</span><span class="n">bake_lut</span><span class="p">(</span><span class="n">size</span> <span class="o">=</span> <span class="mi">64</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;my/auto_lut.cube&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This has a few distinct advantages:</p>
+<ul class="simple">
+<li><p>You can further alter the settings after optimization.</p></li>
+<li><p>You can save the settings as a tiny <em>toml</em> file and reuse them.</p></li>
+<li><p>You can still later bake a LUT of any size and in any color space you prefer.</p></li>
+</ul>
+<p>It also overall seems to generate more plausible results.</p>
+<figure class="align-default" id="id21">
+<a class="reference internal image-reference" href="../_images/autograde_f1.jpg"><img alt="Automatic by-example color correction" src="../_images/autograde_f1.jpg" style="width: 700px;" /></a>
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="tinycio.html#tinycio.ColorCorrection" title="tinycio.ColorCorrection"><code class="xref py py-class docutils literal notranslate"><span class="pre">ColorCorrection</span></code></a> optimization
+(photographs by saso ucitelj <a class="footnote-reference brackets" href="#id10" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>)</span><a class="headerlink" href="#id21" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-default" id="id22">
+<a class="reference internal image-reference" href="../_images/autograde_f2.jpg"><img alt="Automatic by-example color correction" src="../_images/autograde_f2.jpg" style="width: 700px;" /></a>
+<figcaption>
+<p><span class="caption-text"><a class="reference internal" href="tinycio.html#tinycio.ColorCorrection" title="tinycio.ColorCorrection"><code class="xref py py-class docutils literal notranslate"><span class="pre">ColorCorrection</span></code></a> optimization
+(photographs by Diep Minh Chien Tran <a class="footnote-reference brackets" href="#id11" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a>)</span><a class="headerlink" href="#id22" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>See: <a class="reference internal" href="tinycio.html#tinycio.ColorCorrection.fit_to_image" title="tinycio.ColorCorrection.fit_to_image"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ColorCorrection.fit_to_image()</span></code></a></p>
+</section>
+<section id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Permalink to this heading"></a></h2>
+<p>One application for this kind of image processing is as a tool to facilitate compositing.
+The obvious disadvantage of doing this with no ANN, however, is that the optimizer is semantically
+unaware of the scene; we are treating images as mere buckets of color. As there’s no image segmentation
+involved, this technique is probably best suited for, in some sense, “proposing a color palette” rather
+than trying to meaningfully match scene features.</p>
+<p>A few problem cases are illustrated below.</p>
+<figure class="align-default" id="id23">
+<a class="reference internal image-reference" href="../_images/autograde_f3.jpg"><img alt="Automatic by-example color correction" src="../_images/autograde_f3.jpg" style="width: 700px;" /></a>
+<figcaption>
+<p><span class="caption-text"><strong>Left</strong>: Highlights blown out because the optimizer doesn’t know the difference between faces and siding;
+<strong>Right</strong>: Image desaturated trying to match hair and background color
+(photographs by Esma Atak <a class="footnote-reference brackets" href="#id12" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a> and Sadettin Dogan <a class="footnote-reference brackets" href="#id13" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a> respectively)</span><a class="headerlink" href="#id23" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p class="rubric">Footnotes</p>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id9" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>Simon Stålenhag’s <a class="reference external" href="https://en.wikipedia.org/wiki/The_Electric_State_(graphic_novel)">graphic novel</a> and <a class="reference external" href="https://www.simonstalenhag.se/">website</a></p>
+</aside>
+<aside class="footnote brackets" id="id10" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id2">1</a>,<a role="doc-backlink" href="#id5">2</a>)</span>
+<p><a class="reference external" href="https://www.pexels.com/&#64;saso-ucitelj-814183799/">saso ucitelj’s Pexels page</a></p>
+</aside>
+<aside class="footnote brackets" id="id11" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">3</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://www.pexels.com/&#64;diep-minh-chien-tran-2132790/">Diep Minh Chien Tran’s Pexels page</a></p>
+</aside>
+<aside class="footnote brackets" id="id12" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">4</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://www.pexels.com/&#64;esma-atak-46104031/">Esma Atak’s Pexels page</a></p>
+</aside>
+<aside class="footnote brackets" id="id13" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id8">5</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://www.pexels.com/&#64;huysuzkadraj/">Sadettin Dogan’s Pexels page</a></p>
+</aside>
+<aside class="footnote brackets" id="id14" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">6</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://www.pexels.com/&#64;brunorock/">Bruno Kraler’s Pexels page</a></p>
+</aside>
+<aside class="footnote brackets" id="id15" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">7</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://www.pexels.com/&#64;pepecaspers/">Pepe Caspers’ Pexels page</a></p>
+</aside>
+</aside>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="howto_bake_lut.html" class="btn btn-neutral float-left" title="Bake color correction to a LUT" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="example_sweeps.html" class="btn btn-neutral float-right" title="Color sweeps" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

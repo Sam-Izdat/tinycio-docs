@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tinycio.lut &mdash; tinycio a documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=92fd9be5" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/patch.css?v=77628c61" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=c0846a87"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html">
+            
+              <img src="../../_static/tinycio_sm.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">How to:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_hello.html">Hello Color</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_wavelength.html">Look up a wavelength</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_color_value.html">Look up a color value</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_color_space.html">Change an image’s color space</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_hdr.html">Encode HDR data as RGBA PNG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_tone_map.html">Tone map HDR images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_white_balance.html">Apply white balance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_ccbasic.html">Apply basic color correction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_apply_lut.html">Apply LUTs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_bake_lut.html">Bake color correction to a LUT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/howto_autograde.html">Color grade by example</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/example_sweeps.html">Color sweeps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/example_image_manip.html">Lower-level image manipulation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/tinycio.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/about_release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/about_modules.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../genindex.html">Index</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Scripts:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/scripts_color2color.html">Color to color</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/scripts_hdr_codec.html">HDR Codec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/scripts_white_balance.html">White balance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/scripts_img2cube.html">Image to CUBE LUT</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/Sam-Izdat/tinycio">GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://pypi.org/project/tinycio/">PyPi</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">tinycio</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">tinycio.lut</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for tinycio.lut</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+<span class="kn">import</span> <span class="nn">typing</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
+<span class="kn">import</span> <span class="nn">os</span> 
+<span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">IntEnum</span>
+<span class="kn">from</span> <span class="nn">contextlib</span> <span class="kn">import</span> <span class="n">nullcontext</span>
+
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.optim</span> <span class="k">as</span> <span class="nn">optim</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
+
+<span class="kn">from</span> <span class="nn">.colorspace</span> <span class="kn">import</span> <span class="n">ColorSpace</span>
+<span class="kn">from</span> <span class="nn">.fsio.lutfile</span> <span class="kn">import</span> <span class="n">load_lut</span><span class="p">,</span> <span class="n">save_lut</span><span class="p">,</span> <span class="n">_infer_lut_file_format</span><span class="p">,</span> <span class="n">_generate_linear_cube_lut</span>
+<span class="kn">from</span> <span class="nn">.fsio.format</span> <span class="kn">import</span> <span class="n">LUTFormat</span>
+<span class="kn">from</span> <span class="nn">.util.colorutil</span> <span class="kn">import</span> <span class="n">srgb_luminance</span>
+<span class="kn">from</span> <span class="nn">.util.miscutil</span> <span class="kn">import</span> <span class="n">trilinear_interpolation</span>
+<span class="kn">from</span> <span class="nn">.loss</span> <span class="kn">import</span> <span class="n">feature_moments_caculation</span>
+
+<div class="viewcode-block" id="LookupTable"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.LookupTable">[docs]</a><span class="k">class</span> <span class="nc">LookupTable</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Color lookup table. Example:</span>
+
+<span class="sd">    .. highlight:: python</span>
+<span class="sd">    .. code-block:: python</span>
+
+<span class="sd">        lut = LookupTable.get_negative()</span>
+<span class="sd">        im_negative = lut.apply(im)</span>
+
+<span class="sd">    :param size: Size of the LUT.</span>
+<span class="sd">    :param lattice: Lattice as tensor (defaults to linear).</span>
+<span class="sd">    :param lut_format: Format of the LUT.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">size</span> <span class="o">=</span> <span class="mi">32</span>
+    <span class="n">lattice</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">lut_format</span><span class="o">=</span> <span class="n">LUTFormat</span><span class="o">.</span><span class="n">UNKNOWN</span>
+
+    <span class="n">__min_size</span><span class="p">,</span> <span class="n">__max_size</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">512</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span><span class="nb">int</span><span class="p">,</span> <span class="n">lattice</span><span class="p">:</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">lut_format</span><span class="p">:</span><span class="n">LUTFormat</span><span class="o">=</span><span class="n">LUTFormat</span><span class="o">.</span><span class="n">CUBE_3D</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">__min_size</span> <span class="o">&lt;=</span> <span class="n">size</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__max_size</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;LUT size must be between </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__min_size</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">__max_size</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="n">size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lattice</span> <span class="o">=</span> <span class="n">lattice</span> <span class="k">if</span> <span class="n">lattice</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">_generate_linear_cube_lut</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lut_format</span> <span class="o">=</span> <span class="n">lut_format</span>
+
+<div class="viewcode-block" id="LookupTable.load"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.LookupTable.load">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">fp</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">lut_format</span><span class="p">:</span><span class="n">LUTFormat</span><span class="o">=</span><span class="n">LUTFormat</span><span class="o">.</span><span class="n">UNKNOWN</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LookupTable</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Load LUT from file.</span>
+
+<span class="sd">        :param fp: File path.</span>
+<span class="sd">        :param lut_format: Format of the LUT.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">fp</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+        <span class="n">fn</span><span class="p">,</span> <span class="n">fnext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+
+        <span class="n">variant</span> <span class="o">=</span> <span class="n">lut_format</span> <span class="k">if</span> <span class="n">lut_format</span> <span class="o">&gt;</span> <span class="n">LUTFormat</span><span class="o">.</span><span class="n">UNKNOWN</span> <span class="k">else</span> <span class="n">_infer_lut_file_format</span><span class="p">(</span><span class="n">fnext</span><span class="p">)</span>
+
+        <span class="k">assert</span> <span class="n">variant</span> <span class="o">&gt;</span> <span class="n">LUTFormat</span><span class="o">.</span><span class="n">UNKNOWN</span><span class="p">,</span> <span class="s2">&quot;Unrecognized LUT format&quot;</span>
+
+        <span class="n">lattice</span> <span class="o">=</span> <span class="n">load_lut</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">variant</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">lattice</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">lattice</span><span class="p">,</span> <span class="n">variant</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="LookupTable.save"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.LookupTable.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fp</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">lut_format</span><span class="p">:</span><span class="n">LUTFormat</span><span class="o">=</span><span class="n">LUTFormat</span><span class="o">.</span><span class="n">UNKNOWN</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Save LUT to file.</span>
+
+<span class="sd">        .. warning:: </span>
+<span class="sd">            This will overwrite existing files.</span>
+
+<span class="sd">        :param fp: File path.</span>
+<span class="sd">        :param lut_format: Format of the LUT.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">fp</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+        <span class="n">fn</span><span class="p">,</span> <span class="n">fnext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+
+        <span class="n">variant</span> <span class="o">=</span> <span class="n">lut_format</span> <span class="k">if</span> <span class="n">lut_format</span> <span class="o">&gt;</span> <span class="n">LUTFormat</span><span class="o">.</span><span class="n">UNKNOWN</span> <span class="k">else</span> <span class="n">_infer_lut_file_format</span><span class="p">(</span><span class="n">fnext</span><span class="p">)</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">variant</span>
+
+        <span class="k">assert</span> <span class="n">variant</span> <span class="o">&gt;</span> <span class="n">LUTFormat</span><span class="o">.</span><span class="n">UNKNOWN</span><span class="p">,</span> <span class="s2">&quot;Unrecognized LUT format&quot;</span>
+
+        <span class="n">lattice</span> <span class="o">=</span> <span class="n">save_lut</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lattice</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="n">variant</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="LookupTable.apply"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.LookupTable.apply">[docs]</a>    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">im</span><span class="p">:</span><span class="n">Union</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">ColorImage</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Apply LUT to image tensor.</span>
+
+<span class="sd">        :param im: Input image tensor</span>
+<span class="sd">        :type im: torch.Tensor | ColorImage</span>
+<span class="sd">        :return: Image tensor with LUT applied</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">lut_format</span> <span class="o">&gt;</span> <span class="n">LUTFormat</span><span class="o">.</span><span class="n">UNKNOWN</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">lattice</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;No LUT has been loaded&quot;</span>
+        <span class="k">assert</span> <span class="n">im</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;Image should have three color channels (RGB)&quot;</span>
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">lattice</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;Cube LUT should have three color channels&quot;</span>
+
+        <span class="n">indices</span> <span class="o">=</span> <span class="p">(</span><span class="n">im</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lattice</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lattice</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">im_out</span> <span class="o">=</span> <span class="n">trilinear_interpolation</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lattice</span><span class="p">,</span> <span class="n">indices</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">im_out</span></div>
+
+<div class="viewcode-block" id="LookupTable.get_linear"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.LookupTable.get_linear">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_linear</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">lut_format</span><span class="p">:</span><span class="n">LUTFormat</span><span class="o">=</span><span class="n">LUTFormat</span><span class="o">.</span><span class="n">CUBE_3D</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LookupTable</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns linear LUT. Has no effect: when applied, output matches input ([0, 1] range).</span>
+
+<span class="sd">        :param size: Size of the LUT.</span>
+<span class="sd">        :param lut_format: Format of the LUT.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">lut_format</span> <span class="o">==</span> <span class="n">LUTFormat</span><span class="o">.</span><span class="n">CUBE_3D</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__min_size</span> <span class="o">&lt;=</span> <span class="n">size</span> <span class="o">&lt;=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__max_size</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;LUT size must be between </span><span class="si">{</span><span class="bp">cls</span><span class="o">.</span><span class="n">__min_size</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="bp">cls</span><span class="o">.</span><span class="n">__max_size</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">variant</span> <span class="o">=</span> <span class="n">LUTFormat</span><span class="o">.</span><span class="n">CUBE_3D</span>
+            <span class="n">lattice</span> <span class="o">=</span> <span class="n">_generate_linear_cube_lut</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Backpropagation not implemented for: </span><span class="si">{</span><span class="n">lut_format</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">lattice</span><span class="p">,</span> <span class="n">variant</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="LookupTable.get_negative"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.LookupTable.get_negative">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_negative</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">lut_format</span><span class="p">:</span><span class="n">LUTFormat</span><span class="o">=</span><span class="n">LUTFormat</span><span class="o">.</span><span class="n">CUBE_3D</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LookupTable</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns negative LUT. Output is inverted ([0, 1] range).</span>
+
+<span class="sd">        :param size: Size of the LUT.</span>
+<span class="sd">        :param lut_format: Format of the LUT.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">lut</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">get_linear</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">lut_format</span><span class="p">)</span>
+        <span class="n">lut</span><span class="o">.</span><span class="n">lattice</span> <span class="o">=</span> <span class="mf">1.</span> <span class="o">-</span> <span class="n">lut</span><span class="o">.</span><span class="n">lattice</span>
+        <span class="k">return</span> <span class="n">lut</span></div>
+
+<div class="viewcode-block" id="LookupTable.get_random"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.LookupTable.get_random">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_random</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">lut_format</span><span class="p">:</span><span class="n">LUTFormat</span><span class="o">=</span><span class="n">LUTFormat</span><span class="o">.</span><span class="n">CUBE_3D</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LookupTable</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns random LUT. Everything mapped to random values ([0, 1] range).</span>
+
+<span class="sd">        :param size: Size of the LUT.</span>
+<span class="sd">        :param lut_format: Format of the LUT.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">lut</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">get_linear</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">lut_format</span><span class="p">)</span>
+        <span class="n">lut</span><span class="o">.</span><span class="n">lattice</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn_like</span><span class="p">(</span><span class="n">lut</span><span class="o">.</span><span class="n">lattice</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">lut</span></div>
+
+<div class="viewcode-block" id="LookupTable.get_empty"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.LookupTable.get_empty">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_empty</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">lut_format</span><span class="p">:</span><span class="n">LUTFormat</span><span class="o">=</span><span class="n">LUTFormat</span><span class="o">.</span><span class="n">CUBE_3D</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LookupTable</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns empty LUT. All values mapped to 0.</span>
+
+<span class="sd">        :param size: Size of the LUT.</span>
+<span class="sd">        :param lut_format: Format of the LUT.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">lut</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">get_linear</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">lut_format</span><span class="p">)</span>
+        <span class="n">lut</span><span class="o">.</span><span class="n">lattice</span> <span class="o">=</span> <span class="n">lut</span><span class="o">.</span><span class="n">lattice</span> <span class="o">*</span> <span class="mf">0.</span>
+        <span class="k">return</span> <span class="n">lut</span></div>
+
+<div class="viewcode-block" id="LookupTable.fit_to_image"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.LookupTable.fit_to_image">[docs]</a>    <span class="k">def</span> <span class="nf">fit_to_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
+        <span class="n">im_source</span><span class="p">:</span><span class="n">Union</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">ColorImage</span><span class="p">],</span> 
+        <span class="n">im_target</span><span class="p">:</span><span class="n">Union</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">ColorImage</span><span class="p">],</span> 
+        <span class="n">steps</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> 
+        <span class="n">learning_rate</span><span class="p">:</span><span class="nb">float</span><span class="o">=</span><span class="mf">0.003</span><span class="p">,</span>
+        <span class="n">strength</span><span class="p">:</span><span class="nb">float</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span>
+        <span class="n">fit_height</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span>
+        <span class="n">fit_width</span><span class="p">:</span><span class="nb">int</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span>
+        <span class="n">device</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s1">&#39;cuda&#39;</span><span class="p">,</span>
+        <span class="n">context</span><span class="p">:</span><span class="nb">callable</span><span class="o">=</span><span class="kc">None</span>
+        <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Perform gradient descent on the lattice, so that the appearance of the source image matches the target.</span>
+
+<span class="sd">        :param im_source: Source image tensor. Values must be in range [0, 1].</span>
+<span class="sd">        :type im_source: torch.Tensor | ColorImage</span>
+<span class="sd">        :param im_target: Target image tensor.</span>
+<span class="sd">        :type im_target: torch.Tensor | ColorImage</span>
+<span class="sd">        :param steps: Number of optimization steps.</span>
+<span class="sd">        :param learning_rate: Learning rate for gradient descent.</span>
+<span class="sd">        :param strength: Strength of the effect in range [0, 1].</span>
+<span class="sd">        :param fit_height: Image tensors will be interpolated to this height for evaluation.</span>
+<span class="sd">        :param fit_width: Image tensors will be interpolated to this width for evaluation.</span>
+<span class="sd">        :param device: Device for gradient descent (if None will use input tensor device).</span>
+<span class="sd">        :return: True when completed</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="mf">0.</span> <span class="o">&lt;=</span> <span class="n">strength</span> <span class="o">&lt;=</span> <span class="mf">1.</span><span class="p">,</span> <span class="s2">&quot;strength must be in range [0, 1]&quot;</span>
+        <span class="n">im_source</span> <span class="o">=</span> <span class="n">im_source</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
+        <span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="n">device</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span> <span class="k">if</span> <span class="n">device</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">im_source</span><span class="o">.</span><span class="n">device</span>
+        <span class="n">im_source</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span>
+            <span class="n">im_source</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> 
+            <span class="n">size</span><span class="o">=</span><span class="p">[</span><span class="n">fit_height</span><span class="p">,</span> <span class="n">fit_width</span><span class="p">],</span> 
+            <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;bicubic&#39;</span><span class="p">,</span> 
+            <span class="n">align_corners</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="mf">1.</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+        
+        <span class="n">im_target</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">interpolate</span><span class="p">(</span>
+            <span class="n">im_target</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> 
+            <span class="n">size</span><span class="o">=</span><span class="p">[</span><span class="n">fit_height</span><span class="p">,</span> <span class="n">fit_width</span><span class="p">],</span> 
+            <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;bicubic&#39;</span><span class="p">,</span> 
+            <span class="n">align_corners</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="mf">1.</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+        <span class="n">__ctx</span> <span class="o">=</span> <span class="n">context</span> <span class="k">if</span> <span class="n">context</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">callable</span><span class="p">(</span><span class="n">context</span><span class="p">)</span> <span class="k">else</span> <span class="n">nullcontext</span>
+        <span class="k">with</span> <span class="n">__ctx</span><span class="p">()</span> <span class="k">as</span> <span class="n">ctx</span><span class="p">:</span>
+            <span class="n">cb_callable</span> <span class="o">=</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="s1">&#39;update_fit_status&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">callable</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">update_fit_status</span><span class="p">)</span>
+            <span class="n">cb</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">update_fit_status</span> <span class="k">if</span> <span class="n">cb_callable</span> <span class="k">else</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">:</span> <span class="kc">None</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">lut_format</span> <span class="o">==</span> <span class="n">LUTFormat</span><span class="o">.</span><span class="n">CUBE_3D</span><span class="p">:</span>
+                <span class="n">lut</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Parameter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lattice</span><span class="p">)</span>
+                <span class="n">lut</span><span class="o">.</span><span class="n">requires_grad_</span><span class="p">()</span>
+                <span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">([</span><span class="n">lut</span><span class="p">],</span> <span class="n">lr</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">)</span>
+                <span class="n">indices</span> <span class="o">=</span> <span class="p">(</span><span class="n">im_source</span> <span class="o">*</span> <span class="p">(</span><span class="n">lut</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">lut</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+                <span class="n">area</span> <span class="o">=</span> <span class="n">fit_height</span> <span class="o">*</span> <span class="n">fit_height</span>
+                <span class="n">fm_mean_scale</span> <span class="o">=</span> <span class="n">area</span>
+                <span class="n">fm_p2_scale</span> <span class="o">=</span> <span class="n">area</span> <span class="o">/</span> <span class="mf">32.</span>
+                <span class="n">fm_p3_scale</span> <span class="o">=</span> <span class="n">area</span> <span class="o">/</span> <span class="mf">64.</span>
+                <span class="n">selfsim_scale</span> <span class="o">=</span> <span class="n">area</span> 
+                <span class="n">sat_scale</span> <span class="o">=</span> <span class="n">area</span> <span class="c1"># lut optimization goes a bit wild with this</span>
+                <span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">steps</span><span class="p">):</span>
+                    <span class="n">t_source</span> <span class="o">=</span> <span class="n">trilinear_interpolation</span><span class="p">(</span><span class="n">lut</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">indices</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+                    <span class="n">loss</span> <span class="o">=</span> <span class="mf">0.</span>
+
+                    <span class="c1"># Main feature loss</span>
+                    <span class="n">feat_source_mean</span><span class="p">,</span> <span class="n">feat_source_p2</span><span class="p">,</span> <span class="n">feat_source_p3</span> <span class="o">=</span> <span class="n">feature_moments_caculation</span><span class="p">(</span><span class="n">t_source</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+                    <span class="n">feat_target_mean</span><span class="p">,</span> <span class="n">feat_target_p2</span><span class="p">,</span> <span class="n">feat_target_p3</span> <span class="o">=</span> <span class="n">feature_moments_caculation</span><span class="p">(</span><span class="n">im_target</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+                    <span class="n">loss</span> <span class="o">+=</span> <span class="n">F</span><span class="o">.</span><span class="n">mse_loss</span><span class="p">(</span><span class="n">feat_source_mean</span><span class="p">,</span> <span class="n">feat_target_mean</span><span class="p">)</span> <span class="o">*</span> <span class="n">fm_mean_scale</span> <span class="o">*</span> <span class="n">strength</span> 
+                    <span class="n">loss</span> <span class="o">+=</span> <span class="n">F</span><span class="o">.</span><span class="n">mse_loss</span><span class="p">(</span><span class="n">feat_source_p2</span><span class="p">,</span> <span class="n">feat_target_p2</span><span class="p">)</span> <span class="o">*</span> <span class="n">fm_p2_scale</span> <span class="o">*</span> <span class="n">strength</span> 
+                    <span class="n">loss</span> <span class="o">+=</span> <span class="n">F</span><span class="o">.</span><span class="n">mse_loss</span><span class="p">(</span><span class="n">feat_source_p3</span><span class="p">,</span> <span class="n">feat_target_p3</span><span class="p">)</span> <span class="o">*</span> <span class="n">fm_p3_scale</span> <span class="o">*</span> <span class="n">strength</span> 
+
+                    <span class="c1"># Additional saturation-focused loss</span>
+                    <span class="n">sat_s</span> <span class="o">=</span> <span class="n">srgb_luminance</span><span class="p">(</span><span class="n">t_source</span><span class="p">)</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">t_source</span>
+                    <span class="n">sat_t</span> <span class="o">=</span> <span class="n">srgb_luminance</span><span class="p">(</span><span class="n">im_target</span><span class="p">)</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">im_target</span>
+                    <span class="n">loss</span> <span class="o">+=</span> <span class="n">F</span><span class="o">.</span><span class="n">mse_loss</span><span class="p">(</span><span class="n">sat_s</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">sat_t</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> <span class="o">*</span> <span class="n">sat_scale</span> <span class="o">*</span> <span class="n">strength</span> 
+                    <span class="n">loss</span> <span class="o">+=</span> <span class="n">F</span><span class="o">.</span><span class="n">mse_loss</span><span class="p">(</span><span class="n">sat_s</span><span class="o">.</span><span class="n">std</span><span class="p">(),</span> <span class="n">sat_t</span><span class="o">.</span><span class="n">std</span><span class="p">())</span> <span class="o">*</span> <span class="n">sat_scale</span> <span class="o">*</span> <span class="n">strength</span> 
+
+                    <span class="c1"># Self-similarity loss</span>
+                    <span class="k">if</span> <span class="n">strength</span> <span class="o">&lt;</span> <span class="mf">1.</span><span class="p">:</span> <span class="n">loss</span> <span class="o">+=</span> <span class="n">F</span><span class="o">.</span><span class="n">mse_loss</span><span class="p">(</span><span class="n">t_source</span><span class="p">,</span> <span class="n">im_source</span><span class="p">)</span> <span class="o">*</span> <span class="n">selfsim_scale</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">-</span> <span class="n">strength</span><span class="p">)</span>
+
+                    <span class="c1"># Perform backpropagation and optimization step</span>
+                    <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+                    <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+                    <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+                    <span class="k">if</span> <span class="n">step</span> <span class="o">%</span> <span class="mi">10</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="n">cb</span><span class="p">(</span><span class="n">step</span> <span class="o">//</span> <span class="mi">10</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">steps</span><span class="p">,</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">lattice</span> <span class="o">=</span> <span class="n">lut</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="mf">1.</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Backpropagation not implemented for: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">lut_format</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="kc">True</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

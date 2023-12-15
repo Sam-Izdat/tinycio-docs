@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tinycio.util.colorutil &mdash; tinycio a documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=92fd9be5" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/patch.css?v=77628c61" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=c0846a87"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html">
+            
+              <img src="../../../_static/tinycio_sm.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">How to:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/howto_hello.html">Hello Color</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/howto_wavelength.html">Look up a wavelength</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/howto_color_value.html">Look up a color value</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/howto_color_space.html">Change an image’s color space</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/howto_hdr.html">Encode HDR data as RGBA PNG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/howto_tone_map.html">Tone map HDR images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/howto_white_balance.html">Apply white balance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/howto_ccbasic.html">Apply basic color correction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/howto_apply_lut.html">Apply LUTs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/howto_bake_lut.html">Bake color correction to a LUT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/howto_autograde.html">Color grade by example</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/example_sweeps.html">Color sweeps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/example_image_manip.html">Lower-level image manipulation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/tinycio.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/about_release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/about_modules.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../genindex.html">Index</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Scripts:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/scripts_color2color.html">Color to color</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/scripts_hdr_codec.html">HDR Codec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/scripts_white_balance.html">White balance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/scripts_img2cube.html">Image to CUBE LUT</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/Sam-Izdat/tinycio">GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://pypi.org/project/tinycio/">PyPi</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">tinycio</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">tinycio.util.colorutil</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for tinycio.util.colorutil</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+<span class="kn">import</span> <span class="nn">typing</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
+
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">..numerics</span> <span class="kn">import</span> <span class="n">Float2</span><span class="p">,</span> <span class="n">Float3</span>
+
+<div class="viewcode-block" id="srgb_luminance"><a class="viewcode-back" href="../../../source/util.html#tinycio.util.srgb_luminance">[docs]</a><span class="k">def</span> <span class="nf">srgb_luminance</span><span class="p">(</span><span class="n">im_srgb</span><span class="p">:</span><span class="n">Union</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">ColorImage</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Return relative luminance of linear sRGB image.</span>
+
+<span class="sd">    :param im_srgb: [C=3, H, W] color image tensor in sRGB color space</span>
+<span class="sd">    :type im_srgb: torch.Tensor | ColorImage</span>
+<span class="sd">    :return: [C=1, H, W] image tensor</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">lum_r</span><span class="p">,</span> <span class="n">lum_g</span><span class="p">,</span> <span class="n">lum_b</span> <span class="o">=</span> <span class="mf">0.2126</span><span class="p">,</span> <span class="mf">0.7152</span><span class="p">,</span> <span class="mf">0.0722</span>
+    <span class="k">return</span> <span class="n">lum_r</span> <span class="o">*</span> <span class="n">im_srgb</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="o">...</span><span class="p">]</span> <span class="o">+</span> <span class="n">lum_g</span> <span class="o">*</span> <span class="n">im_srgb</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="o">...</span><span class="p">]</span> <span class="o">+</span> <span class="n">lum_b</span> <span class="o">*</span> <span class="n">im_srgb</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span><span class="o">...</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="apply_gamma"><a class="viewcode-back" href="../../../source/util.html#tinycio.util.apply_gamma">[docs]</a><span class="k">def</span> <span class="nf">apply_gamma</span><span class="p">(</span><span class="n">im</span><span class="p">:</span><span class="n">Union</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">ColorImage</span><span class="p">],</span> <span class="n">gamma</span><span class="p">:</span><span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Apply arbitrary gamma correction.</span>
+
+<span class="sd">    :param im: Image tensor</span>
+<span class="sd">    :type im: torch.Tensor | ColorImage</span>
+<span class="sd">    :param gamma: Gamma correction (should be in the range [0.1, 10.0])</span>
+<span class="sd">    :return: Gamma-corrected image tensor</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">gamma</span> <span class="o">==</span> <span class="mf">1.</span><span class="p">:</span> <span class="k">return</span> <span class="n">im</span>
+    <span class="k">assert</span> <span class="mf">0.1</span> <span class="o">&lt;=</span> <span class="n">gamma</span> <span class="o">&lt;=</span> <span class="mf">10.0</span><span class="p">,</span> <span class="s2">&quot;gamma value should be in range [0.1, 10.0]&quot;</span>
+    <span class="n">im</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">gamma</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="apply_hue_oklab"><a class="viewcode-back" href="../../../source/util.html#tinycio.util.apply_hue_oklab">[docs]</a><span class="k">def</span> <span class="nf">apply_hue_oklab</span><span class="p">(</span><span class="n">im_oklab</span><span class="p">:</span><span class="n">Union</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">ColorImage</span><span class="p">],</span> <span class="n">hue_delta</span><span class="p">:</span><span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Manually shift hue of an image by a -1 to +1 delta value.</span>
+
+<span class="sd">    :param im_oklab: Image tensor in OKLAB color space</span>
+<span class="sd">    :type im_oklab: torch.Tensor | ColorImage</span>
+<span class="sd">    :param hue_delta: Hue shift value in the range [-1., 1.]</span>
+<span class="sd">    :return: Image tensor in OKLAB color space with adjusted hue</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span> <span class="o">-</span><span class="mf">1.</span> <span class="o">&lt;=</span> <span class="n">hue_delta</span> <span class="o">&lt;=</span> <span class="mf">1.</span><span class="p">,</span> <span class="s2">&quot;hue_delta value should be in range [-1., 1.]&quot;</span>
+    <span class="n">L</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">im_oklab</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">],</span> <span class="n">im_oklab</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">im_oklab</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+
+    <span class="n">hue_delta</span> <span class="o">=</span> <span class="p">((</span><span class="n">hue_delta</span> <span class="o">*</span> <span class="mf">0.5</span><span class="p">)</span> <span class="o">%</span> <span class="mf">1.</span><span class="p">)</span> <span class="o">*</span> <span class="mf">2.</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">pi</span>
+
+    <span class="c1"># Calculate angle and magnitude in the a-b plane</span>
+    <span class="n">angle</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+    <span class="n">magnitude</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">a</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">b</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="c1"># Apply hue correction</span>
+    <span class="n">angle</span> <span class="o">+=</span> <span class="n">hue_delta</span>
+
+    <span class="c1"># Convert back to Cartesian coordinates</span>
+    <span class="n">a_corrected</span> <span class="o">=</span> <span class="n">magnitude</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
+    <span class="n">b_corrected</span> <span class="o">=</span> <span class="n">magnitude</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">)</span>
+
+    <span class="n">corrected</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">L</span><span class="p">,</span> <span class="n">a_corrected</span><span class="p">,</span> <span class="n">b_corrected</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">corrected</span>
+
+    <span class="k">return</span> <span class="n">im</span></div>
+
+<div class="viewcode-block" id="col_hsv_to_rgb"><a class="viewcode-back" href="../../../source/util.html#tinycio.util.col_hsv_to_rgb">[docs]</a><span class="k">def</span> <span class="nf">col_hsv_to_rgb</span><span class="p">(</span><span class="n">hsv</span><span class="p">:</span><span class="n">Union</span><span class="p">[</span><span class="n">Float3</span><span class="p">,</span> <span class="n">Color</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Float3</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert HSV color to RGB.</span>
+
+<span class="sd">    :param hsv: HSV color</span>
+<span class="sd">    :type hsv: Float3 | Color</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">h</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">hsv</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">hsv</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">hsv</span><span class="o">.</span><span class="n">z</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">h</span> <span class="o">*</span> <span class="mi">6</span><span class="p">)</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">h</span> <span class="o">*</span> <span class="mi">6</span> <span class="o">-</span> <span class="n">i</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">v</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">s</span><span class="p">)</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="n">v</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">f</span> <span class="o">*</span> <span class="n">s</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">v</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">f</span><span class="p">)</span> <span class="o">*</span> <span class="n">s</span><span class="p">)</span>
+    <span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">p</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">t</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">v</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">v</span><span class="p">),</span>
+        <span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">),</span>
+    <span class="p">][</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="o">%</span><span class="mi">6</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="n">Float3</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="col_rgb_to_hsv"><a class="viewcode-back" href="../../../source/util.html#tinycio.util.col_rgb_to_hsv">[docs]</a><span class="k">def</span> <span class="nf">col_rgb_to_hsv</span><span class="p">(</span><span class="n">rgb</span><span class="p">:</span><span class="n">Union</span><span class="p">[</span><span class="n">Float3</span><span class="p">,</span> <span class="n">Color</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Float3</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert RGB color to HSV.</span>
+
+<span class="sd">    :param rgb: RGB color</span>
+<span class="sd">    :type rgb: Float3 | Color</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">rgb</span><span class="o">.</span><span class="n">r</span><span class="p">,</span> <span class="n">rgb</span><span class="o">.</span><span class="n">g</span><span class="p">,</span> <span class="n">rgb</span><span class="o">.</span><span class="n">b</span>
+    <span class="n">high</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">])</span>
+    <span class="n">low</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">([</span><span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span><span class="p">])</span>
+    <span class="n">h</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">high</span><span class="p">,</span> <span class="n">high</span><span class="p">,</span> <span class="n">high</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">high</span> <span class="o">-</span> <span class="n">low</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">high</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">d</span><span class="o">/</span><span class="n">high</span>
+    <span class="k">if</span> <span class="n">high</span> <span class="o">==</span> <span class="n">low</span><span class="p">:</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="n">r</span><span class="p">:</span> <span class="p">(</span><span class="n">g</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span> <span class="o">/</span> <span class="n">d</span> <span class="o">+</span> <span class="p">(</span><span class="mi">6</span> <span class="k">if</span> <span class="n">g</span> <span class="o">&lt;</span> <span class="n">b</span> <span class="k">else</span> <span class="mi">0</span><span class="p">),</span>
+            <span class="n">g</span><span class="p">:</span> <span class="p">(</span><span class="n">b</span> <span class="o">-</span> <span class="n">r</span><span class="p">)</span> <span class="o">/</span> <span class="n">d</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="n">b</span><span class="p">:</span> <span class="p">(</span><span class="n">r</span> <span class="o">-</span> <span class="n">g</span><span class="p">)</span> <span class="o">/</span> <span class="n">d</span> <span class="o">+</span> <span class="mi">4</span><span class="p">,</span>
+        <span class="p">}[</span><span class="n">high</span><span class="p">]</span>
+        <span class="n">h</span> <span class="o">/=</span> <span class="mi">6</span>
+    <span class="k">return</span> <span class="n">Float3</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span></div>
+
+<span class="c1"># My fairly lazy OKHSV/OKHSL &quot;port&quot; of:</span>
+<span class="c1"># https://github.com/holbrookdev/ok-color-picker</span>
+<span class="c1"># MIT License</span>
+
+<span class="c1"># Copyright (c) 2022 Brian Holbrook</span>
+
+<span class="c1"># Permission is hereby granted, free of charge, to any person obtaining a copy</span>
+<span class="c1"># of this software and associated documentation files (the &quot;Software&quot;), to deal</span>
+<span class="c1"># in the Software without restriction, including without limitation the rights</span>
+<span class="c1"># to use, copy, modify, merge, publish, distribute, sublicense, and/or sell</span>
+<span class="c1"># copies of the Software, and to permit persons to whom the Software is</span>
+<span class="c1"># furnished to do so, subject to the following conditions:</span>
+
+<span class="c1"># The above copyright notice and this permission notice shall be included in all</span>
+<span class="c1"># copies or substantial portions of the Software.</span>
+
+<span class="c1"># THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</span>
+<span class="c1"># IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</span>
+<span class="c1"># FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE</span>
+<span class="c1"># AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER</span>
+<span class="c1"># LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</span>
+<span class="c1"># OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE</span>
+<span class="c1"># SOFTWARE.</span>
+
+<span class="n">__ok_eps</span> <span class="o">=</span> <span class="mf">1e-7</span>
+
+<div class="viewcode-block" id="col_oklab_to_linear_srgb"><a class="viewcode-back" href="../../../source/util.html#tinycio.util.col_oklab_to_linear_srgb">[docs]</a><span class="k">def</span> <span class="nf">col_oklab_to_linear_srgb</span><span class="p">(</span><span class="n">lab</span><span class="p">:</span><span class="n">Union</span><span class="p">[</span><span class="n">Float3</span><span class="p">,</span> <span class="n">Color</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Float3</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert OKLAB color to linear sRGB.</span>
+
+<span class="sd">    :param lab: OKLAB color</span>
+<span class="sd">    :type lab: Float3 | Color</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">L</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">lab</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">lab</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">lab</span><span class="o">.</span><span class="n">z</span>
+    <span class="n">l_</span> <span class="o">=</span> <span class="n">L</span> <span class="o">+</span> <span class="mf">0.3963377774</span> <span class="o">*</span> <span class="n">a</span> <span class="o">+</span> <span class="mf">0.2158037573</span> <span class="o">*</span> <span class="n">b</span>
+    <span class="n">m_</span> <span class="o">=</span> <span class="n">L</span> <span class="o">-</span> <span class="mf">0.1055613458</span> <span class="o">*</span> <span class="n">a</span> <span class="o">-</span> <span class="mf">0.0638541728</span> <span class="o">*</span> <span class="n">b</span>
+    <span class="n">s_</span> <span class="o">=</span> <span class="n">L</span> <span class="o">-</span> <span class="mf">0.0894841775</span> <span class="o">*</span> <span class="n">a</span> <span class="o">-</span> <span class="mf">1.291485548</span> <span class="o">*</span> <span class="n">b</span>
+
+    <span class="n">l</span> <span class="o">=</span> <span class="n">l_</span> <span class="o">*</span> <span class="n">l_</span> <span class="o">*</span> <span class="n">l_</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">m_</span> <span class="o">*</span> <span class="n">m_</span> <span class="o">*</span> <span class="n">m_</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">s_</span> <span class="o">*</span> <span class="n">s_</span> <span class="o">*</span> <span class="n">s_</span>
+
+    <span class="n">res</span> <span class="o">=</span> <span class="n">Float3</span><span class="p">(</span>
+        <span class="o">+</span><span class="mf">4.0767416621</span> <span class="o">*</span> <span class="n">l</span> <span class="o">-</span> <span class="mf">3.3077115913</span> <span class="o">*</span> <span class="n">m</span> <span class="o">+</span> <span class="mf">0.2309699292</span> <span class="o">*</span> <span class="n">s</span><span class="p">,</span>
+        <span class="o">-</span><span class="mf">1.2684380046</span> <span class="o">*</span> <span class="n">l</span> <span class="o">+</span> <span class="mf">2.6097574011</span> <span class="o">*</span> <span class="n">m</span> <span class="o">-</span> <span class="mf">0.3413193965</span> <span class="o">*</span> <span class="n">s</span><span class="p">,</span>
+        <span class="o">-</span><span class="mf">0.0041960863</span> <span class="o">*</span> <span class="n">l</span> <span class="o">-</span> <span class="mf">0.7034186147</span> <span class="o">*</span> <span class="n">m</span> <span class="o">+</span> <span class="mf">1.707614701</span> <span class="o">*</span> <span class="n">s</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">res</span></div>
+
+<div class="viewcode-block" id="col_linear_srgb_to_oklab"><a class="viewcode-back" href="../../../source/util.html#tinycio.util.col_linear_srgb_to_oklab">[docs]</a><span class="k">def</span> <span class="nf">col_linear_srgb_to_oklab</span><span class="p">(</span><span class="n">srgb</span><span class="p">:</span><span class="n">Union</span><span class="p">[</span><span class="n">Float3</span><span class="p">,</span> <span class="n">Color</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Float3</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert linear sRGB color to OKLAB.</span>
+
+<span class="sd">    :param srgb: linear sRGB color</span>
+<span class="sd">    :type srgb: Float3 | Color</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">r</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">srgb</span><span class="o">.</span><span class="n">r</span><span class="p">,</span> <span class="n">srgb</span><span class="o">.</span><span class="n">g</span><span class="p">,</span> <span class="n">srgb</span><span class="o">.</span><span class="n">b</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="mf">0.4122214708</span> <span class="o">*</span> <span class="n">r</span> <span class="o">+</span> <span class="mf">0.5363325363</span> <span class="o">*</span> <span class="n">g</span> <span class="o">+</span> <span class="mf">0.0514459929</span> <span class="o">*</span> <span class="n">b</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="mf">0.2119034982</span> <span class="o">*</span> <span class="n">r</span> <span class="o">+</span> <span class="mf">0.6806995451</span> <span class="o">*</span> <span class="n">g</span> <span class="o">+</span> <span class="mf">0.1073969566</span> <span class="o">*</span> <span class="n">b</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="mf">0.0883024619</span> <span class="o">*</span> <span class="n">r</span> <span class="o">+</span> <span class="mf">0.2817188376</span> <span class="o">*</span> <span class="n">g</span> <span class="o">+</span> <span class="mf">0.6299787005</span> <span class="o">*</span> <span class="n">b</span>
+
+    <span class="n">l_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cbrt</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+    <span class="n">m_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cbrt</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+    <span class="n">s_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cbrt</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+
+    <span class="n">res</span> <span class="o">=</span> <span class="n">Float3</span><span class="p">(</span>
+        <span class="mf">0.2104542553</span> <span class="o">*</span> <span class="n">l_</span> <span class="o">+</span> <span class="mf">0.793617785</span> <span class="o">*</span> <span class="n">m_</span> <span class="o">-</span> <span class="mf">0.0040720468</span> <span class="o">*</span> <span class="n">s_</span><span class="p">,</span>
+        <span class="mf">1.9779984951</span> <span class="o">*</span> <span class="n">l_</span> <span class="o">-</span> <span class="mf">2.428592205</span> <span class="o">*</span> <span class="n">m_</span> <span class="o">+</span> <span class="mf">0.4505937099</span> <span class="o">*</span> <span class="n">s_</span><span class="p">,</span>
+        <span class="mf">0.0259040371</span> <span class="o">*</span> <span class="n">l_</span> <span class="o">+</span> <span class="mf">0.7827717662</span> <span class="o">*</span> <span class="n">m_</span> <span class="o">-</span> <span class="mf">0.808675766</span> <span class="o">*</span> <span class="n">s_</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">res</span></div>
+
+<span class="k">def</span> <span class="nf">__ok_compute_max_saturation</span><span class="p">(</span><span class="n">ab</span><span class="p">:</span><span class="n">Float2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="c1"># Max saturation will be when one of r, g or b goes below zero.</span>
+
+    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">ab</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">ab</span><span class="o">.</span><span class="n">y</span>
+
+    <span class="c1"># Select different coefficients depending on which component goes below zero first</span>
+    <span class="n">k0</span><span class="p">,</span> <span class="n">k1</span><span class="p">,</span> <span class="n">k2</span><span class="p">,</span> <span class="n">k3</span><span class="p">,</span> <span class="n">k4</span><span class="p">,</span> <span class="n">wl</span><span class="p">,</span> <span class="n">wm</span><span class="p">,</span> <span class="n">ws</span> <span class="o">=</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span>
+
+    <span class="k">if</span> <span class="o">-</span><span class="mf">1.88170328</span> <span class="o">*</span> <span class="n">a</span> <span class="o">-</span> <span class="mf">0.80936493</span> <span class="o">*</span> <span class="n">b</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="c1"># Red component</span>
+        <span class="n">k0</span> <span class="o">=</span> <span class="o">+</span><span class="mf">1.19086277</span>
+        <span class="n">k1</span> <span class="o">=</span> <span class="o">+</span><span class="mf">1.76576728</span>
+        <span class="n">k2</span> <span class="o">=</span> <span class="o">+</span><span class="mf">0.59662641</span>
+        <span class="n">k3</span> <span class="o">=</span> <span class="o">+</span><span class="mf">0.75515197</span>
+        <span class="n">k4</span> <span class="o">=</span> <span class="o">+</span><span class="mf">0.56771245</span>
+        <span class="n">wl</span> <span class="o">=</span> <span class="o">+</span><span class="mf">4.0767416621</span>
+        <span class="n">wm</span> <span class="o">=</span> <span class="o">-</span><span class="mf">3.3077115913</span>
+        <span class="n">ws</span> <span class="o">=</span> <span class="o">+</span><span class="mf">0.2309699292</span>
+    <span class="k">elif</span> <span class="p">(</span><span class="mf">1.81444104</span> <span class="o">*</span> <span class="n">a</span> <span class="o">-</span> <span class="mf">1.19445276</span> <span class="o">*</span> <span class="n">b</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="c1"># Green component</span>
+        <span class="n">k0</span> <span class="o">=</span> <span class="o">+</span><span class="mf">0.73956515</span>
+        <span class="n">k1</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.45954404</span>
+        <span class="n">k2</span> <span class="o">=</span> <span class="o">+</span><span class="mf">0.08285427</span>
+        <span class="n">k3</span> <span class="o">=</span> <span class="o">+</span><span class="mf">0.1254107</span>
+        <span class="n">k4</span> <span class="o">=</span> <span class="o">+</span><span class="mf">0.14503204</span>
+        <span class="n">wl</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.2684380046</span>
+        <span class="n">wm</span> <span class="o">=</span> <span class="o">+</span><span class="mf">2.6097574011</span>
+        <span class="n">ws</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.3413193965</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Blue component</span>
+        <span class="n">k0</span> <span class="o">=</span> <span class="o">+</span><span class="mf">1.35733652</span>
+        <span class="n">k1</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.00915799</span>
+        <span class="n">k2</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.1513021</span>
+        <span class="n">k3</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.50559606</span>
+        <span class="n">k4</span> <span class="o">=</span> <span class="o">+</span><span class="mf">0.00692167</span>
+        <span class="n">wl</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.0041960863</span>
+        <span class="n">wm</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.7034186147</span>
+        <span class="n">ws</span> <span class="o">=</span> <span class="o">+</span><span class="mf">1.707614701</span>
+
+    <span class="c1"># Approximate max saturation using a polynomial:</span>
+    <span class="n">S</span> <span class="o">=</span> <span class="n">k0</span> <span class="o">+</span> <span class="n">k1</span> <span class="o">*</span> <span class="n">a</span> <span class="o">+</span> <span class="n">k2</span> <span class="o">*</span> <span class="n">b</span> <span class="o">+</span> <span class="n">k3</span> <span class="o">*</span> <span class="n">a</span> <span class="o">*</span> <span class="n">a</span> <span class="o">+</span> <span class="n">k4</span> <span class="o">*</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span>
+
+    <span class="c1"># Do one step Halley&#39;s method to get closer</span>
+    <span class="c1"># this gives an error less than 10e6, except for some blue hues where the dS/dh is close to infinite</span>
+    <span class="c1"># this should be sufficient for most applications, otherwise do two/three steps</span>
+
+    <span class="n">k_l</span> <span class="o">=</span> <span class="o">+</span><span class="mf">0.3963377774</span> <span class="o">*</span> <span class="n">a</span> <span class="o">+</span> <span class="mf">0.2158037573</span> <span class="o">*</span> <span class="n">b</span>
+    <span class="n">k_m</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.1055613458</span> <span class="o">*</span> <span class="n">a</span> <span class="o">-</span> <span class="mf">0.0638541728</span> <span class="o">*</span> <span class="n">b</span>
+    <span class="n">k_s</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.0894841775</span> <span class="o">*</span> <span class="n">a</span> <span class="o">-</span> <span class="mf">1.291485548</span> <span class="o">*</span> <span class="n">b</span>
+
+    <span class="n">l_</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">S</span> <span class="o">*</span> <span class="n">k_l</span>
+    <span class="n">m_</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">S</span> <span class="o">*</span> <span class="n">k_m</span>
+    <span class="n">s_</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">S</span> <span class="o">*</span> <span class="n">k_s</span>
+
+    <span class="n">l</span> <span class="o">=</span> <span class="n">l_</span> <span class="o">*</span> <span class="n">l_</span> <span class="o">*</span> <span class="n">l_</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">m_</span> <span class="o">*</span> <span class="n">m_</span> <span class="o">*</span> <span class="n">m_</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">s_</span> <span class="o">*</span> <span class="n">s_</span> <span class="o">*</span> <span class="n">s_</span>
+
+    <span class="n">l_dS</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">k_l</span> <span class="o">*</span> <span class="n">l_</span> <span class="o">*</span> <span class="n">l_</span>
+    <span class="n">m_dS</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">k_m</span> <span class="o">*</span> <span class="n">m_</span> <span class="o">*</span> <span class="n">m_</span>
+    <span class="n">s_dS</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">k_s</span> <span class="o">*</span> <span class="n">s_</span> <span class="o">*</span> <span class="n">s_</span>
+
+    <span class="n">l_dS2</span> <span class="o">=</span> <span class="mi">6</span> <span class="o">*</span> <span class="n">k_l</span> <span class="o">*</span> <span class="n">k_l</span> <span class="o">*</span> <span class="n">l_</span>
+    <span class="n">m_dS2</span> <span class="o">=</span> <span class="mi">6</span> <span class="o">*</span> <span class="n">k_m</span> <span class="o">*</span> <span class="n">k_m</span> <span class="o">*</span> <span class="n">m_</span>
+    <span class="n">s_dS2</span> <span class="o">=</span> <span class="mi">6</span> <span class="o">*</span> <span class="n">k_s</span> <span class="o">*</span> <span class="n">k_s</span> <span class="o">*</span> <span class="n">s_</span>
+
+    <span class="n">f</span> <span class="o">=</span> <span class="n">wl</span> <span class="o">*</span> <span class="n">l</span> <span class="o">+</span> <span class="n">wm</span> <span class="o">*</span> <span class="n">m</span> <span class="o">+</span> <span class="n">ws</span> <span class="o">*</span> <span class="n">s</span>
+    <span class="n">f1</span> <span class="o">=</span> <span class="n">wl</span> <span class="o">*</span> <span class="n">l_dS</span> <span class="o">+</span> <span class="n">wm</span> <span class="o">*</span> <span class="n">m_dS</span> <span class="o">+</span> <span class="n">ws</span> <span class="o">*</span> <span class="n">s_dS</span>
+    <span class="n">f2</span> <span class="o">=</span> <span class="n">wl</span> <span class="o">*</span> <span class="n">l_dS2</span> <span class="o">+</span> <span class="n">wm</span> <span class="o">*</span> <span class="n">m_dS2</span> <span class="o">+</span> <span class="n">ws</span> <span class="o">*</span> <span class="n">s_dS2</span>
+
+    <span class="n">S</span> <span class="o">=</span> <span class="n">S</span> <span class="o">-</span> <span class="p">(</span><span class="n">f</span> <span class="o">*</span> <span class="n">f1</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">f1</span> <span class="o">*</span> <span class="n">f1</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">f</span> <span class="o">*</span> <span class="n">f2</span><span class="p">,</span> <span class="n">__ok_eps</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">S</span>
+
+<span class="k">def</span> <span class="nf">__ok_find_cusp</span><span class="p">(</span><span class="n">ab</span><span class="p">:</span><span class="n">Float2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Float2</span><span class="p">:</span>
+    <span class="c1"># First, find the maximum saturation (saturation S = C/L)</span>
+    <span class="n">S_cusp</span> <span class="o">=</span> <span class="n">__ok_compute_max_saturation</span><span class="p">(</span><span class="n">ab</span><span class="p">)</span>
+
+    <span class="c1"># Convert to linear sRGB to find the first point where at least one of r,g or b &gt;= 1:</span>
+    <span class="n">rgb_at_max</span> <span class="o">=</span> <span class="n">col_oklab_to_linear_srgb</span><span class="p">(</span><span class="n">Float3</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span> <span class="n">S_cusp</span> <span class="o">*</span> <span class="n">ab</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">S_cusp</span> <span class="o">*</span> <span class="n">ab</span><span class="o">.</span><span class="n">y</span><span class="p">))</span>
+
+    <span class="n">L_cusp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cbrt</span><span class="p">(</span><span class="mf">1.</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">rgb_at_max</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">rgb_at_max</span><span class="p">[</span><span class="mi">1</span><span class="p">]]),</span> <span class="n">rgb_at_max</span><span class="p">[</span><span class="mi">2</span><span class="p">]]))</span>
+    <span class="n">C_cusp</span> <span class="o">=</span> <span class="n">L_cusp</span> <span class="o">*</span> <span class="n">S_cusp</span>
+
+    <span class="k">return</span> <span class="n">Float2</span><span class="p">(</span><span class="n">L_cusp</span><span class="p">,</span> <span class="n">C_cusp</span><span class="p">)</span>
+
+
+
+<span class="c1"># Finds intersection of the line defined by</span>
+<span class="c1"># L = L0 * (1 - t) + t * L1</span>
+<span class="c1"># C = t * C1</span>
+<span class="c1"># a and b must be normalized so a^2 + b^2 == 1</span>
+<span class="k">def</span> <span class="nf">__ok_find_gamut_intersection</span><span class="p">(</span>
+    <span class="n">a</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span>
+    <span class="n">b</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span>
+    <span class="n">L1</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span>
+    <span class="n">C1</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span>
+    <span class="n">L0</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span>
+    <span class="n">cusp</span><span class="p">:</span><span class="n">Float2</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">cusp</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># Find the cusp of the gamut triangle</span>
+        <span class="n">cusp</span> <span class="o">=</span> <span class="n">__ok_find_cusp</span><span class="p">(</span><span class="n">Float2</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">))</span>
+
+    <span class="c1"># Find the intersection for upper and lower half seprately</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="mf">0.</span>
+    <span class="k">if</span> <span class="p">((</span><span class="n">L1</span> <span class="o">-</span> <span class="n">L0</span><span class="p">)</span> <span class="o">*</span> <span class="n">cusp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="p">(</span><span class="n">cusp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">L0</span><span class="p">)</span> <span class="o">*</span> <span class="n">C1</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="c1"># Lower half</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="n">cusp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">L0</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">C1</span> <span class="o">*</span> <span class="n">cusp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">cusp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">L0</span> <span class="o">-</span> <span class="n">L1</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Upper half</span>
+        <span class="c1"># First intersect with triangle</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="n">cusp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">L0</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">C1</span> <span class="o">*</span> <span class="p">(</span><span class="n">cusp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">cusp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">L0</span> <span class="o">-</span> <span class="n">L1</span><span class="p">))</span>
+
+        <span class="c1"># Then one step Halley&#39;s method</span>
+        <span class="n">dL</span> <span class="o">=</span> <span class="n">L1</span> <span class="o">-</span> <span class="n">L0</span>
+        <span class="n">dC</span> <span class="o">=</span> <span class="n">C1</span>
+
+        <span class="n">k_l</span> <span class="o">=</span> <span class="o">+</span><span class="mf">0.3963377774</span> <span class="o">*</span> <span class="n">a</span> <span class="o">+</span> <span class="mf">0.2158037573</span> <span class="o">*</span> <span class="n">b</span>
+        <span class="n">k_m</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.1055613458</span> <span class="o">*</span> <span class="n">a</span> <span class="o">-</span> <span class="mf">0.0638541728</span> <span class="o">*</span> <span class="n">b</span>
+        <span class="n">k_s</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.0894841775</span> <span class="o">*</span> <span class="n">a</span> <span class="o">-</span> <span class="mf">1.291485548</span> <span class="o">*</span> <span class="n">b</span>
+
+        <span class="n">l_dt</span> <span class="o">=</span> <span class="n">dL</span> <span class="o">+</span> <span class="n">dC</span> <span class="o">*</span> <span class="n">k_l</span>
+        <span class="n">m_dt</span> <span class="o">=</span> <span class="n">dL</span> <span class="o">+</span> <span class="n">dC</span> <span class="o">*</span> <span class="n">k_m</span>
+        <span class="n">s_dt</span> <span class="o">=</span> <span class="n">dL</span> <span class="o">+</span> <span class="n">dC</span> <span class="o">*</span> <span class="n">k_s</span>
+
+        <span class="c1"># If higher accuracy is required, 2 or 3 iterations of the following block can be used:</span>
+
+        <span class="n">L</span> <span class="o">=</span> <span class="n">L0</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">t</span><span class="p">)</span> <span class="o">+</span> <span class="n">t</span> <span class="o">*</span> <span class="n">L1</span>
+        <span class="n">C</span> <span class="o">=</span> <span class="n">t</span> <span class="o">*</span> <span class="n">C1</span>
+
+        <span class="n">l_</span> <span class="o">=</span> <span class="n">L</span> <span class="o">+</span> <span class="n">C</span> <span class="o">*</span> <span class="n">k_l</span>
+        <span class="n">m_</span> <span class="o">=</span> <span class="n">L</span> <span class="o">+</span> <span class="n">C</span> <span class="o">*</span> <span class="n">k_m</span>
+        <span class="n">s_</span> <span class="o">=</span> <span class="n">L</span> <span class="o">+</span> <span class="n">C</span> <span class="o">*</span> <span class="n">k_s</span>
+
+        <span class="n">l</span> <span class="o">=</span> <span class="n">l_</span> <span class="o">*</span> <span class="n">l_</span> <span class="o">*</span> <span class="n">l_</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">m_</span> <span class="o">*</span> <span class="n">m_</span> <span class="o">*</span> <span class="n">m_</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">s_</span> <span class="o">*</span> <span class="n">s_</span> <span class="o">*</span> <span class="n">s_</span>
+
+        <span class="n">ldt</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">l_dt</span> <span class="o">*</span> <span class="n">l_</span> <span class="o">*</span> <span class="n">l_</span>
+        <span class="n">mdt</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">m_dt</span> <span class="o">*</span> <span class="n">m_</span> <span class="o">*</span> <span class="n">m_</span>
+        <span class="n">sdt</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">s_dt</span> <span class="o">*</span> <span class="n">s_</span> <span class="o">*</span> <span class="n">s_</span>
+
+        <span class="n">ldt2</span> <span class="o">=</span> <span class="mi">6</span> <span class="o">*</span> <span class="n">l_dt</span> <span class="o">*</span> <span class="n">l_dt</span> <span class="o">*</span> <span class="n">l_</span>
+        <span class="n">mdt2</span> <span class="o">=</span> <span class="mi">6</span> <span class="o">*</span> <span class="n">m_dt</span> <span class="o">*</span> <span class="n">m_dt</span> <span class="o">*</span> <span class="n">m_</span>
+        <span class="n">sdt2</span> <span class="o">=</span> <span class="mi">6</span> <span class="o">*</span> <span class="n">s_dt</span> <span class="o">*</span> <span class="n">s_dt</span> <span class="o">*</span> <span class="n">s_</span>
+
+        <span class="n">r</span> <span class="o">=</span> <span class="mf">4.0767416621</span> <span class="o">*</span> <span class="n">l</span> <span class="o">-</span> <span class="mf">3.3077115913</span> <span class="o">*</span> <span class="n">m</span> <span class="o">+</span> <span class="mf">0.2309699292</span> <span class="o">*</span> <span class="n">s</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">r1</span> <span class="o">=</span> <span class="mf">4.0767416621</span> <span class="o">*</span> <span class="n">ldt</span> <span class="o">-</span> <span class="mf">3.3077115913</span> <span class="o">*</span> <span class="n">mdt</span> <span class="o">+</span> <span class="mf">0.2309699292</span> <span class="o">*</span> <span class="n">sdt</span>
+        <span class="n">r2</span> <span class="o">=</span> <span class="mf">4.0767416621</span> <span class="o">*</span> <span class="n">ldt2</span> <span class="o">-</span> <span class="mf">3.3077115913</span> <span class="o">*</span> <span class="n">mdt2</span> <span class="o">+</span> <span class="mf">0.2309699292</span> <span class="o">*</span> <span class="n">sdt2</span>
+
+        <span class="n">u_r</span> <span class="o">=</span> <span class="n">r1</span> <span class="o">/</span> <span class="p">(</span><span class="n">r1</span> <span class="o">*</span> <span class="n">r1</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">r</span> <span class="o">*</span> <span class="n">r2</span><span class="p">)</span>
+        <span class="n">t_r</span> <span class="o">=</span> <span class="o">-</span><span class="n">r</span> <span class="o">*</span> <span class="n">u_r</span>
+
+        <span class="n">g</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.2684380046</span> <span class="o">*</span> <span class="n">l</span> <span class="o">+</span> <span class="mf">2.6097574011</span> <span class="o">*</span> <span class="n">m</span> <span class="o">-</span> <span class="mf">0.3413193965</span> <span class="o">*</span> <span class="n">s</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">g1</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.2684380046</span> <span class="o">*</span> <span class="n">ldt</span> <span class="o">+</span> <span class="mf">2.6097574011</span> <span class="o">*</span> <span class="n">mdt</span> <span class="o">-</span> <span class="mf">0.3413193965</span> <span class="o">*</span> <span class="n">sdt</span>
+        <span class="n">g2</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.2684380046</span> <span class="o">*</span> <span class="n">ldt2</span> <span class="o">+</span> <span class="mf">2.6097574011</span> <span class="o">*</span> <span class="n">mdt2</span> <span class="o">-</span> <span class="mf">0.3413193965</span> <span class="o">*</span> <span class="n">sdt2</span>
+
+        <span class="n">u_g</span> <span class="o">=</span> <span class="n">g1</span> <span class="o">/</span> <span class="p">(</span><span class="n">g1</span> <span class="o">*</span> <span class="n">g1</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">g</span> <span class="o">*</span> <span class="n">g2</span><span class="p">)</span>
+        <span class="n">t_g</span> <span class="o">=</span> <span class="o">-</span><span class="n">g</span> <span class="o">*</span> <span class="n">u_g</span>
+
+        <span class="n">b</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.0041960863</span> <span class="o">*</span> <span class="n">l</span> <span class="o">-</span> <span class="mf">0.7034186147</span> <span class="o">*</span> <span class="n">m</span> <span class="o">+</span> <span class="mf">1.707614701</span> <span class="o">*</span> <span class="n">s</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">b1</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.0041960863</span> <span class="o">*</span> <span class="n">ldt</span> <span class="o">-</span> <span class="mf">0.7034186147</span> <span class="o">*</span> <span class="n">mdt</span> <span class="o">+</span> <span class="mf">1.707614701</span> <span class="o">*</span> <span class="n">sdt</span>
+        <span class="n">b2</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.0041960863</span> <span class="o">*</span> <span class="n">ldt2</span> <span class="o">-</span> <span class="mf">0.7034186147</span> <span class="o">*</span> <span class="n">mdt2</span> <span class="o">+</span> <span class="mf">1.707614701</span> <span class="o">*</span> <span class="n">sdt2</span>
+
+        <span class="n">u_b</span> <span class="o">=</span> <span class="n">b1</span> <span class="o">/</span> <span class="p">(</span><span class="n">b1</span> <span class="o">*</span> <span class="n">b1</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">b</span> <span class="o">*</span> <span class="n">b2</span><span class="p">)</span>
+        <span class="n">t_b</span> <span class="o">=</span> <span class="o">-</span><span class="n">b</span> <span class="o">*</span> <span class="n">u_b</span>
+
+        <span class="n">t_r</span> <span class="o">=</span> <span class="n">t_r</span> <span class="k">if</span> <span class="n">u_r</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="k">else</span> <span class="mf">10e5</span>
+        <span class="n">t_g</span> <span class="o">=</span> <span class="n">t_g</span> <span class="k">if</span> <span class="n">u_g</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="k">else</span> <span class="mf">10e5</span>
+        <span class="n">t_b</span> <span class="o">=</span> <span class="n">t_b</span> <span class="k">if</span> <span class="n">u_b</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="k">else</span> <span class="mf">10e5</span>
+
+        <span class="n">t</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">([</span><span class="n">t_r</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">([</span><span class="n">t_g</span><span class="p">,</span> <span class="n">t_b</span><span class="p">])])</span>
+    <span class="k">return</span> <span class="n">t</span>
+
+<span class="k">def</span> <span class="nf">__ok_get_st_max</span><span class="p">(</span><span class="n">ab</span><span class="p">:</span><span class="n">Float2</span><span class="p">,</span> <span class="n">cusp</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Float2</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">cusp</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># Find the cusp of the gamut triangle</span>
+        <span class="n">cusp</span> <span class="o">=</span> <span class="n">__ok_find_cusp</span><span class="p">(</span><span class="n">ab</span><span class="p">)</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="n">cusp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">C</span> <span class="o">=</span> <span class="n">cusp</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">Float2</span><span class="p">(</span><span class="n">C</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">L</span><span class="p">,</span> <span class="n">__ok_eps</span><span class="p">]),</span> <span class="n">C</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="mi">1</span> <span class="o">-</span> <span class="n">L</span><span class="p">,</span> <span class="n">__ok_eps</span><span class="p">]))</span>
+
+<span class="k">def</span> <span class="nf">__ok_toe</span><span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="n">k_1</span> <span class="o">=</span> <span class="mf">0.206</span>
+    <span class="n">k_2</span> <span class="o">=</span> <span class="mf">0.03</span>
+    <span class="n">k_3</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">k_1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">k_2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">k_3</span> <span class="o">*</span> <span class="n">x</span> <span class="o">-</span><span class="n">k_1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">k_3</span> <span class="o">*</span> <span class="n">x</span> <span class="o">-</span> <span class="n">k_1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">k_3</span> <span class="o">*</span> <span class="n">x</span> <span class="o">-</span> <span class="n">k_1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">k_2</span> <span class="o">*</span> <span class="n">k_3</span> <span class="o">*</span> <span class="n">x</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">__ok_toe_inv</span><span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="n">k_1</span> <span class="o">=</span> <span class="mf">0.206</span>
+    <span class="n">k_2</span> <span class="o">=</span> <span class="mf">0.03</span>
+    <span class="n">k_3</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">k_1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">k_2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">k_1</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">k_3</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">k_2</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">__ok_get_cs</span><span class="p">(</span><span class="n">lab</span><span class="p">:</span><span class="n">Float3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Float3</span><span class="p">:</span>
+    <span class="n">L</span><span class="p">,</span> <span class="n">a_</span><span class="p">,</span> <span class="n">b_</span> <span class="o">=</span> <span class="n">lab</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">lab</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">lab</span><span class="o">.</span><span class="n">z</span>
+    <span class="n">cusp</span> <span class="o">=</span> <span class="n">__ok_find_cusp</span><span class="p">(</span><span class="n">Float2</span><span class="p">(</span><span class="n">a_</span><span class="p">,</span> <span class="n">b_</span><span class="p">))</span>
+
+    <span class="n">C_max</span> <span class="o">=</span> <span class="n">__ok_find_gamut_intersection</span><span class="p">(</span><span class="n">a_</span><span class="p">,</span> <span class="n">b_</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">cusp</span><span class="p">)</span>
+    <span class="n">ST_max</span> <span class="o">=</span> <span class="n">__ok_get_st_max</span><span class="p">(</span><span class="n">Float2</span><span class="p">(</span><span class="n">a_</span><span class="p">,</span> <span class="n">b_</span><span class="p">),</span> <span class="n">cusp</span><span class="p">)</span>
+
+    <span class="n">S_mid</span> <span class="o">=</span> <span class="mf">0.11516993</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="o">+</span><span class="mf">7.4477897</span> <span class="o">+</span> <span class="mf">4.1590124</span> <span class="o">*</span> <span class="n">b_</span> <span class="o">+</span> <span class="n">a_</span> <span class="o">*</span> \
+        <span class="p">(</span><span class="o">-</span><span class="mf">2.19557347</span> <span class="o">+</span><span class="mf">1.75198401</span> <span class="o">*</span> <span class="n">b_</span> <span class="o">+</span> <span class="n">a_</span> <span class="o">*</span> \
+            <span class="p">(</span><span class="o">-</span><span class="mf">2.13704948</span> <span class="o">-</span> <span class="mf">10.02301043</span> <span class="o">*</span> <span class="n">b_</span> <span class="o">+</span> <span class="n">a_</span> <span class="o">*</span> \
+                <span class="p">(</span><span class="o">-</span><span class="mf">4.24894561</span> <span class="o">+</span> <span class="mf">5.38770819</span> <span class="o">*</span> <span class="n">b_</span> <span class="o">+</span> <span class="mf">4.69891013</span> <span class="o">*</span> <span class="n">a_</span><span class="p">))))</span>
+
+    <span class="n">T_mid</span> <span class="o">=</span> <span class="mf">0.11239642</span> <span class="o">+</span> <span class="mf">1.</span> <span class="o">/</span> <span class="p">(</span><span class="o">+</span><span class="mf">1.6132032</span> <span class="o">-</span> <span class="mf">0.68124379</span> <span class="o">*</span> <span class="n">b_</span> <span class="o">+</span> <span class="n">a_</span> <span class="o">*</span> \
+        <span class="p">(</span><span class="o">+</span><span class="mf">0.40370612</span> <span class="o">+</span> <span class="mf">0.90148123</span> <span class="o">*</span> <span class="n">b_</span> <span class="o">+</span> <span class="n">a_</span> <span class="o">*</span> \
+            <span class="p">(</span><span class="o">-</span><span class="mf">0.27087943</span> <span class="o">+</span> <span class="mf">0.6122399</span> <span class="o">*</span> <span class="n">b_</span> <span class="o">+</span> <span class="n">a_</span> <span class="o">*</span> \
+                <span class="p">(</span><span class="o">+</span><span class="mf">0.00299215</span> <span class="o">-</span> <span class="mf">0.45399568</span> <span class="o">*</span> <span class="n">b_</span> <span class="o">-</span> <span class="mf">0.14661872</span> <span class="o">*</span> <span class="n">a_</span><span class="p">))))</span>
+
+    <span class="n">k</span> <span class="o">=</span> <span class="n">C_max</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">([</span><span class="n">L</span> <span class="o">*</span> <span class="n">ST_max</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">L</span><span class="p">)</span> <span class="o">*</span> <span class="n">ST_max</span><span class="p">[</span><span class="mi">1</span><span class="p">]]),</span> <span class="n">__ok_eps</span><span class="p">])</span>
+
+    <span class="n">C_mid</span> <span class="o">=</span> <span class="mf">0.</span>
+    <span class="n">C_a</span> <span class="o">=</span> <span class="n">L</span> <span class="o">*</span> <span class="n">S_mid</span>
+    <span class="n">C_b</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">L</span><span class="p">)</span> <span class="o">*</span> <span class="n">T_mid</span>
+
+    <span class="n">C_mid</span> <span class="o">=</span> <span class="mf">0.9</span> <span class="o">*</span> <span class="n">k</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span>  <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span>  <span class="p">(</span><span class="n">C_a</span> <span class="o">*</span> <span class="n">C_a</span> <span class="o">*</span> <span class="n">C_a</span> <span class="o">*</span> <span class="n">C_a</span><span class="p">),</span> <span class="n">__ok_eps</span> <span class="p">])</span> <span class="o">+</span> \
+            <span class="mi">1</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([(</span><span class="n">C_b</span> <span class="o">*</span> <span class="n">C_b</span> <span class="o">*</span> <span class="n">C_b</span> <span class="o">*</span> <span class="n">C_b</span><span class="p">),</span> <span class="n">__ok_eps</span><span class="p">]))))</span>
+
+    <span class="n">C_0</span> <span class="o">=</span> <span class="mf">0.</span>
+    <span class="n">C_a</span> <span class="o">=</span> <span class="n">L</span> <span class="o">*</span> <span class="mf">0.4</span>
+    <span class="n">C_b</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">L</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.8</span>
+
+    <span class="n">C_0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([(</span><span class="n">C_a</span> <span class="o">*</span> <span class="n">C_a</span><span class="p">)</span> <span class="p">,</span> <span class="n">__ok_eps</span><span class="p">])</span> <span class="o">+</span> \
+        <span class="mi">1</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span> <span class="p">(</span><span class="n">C_b</span> <span class="o">*</span> <span class="n">C_b</span><span class="p">),</span> <span class="n">__ok_eps</span><span class="p">])))</span>
+
+    <span class="k">return</span> <span class="n">Float3</span><span class="p">(</span><span class="n">C_0</span><span class="p">,</span> <span class="n">C_mid</span><span class="p">,</span> <span class="n">C_max</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="col_okhsv_to_srgb"><a class="viewcode-back" href="../../../source/util.html#tinycio.util.col_okhsv_to_srgb">[docs]</a><span class="k">def</span> <span class="nf">col_okhsv_to_srgb</span><span class="p">(</span><span class="n">hsv</span><span class="p">:</span><span class="n">Union</span><span class="p">[</span><span class="n">Float3</span><span class="p">,</span> <span class="n">Color</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Float3</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert OKHSV color to linear sRGB.</span>
+
+<span class="sd">    :param hsv: OKHSV color</span>
+<span class="sd">    :type hsv: Float3 | Color</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">h</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">v</span> <span class="o">=</span> <span class="n">hsv</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">hsv</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">hsv</span><span class="o">.</span><span class="n">z</span>
+    <span class="n">a_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">h</span><span class="p">)</span>
+    <span class="n">b_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">h</span><span class="p">)</span>
+
+    <span class="n">ST_max</span> <span class="o">=</span> <span class="n">__ok_get_st_max</span><span class="p">(</span><span class="n">Float2</span><span class="p">(</span><span class="n">a_</span><span class="p">,</span> <span class="n">b_</span><span class="p">))</span>
+    <span class="n">S_max</span> <span class="o">=</span> <span class="n">ST_max</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">S_0</span> <span class="o">=</span> <span class="mf">0.5</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">ST_max</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">S_0</span> <span class="o">/</span> <span class="n">S_max</span>
+
+    <span class="n">L_v</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">s</span> <span class="o">*</span> <span class="n">S_0</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">S_0</span> <span class="o">+</span> <span class="n">T</span> <span class="o">-</span> <span class="n">T</span> <span class="o">*</span> <span class="n">k</span> <span class="o">*</span> <span class="n">s</span><span class="p">)</span>
+    <span class="n">C_v</span> <span class="o">=</span> <span class="p">(</span><span class="n">s</span> <span class="o">*</span> <span class="n">T</span> <span class="o">*</span> <span class="n">S_0</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">S_0</span> <span class="o">+</span> <span class="n">T</span> <span class="o">-</span> <span class="n">T</span> <span class="o">*</span> <span class="n">k</span> <span class="o">*</span> <span class="n">s</span><span class="p">)</span>
+
+    <span class="n">L</span> <span class="o">=</span> <span class="n">v</span> <span class="o">*</span> <span class="n">L_v</span>
+    <span class="n">C</span> <span class="o">=</span> <span class="n">v</span> <span class="o">*</span> <span class="n">C_v</span>
+
+
+    <span class="n">L_vt</span> <span class="o">=</span> <span class="n">__ok_toe_inv</span><span class="p">(</span><span class="n">L_v</span><span class="p">)</span>
+    <span class="n">C_vt</span> <span class="o">=</span> <span class="p">(</span><span class="n">C_v</span> <span class="o">*</span> <span class="n">L_vt</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">L_v</span><span class="p">,</span> <span class="n">__ok_eps</span><span class="p">])</span>
+
+    <span class="n">L_new</span> <span class="o">=</span> <span class="n">__ok_toe_inv</span><span class="p">(</span><span class="n">L</span><span class="p">)</span> <span class="c1"># * L_v/L_vt</span>
+    <span class="n">C</span> <span class="o">=</span> <span class="p">(</span><span class="n">C</span> <span class="o">*</span> <span class="n">L_new</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">L</span><span class="p">,</span> <span class="n">__ok_eps</span><span class="p">])</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="n">L_new</span>
+
+    <span class="n">rgb_scale</span> <span class="o">=</span> <span class="n">col_oklab_to_linear_srgb</span><span class="p">(</span><span class="n">Float3</span><span class="p">(</span><span class="n">L_vt</span><span class="p">,</span> <span class="n">a_</span> <span class="o">*</span> <span class="n">C_vt</span><span class="p">,</span> <span class="n">b_</span> <span class="o">*</span> <span class="n">C_vt</span><span class="p">))</span>
+    <span class="n">scale_L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cbrt</span><span class="p">(</span>
+        <span class="mi">1</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">rgb_scale</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">rgb_scale</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">rgb_scale</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">__ok_eps</span><span class="p">])</span>
+    <span class="p">)</span>
+
+    <span class="c1"># remove to see effect without rescaling</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="n">L</span> <span class="o">*</span> <span class="n">scale_L</span>
+    <span class="n">C</span> <span class="o">=</span> <span class="n">C</span> <span class="o">*</span> <span class="n">scale_L</span>
+    <span class="n">rgb</span> <span class="o">=</span> <span class="n">col_oklab_to_linear_srgb</span><span class="p">(</span><span class="n">Float3</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">C</span> <span class="o">*</span> <span class="n">a_</span><span class="p">,</span> <span class="n">C</span> <span class="o">*</span> <span class="n">b_</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">rgb</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="col_srgb_to_okhsv"><a class="viewcode-back" href="../../../source/util.html#tinycio.util.col_srgb_to_okhsv">[docs]</a><span class="k">def</span> <span class="nf">col_srgb_to_okhsv</span><span class="p">(</span><span class="n">srgb</span><span class="p">:</span><span class="n">Union</span><span class="p">[</span><span class="n">Float3</span><span class="p">,</span> <span class="n">Color</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Float3</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert linear sRGB color to OKHSV.</span>
+
+<span class="sd">    :param srgb: linear sRGB color</span>
+<span class="sd">    :type srgb: Float3 | Color</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">srgb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">srgb</span><span class="p">,</span> <span class="n">Float3</span><span class="p">(</span><span class="mf">1.</span> <span class="o">-</span> <span class="n">__ok_eps</span><span class="p">))</span>
+    <span class="n">srgb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">srgb</span><span class="p">,</span> <span class="n">Float3</span><span class="p">(</span><span class="n">__ok_eps</span><span class="p">))</span>
+    <span class="n">lab</span> <span class="o">=</span> <span class="n">col_linear_srgb_to_oklab</span><span class="p">(</span><span class="n">srgb</span><span class="p">)</span>
+
+    <span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">lab</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">lab</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">lab</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">lab</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">a_</span> <span class="o">=</span> <span class="n">lab</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">C</span><span class="p">,</span> <span class="n">__ok_eps</span><span class="p">])</span>
+    <span class="n">b_</span> <span class="o">=</span> <span class="n">lab</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">C</span><span class="p">,</span> <span class="n">__ok_eps</span><span class="p">])</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="n">lab</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">+</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="o">-</span><span class="n">lab</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="o">-</span><span class="n">lab</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+
+    <span class="n">ST_max</span> <span class="o">=</span> <span class="n">__ok_get_st_max</span><span class="p">(</span><span class="n">Float2</span><span class="p">(</span><span class="n">a_</span><span class="p">,</span> <span class="n">b_</span><span class="p">))</span>
+    <span class="n">S_max</span> <span class="o">=</span> <span class="n">ST_max</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">S_0</span> <span class="o">=</span> <span class="mf">0.5</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">ST_max</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">S_0</span> <span class="o">/</span> <span class="n">S_max</span>
+
+    <span class="n">t</span> <span class="o">=</span> <span class="n">T</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">C</span> <span class="o">+</span> <span class="n">L</span> <span class="o">*</span> <span class="n">T</span><span class="p">,</span> <span class="n">__ok_eps</span><span class="p">])</span>
+    <span class="n">L_v</span> <span class="o">=</span> <span class="n">t</span> <span class="o">*</span> <span class="n">L</span>
+    <span class="n">C_v</span> <span class="o">=</span> <span class="n">t</span> <span class="o">*</span> <span class="n">C</span>
+
+    <span class="n">L_vt</span> <span class="o">=</span> <span class="n">__ok_toe_inv</span><span class="p">(</span><span class="n">L_v</span><span class="p">)</span>
+    <span class="n">C_vt</span> <span class="o">=</span> <span class="p">(</span><span class="n">C_v</span> <span class="o">*</span> <span class="n">L_vt</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">L_v</span><span class="p">,</span> <span class="n">__ok_eps</span><span class="p">])</span>
+    <span class="n">rgb_scale</span> <span class="o">=</span> <span class="n">col_oklab_to_linear_srgb</span><span class="p">(</span><span class="n">Float3</span><span class="p">(</span><span class="n">L_vt</span><span class="p">,</span> <span class="n">a_</span> <span class="o">*</span> <span class="n">C_vt</span><span class="p">,</span> <span class="n">b_</span> <span class="o">*</span> <span class="n">C_vt</span><span class="p">))</span>
+    <span class="n">scale_L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cbrt</span><span class="p">(</span>
+        <span class="mi">1</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">rgb_scale</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">rgb_scale</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">rgb_scale</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">__ok_eps</span><span class="p">])</span>
+    <span class="p">)</span>
+
+    <span class="n">L</span> <span class="o">=</span> <span class="n">L</span> <span class="o">/</span> <span class="n">scale_L</span>
+    <span class="n">C</span> <span class="o">=</span> <span class="n">C</span> <span class="o">/</span> <span class="n">scale_L</span>
+
+    <span class="n">C</span> <span class="o">=</span> <span class="p">(</span><span class="n">C</span> <span class="o">*</span> <span class="n">__ok_toe</span><span class="p">(</span><span class="n">L</span><span class="p">))</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">L</span><span class="p">,</span> <span class="n">__ok_eps</span><span class="p">])</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="n">__ok_toe</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+
+    <span class="n">v</span> <span class="o">=</span> <span class="n">L</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">L_v</span><span class="p">,</span> <span class="n">__ok_eps</span><span class="p">])</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="p">((</span><span class="n">S_0</span> <span class="o">+</span> <span class="n">T</span><span class="p">)</span> <span class="o">*</span> <span class="n">C_v</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">T</span> <span class="o">*</span> <span class="n">S_0</span> <span class="o">+</span> <span class="n">T</span> <span class="o">*</span> <span class="n">k</span> <span class="o">*</span> <span class="n">C_v</span><span class="p">,</span> <span class="n">__ok_eps</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">Float3</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="col_okhsl_to_srgb"><a class="viewcode-back" href="../../../source/util.html#tinycio.util.col_okhsl_to_srgb">[docs]</a><span class="k">def</span> <span class="nf">col_okhsl_to_srgb</span><span class="p">(</span><span class="n">hsl</span><span class="p">:</span><span class="n">Union</span><span class="p">[</span><span class="n">Float3</span><span class="p">,</span> <span class="n">Color</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Float3</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert OKHSL color to linear sRGB.</span>
+
+<span class="sd">    :param hsl: OKHSL color</span>
+<span class="sd">    :type hsl: Float3 | Color</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">h</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">l</span> <span class="o">=</span> <span class="n">hsl</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">hsl</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">hsl</span><span class="o">.</span><span class="n">z</span>
+    <span class="k">if</span> <span class="n">l</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Float3</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">l</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">Float3</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">a_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">h</span><span class="p">)</span>
+    <span class="n">b_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">h</span><span class="p">)</span>
+    <span class="n">L</span> <span class="o">=</span> <span class="n">__ok_toe_inv</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+
+    <span class="n">Cs</span> <span class="o">=</span> <span class="n">__ok_get_cs</span><span class="p">(</span><span class="n">Float3</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">a_</span><span class="p">,</span> <span class="n">b_</span><span class="p">))</span>
+    <span class="n">C_0</span> <span class="o">=</span> <span class="n">Cs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">C_mid</span> <span class="o">=</span> <span class="n">Cs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">C_max</span> <span class="o">=</span> <span class="n">Cs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+    <span class="n">C</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">k_0</span><span class="p">,</span> <span class="n">k_1</span><span class="p">,</span> <span class="n">k_2</span> <span class="o">=</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span>
+    <span class="k">if</span> <span class="n">s</span> <span class="o">&lt;</span> <span class="mf">0.8</span><span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="mf">1.25</span> <span class="o">*</span> <span class="n">s</span>
+        <span class="n">k_0</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">k_1</span> <span class="o">=</span> <span class="mf">0.8</span> <span class="o">*</span> <span class="n">C_0</span>
+        <span class="n">k_2</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">k_1</span> <span class="o">/</span> <span class="n">C_mid</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">*</span> <span class="p">(</span><span class="n">s</span> <span class="o">-</span> <span class="mf">0.8</span><span class="p">)</span>
+        <span class="n">k_0</span> <span class="o">=</span> <span class="n">C_mid</span>
+        <span class="n">k_1</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.2</span> <span class="o">*</span> <span class="n">C_mid</span> <span class="o">*</span> <span class="n">C_mid</span> <span class="o">*</span> <span class="mf">1.25</span> <span class="o">*</span> <span class="mf">1.25</span><span class="p">)</span> <span class="o">/</span> <span class="n">C_0</span>
+        <span class="n">k_2</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">k_1</span> <span class="o">/</span> <span class="p">(</span><span class="n">C_max</span> <span class="o">-</span> <span class="n">C_mid</span><span class="p">)</span>
+
+    <span class="n">C</span> <span class="o">=</span> <span class="n">k_0</span> <span class="o">+</span> <span class="p">(</span><span class="n">t</span> <span class="o">*</span> <span class="n">k_1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">k_2</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>
+
+    <span class="c1"># If we would only use one of the Cs:</span>
+    <span class="c1">#C = s*C_0</span>
+    <span class="c1">#C = s*1.25*C_mid</span>
+    <span class="c1">#C = s*C_max</span>
+
+    <span class="n">rgb</span> <span class="o">=</span> <span class="n">col_oklab_to_linear_srgb</span><span class="p">(</span><span class="n">Float3</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">C</span> <span class="o">*</span> <span class="n">a_</span><span class="p">,</span> <span class="n">C</span> <span class="o">*</span> <span class="n">b_</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">rgb</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="col_srgb_to_okhsl"><a class="viewcode-back" href="../../../source/util.html#tinycio.util.col_srgb_to_okhsl">[docs]</a><span class="k">def</span> <span class="nf">col_srgb_to_okhsl</span><span class="p">(</span><span class="n">srgb</span><span class="p">:</span><span class="n">Union</span><span class="p">[</span><span class="n">Float3</span><span class="p">,</span> <span class="n">Color</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Float3</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Convert linear sRGB color to OKHSL.</span>
+
+<span class="sd">    :param srgb: linear sRGB color</span>
+<span class="sd">    :type srgb: Float3 | Color</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">srgb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">srgb</span><span class="p">,</span> <span class="n">Float3</span><span class="p">(</span><span class="mf">1.</span> <span class="o">-</span> <span class="n">__ok_eps</span><span class="p">))</span>
+    <span class="n">srgb</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">srgb</span><span class="p">,</span> <span class="n">Float3</span><span class="p">(</span><span class="n">__ok_eps</span><span class="p">))</span>
+
+    <span class="n">lab</span> <span class="o">=</span> <span class="n">col_linear_srgb_to_oklab</span><span class="p">(</span><span class="n">srgb</span><span class="p">)</span>
+
+    <span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">lab</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">lab</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">lab</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">lab</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">a_</span> <span class="o">=</span> <span class="n">lab</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">C</span><span class="p">,</span> <span class="n">__ok_eps</span><span class="p">])</span>
+    <span class="n">b_</span> <span class="o">=</span> <span class="n">lab</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">C</span><span class="p">,</span> <span class="n">__ok_eps</span><span class="p">])</span>
+
+    <span class="n">L</span> <span class="o">=</span> <span class="n">lab</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">+</span> <span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="o">-</span><span class="n">lab</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="o">-</span><span class="n">lab</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+
+    <span class="n">Cs</span> <span class="o">=</span> <span class="n">__ok_get_cs</span><span class="p">(</span><span class="n">Float3</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="n">a_</span><span class="p">,</span> <span class="n">b_</span><span class="p">))</span>
+    <span class="n">C_0</span> <span class="o">=</span> <span class="n">Cs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">C_mid</span> <span class="o">=</span> <span class="n">Cs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">C_max</span> <span class="o">=</span> <span class="n">Cs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+    <span class="n">s</span> <span class="o">=</span> <span class="mf">0.</span>
+    <span class="k">if</span> <span class="n">C</span> <span class="o">&lt;</span> <span class="n">C_mid</span><span class="p">:</span>
+        <span class="n">k_0</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">k_1</span> <span class="o">=</span> <span class="mf">0.8</span> <span class="o">*</span> <span class="n">C_0</span>
+        <span class="n">k_2</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">k_1</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">C_mid</span><span class="p">,</span> <span class="n">__ok_eps</span><span class="p">])</span>
+
+        <span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="n">C</span> <span class="o">-</span> <span class="n">k_0</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([(</span><span class="n">k_1</span> <span class="o">+</span> <span class="n">k_2</span> <span class="o">*</span> <span class="p">(</span><span class="n">C</span> <span class="o">-</span> <span class="n">k_0</span><span class="p">)),</span> <span class="n">__ok_eps</span><span class="p">])</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">t</span> <span class="o">*</span> <span class="mf">0.8</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">k_0</span> <span class="o">=</span> <span class="n">C_mid</span>
+        <span class="n">k_1</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.2</span> <span class="o">*</span> <span class="n">C_mid</span> <span class="o">*</span> <span class="n">C_mid</span> <span class="o">*</span> <span class="mf">1.25</span> <span class="o">*</span> <span class="mf">1.25</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([</span><span class="n">C_0</span><span class="p">,</span> <span class="n">__ok_eps</span><span class="p">])</span>
+        <span class="n">k_2</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">k_1</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([(</span><span class="n">C_max</span> <span class="o">-</span> <span class="n">C_mid</span><span class="p">),</span> <span class="n">__ok_eps</span><span class="p">])</span>
+
+        <span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="n">C</span> <span class="o">-</span> <span class="n">k_0</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">([(</span><span class="n">k_1</span> <span class="o">+</span> <span class="n">k_2</span> <span class="o">*</span> <span class="p">(</span><span class="n">C</span> <span class="o">-</span> <span class="n">k_0</span><span class="p">)),</span> <span class="n">__ok_eps</span><span class="p">])</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="mf">0.8</span> <span class="o">+</span> <span class="mf">0.2</span> <span class="o">*</span> <span class="n">t</span>
+
+    <span class="n">l</span> <span class="o">=</span> <span class="n">__ok_toe</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Float3</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

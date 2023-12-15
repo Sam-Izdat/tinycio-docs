@@ -1,0 +1,1833 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API Reference &mdash; tinycio a documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=92fd9be5" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/patch.css?v=77628c61" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=c0846a87"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="fsio module" href="fsio.html" />
+    <link rel="prev" title="Lower-level image manipulation" href="example_image_manip.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/tinycio_sm.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">How to:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="howto_hello.html">Hello Color</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_wavelength.html">Look up a wavelength</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_color_value.html">Look up a color value</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_color_space.html">Change an image’s color space</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_hdr.html">Encode HDR data as RGBA PNG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_tone_map.html">Tone map HDR images</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_white_balance.html">Apply white balance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_ccbasic.html">Apply basic color correction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_apply_lut.html">Apply LUTs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_bake_lut.html">Bake color correction to a LUT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto_autograde.html">Color grade by example</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="example_sweeps.html">Color sweeps</a></li>
+<li class="toctree-l1"><a class="reference internal" href="example_image_manip.html">Lower-level image manipulation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#tinycio.ColorImage"><code class="docutils literal notranslate"><span class="pre">ColorImage</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.ColorImage.correct"><code class="docutils literal notranslate"><span class="pre">ColorImage.correct()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.ColorImage.info"><code class="docutils literal notranslate"><span class="pre">ColorImage.info()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.ColorImage.load"><code class="docutils literal notranslate"><span class="pre">ColorImage.load()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.ColorImage.lut"><code class="docutils literal notranslate"><span class="pre">ColorImage.lut()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.ColorImage.save"><code class="docutils literal notranslate"><span class="pre">ColorImage.save()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.ColorImage.to_color_space"><code class="docutils literal notranslate"><span class="pre">ColorImage.to_color_space()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.ColorImage.tone_map"><code class="docutils literal notranslate"><span class="pre">ColorImage.tone_map()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.ColorImage.white_balance"><code class="docutils literal notranslate"><span class="pre">ColorImage.white_balance()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tinycio.MonoImage"><code class="docutils literal notranslate"><span class="pre">MonoImage</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.MonoImage.info"><code class="docutils literal notranslate"><span class="pre">MonoImage.info()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tinycio.Color"><code class="docutils literal notranslate"><span class="pre">Color</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.Color.convert"><code class="docutils literal notranslate"><span class="pre">Color.convert()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.Color.image"><code class="docutils literal notranslate"><span class="pre">Color.image()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tinycio.Chromaticity"><code class="docutils literal notranslate"><span class="pre">Chromaticity</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.Chromaticity.to_xyy"><code class="docutils literal notranslate"><span class="pre">Chromaticity.to_xyy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.Chromaticity.to_xyz"><code class="docutils literal notranslate"><span class="pre">Chromaticity.to_xyz()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tinycio.ColorSpace"><code class="docutils literal notranslate"><span class="pre">ColorSpace</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.ColorSpace.Variant"><code class="docutils literal notranslate"><span class="pre">ColorSpace.Variant</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.ColorSpace.convert"><code class="docutils literal notranslate"><span class="pre">ColorSpace.convert()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tinycio.TransferFunction"><code class="docutils literal notranslate"><span class="pre">TransferFunction</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.TransferFunction.dcip3_eotf"><code class="docutils literal notranslate"><span class="pre">TransferFunction.dcip3_eotf()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.TransferFunction.dcip3_oetf"><code class="docutils literal notranslate"><span class="pre">TransferFunction.dcip3_oetf()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.TransferFunction.log_c_eotf"><code class="docutils literal notranslate"><span class="pre">TransferFunction.log_c_eotf()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.TransferFunction.log_c_oetf"><code class="docutils literal notranslate"><span class="pre">TransferFunction.log_c_oetf()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.TransferFunction.rec2020_eotf"><code class="docutils literal notranslate"><span class="pre">TransferFunction.rec2020_eotf()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.TransferFunction.rec2020_oetf"><code class="docutils literal notranslate"><span class="pre">TransferFunction.rec2020_oetf()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.TransferFunction.rec709_eotf"><code class="docutils literal notranslate"><span class="pre">TransferFunction.rec709_eotf()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.TransferFunction.rec709_oetf"><code class="docutils literal notranslate"><span class="pre">TransferFunction.rec709_oetf()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.TransferFunction.s_log_eotf"><code class="docutils literal notranslate"><span class="pre">TransferFunction.s_log_eotf()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.TransferFunction.s_log_oetf"><code class="docutils literal notranslate"><span class="pre">TransferFunction.s_log_oetf()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.TransferFunction.srgb_eotf"><code class="docutils literal notranslate"><span class="pre">TransferFunction.srgb_eotf()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.TransferFunction.srgb_oetf"><code class="docutils literal notranslate"><span class="pre">TransferFunction.srgb_oetf()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tinycio.ToneMapping"><code class="docutils literal notranslate"><span class="pre">ToneMapping</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.ToneMapping.Variant"><code class="docutils literal notranslate"><span class="pre">ToneMapping.Variant</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.ToneMapping.apply"><code class="docutils literal notranslate"><span class="pre">ToneMapping.apply()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tinycio.ColorCorrection"><code class="docutils literal notranslate"><span class="pre">ColorCorrection</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.ColorCorrection.apply"><code class="docutils literal notranslate"><span class="pre">ColorCorrection.apply()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.ColorCorrection.bake_lut"><code class="docutils literal notranslate"><span class="pre">ColorCorrection.bake_lut()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.ColorCorrection.fit_to_image"><code class="docutils literal notranslate"><span class="pre">ColorCorrection.fit_to_image()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.ColorCorrection.info"><code class="docutils literal notranslate"><span class="pre">ColorCorrection.info()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.ColorCorrection.load"><code class="docutils literal notranslate"><span class="pre">ColorCorrection.load()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.ColorCorrection.save"><code class="docutils literal notranslate"><span class="pre">ColorCorrection.save()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.ColorCorrection.set_color_filter"><code class="docutils literal notranslate"><span class="pre">ColorCorrection.set_color_filter()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.ColorCorrection.set_contrast"><code class="docutils literal notranslate"><span class="pre">ColorCorrection.set_contrast()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.ColorCorrection.set_exposure_bias"><code class="docutils literal notranslate"><span class="pre">ColorCorrection.set_exposure_bias()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.ColorCorrection.set_highlight_color"><code class="docutils literal notranslate"><span class="pre">ColorCorrection.set_highlight_color()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.ColorCorrection.set_highlight_offset"><code class="docutils literal notranslate"><span class="pre">ColorCorrection.set_highlight_offset()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.ColorCorrection.set_hue_delta"><code class="docutils literal notranslate"><span class="pre">ColorCorrection.set_hue_delta()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.ColorCorrection.set_midtone_color"><code class="docutils literal notranslate"><span class="pre">ColorCorrection.set_midtone_color()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.ColorCorrection.set_midtone_offset"><code class="docutils literal notranslate"><span class="pre">ColorCorrection.set_midtone_offset()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.ColorCorrection.set_saturation"><code class="docutils literal notranslate"><span class="pre">ColorCorrection.set_saturation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.ColorCorrection.set_shadow_color"><code class="docutils literal notranslate"><span class="pre">ColorCorrection.set_shadow_color()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.ColorCorrection.set_shadow_offset"><code class="docutils literal notranslate"><span class="pre">ColorCorrection.set_shadow_offset()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tinycio.LookupTable"><code class="docutils literal notranslate"><span class="pre">LookupTable</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.LookupTable.apply"><code class="docutils literal notranslate"><span class="pre">LookupTable.apply()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.LookupTable.fit_to_image"><code class="docutils literal notranslate"><span class="pre">LookupTable.fit_to_image()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.LookupTable.get_empty"><code class="docutils literal notranslate"><span class="pre">LookupTable.get_empty()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.LookupTable.get_linear"><code class="docutils literal notranslate"><span class="pre">LookupTable.get_linear()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.LookupTable.get_negative"><code class="docutils literal notranslate"><span class="pre">LookupTable.get_negative()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.LookupTable.get_random"><code class="docutils literal notranslate"><span class="pre">LookupTable.get_random()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.LookupTable.load"><code class="docutils literal notranslate"><span class="pre">LookupTable.load()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.LookupTable.save"><code class="docutils literal notranslate"><span class="pre">LookupTable.save()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tinycio.WhiteBalance"><code class="docutils literal notranslate"><span class="pre">WhiteBalance</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.WhiteBalance.Illuminant"><code class="docutils literal notranslate"><span class="pre">WhiteBalance.Illuminant</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.WhiteBalance.apply"><code class="docutils literal notranslate"><span class="pre">WhiteBalance.apply()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.WhiteBalance.wp_from_cct"><code class="docutils literal notranslate"><span class="pre">WhiteBalance.wp_from_cct()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.WhiteBalance.wp_from_illuminant"><code class="docutils literal notranslate"><span class="pre">WhiteBalance.wp_from_illuminant()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.WhiteBalance.wp_from_image"><code class="docutils literal notranslate"><span class="pre">WhiteBalance.wp_from_image()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tinycio.Spectral"><code class="docutils literal notranslate"><span class="pre">Spectral</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.Spectral.cm_table"><code class="docutils literal notranslate"><span class="pre">Spectral.cm_table()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.Spectral.wl_to_srgb"><code class="docutils literal notranslate"><span class="pre">Spectral.wl_to_srgb()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.Spectral.wl_to_srgb_linear"><code class="docutils literal notranslate"><span class="pre">Spectral.wl_to_srgb_linear()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.Spectral.wl_to_xyz"><code class="docutils literal notranslate"><span class="pre">Spectral.wl_to_xyz()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tinycio.Codec"><code class="docutils literal notranslate"><span class="pre">Codec</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.Codec.logluv_decode"><code class="docutils literal notranslate"><span class="pre">Codec.logluv_decode()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tinycio.Codec.logluv_encode"><code class="docutils literal notranslate"><span class="pre">Codec.logluv_encode()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="fsio.html">fsio module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="numerics.html">numerics module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util.html">util module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="about_release_notes.html">Release notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="about_modules.html">Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Scripts:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="scripts_color2color.html">Color to color</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scripts_hdr_codec.html">HDR Codec</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scripts_white_balance.html">White balance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scripts_img2cube.html">Image to CUBE LUT</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Links:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference external" href="https://github.com/Sam-Izdat/tinycio">GitHub</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://pypi.org/project/tinycio/">PyPi</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">tinycio</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">API Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/source/tinycio.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="api-reference">
+<h1>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this heading"></a></h1>
+<span class="target" id="module-tinycio"><span id="api"></span></span><table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tinycio.ColorImage" title="tinycio.ColorImage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ColorImage</span></code></a>(*args, **kwargs)</p></td>
+<td><p>2D 3-channel color image using float32.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tinycio.MonoImage" title="tinycio.MonoImage"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MonoImage</span></code></a>(*args, **kwargs)</p></td>
+<td><p>2D monochromatic image using float32.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tinycio.Color" title="tinycio.Color"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Color</span></code></a>(*args, **kwargs)</p></td>
+<td><p>3-component float32 color type.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tinycio.Chromaticity" title="tinycio.Chromaticity"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Chromaticity</span></code></a>(*args, **kwargs)</p></td>
+<td><p>2-component float32 CIE xy chromaticity type.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tinycio.ColorSpace" title="tinycio.ColorSpace"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ColorSpace</span></code></a>()</p></td>
+<td><p>Color space conversion.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tinycio.TransferFunction" title="tinycio.TransferFunction"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TransferFunction</span></code></a>()</p></td>
+<td><p>Opto-electronic/electro-optical transfer functions.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tinycio.ToneMapping" title="tinycio.ToneMapping"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ToneMapping</span></code></a>()</p></td>
+<td><p>Map high-dynamic-range values to low-dynamic-range.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tinycio.ColorCorrection" title="tinycio.ColorCorrection"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ColorCorrection</span></code></a>()</p></td>
+<td><p>Apply color correction to an image.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tinycio.LookupTable" title="tinycio.LookupTable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LookupTable</span></code></a>(size[, lattice, lut_format])</p></td>
+<td><p>Color lookup table.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tinycio.WhiteBalance" title="tinycio.WhiteBalance"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WhiteBalance</span></code></a>()</p></td>
+<td><p>Adjust white balance of an image.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tinycio.Spectral" title="tinycio.Spectral"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Spectral</span></code></a>()</p></td>
+<td><p>Spectral color matching functions.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tinycio.Codec" title="tinycio.Codec"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Codec</span></code></a>()</p></td>
+<td><p>Encoder/decoder for high-dynamic-range data.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="tinycio.ColorImage">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tinycio.</span></span><span class="sig-name descname"><span class="pre">ColorImage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/usertypes.html#ColorImage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.ColorImage" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></p>
+<p>2D 3-channel color image using float32. Convenience wrapper around a [C=3, H, W] sized PyTorch image tensor.
+This is the most hands-off abstraction, as it automatically handles color space conversion as needed.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All transformative methods will return a new <a class="reference internal" href="#tinycio.ColorImage" title="tinycio.ColorImage"><code class="xref py py-class docutils literal notranslate"><span class="pre">ColorImage</span></code></a> instance without
+overwriting data. To overwrite use as e.g. <code class="code docutils literal notranslate"><span class="pre">im</span> <span class="pre">=</span> <span class="pre">im.to_color_space(cs_dst)</span></code></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Assumes size/shape [C, H, W] for both PyTorch tensor or NumPy array inputs.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>param0</strong> (<em>torch.Tensor</em><em> | </em><em>numpy.ndarray</em>) – [C=3, H, W] sized tensor/array</p></li>
+<li><p><strong>color_space</strong> (<em>str</em><em> | </em><a class="reference internal" href="#tinycio.ColorSpace.Variant" title="tinycio.ColorSpace.Variant"><em>ColorSpace.Variant</em></a>) – the color space of the image</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.ColorImage.correct">
+<span class="sig-name descname"><span class="pre">correct</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cc</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/usertypes.html#ColorImage.correct"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.ColorImage.correct" title="Permalink to this definition"></a></dt>
+<dd><p>Apply color correction and return as new <a class="reference internal" href="#tinycio.ColorImage" title="tinycio.ColorImage"><code class="xref py py-class docutils literal notranslate"><span class="pre">ColorImage</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cc</strong> (<a class="reference internal" href="#tinycio.ColorCorrection" title="tinycio.correction.ColorCorrection"><em>ColorCorrection</em></a>) – Color correction object.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>New <a class="reference internal" href="#tinycio.ColorImage" title="tinycio.ColorImage"><code class="xref py py-class docutils literal notranslate"><span class="pre">ColorImage</span></code></a> with color correction applied.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#tinycio.ColorImage" title="tinycio.usertypes.ColorImage"><em>ColorImage</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.ColorImage.info">
+<span class="sig-name descname"><span class="pre">info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">printout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/usertypes.html#ColorImage.info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.ColorImage.info" title="Permalink to this definition"></a></dt>
+<dd><p>Print or return a string describing the properties of the image for debugging.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>printout</strong> – Print string if True, return string if False</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool | str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.ColorImage.load">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color_space</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Variant.UNKNOWN</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graphics_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">GraphicsFormat.UNKNOWN</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/usertypes.html#ColorImage.load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.ColorImage.load" title="Permalink to this definition"></a></dt>
+<dd><p>Load image from file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fp</strong> (<em>str</em>) – image file path</p></li>
+<li><p><strong>color_space</strong> (<em>str</em><em> | </em><a class="reference internal" href="#tinycio.ColorSpace.Variant" title="tinycio.ColorSpace.Variant"><em>ColorSpace.Variant</em></a>) – image color space</p></li>
+<li><p><strong>graphics_format</strong> (<em>str</em><em> | </em><a class="reference internal" href="fsio.html#tinycio.fsio.GraphicsFormat" title="tinycio.fsio.GraphicsFormat"><em>fsio.GraphicsFormat</em></a>) – image graphics format</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>New <a class="reference internal" href="#tinycio.ColorImage" title="tinycio.ColorImage"><code class="xref py py-class docutils literal notranslate"><span class="pre">ColorImage</span></code></a> loaded from file.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#tinycio.ColorImage" title="tinycio.usertypes.ColorImage"><em>ColorImage</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.ColorImage.lut">
+<span class="sig-name descname"><span class="pre">lut</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lut</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lut_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">LUTFormat.UNKNOWN</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/usertypes.html#ColorImage.lut"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.ColorImage.lut" title="Permalink to this definition"></a></dt>
+<dd><p>Apply a <a class="reference internal" href="#tinycio.LookupTable" title="tinycio.LookupTable"><code class="xref py py-class docutils literal notranslate"><span class="pre">LookupTable</span></code></a> and return as new <a class="reference internal" href="#tinycio.ColorImage" title="tinycio.ColorImage"><code class="xref py py-class docutils literal notranslate"><span class="pre">ColorImage</span></code></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Any needed color space conversion will be handled automatically.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lut</strong> (<em>str</em><em> | </em><a class="reference internal" href="#tinycio.LookupTable" title="tinycio.lut.LookupTable"><em>LookupTable</em></a>) – <a class="reference internal" href="#tinycio.LookupTable" title="tinycio.LookupTable"><code class="xref py py-class docutils literal notranslate"><span class="pre">LookupTable</span></code></a> or LUT file path</p></li>
+<li><p><strong>lut_format</strong> – Format of the LUT, if loading from file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>New <a class="reference internal" href="#tinycio.ColorImage" title="tinycio.ColorImage"><code class="xref py py-class docutils literal notranslate"><span class="pre">ColorImage</span></code></a> with LUT applied.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#tinycio.ColorImage" title="tinycio.usertypes.ColorImage"><em>ColorImage</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.ColorImage.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graphics_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">GraphicsFormat.UNKNOWN</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/usertypes.html#ColorImage.save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.ColorImage.save" title="Permalink to this definition"></a></dt>
+<dd><p>Save image to file</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This will overwrite existing files.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fp</strong> (<em>str</em>) – image file path</p></li>
+<li><p><strong>graphics_format</strong> (<em>str</em><em> | </em><a class="reference internal" href="fsio.html#tinycio.fsio.GraphicsFormat" title="tinycio.fsio.GraphicsFormat"><em>fsio.GraphicsFormat</em></a>) – image graphics format</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if successful</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.ColorImage.to_color_space">
+<span class="sig-name descname"><span class="pre">to_color_space</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">color_space</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/usertypes.html#ColorImage.to_color_space"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.ColorImage.to_color_space" title="Permalink to this definition"></a></dt>
+<dd><p>Convert the image to a different color space and return as new <a class="reference internal" href="#tinycio.ColorImage" title="tinycio.ColorImage"><code class="xref py py-class docutils literal notranslate"><span class="pre">ColorImage</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>color_space</strong> (<em>str</em><em> | </em><a class="reference internal" href="#tinycio.ColorSpace.Variant" title="tinycio.ColorSpace.Variant"><em>ColorSpace.Variant</em></a>) – the destination color space</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>New <a class="reference internal" href="#tinycio.ColorImage" title="tinycio.ColorImage"><code class="xref py py-class docutils literal notranslate"><span class="pre">ColorImage</span></code></a> in designated color space.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#tinycio.ColorImage" title="tinycio.usertypes.ColorImage"><em>ColorImage</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.ColorImage.tone_map">
+<span class="sig-name descname"><span class="pre">tone_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tone_mapper</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/usertypes.html#ColorImage.tone_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.ColorImage.tone_map" title="Permalink to this definition"></a></dt>
+<dd><p>Apply tone mapping and return as new <a class="reference internal" href="#tinycio.ColorImage" title="tinycio.ColorImage"><code class="xref py py-class docutils literal notranslate"><span class="pre">ColorImage</span></code></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Any needed color space conversion will be handled automatically.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>tone_mapper</strong> (<em>str</em><em> | </em><a class="reference internal" href="#tinycio.ToneMapping.Variant" title="tinycio.ToneMapping.Variant"><em>ToneMapping.Variant</em></a>) – the tone mapper to use</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>New tone mapped <a class="reference internal" href="#tinycio.ColorImage" title="tinycio.ColorImage"><code class="xref py py-class docutils literal notranslate"><span class="pre">ColorImage</span></code></a>.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#tinycio.ColorImage" title="tinycio.usertypes.ColorImage"><em>ColorImage</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.ColorImage.white_balance">
+<span class="sig-name descname"><span class="pre">white_balance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source_white</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'auto'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_white</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Illuminant.NONE</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/usertypes.html#ColorImage.white_balance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.ColorImage.white_balance" title="Permalink to this definition"></a></dt>
+<dd><p>White balance the image and return as new <a class="reference internal" href="#tinycio.ColorImage" title="tinycio.ColorImage"><code class="xref py py-class docutils literal notranslate"><span class="pre">ColorImage</span></code></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Any needed color space conversion will be handled automatically.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source_white</strong> (<em>str</em><em> | </em><a class="reference internal" href="numerics.html#tinycio.numerics.Float2" title="tinycio.numerics.vector.Float2"><em>Float2</em></a><em> | </em><a class="reference internal" href="#tinycio.Chromaticity" title="tinycio.usertypes.Chromaticity"><em>Chromaticity</em></a><em> | </em><em>float</em><em> | </em><a class="reference internal" href="#tinycio.WhiteBalance.Illuminant" title="tinycio.balance.WhiteBalance.Illuminant"><em>Illuminant</em></a>) – <p>Source white point - can be any of:</p>
+<ul>
+<li><p><em>string</em> “auto” for automatic (<a class="reference internal" href="#tinycio.WhiteBalance.wp_from_image" title="tinycio.WhiteBalance.wp_from_image"><code class="xref py py-meth docutils literal notranslate"><span class="pre">wp_from_image()</span></code></a>)</p></li>
+<li><p><em>int</em> for correlated color temperature (<a class="reference internal" href="#tinycio.WhiteBalance.wp_from_cct" title="tinycio.WhiteBalance.wp_from_cct"><code class="xref py py-meth docutils literal notranslate"><span class="pre">wp_from_cct()</span></code></a>)</p></li>
+<li><p><a class="reference internal" href="#tinycio.WhiteBalance.Illuminant" title="tinycio.WhiteBalance.Illuminant"><code class="xref py py-class docutils literal notranslate"><span class="pre">Illuminant</span></code></a> or matching <em>string</em> (<a class="reference internal" href="#tinycio.WhiteBalance.wp_from_illuminant" title="tinycio.WhiteBalance.wp_from_illuminant"><code class="xref py py-meth docutils literal notranslate"><span class="pre">wp_from_illuminant()</span></code></a>)</p></li>
+<li><p>CIE 1931 xy coordinates as <a class="reference internal" href="numerics.html#tinycio.numerics.Float2" title="tinycio.numerics.Float2"><code class="xref py py-class docutils literal notranslate"><span class="pre">Float2</span></code></a>/<a class="reference internal" href="#tinycio.Chromaticity" title="tinycio.Chromaticity"><code class="xref py py-class docutils literal notranslate"><span class="pre">Chromaticity</span></code></a></p></li>
+</ul>
+</p></li>
+<li><p><strong>target_white</strong> (<em>str</em><em> | </em><a class="reference internal" href="numerics.html#tinycio.numerics.Float2" title="tinycio.numerics.vector.Float2"><em>Float2</em></a><em> | </em><a class="reference internal" href="#tinycio.Chromaticity" title="tinycio.usertypes.Chromaticity"><em>Chromaticity</em></a><em> | </em><em>float</em><em> | </em><a class="reference internal" href="#tinycio.WhiteBalance.Illuminant" title="tinycio.balance.WhiteBalance.Illuminant"><em>Illuminant</em></a>) – <p>Target white point - can be any of:</p>
+<ul>
+<li><p><em>int</em> for correlated color temperature (<a class="reference internal" href="#tinycio.WhiteBalance.wp_from_cct" title="tinycio.WhiteBalance.wp_from_cct"><code class="xref py py-meth docutils literal notranslate"><span class="pre">wp_from_cct()</span></code></a>)</p></li>
+<li><p><a class="reference internal" href="#tinycio.WhiteBalance.Illuminant" title="tinycio.WhiteBalance.Illuminant"><code class="xref py py-class docutils literal notranslate"><span class="pre">Illuminant</span></code></a> or matching <em>string</em> (<a class="reference internal" href="#tinycio.WhiteBalance.wp_from_illuminant" title="tinycio.WhiteBalance.wp_from_illuminant"><code class="xref py py-meth docutils literal notranslate"><span class="pre">wp_from_illuminant()</span></code></a>)</p></li>
+<li><p>CIE 1931 xy coordinates as <a class="reference internal" href="numerics.html#tinycio.numerics.Float2" title="tinycio.numerics.Float2"><code class="xref py py-class docutils literal notranslate"><span class="pre">Float2</span></code></a>/<a class="reference internal" href="#tinycio.Chromaticity" title="tinycio.Chromaticity"><code class="xref py py-class docutils literal notranslate"><span class="pre">Chromaticity</span></code></a></p></li>
+</ul>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>New <a class="reference internal" href="#tinycio.ColorImage" title="tinycio.ColorImage"><code class="xref py py-class docutils literal notranslate"><span class="pre">ColorImage</span></code></a> with white balance applied.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#tinycio.ColorImage" title="tinycio.usertypes.ColorImage"><em>ColorImage</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="tinycio.MonoImage">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tinycio.</span></span><span class="sig-name descname"><span class="pre">MonoImage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/usertypes.html#MonoImage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.MonoImage" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Tensor</span></code></p>
+<p>2D monochromatic image using float32. Convenience wrapper around a [C=1, H, W] sized PyTorch image tensor.
+This is a utility class that has no built-in functionality beyond enforcing a single channel for initial inputs.
+Can be converted to <a class="reference internal" href="#tinycio.ColorImage" title="tinycio.ColorImage"><code class="xref py py-class docutils literal notranslate"><span class="pre">ColorImage</span></code></a> with <code class="code docutils literal notranslate"><span class="pre">ColorImage(mono_im.repeat(3,1,1))</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Assumes size/shape [C, H, W] for both PyTorch tensor or NumPy array inputs.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>param0</strong> (<em>torch.Tensor</em><em> | </em><em>numpy.ndarray</em>) – [C=1, H, W] sized tensor/array</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.MonoImage.info">
+<span class="sig-name descname"><span class="pre">info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">printout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/usertypes.html#MonoImage.info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.MonoImage.info" title="Permalink to this definition"></a></dt>
+<dd><p>Print or return a string describing the properties of the image for debugging.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>printout</strong> – Print string if True, return string if False</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool | str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="tinycio.Color">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tinycio.</span></span><span class="sig-name descname"><span class="pre">Color</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/usertypes.html#Color"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.Color" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="numerics.html#tinycio.numerics.Float3" title="tinycio.numerics.vector.Float3"><code class="xref py py-class docutils literal notranslate"><span class="pre">Float3</span></code></a></p>
+<p>3-component float32 color type. Convenience wrapper around <a class="reference internal" href="numerics.html#tinycio.numerics.Float3" title="tinycio.numerics.Float3"><code class="xref py py-class docutils literal notranslate"><span class="pre">Float3</span></code></a>,
+which is in turn a shape [3] numpy.ndarray. Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">Color</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">Color</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">Color</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">Color</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">numpy</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array_equal</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">d</span><span class="p">)</span> <span class="c1"># True</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This data type is color space agnostic until a <a class="reference internal" href="#tinycio.ColorImage" title="tinycio.ColorImage"><code class="xref py py-class docutils literal notranslate"><span class="pre">ColorImage</span></code></a> is requested.
+Swizzling is allowed, but a numeric type will be returned if the number of
+swizzled components is not 3.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>option1_param0</strong> (<em>float</em>) – x/r component</p></li>
+<li><p><strong>option1_param1</strong> (<em>float</em>) – y/g component</p></li>
+<li><p><strong>option1_param2</strong> (<em>float</em>) – z/b component</p></li>
+<li><p><strong>option2_param0</strong> (<em>float</em>) – value of every component</p></li>
+<li><p><strong>option3_param0</strong> (<em>torch.Tensor</em><em> | </em><em>numpy.ndarray</em><em> | </em><a class="reference internal" href="numerics.html#tinycio.numerics.Float3" title="tinycio.numerics.Float3"><em>Float3</em></a>) – 3-component tensor or array
+(a 2D tensor/array image is allowed if the number of pixel values is 1)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.Color.convert">
+<span class="sig-name descname"><span class="pre">convert</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destination</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/usertypes.html#Color.convert"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.Color.convert" title="Permalink to this definition"></a></dt>
+<dd><p>Convert color value from one color space to another.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>source</strong> (<em>str</em><em> | </em><a class="reference internal" href="#tinycio.ColorSpace.Variant" title="tinycio.ColorSpace.Variant"><em>ColorSpace.Variant</em></a>) – color space to convert from</p></li>
+<li><p><strong>destination</strong> (<em>str</em><em> | </em><a class="reference internal" href="#tinycio.ColorSpace.Variant" title="tinycio.ColorSpace.Variant"><em>ColorSpace.Variant</em></a>) – color space to convert to</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#tinycio.Color" title="tinycio.usertypes.Color"><em>Color</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.Color.image">
+<span class="sig-name descname"><span class="pre">image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">color_space</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Variant.UNKNOWN</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/usertypes.html#Color.image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.Color.image" title="Permalink to this definition"></a></dt>
+<dd><p>Unsqueeze to a [C=3, H, W] sized PyTorch image tensor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>color_space</strong> (<em>str</em><em> | </em><a class="reference internal" href="#tinycio.ColorSpace.Variant" title="tinycio.ColorSpace.Variant"><em>ColorSpace.Variant</em></a>) – the color space of the image</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Expanded [C=3, H=1, W=1] float32 “image” tensor</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#tinycio.ColorImage" title="tinycio.usertypes.ColorImage"><em>ColorImage</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="tinycio.Chromaticity">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tinycio.</span></span><span class="sig-name descname"><span class="pre">Chromaticity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/usertypes.html#Chromaticity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.Chromaticity" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="numerics.html#tinycio.numerics.Float2" title="tinycio.numerics.vector.Float2"><code class="xref py py-class docutils literal notranslate"><span class="pre">Float2</span></code></a></p>
+<p>2-component float32 CIE xy chromaticity type. Convenience wrapper around <a class="reference internal" href="numerics.html#tinycio.numerics.Float2" title="tinycio.numerics.Float2"><code class="xref py py-class docutils literal notranslate"><span class="pre">Float2</span></code></a>,
+which is in turn a shape [2] numpy.ndarray.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>option1_param0</strong> (<em>float</em>) – x component</p></li>
+<li><p><strong>option1_param1</strong> (<em>float</em>) – y component</p></li>
+<li><p><strong>option2_param0</strong> (<em>float</em>) – value of both components</p></li>
+<li><p><strong>option3_param0</strong> (<em>torch.Tensor</em><em> | </em><em>numpy.ndarray</em><em> | </em><a class="reference internal" href="numerics.html#tinycio.numerics.Float2" title="tinycio.numerics.Float2"><em>Float2</em></a>) – 2-component tensor or array
+(a 2D tensor/array image is allowed if the number of pixel values is 1)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.Chromaticity.to_xyy">
+<span class="sig-name descname"><span class="pre">to_xyy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">luminance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/usertypes.html#Chromaticity.to_xyy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.Chromaticity.to_xyy" title="Permalink to this definition"></a></dt>
+<dd><p>Returns CIE xyY color</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>luminance</strong> (<em>float</em>) – Y luminance</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>CIE xyY color</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#tinycio.Color" title="tinycio.usertypes.Color"><em>Color</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.Chromaticity.to_xyz">
+<span class="sig-name descname"><span class="pre">to_xyz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">luminance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/usertypes.html#Chromaticity.to_xyz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.Chromaticity.to_xyz" title="Permalink to this definition"></a></dt>
+<dd><p>Returns CIE XYZ color</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>luminance</strong> (<em>float</em>) – Y luminance</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>CIE XYZ color</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#tinycio.Color" title="tinycio.usertypes.Color"><em>Color</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="tinycio.ColorSpace">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tinycio.</span></span><span class="sig-name descname"><span class="pre">ColorSpace</span></span><a class="reference internal" href="../_modules/tinycio/colorspace.html#ColorSpace"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.ColorSpace" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Color space conversion. Applies OETFs and EOTFs as needed but omits tonemapping. Cylindrical transformations are
+treated as distinct color spaces. Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cs_in</span> <span class="o">=</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">SRGB_LIN</span>
+<span class="n">cs_out</span> <span class="o">=</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">OKLAB</span>
+<span class="n">oklab_image</span> <span class="o">=</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">srgb_image</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">cs_in</span><span class="p">,</span> <span class="n">destination</span><span class="o">=</span><span class="n">cs_out</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="tinycio.ColorSpace.Variant">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Variant</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/colorspace.html#ColorSpace.Variant"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.ColorSpace.Variant" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code></p>
+<p>Color space enum. Available options are:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>- UNKNOWN       # no color space specified - flag for &quot;take a guess&quot;
+- NONCOLOR      # non-color data or color space not applicable
+- CIE_XYZ       # CIE 1931 XYZ color space
+- CIE_XYY       # xyY color space derived from above
+- SRGB          # sRGB with gamma curve
+- SRGB_LIN      # scene-linear sRGB/Rec. 709 - no gamma curve
+- REC709        # almost the same as sRGB, different gamma
+- REC2020       # a wide-gamut RGB color space
+- REC2020_LIN   # scene-linear Rec. 2020
+- DCI_P3        # a wide-gamut RGB color space
+- DCI_P3_LIN    # scene-linear DCI-P3
+- DISPLAY_P3    # some apple DCI P3 clone with different gamma, because apple
+- ACESCG        # AP1 primaries; scene-linear, less suitable for color grading
+- ACESCC        # AP1 primaries; logarithmic, more suitable for color grading
+- ACESCCT†      # AP1 primaries; logarithmic, more suitable for color grading
+- ACES2065_1††  # AP0 primaries; scene-linear†††, core ACES color space
+- LMS           # &quot;long, medium, short&quot; / tristimulus
+- OKLAB         # perceptual; Björn Ottosson&#39;s improvement over CIELAB
+- CIELAB        # perceptual; for &quot;characterization of colored surfaces and dyes&quot;
+- CIELUV†††     # perceptual; for &quot;characterization of color displays&quot;
+- HSV           # &quot;hue, saturation, value&quot;; assumed sRGB-relative
+- HSL           # &quot;hue, saturation, lightness&quot;; assumed sRGB-relative
+- OKHSV††††     # perceptually linear HSV based on OKLAB
+- OKHSL††††     # perceptually linear HSL based on OKLAB
+
+†       - not yet implemented
+††      - scene-linear but still bad for rendering - can have negative values
+†††     - currently disabled
+††††    - intended for color picking; not implemented for image tensor conversion
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.ColorSpace.convert">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">convert</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">im</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destination</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/colorspace.html#ColorSpace.convert"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.ColorSpace.convert" title="Permalink to this definition"></a></dt>
+<dd><p>Change the color space of an image. Cylindrical transformations HSV/HSL are
+treated as their own color spaces and assumed to be relative to sRGB linear.
+Unless otherwise noted or required by specification (e.g. ACES), we assume D65 white point.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Tone mapping is not included, so converting the color space of HDR values to
+an LDR-designated color space will not automatically reduce dynamic range. For example,
+taking an HDR image from <code class="code docutils literal notranslate"><span class="pre">ACESCG</span></code> (AP1) to <code class="code docutils literal notranslate"><span class="pre">SRGB</span></code> will yield the sRGB
+gamma curve, but values outside the required range must still be tone mapped or clamped beforehand.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Cylindrical transformations (HSL, HSV) should be given input in [0, 1] linear sRGB range
+(or equivalent). This is not strictly enforced but input outside this range may yield
+unpredictable results or <em>NaN</em> values.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>im</strong> (<em>torch.Tensor</em><em> | </em><a class="reference internal" href="#tinycio.ColorImage" title="tinycio.ColorImage"><em>ColorImage</em></a>) – [C=3, H, W] image tensor</p></li>
+<li><p><strong>source</strong> (<a class="reference internal" href="#tinycio.ColorSpace.Variant" title="tinycio.ColorSpace.Variant"><em>Variant</em></a>) – color space to convert from</p></li>
+<li><p><strong>destination</strong> (<a class="reference internal" href="#tinycio.ColorSpace.Variant" title="tinycio.ColorSpace.Variant"><em>Variant</em></a>) – color space to convert to</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>image tensor in designated color space</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="tinycio.TransferFunction">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tinycio.</span></span><span class="sig-name descname"><span class="pre">TransferFunction</span></span><a class="reference internal" href="../_modules/tinycio/colorspace.html#TransferFunction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.TransferFunction" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Opto-electronic/electro-optical transfer functions. Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">im_srgb</span> <span class="o">=</span> <span class="n">TransferFunction</span><span class="o">.</span><span class="n">srgb_oetf</span><span class="p">(</span><span class="n">im_linear</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>These transfer functions are applied automatically by <code class="code docutils literal notranslate"><span class="pre">ColorSpace.convert</span></code> when appropriate,
+but can instead be used explicitly.</p>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.TransferFunction.dcip3_eotf">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dcip3_eotf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">im</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/colorspace.html#TransferFunction.dcip3_eotf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.TransferFunction.dcip3_eotf" title="Permalink to this definition"></a></dt>
+<dd><p>DCI P3 electro-optical transfer function (DCI P3 gamma to linear)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>im</strong> (<em>torch.Tensor</em>) – DCI P3 image tensor</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>linear P3 gamut image tensor</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.TransferFunction.dcip3_oetf">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dcip3_oetf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">im</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/colorspace.html#TransferFunction.dcip3_oetf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.TransferFunction.dcip3_oetf" title="Permalink to this definition"></a></dt>
+<dd><p>DCI P3 opto-electronic transfer function (linear to DCI P3 gamma)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>im</strong> (<em>torch.Tensor</em>) – linear P3 gamut image tensor</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>DCI P3 image tensor</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.TransferFunction.log_c_eotf">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">log_c_eotf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">im</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/colorspace.html#TransferFunction.log_c_eotf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.TransferFunction.log_c_eotf" title="Permalink to this definition"></a></dt>
+<dd><p>LogC electro-optical transfer function</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>im</strong> (<em>torch.Tensor</em>) – LogC encoded image tensor</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>linear image tensor</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.TransferFunction.log_c_oetf">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">log_c_oetf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">im</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/colorspace.html#TransferFunction.log_c_oetf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.TransferFunction.log_c_oetf" title="Permalink to this definition"></a></dt>
+<dd><p>LogC opto-electronic transfer function</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>im</strong> (<em>torch.Tensor</em>) – linear image tensor</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>LogC encoded image tensor</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.TransferFunction.rec2020_eotf">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rec2020_eotf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">im</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/colorspace.html#TransferFunction.rec2020_eotf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.TransferFunction.rec2020_eotf" title="Permalink to this definition"></a></dt>
+<dd><p>Rec. 2020 electro-optical transfer function (Rec. 2020 gamma to linear)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>im</strong> (<em>torch.Tensor</em>) – Rec. 2020 image tensor</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>linear Rec. 2020 gamut image tensor</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.TransferFunction.rec2020_oetf">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rec2020_oetf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">im</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/colorspace.html#TransferFunction.rec2020_oetf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.TransferFunction.rec2020_oetf" title="Permalink to this definition"></a></dt>
+<dd><p>Rec. 2020 opto-electronic transfer function (linear to Rec. 2020 gamma)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>im</strong> (<em>torch.Tensor</em>) – linear Rec. 2020 gamut image tensor</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Rec. 2020 image tensor</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.TransferFunction.rec709_eotf">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rec709_eotf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">im</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/colorspace.html#TransferFunction.rec709_eotf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.TransferFunction.rec709_eotf" title="Permalink to this definition"></a></dt>
+<dd><p>Rec. 709 electro-optical transfer function (Rec. 709 gamma to linear sRGB)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>im</strong> (<em>torch.Tensor</em>) – Rec. 709 image tensor</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>linear sRGB image tensor (same primaries)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.TransferFunction.rec709_oetf">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">rec709_oetf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">im</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/colorspace.html#TransferFunction.rec709_oetf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.TransferFunction.rec709_oetf" title="Permalink to this definition"></a></dt>
+<dd><p>Rec. 709 opto-electronic transfer function (linear sRGB to Rec. 709 gamma)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>im</strong> (<em>torch.Tensor</em>) – linear sRGB image tensor (same primaries)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Rec. 709 image tensor</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.TransferFunction.s_log_eotf">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">s_log_eotf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">im</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/colorspace.html#TransferFunction.s_log_eotf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.TransferFunction.s_log_eotf" title="Permalink to this definition"></a></dt>
+<dd><p>S-Log electro-optical transfer function</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>im</strong> (<em>torch.Tensor</em>) – S-Log encoded image tensor</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>linear image tensor</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.TransferFunction.s_log_oetf">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">s_log_oetf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">im</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/colorspace.html#TransferFunction.s_log_oetf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.TransferFunction.s_log_oetf" title="Permalink to this definition"></a></dt>
+<dd><p>S-Log opto-electronic transfer function</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>im</strong> (<em>torch.Tensor</em>) – linear image tensor</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>S-Log encoded image tensor</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.TransferFunction.srgb_eotf">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">srgb_eotf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">im</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/colorspace.html#TransferFunction.srgb_eotf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.TransferFunction.srgb_eotf" title="Permalink to this definition"></a></dt>
+<dd><p>sRGB electro-optical transfer function (sRGB gamma to linear sRGB)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>im</strong> (<em>torch.Tensor</em>) – sRGB image tensor</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>linear sRGB image tensor</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.TransferFunction.srgb_oetf">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">srgb_oetf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">im</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/colorspace.html#TransferFunction.srgb_oetf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.TransferFunction.srgb_oetf" title="Permalink to this definition"></a></dt>
+<dd><p>sRGB opto-electronic transfer function (linear sRGB to sRGB gamma)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>im</strong> (<em>torch.Tensor</em>) – linear sRGB image tensor</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>sRGB image tensor</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="tinycio.ToneMapping">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tinycio.</span></span><span class="sig-name descname"><span class="pre">ToneMapping</span></span><a class="reference internal" href="../_modules/tinycio/tonemapping.html#ToneMapping"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.ToneMapping" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Map high-dynamic-range values to low-dynamic-range. LDR is typically sRGB in [0, 1] range. Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tm</span> <span class="o">=</span> <span class="n">ToneMapping</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">HABLE</span>
+<span class="n">tonemapped_image</span> <span class="o">=</span> <span class="n">ToneMapping</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">input_im</span><span class="p">,</span> <span class="n">tone_mapper</span><span class="o">=</span><span class="n">tm</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="tinycio.ToneMapping.Variant">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Variant</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/tonemapping.html#ToneMapping.Variant"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.ToneMapping.Variant" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code></p>
+<p>Tone mapper enum. Available options are:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>- NONE
+- CLAMP
+- AGX
+- AGX_PUNCHY
+- HABLE
+- REINHARD
+- ACESCG
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.ToneMapping.apply">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">im</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tone_mapper</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/tonemapping.html#ToneMapping.apply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.ToneMapping.apply" title="Permalink to this definition"></a></dt>
+<dd><p>Apply tone mapping to HDR image tensor. Input data is expected to be in the correct color
+space for the chosen tone mapper.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="code docutils literal notranslate"><span class="pre">ACESCG</span></code> tone mapping is performed on AP1 primaries and expects input in the
+<code class="code docutils literal notranslate"><span class="pre">ACESCG</span></code> color space. All other tone mappers expect <code class="code docutils literal notranslate"><span class="pre">SRGB_LIN</span></code>.
+The <code class="code docutils literal notranslate"><span class="pre">tone_map()</span></code> method of <a class="reference internal" href="#tinycio.ColorImage" title="tinycio.ColorImage"><code class="xref py py-class docutils literal notranslate"><span class="pre">ColorImage</span></code></a> handles this conversion automatically.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>im</strong> (<em>torch.Tensor</em>) – [C=3, H, W] sized image tensor</p></li>
+<li><p><strong>tone_mapper</strong> (<a class="reference internal" href="#tinycio.ToneMapping.Variant" title="tinycio.ToneMapping.Variant"><em>ToneMapping.Variant</em></a>) – tonemapper to be used</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>image tensor</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="tinycio.ColorCorrection">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tinycio.</span></span><span class="sig-name descname"><span class="pre">ColorCorrection</span></span><a class="reference internal" href="../_modules/tinycio/correction.html#ColorCorrection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.ColorCorrection" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Apply color correction to an image. Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cc</span> <span class="o">=</span> <span class="n">ColorCorrection</span><span class="p">()</span>
+<span class="n">cc</span><span class="o">.</span><span class="n">set_contrast</span><span class="p">(</span><span class="mf">1.3</span><span class="p">)</span>
+<span class="n">im_corrected</span> <span class="o">=</span> <span class="n">cc</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">im_cc</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Any <em>hue</em> and <em>saturation</em> parameters use perceptually linear values of the OKHSV color space.</p>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.ColorCorrection.apply">
+<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">im</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/correction.html#ColorCorrection.apply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.ColorCorrection.apply" title="Permalink to this definition"></a></dt>
+<dd><p>Apply color correction to image tensor in ACEScc color space.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>im</strong> (<em>torch.Tensor</em>) – Image tensor sized [C=3, H, W] in ACEScc color space.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Color corrected image tensor.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.ColorCorrection.bake_lut">
+<span class="sig-name descname"><span class="pre">bake_lut</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lut_size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">64</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lut_color_space</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Variant.ACESCC</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/correction.html#ColorCorrection.bake_lut"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.ColorCorrection.bake_lut" title="Permalink to this definition"></a></dt>
+<dd><p>Bake color correction to a CUBE LUT.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Regardless of working color space, the LUT will be limited to a [0, 1] range of values.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lut_size</strong> (<em>int</em>) – Size of the LUT. Range [4, 512].</p></li>
+<li><p><strong>lut_color_space</strong> (<em>str</em><em> | </em><a class="reference internal" href="#tinycio.ColorSpace.Variant" title="tinycio.colorspace.ColorSpace.Variant"><em>Variant</em></a>) – The color space that the LUT should be baked for, as string or IntEnum.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The baked LUT.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#tinycio.LookupTable" title="tinycio.lut.LookupTable"><em>LookupTable</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.ColorCorrection.fit_to_image">
+<span class="sig-name descname"><span class="pre">fit_to_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">im_source</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">im_target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">learning_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.003</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strength</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">allow_hue_shift</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_height</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">512</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">512</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cuda'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/correction.html#ColorCorrection.fit_to_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.ColorCorrection.fit_to_image" title="Permalink to this definition"></a></dt>
+<dd><p>Perform gradient descent on the color correction settings, so that the appearance
+of the source image matches the target.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>im_source</strong> (<em>torch.Tensor</em><em> | </em><a class="reference internal" href="#tinycio.ColorImage" title="tinycio.ColorImage"><em>ColorImage</em></a>) – Source image tensor. Values must be in range [0, 1].</p></li>
+<li><p><strong>im_target</strong> (<em>torch.Tensor</em><em> | </em><a class="reference internal" href="#tinycio.ColorImage" title="tinycio.ColorImage"><em>ColorImage</em></a>) – Target image tensor.</p></li>
+<li><p><strong>steps</strong> (<em>int</em>) – Number of optimization steps.</p></li>
+<li><p><strong>learning_rate</strong> (<em>float</em>) – Learning rate for gradient descent.</p></li>
+<li><p><strong>strength</strong> (<em>float</em>) – Strength of the effect in range [0, 1].</p></li>
+<li><p><strong>allow_hue_shift</strong> (<em>bool</em>) – Allow the optimizer to shift the hue.</p></li>
+<li><p><strong>fit_height</strong> (<em>int</em>) – Image tensors will be interpolated to this height for evaluation.</p></li>
+<li><p><strong>fit_width</strong> (<em>int</em>) – Image tensors will be interpolated to this width for evaluation.</p></li>
+<li><p><strong>device</strong> (<em>str</em>) – Device for gradient descent (if None will use input tensor device).</p></li>
+<li><p><strong>context</strong> (<em>callable</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True when completed</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#tinycio.ColorCorrection" title="tinycio.ColorCorrection">ColorCorrection</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.ColorCorrection.info">
+<span class="sig-name descname"><span class="pre">info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">printout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/correction.html#ColorCorrection.info"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.ColorCorrection.info" title="Permalink to this definition"></a></dt>
+<dd><p>Print or return a string describing the current color correction settings.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>printout</strong> (<em>bool</em>) – Print string if True, return string if False</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool | str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.ColorCorrection.load">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/correction.html#ColorCorrection.load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.ColorCorrection.load" title="Permalink to this definition"></a></dt>
+<dd><p>Load color correction settings from <em>toml</em> file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fp</strong> (<em>str</em>) – File path of <em>toml</em> file to be loaded.</p></li>
+<li><p><strong>force</strong> (<em>bool</em>) – If set to True, ignores version mismatch forces loading the file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#tinycio.ColorCorrection" title="tinycio.ColorCorrection"><code class="xref py py-class docutils literal notranslate"><span class="pre">ColorCorrection</span></code></a> object with settings loaded.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#tinycio.ColorCorrection" title="tinycio.correction.ColorCorrection"><em>ColorCorrection</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.ColorCorrection.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fp</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/correction.html#ColorCorrection.save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.ColorCorrection.save" title="Permalink to this definition"></a></dt>
+<dd><p>Save color correction settings to a <em>toml</em> file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>fp</strong> (<em>str</em>) – Output file path of <em>toml</em> file to be saved.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if successful.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This will overwrite existing files.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.ColorCorrection.set_color_filter">
+<span class="sig-name descname"><span class="pre">set_color_filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hue</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">saturation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/correction.html#ColorCorrection.set_color_filter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.ColorCorrection.set_color_filter" title="Permalink to this definition"></a></dt>
+<dd><p>Set a color filter. Idempotent assignment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hue</strong> (<em>float</em>) – Filter hue - perceptually linear (the H from OKHSV). Range [0, 1].</p></li>
+<li><p><strong>saturation</strong> (<em>float</em>) – Filter saturation - perceptually linear (the S from OKHSV).
+Range [0, 1].</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if successful</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.ColorCorrection.set_contrast">
+<span class="sig-name descname"><span class="pre">set_contrast</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">contrast</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/correction.html#ColorCorrection.set_contrast"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.ColorCorrection.set_contrast" title="Permalink to this definition"></a></dt>
+<dd><p>Set the contrast. Idempotent assignment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>contrast</strong> (<em>float</em>) – Contrast. Range [0, 4].</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if successful</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.ColorCorrection.set_exposure_bias">
+<span class="sig-name descname"><span class="pre">set_exposure_bias</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exposure_bias</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/correction.html#ColorCorrection.set_exposure_bias"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.ColorCorrection.set_exposure_bias" title="Permalink to this definition"></a></dt>
+<dd><p>Set the exposure bias. Idempotent assignment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>exposure_bias</strong> (<em>float</em>) – Exposure bias in f-stops. Range [-5, 5].</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if successful</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.ColorCorrection.set_highlight_color">
+<span class="sig-name descname"><span class="pre">set_highlight_color</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hue</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">saturation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/correction.html#ColorCorrection.set_highlight_color"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.ColorCorrection.set_highlight_color" title="Permalink to this definition"></a></dt>
+<dd><p>Set the highlight color. Uses OKHSV model - value fixed at 1. Idempotent assignment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hue</strong> (<em>float</em>) – Highlight hue in range [0, 1]  - perceptually linear (the H from OKHSV)</p></li>
+<li><p><strong>saturation</strong> (<em>float</em>) – Highlight saturation in range [0, 1]  - perceptually linear (the S from OKHSV)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if successful</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.ColorCorrection.set_highlight_offset">
+<span class="sig-name descname"><span class="pre">set_highlight_offset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/correction.html#ColorCorrection.set_highlight_offset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.ColorCorrection.set_highlight_offset" title="Permalink to this definition"></a></dt>
+<dd><p>Set the shadow offset in range [-2, 2]. Idempotent assignment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>offset</strong> (<em>float</em>) – Highlight offset.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if successful</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.ColorCorrection.set_hue_delta">
+<span class="sig-name descname"><span class="pre">set_hue_delta</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hue_delta</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/correction.html#ColorCorrection.set_hue_delta"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.ColorCorrection.set_hue_delta" title="Permalink to this definition"></a></dt>
+<dd><p>Set the hue delta, shifting an image’s hues. Idempotent assignment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>hue_delta</strong> (<em>float</em>) – Amount of hue shift - perceptually linear. Range [-1, 1].</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if successful</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.ColorCorrection.set_midtone_color">
+<span class="sig-name descname"><span class="pre">set_midtone_color</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hue</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">saturation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/correction.html#ColorCorrection.set_midtone_color"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.ColorCorrection.set_midtone_color" title="Permalink to this definition"></a></dt>
+<dd><p>Set the midtone color. Uses OKHSV model - value fixed at 1. Idempotent assignment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hue</strong> (<em>float</em>) – Midtone hue in range [0, 1]  - perceptually linear (the H from OKHSV)</p></li>
+<li><p><strong>saturation</strong> (<em>float</em>) – Midtone saturation  in range [0, 1] - perceptually linear (the S from OKHSV)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if successful</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.ColorCorrection.set_midtone_offset">
+<span class="sig-name descname"><span class="pre">set_midtone_offset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/correction.html#ColorCorrection.set_midtone_offset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.ColorCorrection.set_midtone_offset" title="Permalink to this definition"></a></dt>
+<dd><p>Set the shadow offset in range [-2, 2]. Idempotent assignment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>offset</strong> (<em>float</em>) – Midtone offset.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if successful</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.ColorCorrection.set_saturation">
+<span class="sig-name descname"><span class="pre">set_saturation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">saturation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/correction.html#ColorCorrection.set_saturation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.ColorCorrection.set_saturation" title="Permalink to this definition"></a></dt>
+<dd><p>Set the color saturation. Idempotent assignment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>saturation</strong> (<em>float</em>) – Amount of saturation. Range [0, 4].</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if successful</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.ColorCorrection.set_shadow_color">
+<span class="sig-name descname"><span class="pre">set_shadow_color</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hue</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">saturation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/correction.html#ColorCorrection.set_shadow_color"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.ColorCorrection.set_shadow_color" title="Permalink to this definition"></a></dt>
+<dd><p>Set the shadow color. Uses OKHSV model - value fixed at 1. Idempotent assignment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>hue</strong> (<em>float</em>) – Shadow hue in range [0, 1] - perceptually linear (the H from OKHSV)</p></li>
+<li><p><strong>saturation</strong> (<em>float</em>) – Shadow saturation  in range [0, 1] - perceptually linear (the S from OKHSV)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if successful</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.ColorCorrection.set_shadow_offset">
+<span class="sig-name descname"><span class="pre">set_shadow_offset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/correction.html#ColorCorrection.set_shadow_offset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.ColorCorrection.set_shadow_offset" title="Permalink to this definition"></a></dt>
+<dd><p>Set the shadow offset in range [-2, 2]. Idempotent assignment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>offset</strong> (<em>float</em>) – Shadow offset.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if successful</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="tinycio.LookupTable">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tinycio.</span></span><span class="sig-name descname"><span class="pre">LookupTable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lattice</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lut_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">LUTFormat.CUBE_3D</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/lut.html#LookupTable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.LookupTable" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Color lookup table. Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lut</span> <span class="o">=</span> <span class="n">LookupTable</span><span class="o">.</span><span class="n">get_negative</span><span class="p">()</span>
+<span class="n">im_negative</span> <span class="o">=</span> <span class="n">lut</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>size</strong> (<em>int</em>) – Size of the LUT.</p></li>
+<li><p><strong>lattice</strong> (<em>torch.Tensor</em>) – Lattice as tensor (defaults to linear).</p></li>
+<li><p><strong>lut_format</strong> (<a class="reference internal" href="fsio.html#tinycio.fsio.LUTFormat" title="tinycio.fsio.LUTFormat"><em>LUTFormat</em></a>) – Format of the LUT.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.LookupTable.apply">
+<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">im</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/lut.html#LookupTable.apply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.LookupTable.apply" title="Permalink to this definition"></a></dt>
+<dd><p>Apply LUT to image tensor.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>im</strong> (<em>torch.Tensor</em><em> | </em><a class="reference internal" href="#tinycio.ColorImage" title="tinycio.ColorImage"><em>ColorImage</em></a>) – Input image tensor</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Image tensor with LUT applied</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.LookupTable.fit_to_image">
+<span class="sig-name descname"><span class="pre">fit_to_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">im_source</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">im_target</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">steps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">500</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">learning_rate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.003</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">strength</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_height</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">512</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_width</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">512</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cuda'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">context</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/lut.html#LookupTable.fit_to_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.LookupTable.fit_to_image" title="Permalink to this definition"></a></dt>
+<dd><p>Perform gradient descent on the lattice, so that the appearance of the source image matches the target.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>im_source</strong> (<em>torch.Tensor</em><em> | </em><a class="reference internal" href="#tinycio.ColorImage" title="tinycio.ColorImage"><em>ColorImage</em></a>) – Source image tensor. Values must be in range [0, 1].</p></li>
+<li><p><strong>im_target</strong> (<em>torch.Tensor</em><em> | </em><a class="reference internal" href="#tinycio.ColorImage" title="tinycio.ColorImage"><em>ColorImage</em></a>) – Target image tensor.</p></li>
+<li><p><strong>steps</strong> (<em>int</em>) – Number of optimization steps.</p></li>
+<li><p><strong>learning_rate</strong> (<em>float</em>) – Learning rate for gradient descent.</p></li>
+<li><p><strong>strength</strong> (<em>float</em>) – Strength of the effect in range [0, 1].</p></li>
+<li><p><strong>fit_height</strong> (<em>int</em>) – Image tensors will be interpolated to this height for evaluation.</p></li>
+<li><p><strong>fit_width</strong> (<em>int</em>) – Image tensors will be interpolated to this width for evaluation.</p></li>
+<li><p><strong>device</strong> (<em>str</em>) – Device for gradient descent (if None will use input tensor device).</p></li>
+<li><p><strong>context</strong> (<em>callable</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True when completed</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.LookupTable.get_empty">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_empty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">32</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lut_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">LUTFormat.CUBE_3D</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/lut.html#LookupTable.get_empty"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.LookupTable.get_empty" title="Permalink to this definition"></a></dt>
+<dd><p>Returns empty LUT. All values mapped to 0.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>size</strong> (<em>int</em>) – Size of the LUT.</p></li>
+<li><p><strong>lut_format</strong> (<a class="reference internal" href="fsio.html#tinycio.fsio.LUTFormat" title="tinycio.fsio.format.LUTFormat"><em>LUTFormat</em></a>) – Format of the LUT.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#tinycio.LookupTable" title="tinycio.lut.LookupTable"><em>LookupTable</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.LookupTable.get_linear">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_linear</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">32</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lut_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">LUTFormat.CUBE_3D</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/lut.html#LookupTable.get_linear"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.LookupTable.get_linear" title="Permalink to this definition"></a></dt>
+<dd><p>Returns linear LUT. Has no effect: when applied, output matches input ([0, 1] range).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>size</strong> (<em>int</em>) – Size of the LUT.</p></li>
+<li><p><strong>lut_format</strong> (<a class="reference internal" href="fsio.html#tinycio.fsio.LUTFormat" title="tinycio.fsio.format.LUTFormat"><em>LUTFormat</em></a>) – Format of the LUT.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#tinycio.LookupTable" title="tinycio.lut.LookupTable"><em>LookupTable</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.LookupTable.get_negative">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_negative</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">32</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lut_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">LUTFormat.CUBE_3D</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/lut.html#LookupTable.get_negative"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.LookupTable.get_negative" title="Permalink to this definition"></a></dt>
+<dd><p>Returns negative LUT. Output is inverted ([0, 1] range).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>size</strong> (<em>int</em>) – Size of the LUT.</p></li>
+<li><p><strong>lut_format</strong> (<a class="reference internal" href="fsio.html#tinycio.fsio.LUTFormat" title="tinycio.fsio.format.LUTFormat"><em>LUTFormat</em></a>) – Format of the LUT.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#tinycio.LookupTable" title="tinycio.lut.LookupTable"><em>LookupTable</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.LookupTable.get_random">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_random</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">32</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lut_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">LUTFormat.CUBE_3D</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/lut.html#LookupTable.get_random"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.LookupTable.get_random" title="Permalink to this definition"></a></dt>
+<dd><p>Returns random LUT. Everything mapped to random values ([0, 1] range).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>size</strong> (<em>int</em>) – Size of the LUT.</p></li>
+<li><p><strong>lut_format</strong> (<a class="reference internal" href="fsio.html#tinycio.fsio.LUTFormat" title="tinycio.fsio.format.LUTFormat"><em>LUTFormat</em></a>) – Format of the LUT.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#tinycio.LookupTable" title="tinycio.lut.LookupTable"><em>LookupTable</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.LookupTable.load">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lut_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">LUTFormat.UNKNOWN</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/lut.html#LookupTable.load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.LookupTable.load" title="Permalink to this definition"></a></dt>
+<dd><p>Load LUT from file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fp</strong> (<em>str</em>) – File path.</p></li>
+<li><p><strong>lut_format</strong> (<a class="reference internal" href="fsio.html#tinycio.fsio.LUTFormat" title="tinycio.fsio.format.LUTFormat"><em>LUTFormat</em></a>) – Format of the LUT.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#tinycio.LookupTable" title="tinycio.lut.LookupTable"><em>LookupTable</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.LookupTable.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lut_format</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">LUTFormat.UNKNOWN</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/lut.html#LookupTable.save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.LookupTable.save" title="Permalink to this definition"></a></dt>
+<dd><p>Save LUT to file.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This will overwrite existing files.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fp</strong> (<em>str</em>) – File path.</p></li>
+<li><p><strong>lut_format</strong> (<a class="reference internal" href="fsio.html#tinycio.fsio.LUTFormat" title="tinycio.fsio.format.LUTFormat"><em>LUTFormat</em></a>) – Format of the LUT.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="tinycio.WhiteBalance">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tinycio.</span></span><span class="sig-name descname"><span class="pre">WhiteBalance</span></span><a class="reference internal" href="../_modules/tinycio/balance.html#WhiteBalance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.WhiteBalance" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Adjust white balance of an image. Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">source_white</span> <span class="o">=</span> <span class="n">WhiteBalance</span><span class="o">.</span><span class="n">wp_from_image</span><span class="p">(</span><span class="n">input_image</span><span class="p">)</span>
+<span class="n">target_white</span> <span class="o">=</span> <span class="n">WhiteBalance</span><span class="o">.</span><span class="n">wp_from_illuminant</span><span class="p">(</span><span class="n">WhiteBalance</span><span class="o">.</span><span class="n">Illuminant</span><span class="o">.</span><span class="n">NORTH_SKY</span><span class="p">)</span>
+<span class="n">white_balanced_image</span> <span class="o">=</span> <span class="n">WhiteBalance</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">input_image</span><span class="p">,</span> <span class="n">source_white</span><span class="p">,</span> <span class="n">target_white</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py class">
+<dt class="sig sig-object py" id="tinycio.WhiteBalance.Illuminant">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Illuminant</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/balance.html#WhiteBalance.Illuminant"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.WhiteBalance.Illuminant" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code></p>
+<p>CIE 1931 2° standard illuminant. Available options are:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>- NONE
+- A (INCANDESCENT, TUNGSTEN)
+- D50 (HORIZON)
+- D55 (MIDMORNING)
+- D65 (DAYLIGHT_NOON)
+- D75 (NORTH SKY)
+- D93 (BLUE_PHOSPHOR)
+- E (EQUAL_ENERGY)
+- F1 (FLUORESCENT_DAYLIGHT1)
+- F2 (FLUORESCENT_COOL_WHITE)
+- F3 (FLUORESCENT_WHITE)
+- F4 (FLUORESCENT_WARM_WHITE)
+- F5 (FLUORESCENT_DAYLIGHT2)
+- F6 (FLUORESCENT_LIGHT_WHITE)
+- F7 (D65_SIMULATOR, DAYLIGHT_SIMULATOR)
+- F8 (D50_SIMULATOR, SYLVANIA_F40)
+- F9 (FLOURESCENT_COOL_WHITE_DELUXE)
+- F10 (PHILIPS_TL85, ULTRALUME_50)
+- F11 (PHILIPS_TL84, ULTRALUME_40)
+- F12 (PHILIPS_TL83, ULTRALUME_30)
+- LED_B1 (PHOSPHOR_CONVERTED_BLUE1)
+- LED_B2 (PHOSPHOR_CONVERTED_BLUE2)
+- LED_B3 (PHOSPHOR_CONVERTED_BLUE3)
+- LED_B4 (PHOSPHOR_CONVERTED_BLUE4)
+- LED_B5 (PHOSPHOR_CONVERTED_BLUE5)
+- LED_BH1
+- LED_RGB1
+- LED_V1 (LED_VIOLET1)
+- LED_V2 (LED_VIOLET2)
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.WhiteBalance.apply">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">im_lms</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">source_white</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_white</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/balance.html#WhiteBalance.apply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.WhiteBalance.apply" title="Permalink to this definition"></a></dt>
+<dd><p>Apply white balance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>im_lms</strong> (<em>torch.Tensor</em><em> | </em><a class="reference internal" href="#tinycio.ColorImage" title="tinycio.ColorImage"><em>ColorImage</em></a>) – Image tensor in LMS color space</p></li>
+<li><p><strong>source_white</strong> (<a class="reference internal" href="numerics.html#tinycio.numerics.Float2" title="tinycio.numerics.Float2"><em>Float2</em></a><em> | </em><a class="reference internal" href="#tinycio.Chromaticity" title="tinycio.Chromaticity"><em>Chromaticity</em></a><em> | </em><em>torch.Tensor</em><em> | </em><em>numpy.ndarray</em>) – Source white point coordinates (CIE xy)</p></li>
+<li><p><strong>target_white</strong> (<a class="reference internal" href="numerics.html#tinycio.numerics.Float2" title="tinycio.numerics.Float2"><em>Float2</em></a><em> | </em><a class="reference internal" href="#tinycio.Chromaticity" title="tinycio.Chromaticity"><em>Chromaticity</em></a><em> | </em><em>torch.Tensor</em><em> | </em><em>numpy.ndarray</em>) – Target white point coordinates (CIE xy)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>White balanced image tensor</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.WhiteBalance.wp_from_cct">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">wp_from_cct</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cct</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/balance.html#WhiteBalance.wp_from_cct"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.WhiteBalance.wp_from_cct" title="Permalink to this definition"></a></dt>
+<dd><p>Compute CIE xy chromaticity coordinates (white point) from correlated colour temperature.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cct</strong> (<em>int</em>) – Correlated colour temperature in range [4000, 25000]</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>White point coordinates (CIE xy)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="numerics.html#tinycio.numerics.Float2" title="tinycio.numerics.vector.Float2"><em>Float2</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.WhiteBalance.wp_from_illuminant">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">wp_from_illuminant</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">illuminant</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/balance.html#WhiteBalance.wp_from_illuminant"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.WhiteBalance.wp_from_illuminant" title="Permalink to this definition"></a></dt>
+<dd><p>Look up chromaticity coordinates (white point) of a CIE 1931 2° standard illuminant.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>illuminant</strong> (<a class="reference internal" href="#tinycio.WhiteBalance.Illuminant" title="tinycio.WhiteBalance.Illuminant"><em>Illuminant</em></a>) – Standard illuminant</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>White point coordinates (CIE xy)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="numerics.html#tinycio.numerics.Float2" title="tinycio.numerics.Float2">Float2</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.WhiteBalance.wp_from_image">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">wp_from_image</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">im_xyz</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/balance.html#WhiteBalance.wp_from_image"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.WhiteBalance.wp_from_image" title="Permalink to this definition"></a></dt>
+<dd><p>Estimate the dominant illuminant of an environment map or a target image directly and return its
+approximate CIE xy chromaticity coordinates (white point).</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This is a lazy method that just averages the pixels in the image tensor.
+There is no spherical mapping, nor PCA, nor any serious attempt to analyze the image.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>im_xyz</strong> (<em>torch.Tensor</em><em> | </em><a class="reference internal" href="#tinycio.ColorImage" title="tinycio.ColorImage"><em>ColorImage</em></a>) – Image tensor in CIE XYZ color space</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Estimated white point coordinates (CIE xy)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="numerics.html#tinycio.numerics.Float2" title="tinycio.numerics.Float2">Float2</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="tinycio.Spectral">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tinycio.</span></span><span class="sig-name descname"><span class="pre">Spectral</span></span><a class="reference internal" href="../_modules/tinycio/spectral.html#Spectral"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.Spectral" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Spectral color matching functions. Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">xyz_col</span> <span class="o">=</span> <span class="n">Spectral</span><span class="o">.</span><span class="n">wl_to_xyz</span><span class="p">(</span><span class="mi">550</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.Spectral.cm_table">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cm_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">normalize_xyz</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/spectral.html#Spectral.cm_table"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.Spectral.cm_table" title="Permalink to this definition"></a></dt>
+<dd><p>Returns color matching table as tensor of size [81, 3].
+The table contains CIE XYZ values, arranged by wavelength,
+in increments of 5nm, from 380nm to 780nm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>normalize_xyz</strong> (<em>bool</em>) – Normalize XYZ color, such that X=X/(X+Y+Z), etc</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Color matching function table</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.Spectral.wl_to_srgb">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">wl_to_srgb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/spectral.html#Spectral.wl_to_srgb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.Spectral.wl_to_srgb" title="Permalink to this definition"></a></dt>
+<dd><p>Wavelength (nm) to normalized, approximate sRGB color,
+clamped to [0, 1] range, with sRGB gamma curve.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Wolfram Alpha doesn’t quite agree, but it’s rather close. This produces a
+plausible-looking spectrum, but there is probably some missing (pre?) normalization step.
+Take the RGB outputs with a grain of salt.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>wl</strong> (<em>float</em>) – wavelength in nm</p></li>
+<li><p><strong>normalize</strong> – normalize sRGB color</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>sRGB linear color</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="numerics.html#tinycio.numerics.Float3" title="tinycio.numerics.vector.Float3"><em>Float3</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.Spectral.wl_to_srgb_linear">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">wl_to_srgb_linear</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/spectral.html#Spectral.wl_to_srgb_linear"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.Spectral.wl_to_srgb_linear" title="Permalink to this definition"></a></dt>
+<dd><p>Wavelength (nm) to normalized, approximate linear sRGB color, clamped to [0, 1] range.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>wl</strong> (<em>float</em>) – wavelength in nm</p></li>
+<li><p><strong>normalize</strong> – normalize sRGB color</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>sRGB linear color</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="numerics.html#tinycio.numerics.Float3" title="tinycio.numerics.vector.Float3"><em>Float3</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.Spectral.wl_to_xyz">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">wl_to_xyz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wl</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/spectral.html#Spectral.wl_to_xyz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.Spectral.wl_to_xyz" title="Permalink to this definition"></a></dt>
+<dd><p>Wavelength (nm) to CIE XYZ color, linearly interpolated.
+Precision is limited to interpolated 5nm increments.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>These coordinates will often fall outside the sRGB gamut.
+Direct color space conversion will yield invalid sRGB values.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>wl</strong> (<em>float</em>) – wavelength in nm</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>CIE XYZ color</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="numerics.html#tinycio.numerics.Float3" title="tinycio.numerics.vector.Float3"><em>Float3</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="tinycio.Codec">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tinycio.</span></span><span class="sig-name descname"><span class="pre">Codec</span></span><a class="reference internal" href="../_modules/tinycio/codec.html#Codec"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.Codec" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Encoder/decoder for high-dynamic-range data. Example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">encoded_image</span> <span class="o">=</span> <span class="n">Codec</span><span class="o">.</span><span class="n">logluv_encode</span><span class="p">(</span><span class="n">hdr_rgb_image</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.Codec.logluv_decode">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">logluv_decode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">im</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/codec.html#Codec.logluv_decode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.Codec.logluv_decode" title="Permalink to this definition"></a></dt>
+<dd><p>Decode LOGLUV to HDR floating point RGB data.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>4 channels in, 3 channels out.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>im</strong> (<em>torch.Tensor</em>) – LOGLUV encoded [C=4, H, W] sized image tensor (4 channels)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Decoded HDR image tensor (3 channels)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tinycio.Codec.logluv_encode">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">logluv_encode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">im</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/codec.html#Codec.logluv_encode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.Codec.logluv_encode" title="Permalink to this definition"></a></dt>
+<dd><p>Encode HDR floating point RGB data to LOGLUV for 32bpp (RGBA) image file.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>3 channels in, 4 channels out.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>im</strong> (<em>torch.Tensor</em><em> | </em><a class="reference internal" href="#tinycio.ColorImage" title="tinycio.ColorImage"><em>ColorImage</em></a>) – HDR [C=3, H, W] sized image tensor</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>LOGLUV encoded image tensor (4 channels)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>torch.Tensor</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="fsio.html">fsio module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="fsio.html#tinycio.fsio.GraphicsFormat"><code class="docutils literal notranslate"><span class="pre">GraphicsFormat</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="fsio.html#tinycio.fsio.LUTFormat"><code class="docutils literal notranslate"><span class="pre">LUTFormat</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="fsio.html#tinycio.fsio.load_image"><code class="docutils literal notranslate"><span class="pre">load_image()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="fsio.html#tinycio.fsio.save_image"><code class="docutils literal notranslate"><span class="pre">save_image()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="fsio.html#tinycio.fsio.load_lut"><code class="docutils literal notranslate"><span class="pre">load_lut()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="fsio.html#tinycio.fsio.save_lut"><code class="docutils literal notranslate"><span class="pre">save_lut()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="fsio.html#tinycio.fsio.truncate_image"><code class="docutils literal notranslate"><span class="pre">truncate_image()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="numerics.html">numerics module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="numerics.html#tinycio.numerics.Float2"><code class="docutils literal notranslate"><span class="pre">Float2</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="numerics.html#tinycio.numerics.Float3"><code class="docutils literal notranslate"><span class="pre">Float3</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="numerics.html#tinycio.numerics.Float4"><code class="docutils literal notranslate"><span class="pre">Float4</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="numerics.html#tinycio.numerics.Int2"><code class="docutils literal notranslate"><span class="pre">Int2</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="numerics.html#tinycio.numerics.Int3"><code class="docutils literal notranslate"><span class="pre">Int3</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="numerics.html#tinycio.numerics.Int4"><code class="docutils literal notranslate"><span class="pre">Int4</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="numerics.html#tinycio.numerics.lerp"><code class="docutils literal notranslate"><span class="pre">lerp()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="numerics.html#tinycio.numerics.saturate"><code class="docutils literal notranslate"><span class="pre">saturate()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="numerics.html#tinycio.numerics.sign"><code class="docutils literal notranslate"><span class="pre">sign()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="numerics.html#tinycio.numerics.normalize"><code class="docutils literal notranslate"><span class="pre">normalize()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="numerics.html#tinycio.numerics.reflect"><code class="docutils literal notranslate"><span class="pre">reflect()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="util.html">util module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="util.html#tinycio.util.progress_bar"><code class="docutils literal notranslate"><span class="pre">progress_bar()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="util.html#tinycio.util.apply_gamma"><code class="docutils literal notranslate"><span class="pre">apply_gamma()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="util.html#tinycio.util.apply_hue_oklab"><code class="docutils literal notranslate"><span class="pre">apply_hue_oklab()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="util.html#tinycio.util.srgb_luminance"><code class="docutils literal notranslate"><span class="pre">srgb_luminance()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="util.html#tinycio.util.col_hsv_to_rgb"><code class="docutils literal notranslate"><span class="pre">col_hsv_to_rgb()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="util.html#tinycio.util.col_rgb_to_hsv"><code class="docutils literal notranslate"><span class="pre">col_rgb_to_hsv()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="util.html#tinycio.util.col_oklab_to_linear_srgb"><code class="docutils literal notranslate"><span class="pre">col_oklab_to_linear_srgb()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="util.html#tinycio.util.col_linear_srgb_to_oklab"><code class="docutils literal notranslate"><span class="pre">col_linear_srgb_to_oklab()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="util.html#tinycio.util.col_okhsv_to_srgb"><code class="docutils literal notranslate"><span class="pre">col_okhsv_to_srgb()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="util.html#tinycio.util.col_srgb_to_okhsv"><code class="docutils literal notranslate"><span class="pre">col_srgb_to_okhsv()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="util.html#tinycio.util.col_okhsl_to_srgb"><code class="docutils literal notranslate"><span class="pre">col_okhsl_to_srgb()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="util.html#tinycio.util.col_srgb_to_okhsl"><code class="docutils literal notranslate"><span class="pre">col_srgb_to_okhsl()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="example_image_manip.html" class="btn btn-neutral float-left" title="Lower-level image manipulation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="fsio.html" class="btn btn-neutral float-right" title="fsio module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p></p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
