@@ -208,11 +208,14 @@
         <span class="p">)</span>  <span class="o">-&gt;</span> <span class="n">ColorCorrection</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Perform gradient descent on the color correction settings, so that the appearance  </span>
-<span class="sd">        of the source image matches the target.</span>
+<span class="sd">        of the source image matches the target. </span>
 
-<span class="sd">        :param im_source: Source image tensor. Values must be in range [0, 1].</span>
+<span class="sd">        .. note::</span>
+<span class="sd">            Images need to be in *ACEScc* color space.</span>
+
+<span class="sd">        :param im_source: Source image tensor in *ACEScc* color space. Values must be in range [0, 1].</span>
 <span class="sd">        :type im_source: torch.Tensor | ColorImage</span>
-<span class="sd">        :param im_target: Target image tensor.</span>
+<span class="sd">        :param im_target: Target image tensor in *ACEScc* color space.</span>
 <span class="sd">        :type im_target: torch.Tensor | ColorImage</span>
 <span class="sd">        :param steps: Number of optimization steps.</span>
 <span class="sd">        :param learning_rate: Learning rate for gradient descent.</span>
