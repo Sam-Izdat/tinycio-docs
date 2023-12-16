@@ -267,8 +267,10 @@
 This is the most hands-off abstraction, as it automatically handles color space conversion as needed.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>All transformative methods will return a new <a class="reference internal" href="#tinycio.ColorImage" title="tinycio.ColorImage"><code class="xref py py-class docutils literal notranslate"><span class="pre">ColorImage</span></code></a> instance without
-overwriting data. To overwrite use as e.g. <code class="code docutils literal notranslate"><span class="pre">im</span> <span class="pre">=</span> <span class="pre">im.to_color_space(cs_dst)</span></code></p>
+<p>All transformative methods will create a new <a class="reference internal" href="#tinycio.ColorImage" title="tinycio.ColorImage"><code class="xref py py-class docutils literal notranslate"><span class="pre">ColorImage</span></code></a> instance without altering the
+current state. PyTorch methods and operations will work as expected but will return with
+the color space set to UNKNOWN. Exceptions include <code class="code docutils literal notranslate"><span class="pre">.clamp()</span></code>, <code class="code docutils literal notranslate"><span class="pre">.lerp()</span></code>,
+<code class="code docutils literal notranslate"><span class="pre">.minimum()</span></code>, and <code class="code docutils literal notranslate"><span class="pre">.maximum()</span></code>, which will retain the current state for convenience.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>

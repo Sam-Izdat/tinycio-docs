@@ -174,14 +174,22 @@
         <span class="n">z</span> <span class="o">=</span> <span class="p">(</span><span class="n">luminance</span> <span class="o">/</span> <span class="bp">self</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">Color</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">luminance</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span></div></div>
 
+<span class="k">def</span> <span class="nf">wrap_pt_im_method</span><span class="p">(</span><span class="n">method</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">color_space</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">color_space</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="k">else</span> <span class="n">result</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+
 <div class="viewcode-block" id="ColorImage"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.ColorImage">[docs]</a><span class="k">class</span> <span class="nc">ColorImage</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    2D 3-channel color image using float32. Convenience wrapper around a [C=3, H, W] sized PyTorch image tensor. </span>
 <span class="sd">    This is the most hands-off abstraction, as it automatically handles color space conversion as needed.</span>
 
 <span class="sd">    .. note::</span>
-<span class="sd">        All transformative methods will return a new :class:`ColorImage` instance without </span>
-<span class="sd">        overwriting data. To overwrite use as e.g. :code:`im = im.to_color_space(cs_dst)`</span>
+<span class="sd">        All transformative methods will create a new :class:`ColorImage` instance without altering the </span>
+<span class="sd">        current state. PyTorch methods and operations will work as expected but will return with </span>
+<span class="sd">        the color space set to UNKNOWN. Exceptions include :code:`.clamp()`, :code:`.lerp()`, </span>
+<span class="sd">        :code:`.minimum()`, and :code:`.maximum()`, which will retain the current state for convenience.</span>
 
 <span class="sd">    .. note:: </span>
 <span class="sd">        Assumes size/shape [C, H, W] for both PyTorch tensor or NumPy array inputs.</span>
@@ -192,7 +200,7 @@
 <span class="sd">    :type color_space: str | ColorSpace.Variant</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">color_space</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">color_space</span> <span class="o">=</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">UNKNOWN</span>
     
     <span class="n">meta_channel_names</span>  <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;unknown&#39;</span><span class="p">,</span> <span class="s1">&#39;unknown&#39;</span><span class="p">,</span> <span class="s1">&#39;uknown&#39;</span><span class="p">]</span>
     <span class="n">meta_white_point</span>    <span class="o">=</span> <span class="s1">&#39;unknown&#39;</span>
@@ -210,14 +218,36 @@
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;ColorImage must be a [C=3, H, W] sized image tensor.&quot;</span><span class="p">)</span>
 
         <span class="c1"># There is a reason why this has to be here, in this order, and why this hangs &quot;color_space&quot; on &quot;new&quot;.</span>
-        <span class="c1"># Setting it prematurely on cls will corrupt the metadata of the instance being transitioned to a new cs.</span>
-        <span class="c1"># We want to retain old instances, intact.</span>
+        <span class="c1"># Setting it prematurely on cls will yeet the metadata of the instance being transitioned to a new cs.</span>
         <span class="n">new</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">ColorImage</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">ten</span><span class="p">)</span>
-        <span class="n">new</span><span class="o">.</span><span class="n">color_space</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;color_space&quot;</span><span class="p">,</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">UNKNOWN</span><span class="p">)</span>
+        <span class="n">cs_default</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">color_space</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ColorImage</span><span class="p">)</span> <span class="k">else</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">UNKNOWN</span>
+        <span class="n">new</span><span class="o">.</span><span class="n">color_space</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;color_space&quot;</span><span class="p">,</span> <span class="n">cs_default</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">new</span><span class="o">.</span><span class="n">color_space</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">:</span> <span class="n">new</span><span class="o">.</span><span class="n">color_space</span> <span class="o">=</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="p">[</span><span class="n">new</span><span class="o">.</span><span class="n">color_space</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()]</span>
         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">new</span><span class="o">.</span><span class="n">color_space</span><span class="p">,</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="p">),</span> <span class="s2">&quot;Invalid color space&quot;</span>
         <span class="n">new</span><span class="o">.</span><span class="n">_set_meta</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">new</span>
+
+    <span class="c1"># We want to to maintain state through these common torch methods.</span>
+    <span class="c1"># Annoying, but __torch_function__ is footgun city, and I&#39;m not sure it would work anyway.</span>
+    <span class="nd">@wrap_pt_im_method</span>
+    <span class="k">def</span> <span class="nf">clamp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="nd">@wrap_pt_im_method</span>
+    <span class="k">def</span> <span class="nf">clip</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="nd">@wrap_pt_im_method</span>
+    <span class="k">def</span> <span class="nf">lerp</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">lerp</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        
+    <span class="nd">@wrap_pt_im_method</span>
+    <span class="k">def</span> <span class="nf">minimum</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        
+    <span class="nd">@wrap_pt_im_method</span>
+    <span class="k">def</span> <span class="nf">maximum</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_set_meta</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Meta variables are only used for a debug printout at this time</span>
@@ -386,7 +416,7 @@
         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">color_space</span><span class="p">,</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="p">),</span> <span class="s2">&quot;Invalid color space&quot;</span>
         <span class="n">res</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="n">res</span> <span class="o">=</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">clone</span><span class="p">(),</span> <span class="n">source</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">color_space</span><span class="p">,</span> <span class="n">destination</span><span class="o">=</span><span class="n">color_space</span><span class="p">)</span>
-        <span class="n">res</span> <span class="o">=</span> <span class="n">ColorImage</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">color_space</span><span class="o">=</span><span class="n">color_space</span><span class="p">)</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">ColorImage</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">color_space</span><span class="o">=</span><span class="n">color_space</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">res</span></div>
 
 <div class="viewcode-block" id="ColorImage.tone_map"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.ColorImage.tone_map">[docs]</a>    <span class="k">def</span> <span class="nf">tone_map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tone_mapper</span><span class="p">:</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span><span class="n">ToneMapping</span><span class="o">.</span><span class="n">Variant</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">ColorImage</span><span class="p">:</span>
