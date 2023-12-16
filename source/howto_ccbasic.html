@@ -149,8 +149,8 @@
 </div>
 <p>Most color correction uses <em>ACEScc</em>, so <a class="reference internal" href="tinycio.html#tinycio.ColorCorrection.apply" title="tinycio.ColorCorrection.apply"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ColorCorrection.apply()</span></code></a> expects inputs in that color space.
 <a class="reference internal" href="tinycio.html#tinycio.ColorImage.correct" title="tinycio.ColorImage.correct"><code class="xref py py-meth docutils literal notranslate"><span class="pre">ColorImage.correct()</span></code></a> handles this conversion automatically.</p>
-<p>Your instructions to the the <a class="reference internal" href="tinycio.html#tinycio.ColorCorrection" title="tinycio.ColorCorrection"><code class="xref py py-class docutils literal notranslate"><span class="pre">ColorCorrection</span></code></a> object are persistent (they change
-the instance’s state rather than returning a new one) and idempotent (no difference between
+<p>Your instructions to the <a class="reference internal" href="tinycio.html#tinycio.ColorCorrection" title="tinycio.ColorCorrection"><code class="xref py py-class docutils literal notranslate"><span class="pre">ColorCorrection</span></code></a> object will change the state of the
+the instance rather than returning a new one and will all be idempotent (no difference between
 calling <a class="reference internal" href="tinycio.html#tinycio.ColorCorrection.set_hue_delta" title="tinycio.ColorCorrection.set_hue_delta"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set_hue_delta()</span></code></a> once or five times). It is recommended
 to use the setter functions as they perform color value conversions and check value ranges.</p>
 <div class="admonition note">
