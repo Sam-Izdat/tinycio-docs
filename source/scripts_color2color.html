@@ -123,8 +123,9 @@ positional arguments:
   input                 Input image file path
   input-color-space     Input color space
                         CHOICES:
-                            cie_xyz, cie_xyy, srgb, srgb_linear
-                            rec709, rec2020, dci_p3, display_p3
+                            cie_xyz, cie_xyy, srgb, srgb_lin
+                            rec709, rec2020, rec2020_lin,
+                            dci_p3, dci_p3_lin, display_p3,
                             acescg, aces2065_1, lms, hsl, hsv
                             oklab, cielab
   output                Output image file path
@@ -175,15 +176,17 @@ optional arguments:
         <span class="s1">&#39;ics&#39;</span><span class="p">,</span> 
         <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> 
         <span class="n">choices</span><span class="o">=</span><span class="p">[</span>
-            <span class="s1">&#39;cie_xyz&#39;</span><span class="p">,</span> <span class="s1">&#39;cie_xyy&#39;</span><span class="p">,</span> <span class="s1">&#39;srgb&#39;</span><span class="p">,</span> <span class="s1">&#39;srgb_linear&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;rec709&#39;</span><span class="p">,</span> <span class="s1">&#39;rec2020&#39;</span><span class="p">,</span> <span class="s1">&#39;dci_p3&#39;</span><span class="p">,</span> <span class="s1">&#39;display_p3&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;cie_xyz&#39;</span><span class="p">,</span> <span class="s1">&#39;cie_xyy&#39;</span><span class="p">,</span> <span class="s1">&#39;srgb&#39;</span><span class="p">,</span> <span class="s1">&#39;srgb_lin&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;rec709&#39;</span><span class="p">,</span> <span class="s1">&#39;rec2020&#39;</span><span class="p">,</span> <span class="s1">&#39;rec2020_lin&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;dci_p3&#39;</span><span class="p">,</span> <span class="s1">&#39;dci_p3_lin&#39;</span><span class="p">,</span> <span class="s1">&#39;display_p3&#39;</span><span class="p">,</span>
             <span class="s1">&#39;acescg&#39;</span><span class="p">,</span> <span class="s1">&#39;aces2065_1&#39;</span><span class="p">,</span> <span class="s1">&#39;lms&#39;</span><span class="p">,</span> <span class="s1">&#39;hsl&#39;</span><span class="p">,</span> <span class="s1">&#39;hsv&#39;</span><span class="p">,</span>
             <span class="s1">&#39;oklab&#39;</span><span class="p">,</span> <span class="s1">&#39;cielab&#39;</span><span class="p">],</span>
         <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;input-color-space&#39;</span><span class="p">,</span> <span class="c1"># because bad formatting is bad :(</span>
         <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Input color space</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
             <span class="s1">&#39;CHOICES:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
-            <span class="s1">&#39;    cie_xyz, cie_xyy, srgb, srgb_linear </span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
-            <span class="s1">&#39;    rec709, rec2020, dci_p3, display_p3 </span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39;    cie_xyz, cie_xyy, srgb, srgb_lin, </span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39;    rec709, rec2020, rec_2020_lin, </span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39;    dci_p3, dci_p3_lin, display_p3, </span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
             <span class="s1">&#39;    acescg, aces2065_1, lms, hsl, hsv </span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
             <span class="s1">&#39;    oklab, cielab&#39;</span>
         <span class="p">)</span>
