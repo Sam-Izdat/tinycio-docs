@@ -113,11 +113,42 @@
              
   <section id="release-notes">
 <h1>Release notes<a class="headerlink" href="#release-notes" title="Permalink to this heading"></a></h1>
-<p class="rubric">v 0.5.1 alpha - Dec. 2023</p>
+<p class="rubric">v 0.6.0 a - Dec. 2023</p>
+<ul>
+<li><p><strong>API change</strong>: simplified <a class="reference internal" href="fsio.html#tinycio.fsio.GraphicsFormat" title="tinycio.fsio.GraphicsFormat"><code class="xref py py-class docutils literal notranslate"><span class="pre">GraphicsFormat</span></code></a> (options now just UINT8, SFLOAT32, UNORM8, etc).</p></li>
+<li><p>Added denormalization/normalization for UNORM image loading/saving.</p></li>
+<li><p>API extension: extended numeric types to accept and return lists and tuples.</p></li>
+<li><p>Moved scripts to src and added them to setuptools config. Scripts can now be run with:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="code docutils literal notranslate"><span class="pre">tcio-color2color</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">tcio-hdr-codec</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">tcio-img2cube</span></code></p></li>
+<li><p><code class="code docutils literal notranslate"><span class="pre">tcio-white-balance</span></code></p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Added <code class="code docutils literal notranslate"><span class="pre">tcio-setup</span></code> script. Currently just an alias for <code class="code docutils literal notranslate"><span class="pre">imageio_download_bin</span> <span class="pre">freeimage</span></code>.</p></li>
+</ul>
+<p class="rubric">v 0.5.4 a - Dec. 2023</p>
+<ul class="simple">
+<li><p>Fixed tonemapping color space conversion bug with <a class="reference internal" href="tinycio.html#tinycio.ColorImage" title="tinycio.ColorImage"><code class="xref py py-class docutils literal notranslate"><span class="pre">ColorImage</span></code></a>.</p></li>
+</ul>
+<p class="rubric">v 0.5.3 a - Dec. 2023</p>
+<ul class="simple">
+<li><p>Updated examples to reflect API changes.</p></li>
+<li><p>Fixed potential problem with ColorImage prematurely losing state.</p></li>
+<li><p>Updated docs.</p></li>
+</ul>
+<p class="rubric">v 0.5.2 a - Dec. 2023</p>
+<ul class="simple">
+<li><p>Very minor corrections and fixes, mostly to docs and examples.</p></li>
+</ul>
+<p class="rubric">v 0.5.1 a - Dec. 2023</p>
 <ul class="simple">
 <li><p>just docs and webhosting housekeeping</p></li>
 </ul>
-<p class="rubric">v 0.5.0 alpha - Dec. 2023</p>
+<p class="rubric">v 0.5.0 a - Dec. 2023</p>
 <ul class="simple">
 <li><p><em>gestures at the docs</em></p></li>
 </ul>

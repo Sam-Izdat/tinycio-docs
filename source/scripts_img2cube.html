@@ -114,7 +114,7 @@
 <h1>Image to CUBE LUT<a class="headerlink" href="#image-to-cube-lut" title="Permalink to this heading"></a></h1>
 <p>Create a color grading LUT by aligning the appearance of a source image to that of a target image.</p>
 <p class="rubric">Summary:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>usage: img2cube.py [-h] [--save-lut SAVE_LUT] [--save-image SAVE_IMAGE] [--size SIZE]
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>usage: tcio-img2cube [-h] [--save-lut SAVE_LUT] [--save-image SAVE_IMAGE] [--size SIZE]
                    [--steps STEPS] [--learning-rate LEARNING_RATE] [--loss-fm LOSS_FM]
                    [--loss-jsd LOSS_JSD] [--loss-ssim LOSS_SSIM] [--empty-lut] [--igfs ]
                    [--igft ] [--ogf ] [--device ]
@@ -153,7 +153,7 @@ optional arguments:
 </pre></div>
 </div>
 <p class="rubric">Example usage:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>./img2cube.py<span class="w"> </span>--t<span class="w"> </span><span class="m">500</span><span class="w"> </span>--save-image<span class="w"> </span>out.png<span class="w"> </span>source.png<span class="w"> </span>target.png
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>tcio-img2cube<span class="w"> </span>--t<span class="w"> </span><span class="m">500</span><span class="w"> </span>--save-image<span class="w"> </span>out.png<span class="w"> </span>source.png<span class="w"> </span>target.png
 </pre></div>
 </div>
 <p class="rubric">Script:</p>
@@ -168,113 +168,117 @@ optional arguments:
 <span class="kn">from</span> <span class="nn">tinycio</span> <span class="kn">import</span> <span class="n">fsio</span><span class="p">,</span> <span class="n">LookupTable</span>
 <span class="kn">from</span> <span class="nn">tinycio.util</span> <span class="kn">import</span> <span class="n">progress_bar</span>
 
-<span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="vm">__doc__</span><span class="p">,</span> <span class="n">formatter_class</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">RawTextHelpFormatter</span><span class="p">)</span>
-<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;source&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Source image file path&#39;</span><span class="p">)</span>
-<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;target&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Target image file path&#39;</span><span class="p">)</span>
-<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--save-image&#39;</span><span class="p">,</span> <span class="s1">&#39;-i&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Output image file path&#39;</span><span class="p">)</span>
-<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--save-lut&#39;</span><span class="p">,</span> <span class="s1">&#39;-l&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Output LUT file path&#39;</span><span class="p">)</span>
-<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--size&#39;</span><span class="p">,</span> <span class="s1">&#39;-s&#39;</span><span class="p">,</span> 
-    <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> 
-    <span class="n">default</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> 
-    <span class="n">help</span><span class="o">=</span><span class="s1">&#39;LUT size (range [0, 128]) (default: </span><span class="si">%(default)s</span><span class="s1">)&#39;</span><span class="p">)</span>
-<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--steps&#39;</span><span class="p">,</span> <span class="s1">&#39;-t&#39;</span><span class="p">,</span> 
-    <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> 
-    <span class="n">default</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> 
-    <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Steps (range [0, 10000]) (default: </span><span class="si">%(default)s</span><span class="s1">)&#39;</span><span class="p">)</span>
-<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--learning-rate&#39;</span><span class="p">,</span> <span class="s1">&#39;-r&#39;</span><span class="p">,</span> 
-    <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> 
-    <span class="n">default</span><span class="o">=</span><span class="mf">0.003</span><span class="p">,</span>
-    <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Learning rate (range [0, 1]) (default: </span><span class="si">%(default)s</span><span class="s1">)&#39;</span><span class="p">)</span>
-<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--strength&#39;</span><span class="p">,</span> 
-    <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> 
-    <span class="n">default</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span>
-    <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Strength of the effect (range [0, 1]) (default: </span><span class="si">%(default)s</span><span class="s1">)&#39;</span><span class="p">)</span>
-<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--empty-lut&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Initialize empty LUT (instead of linear)&#39;</span><span class="p">)</span>
-<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-    <span class="s1">&#39;--igfs&#39;</span><span class="p">,</span> 
-    <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> 
-    <span class="n">default</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span> 
-    <span class="n">const</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span>
-    <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;?&#39;</span><span class="p">,</span>
-    <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;sfloat16&#39;</span><span class="p">,</span><span class="s1">&#39;sfloat32&#39;</span><span class="p">,</span><span class="s1">&#39;uint8&#39;</span><span class="p">,</span><span class="s1">&#39;uint16&#39;</span><span class="p">,</span><span class="s1">&#39;uint32&#39;</span><span class="p">],</span>
-    <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> 
-    <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Source image graphics format (default: </span><span class="si">%(default)s</span><span class="s1">)</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
-        <span class="s1">&#39;CHOICES:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
-        <span class="s1">&#39;    sfloat16, sfloat32 </span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
-        <span class="s1">&#39;    uint8, uint16, uint32 </span><span class="se">\n</span><span class="s1">&#39;</span>
-    <span class="p">)</span>
-<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-    <span class="s1">&#39;--igft&#39;</span><span class="p">,</span>
-    <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> 
-    <span class="n">default</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span> 
-    <span class="n">const</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span>
-    <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;?&#39;</span><span class="p">,</span>
-    <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;sfloat16&#39;</span><span class="p">,</span><span class="s1">&#39;sfloat32&#39;</span><span class="p">,</span><span class="s1">&#39;uint8&#39;</span><span class="p">,</span><span class="s1">&#39;uint16&#39;</span><span class="p">,</span><span class="s1">&#39;uint32&#39;</span><span class="p">],</span>
-    <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
-    <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Target image graphics format (default: </span><span class="si">%(default)s</span><span class="s1">)</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
-        <span class="s1">&#39;CHOICES: [same as above]&#39;</span>
-    <span class="p">)</span>
-<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-    <span class="s1">&#39;--ogf&#39;</span><span class="p">,</span>
-    <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> 
-    <span class="n">default</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span> 
-    <span class="n">const</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span>
-    <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;?&#39;</span><span class="p">,</span>
-    <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;sfloat16&#39;</span><span class="p">,</span><span class="s1">&#39;sfloat32&#39;</span><span class="p">,</span><span class="s1">&#39;uint8&#39;</span><span class="p">,</span><span class="s1">&#39;uint16&#39;</span><span class="p">,</span><span class="s1">&#39;uint32&#39;</span><span class="p">],</span>
-    <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
-    <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Output image graphics format (default: </span><span class="si">%(default)s</span><span class="s1">)</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
-        <span class="s1">&#39;CHOICES: [same as above]&#39;</span>
-    <span class="p">)</span>
-<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-    <span class="s1">&#39;--device&#39;</span><span class="p">,</span> 
-    <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> 
-    <span class="n">default</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">,</span> 
-    <span class="n">const</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">,</span>
-    <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;?&#39;</span><span class="p">,</span>
-    <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;cpu&#39;</span><span class="p">,</span><span class="s1">&#39;cuda&#39;</span><span class="p">],</span>
-    <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> 
-    <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Device for gradient descent (default: </span><span class="si">%(default)s</span><span class="s1">)</span><span class="se">\n</span><span class="s1">&#39;</span>
-    <span class="p">)</span>
-<span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
-
-<span class="k">try</span><span class="p">:</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">save_lut</span> <span class="ow">or</span> <span class="n">args</span><span class="o">.</span><span class="n">save_image</span><span class="p">):</span>
-        <span class="n">parser</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;no output requested - need at least one of: --save-lut or --save-image&#39;</span><span class="p">)</span>
-
-    <span class="k">assert</span> <span class="mf">8.</span> <span class="o">&lt;=</span> <span class="n">args</span><span class="o">.</span><span class="n">size</span> <span class="o">&lt;=</span> <span class="mi">128</span><span class="p">,</span> <span class="s2">&quot;size must be in range [0, 128]&quot;</span>
-    <span class="k">assert</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">args</span><span class="o">.</span><span class="n">steps</span> <span class="o">&lt;=</span> <span class="mi">10000</span><span class="p">,</span> <span class="s2">&quot;steps must be in range [0, 10000]&quot;</span>
-    <span class="k">assert</span> <span class="mf">0.</span> <span class="o">&lt;=</span> <span class="n">args</span><span class="o">.</span><span class="n">strength</span> <span class="o">&lt;=</span> <span class="mf">1.</span><span class="p">,</span> <span class="s2">&quot;strength must be in range [0, 1]&quot;</span>
-    <span class="k">assert</span> <span class="mf">0.</span> <span class="o">&lt;=</span> <span class="n">args</span><span class="o">.</span><span class="n">learning_rate</span> <span class="o">&lt;=</span> <span class="mf">1.</span><span class="p">,</span> <span class="s2">&quot;learning-rate must be in range [0, 1]&quot;</span>
-
-    <span class="n">steps</span>   <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">steps</span><span class="p">)</span>
-    <span class="n">fp_src</span>  <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">source</span><span class="p">)</span> <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">source</span> <span class="k">else</span> <span class="kc">None</span>
-    <span class="n">fp_tgt</span>  <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">target</span><span class="p">)</span> <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">target</span> <span class="k">else</span> <span class="kc">None</span>
-    <span class="n">fp_out</span>  <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">save_image</span><span class="p">)</span> <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">save_image</span> <span class="k">else</span> <span class="kc">None</span>
-    <span class="n">fp_lut</span>  <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">save_lut</span><span class="p">)</span> <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">save_lut</span> <span class="k">else</span> <span class="kc">None</span>
-    <span class="n">gfs_in</span>  <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">igfs</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
-    <span class="n">gft_in</span>  <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">igft</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
-    <span class="n">gf_out</span>  <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">ogf</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
-
-    <span class="n">im_src</span> <span class="o">=</span> <span class="n">fsio</span><span class="o">.</span><span class="n">load_image</span><span class="p">(</span><span class="n">fp_src</span><span class="p">,</span> <span class="n">graphics_format</span><span class="o">=</span><span class="n">fsio</span><span class="o">.</span><span class="n">GraphicsFormat</span><span class="p">[</span><span class="n">gfs_in</span><span class="p">])</span>
-    <span class="n">im_dst</span> <span class="o">=</span> <span class="n">fsio</span><span class="o">.</span><span class="n">load_image</span><span class="p">(</span><span class="n">fp_tgt</span><span class="p">,</span> <span class="n">graphics_format</span><span class="o">=</span><span class="n">fsio</span><span class="o">.</span><span class="n">GraphicsFormat</span><span class="p">[</span><span class="n">gft_in</span><span class="p">])</span>
-    <span class="n">im_src</span> <span class="o">=</span> <span class="n">fsio</span><span class="o">.</span><span class="n">truncate_image</span><span class="p">(</span><span class="n">im_src</span><span class="p">)</span>
-    <span class="n">im_dst</span> <span class="o">=</span> <span class="n">fsio</span><span class="o">.</span><span class="n">truncate_image</span><span class="p">(</span><span class="n">im_dst</span><span class="p">)</span>
-
-    <span class="n">lut</span> <span class="o">=</span> <span class="n">LookupTable</span><span class="o">.</span><span class="n">get_empty</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">size</span><span class="p">)</span> <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">empty_lut</span> <span class="k">else</span> <span class="n">LookupTable</span><span class="o">.</span><span class="n">get_linear</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">size</span><span class="p">)</span> 
-    <span class="n">lut</span><span class="o">.</span><span class="n">fit_to_image</span><span class="p">(</span>
-        <span class="n">im_source</span><span class="o">=</span><span class="n">im_src</span><span class="p">,</span> 
-        <span class="n">im_target</span><span class="o">=</span><span class="n">im_dst</span><span class="p">,</span> 
-        <span class="n">strength</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">strength</span><span class="p">,</span>
-        <span class="n">steps</span><span class="o">=</span><span class="n">steps</span><span class="p">,</span>
-        <span class="n">device</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">device</span><span class="p">,</span>
-        <span class="n">context</span><span class="o">=</span><span class="n">progress_bar</span>
+<span class="k">def</span> <span class="nf">main_cli</span><span class="p">():</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="vm">__doc__</span><span class="p">,</span> <span class="n">formatter_class</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">RawTextHelpFormatter</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;source&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Source image file path&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;target&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Target image file path&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--save-image&#39;</span><span class="p">,</span> <span class="s1">&#39;-i&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Output image file path&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--save-lut&#39;</span><span class="p">,</span> <span class="s1">&#39;-l&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Output LUT file path&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--size&#39;</span><span class="p">,</span> <span class="s1">&#39;-s&#39;</span><span class="p">,</span> 
+        <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> 
+        <span class="n">default</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span> 
+        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;LUT size (range [0, 128]) (default: </span><span class="si">%(default)s</span><span class="s1">)&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--steps&#39;</span><span class="p">,</span> <span class="s1">&#39;-t&#39;</span><span class="p">,</span> 
+        <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> 
+        <span class="n">default</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> 
+        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Steps (range [0, 10000]) (default: </span><span class="si">%(default)s</span><span class="s1">)&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--learning-rate&#39;</span><span class="p">,</span> <span class="s1">&#39;-r&#39;</span><span class="p">,</span> 
+        <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> 
+        <span class="n">default</span><span class="o">=</span><span class="mf">0.003</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Learning rate (range [0, 1]) (default: </span><span class="si">%(default)s</span><span class="s1">)&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--strength&#39;</span><span class="p">,</span> 
+        <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> 
+        <span class="n">default</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Strength of the effect (range [0, 1]) (default: </span><span class="si">%(default)s</span><span class="s1">)&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--empty-lut&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Initialize empty LUT (instead of linear)&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;--igfs&#39;</span><span class="p">,</span> 
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> 
+        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span> 
+        <span class="n">const</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span>
+        <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;?&#39;</span><span class="p">,</span>
+        <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;sfloat16&#39;</span><span class="p">,</span><span class="s1">&#39;sfloat32&#39;</span><span class="p">,</span><span class="s1">&#39;uint8&#39;</span><span class="p">,</span><span class="s1">&#39;uint16&#39;</span><span class="p">,</span><span class="s1">&#39;uint32&#39;</span><span class="p">],</span>
+        <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> 
+        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Source image graphics format (default: </span><span class="si">%(default)s</span><span class="s1">)</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39;CHOICES:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39;    sfloat16, sfloat32 </span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39;    uint8, uint16, uint32 </span><span class="se">\n</span><span class="s1">&#39;</span>
         <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;--igft&#39;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> 
+        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span> 
+        <span class="n">const</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span>
+        <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;?&#39;</span><span class="p">,</span>
+        <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;sfloat16&#39;</span><span class="p">,</span><span class="s1">&#39;sfloat32&#39;</span><span class="p">,</span><span class="s1">&#39;uint8&#39;</span><span class="p">,</span><span class="s1">&#39;uint16&#39;</span><span class="p">,</span><span class="s1">&#39;uint32&#39;</span><span class="p">],</span>
+        <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Target image graphics format (default: </span><span class="si">%(default)s</span><span class="s1">)</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39;CHOICES: [same as above]&#39;</span>
+        <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;--ogf&#39;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> 
+        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span> 
+        <span class="n">const</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span>
+        <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;?&#39;</span><span class="p">,</span>
+        <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;sfloat16&#39;</span><span class="p">,</span><span class="s1">&#39;sfloat32&#39;</span><span class="p">,</span><span class="s1">&#39;uint8&#39;</span><span class="p">,</span><span class="s1">&#39;uint16&#39;</span><span class="p">,</span><span class="s1">&#39;uint32&#39;</span><span class="p">],</span>
+        <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Output image graphics format (default: </span><span class="si">%(default)s</span><span class="s1">)</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39;CHOICES: [same as above]&#39;</span>
+        <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;--device&#39;</span><span class="p">,</span> 
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> 
+        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">,</span> 
+        <span class="n">const</span><span class="o">=</span><span class="s2">&quot;cuda&quot;</span><span class="p">,</span>
+        <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;?&#39;</span><span class="p">,</span>
+        <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;cpu&#39;</span><span class="p">,</span><span class="s1">&#39;cuda&#39;</span><span class="p">],</span>
+        <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> 
+        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Device for gradient descent (default: </span><span class="si">%(default)s</span><span class="s1">)</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="p">)</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
 
-    <span class="n">im_out</span> <span class="o">=</span> <span class="n">lut</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">im_src</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">fp_lut</span><span class="p">:</span> <span class="n">lut</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">fp_lut</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">fp_out</span><span class="p">:</span> <span class="n">fsio</span><span class="o">.</span><span class="n">save_image</span><span class="p">(</span><span class="n">im_out</span><span class="p">,</span> <span class="n">fp_out</span><span class="p">,</span> <span class="n">graphics_format</span><span class="o">=</span><span class="n">fsio</span><span class="o">.</span><span class="n">GraphicsFormat</span><span class="p">[</span><span class="n">gf_out</span><span class="p">])</span>
-<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span> 
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;cannot proceed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">save_lut</span> <span class="ow">or</span> <span class="n">args</span><span class="o">.</span><span class="n">save_image</span><span class="p">):</span>
+            <span class="n">parser</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;no output requested - need at least one of: --save-lut or --save-image&#39;</span><span class="p">)</span>
+
+        <span class="k">assert</span> <span class="mf">8.</span> <span class="o">&lt;=</span> <span class="n">args</span><span class="o">.</span><span class="n">size</span> <span class="o">&lt;=</span> <span class="mi">128</span><span class="p">,</span> <span class="s2">&quot;size must be in range [0, 128]&quot;</span>
+        <span class="k">assert</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">args</span><span class="o">.</span><span class="n">steps</span> <span class="o">&lt;=</span> <span class="mi">10000</span><span class="p">,</span> <span class="s2">&quot;steps must be in range [0, 10000]&quot;</span>
+        <span class="k">assert</span> <span class="mf">0.</span> <span class="o">&lt;=</span> <span class="n">args</span><span class="o">.</span><span class="n">strength</span> <span class="o">&lt;=</span> <span class="mf">1.</span><span class="p">,</span> <span class="s2">&quot;strength must be in range [0, 1]&quot;</span>
+        <span class="k">assert</span> <span class="mf">0.</span> <span class="o">&lt;=</span> <span class="n">args</span><span class="o">.</span><span class="n">learning_rate</span> <span class="o">&lt;=</span> <span class="mf">1.</span><span class="p">,</span> <span class="s2">&quot;learning-rate must be in range [0, 1]&quot;</span>
+
+        <span class="n">steps</span>   <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">steps</span><span class="p">)</span>
+        <span class="n">fp_src</span>  <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">source</span><span class="p">)</span> <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">source</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="n">fp_tgt</span>  <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">target</span><span class="p">)</span> <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">target</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="n">fp_out</span>  <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">save_image</span><span class="p">)</span> <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">save_image</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="n">fp_lut</span>  <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">save_lut</span><span class="p">)</span> <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">save_lut</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="n">gfs_in</span>  <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">igfs</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+        <span class="n">gft_in</span>  <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">igft</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+        <span class="n">gf_out</span>  <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">ogf</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+
+        <span class="n">im_src</span> <span class="o">=</span> <span class="n">fsio</span><span class="o">.</span><span class="n">load_image</span><span class="p">(</span><span class="n">fp_src</span><span class="p">,</span> <span class="n">graphics_format</span><span class="o">=</span><span class="n">fsio</span><span class="o">.</span><span class="n">GraphicsFormat</span><span class="p">[</span><span class="n">gfs_in</span><span class="p">])</span>
+        <span class="n">im_dst</span> <span class="o">=</span> <span class="n">fsio</span><span class="o">.</span><span class="n">load_image</span><span class="p">(</span><span class="n">fp_tgt</span><span class="p">,</span> <span class="n">graphics_format</span><span class="o">=</span><span class="n">fsio</span><span class="o">.</span><span class="n">GraphicsFormat</span><span class="p">[</span><span class="n">gft_in</span><span class="p">])</span>
+        <span class="n">im_src</span> <span class="o">=</span> <span class="n">fsio</span><span class="o">.</span><span class="n">truncate_image</span><span class="p">(</span><span class="n">im_src</span><span class="p">)</span>
+        <span class="n">im_dst</span> <span class="o">=</span> <span class="n">fsio</span><span class="o">.</span><span class="n">truncate_image</span><span class="p">(</span><span class="n">im_dst</span><span class="p">)</span>
+
+        <span class="n">lut</span> <span class="o">=</span> <span class="n">LookupTable</span><span class="o">.</span><span class="n">get_empty</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">size</span><span class="p">)</span> <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">empty_lut</span> <span class="k">else</span> <span class="n">LookupTable</span><span class="o">.</span><span class="n">get_linear</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">size</span><span class="p">)</span> 
+        <span class="n">lut</span><span class="o">.</span><span class="n">fit_to_image</span><span class="p">(</span>
+            <span class="n">im_source</span><span class="o">=</span><span class="n">im_src</span><span class="p">,</span> 
+            <span class="n">im_target</span><span class="o">=</span><span class="n">im_dst</span><span class="p">,</span> 
+            <span class="n">strength</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">strength</span><span class="p">,</span>
+            <span class="n">steps</span><span class="o">=</span><span class="n">steps</span><span class="p">,</span>
+            <span class="n">device</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">device</span><span class="p">,</span>
+            <span class="n">context</span><span class="o">=</span><span class="n">progress_bar</span>
+            <span class="p">)</span>
+
+        <span class="n">im_out</span> <span class="o">=</span> <span class="n">lut</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">im_src</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">fp_lut</span><span class="p">:</span> <span class="n">lut</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">fp_lut</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">fp_out</span><span class="p">:</span> <span class="n">fsio</span><span class="o">.</span><span class="n">save_image</span><span class="p">(</span><span class="n">im_out</span><span class="p">,</span> <span class="n">fp_out</span><span class="p">,</span> <span class="n">graphics_format</span><span class="o">=</span><span class="n">fsio</span><span class="o">.</span><span class="n">GraphicsFormat</span><span class="p">[</span><span class="n">gf_out</span><span class="p">])</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span> 
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;cannot proceed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main_cli</span><span class="p">()</span>
 </pre></div>
 </div>
 </section>

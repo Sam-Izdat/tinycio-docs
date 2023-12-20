@@ -115,7 +115,7 @@
 <h1>HDR Codec<a class="headerlink" href="#hdr-codec" title="Permalink to this heading"></a></h1>
 <p>Encode and decode HDR color data to and from low-bit-depth RGBA files.</p>
 <p class="rubric">Summary:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>usage: hdr_codec.py [-h] (--encode | --decode) [--igf ] [--ogf ] [--format {logluv}] input output
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>usage: tcio-hdr-codec [-h] (--encode | --decode) [--igf ] [--ogf ] [--format {logluv}] input output
 
 Encode and decode high dynamic range color data.
 
@@ -137,10 +137,10 @@ optional arguments:
 </pre></div>
 </div>
 <p class="rubric">Example usage:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>./hdr_codec.py<span class="w"> </span>--encode<span class="w"> </span>hdr_image.exr<span class="w"> </span>encoded_image.png
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>tcio-hdr-codec<span class="w"> </span>--encode<span class="w"> </span>hdr_image.exr<span class="w"> </span>encoded_image.png
 </pre></div>
 </div>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>./hdr_codec.py<span class="w"> </span>--decode<span class="w"> </span>encoded_image.png<span class="w"> </span>hdr_image.exr
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>tcio-hdr-codec<span class="w"> </span>--decode<span class="w"> </span>encoded_image.png<span class="w"> </span>hdr_image.exr
 </pre></div>
 </div>
 <p class="rubric">Script:</p>
@@ -151,68 +151,72 @@ optional arguments:
 <span class="kn">from</span> <span class="nn">argparse</span> <span class="kn">import</span> <span class="n">RawTextHelpFormatter</span>
 <span class="kn">from</span> <span class="nn">tinycio</span> <span class="kn">import</span> <span class="n">fsio</span><span class="p">,</span> <span class="n">Codec</span>
 
-<span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="vm">__doc__</span><span class="p">,</span> <span class="n">formatter_class</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">RawTextHelpFormatter</span><span class="p">)</span>
-<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;input&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Input image file path&#39;</span><span class="p">)</span>
-<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;output&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Output image file path&#39;</span><span class="p">)</span>
-<span class="n">mode</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">add_mutually_exclusive_group</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">mode</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--encode&#39;</span><span class="p">,</span> <span class="s1">&#39;-e&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Encode mode&#39;</span><span class="p">)</span>
-<span class="n">mode</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--decode&#39;</span><span class="p">,</span> <span class="s1">&#39;-d&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Decode mode&#39;</span><span class="p">)</span>
-<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-    <span class="s1">&#39;--igf&#39;</span><span class="p">,</span> 
-    <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> 
-    <span class="n">default</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span> 
-    <span class="n">const</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span>
-    <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;?&#39;</span><span class="p">,</span>
-    <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;sfloat16&#39;</span><span class="p">,</span><span class="s1">&#39;sfloat32&#39;</span><span class="p">,</span><span class="s1">&#39;uint8&#39;</span><span class="p">,</span><span class="s1">&#39;uint16&#39;</span><span class="p">,</span><span class="s1">&#39;uint32&#39;</span><span class="p">],</span>
-    <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> 
-    <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Input graphics format (default: </span><span class="si">%(default)s</span><span class="s1">)</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
-        <span class="s1">&#39;CHOICES:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
-        <span class="s1">&#39;    sfloat16, sfloat32 </span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
-        <span class="s1">&#39;    uint8, uint16, uint32 </span><span class="se">\n</span><span class="s1">&#39;</span>
-    <span class="p">)</span>
-<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-    <span class="s1">&#39;--ogf&#39;</span><span class="p">,</span>
-    <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> 
-    <span class="n">default</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span> 
-    <span class="n">const</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span>
-    <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;?&#39;</span><span class="p">,</span>
-    <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;sfloat16&#39;</span><span class="p">,</span><span class="s1">&#39;sfloat32&#39;</span><span class="p">,</span><span class="s1">&#39;uint8&#39;</span><span class="p">,</span><span class="s1">&#39;uint16&#39;</span><span class="p">,</span><span class="s1">&#39;uint32&#39;</span><span class="p">],</span>
-    <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
-    <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Output graphics format (default: </span><span class="si">%(default)s</span><span class="s1">)</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
-        <span class="s1">&#39;CHOICES: [same as above]&#39;</span>
-    <span class="p">)</span>
-<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-    <span class="s1">&#39;--format&#39;</span><span class="p">,</span> 
-    <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> 
-    <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;logluv&#39;</span><span class="p">],</span>
-    <span class="n">default</span><span class="o">=</span><span class="s1">&#39;logluv&#39;</span><span class="p">,</span>
-    <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Format&#39;</span>
-    <span class="p">)</span>
-<span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">main_cli</span><span class="p">():</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="vm">__doc__</span><span class="p">,</span> <span class="n">formatter_class</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">RawTextHelpFormatter</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;input&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Input image file path&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;output&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Output image file path&#39;</span><span class="p">)</span>
+    <span class="n">mode</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">add_mutually_exclusive_group</span><span class="p">(</span><span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">mode</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--encode&#39;</span><span class="p">,</span> <span class="s1">&#39;-e&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Encode mode&#39;</span><span class="p">)</span>
+    <span class="n">mode</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--decode&#39;</span><span class="p">,</span> <span class="s1">&#39;-d&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Decode mode&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;--igf&#39;</span><span class="p">,</span> 
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> 
+        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span> 
+        <span class="n">const</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span>
+        <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;?&#39;</span><span class="p">,</span>
+        <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;sfloat16&#39;</span><span class="p">,</span><span class="s1">&#39;sfloat32&#39;</span><span class="p">,</span><span class="s1">&#39;uint8&#39;</span><span class="p">,</span><span class="s1">&#39;uint16&#39;</span><span class="p">,</span><span class="s1">&#39;uint32&#39;</span><span class="p">],</span>
+        <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> 
+        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Input graphics format (default: </span><span class="si">%(default)s</span><span class="s1">)</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39;CHOICES:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39;    sfloat16, sfloat32 </span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39;    uint8, uint16, uint32 </span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;--ogf&#39;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> 
+        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span> 
+        <span class="n">const</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span>
+        <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;?&#39;</span><span class="p">,</span>
+        <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;sfloat16&#39;</span><span class="p">,</span><span class="s1">&#39;sfloat32&#39;</span><span class="p">,</span><span class="s1">&#39;uint8&#39;</span><span class="p">,</span><span class="s1">&#39;uint16&#39;</span><span class="p">,</span><span class="s1">&#39;uint32&#39;</span><span class="p">],</span>
+        <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Output graphics format (default: </span><span class="si">%(default)s</span><span class="s1">)</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39;CHOICES: [same as above]&#39;</span>
+        <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;--format&#39;</span><span class="p">,</span> 
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> 
+        <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;logluv&#39;</span><span class="p">],</span>
+        <span class="n">default</span><span class="o">=</span><span class="s1">&#39;logluv&#39;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Format&#39;</span>
+        <span class="p">)</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
 
-<span class="n">fp_in</span>   <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">input</span><span class="p">)</span>
-<span class="n">fp_out</span>  <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
-<span class="n">gf_in</span>   <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">igf</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
-<span class="n">gf_out</span>  <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">ogf</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+    <span class="n">fp_in</span>   <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">input</span><span class="p">)</span>
+    <span class="n">fp_out</span>  <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
+    <span class="n">gf_in</span>   <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">igf</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+    <span class="n">gf_out</span>  <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">ogf</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
 
-<span class="k">try</span><span class="p">:</span>
-    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">format</span> <span class="o">==</span> <span class="s1">&#39;logluv&#39;</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">encode</span><span class="p">:</span>
-            <span class="n">im_hdr</span> <span class="o">=</span> <span class="n">fsio</span><span class="o">.</span><span class="n">load_image</span><span class="p">(</span><span class="n">fp_in</span><span class="p">,</span> <span class="n">graphics_format</span><span class="o">=</span><span class="n">fsio</span><span class="o">.</span><span class="n">GraphicsFormat</span><span class="p">[</span><span class="n">gf_in</span><span class="p">])</span>
-            <span class="n">im_hdr</span> <span class="o">=</span> <span class="n">fsio</span><span class="o">.</span><span class="n">truncate_image</span><span class="p">(</span><span class="n">im_hdr</span><span class="p">)</span>
-            <span class="n">im_logluv</span> <span class="o">=</span> <span class="n">Codec</span><span class="o">.</span><span class="n">logluv_encode</span><span class="p">(</span><span class="n">im_hdr</span><span class="p">)</span>
-            <span class="n">fsio</span><span class="o">.</span><span class="n">save_image</span><span class="p">(</span><span class="n">im_logluv</span><span class="p">,</span> <span class="n">fp_out</span><span class="p">)</span> 
-        <span class="k">elif</span> <span class="n">args</span><span class="o">.</span><span class="n">decode</span><span class="p">:</span>
-            <span class="n">im_logluv</span> <span class="o">=</span> <span class="n">fsio</span><span class="o">.</span><span class="n">load_image</span><span class="p">(</span><span class="n">fp_in</span><span class="p">,</span> <span class="n">graphics_format</span><span class="o">=</span><span class="n">fsio</span><span class="o">.</span><span class="n">GraphicsFormat</span><span class="p">[</span><span class="n">gf_in</span><span class="p">])</span>
-            <span class="n">im_hdr</span> <span class="o">=</span> <span class="n">Codec</span><span class="o">.</span><span class="n">logluv_decode</span><span class="p">(</span><span class="n">im_logluv</span><span class="p">)</span>
-            <span class="n">fsio</span><span class="o">.</span><span class="n">save_image</span><span class="p">(</span><span class="n">im_hdr</span><span class="p">,</span> <span class="n">fp_out</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">format</span> <span class="o">==</span> <span class="s1">&#39;logluv&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">encode</span><span class="p">:</span>
+                <span class="n">im_hdr</span> <span class="o">=</span> <span class="n">fsio</span><span class="o">.</span><span class="n">load_image</span><span class="p">(</span><span class="n">fp_in</span><span class="p">,</span> <span class="n">graphics_format</span><span class="o">=</span><span class="n">fsio</span><span class="o">.</span><span class="n">GraphicsFormat</span><span class="p">[</span><span class="n">gf_in</span><span class="p">])</span>
+                <span class="n">im_hdr</span> <span class="o">=</span> <span class="n">fsio</span><span class="o">.</span><span class="n">truncate_image</span><span class="p">(</span><span class="n">im_hdr</span><span class="p">)</span>
+                <span class="n">im_logluv</span> <span class="o">=</span> <span class="n">Codec</span><span class="o">.</span><span class="n">logluv_encode</span><span class="p">(</span><span class="n">im_hdr</span><span class="p">)</span>
+                <span class="n">fsio</span><span class="o">.</span><span class="n">save_image</span><span class="p">(</span><span class="n">im_logluv</span><span class="p">,</span> <span class="n">fp_out</span><span class="p">)</span> 
+            <span class="k">elif</span> <span class="n">args</span><span class="o">.</span><span class="n">decode</span><span class="p">:</span>
+                <span class="n">im_logluv</span> <span class="o">=</span> <span class="n">fsio</span><span class="o">.</span><span class="n">load_image</span><span class="p">(</span><span class="n">fp_in</span><span class="p">,</span> <span class="n">graphics_format</span><span class="o">=</span><span class="n">fsio</span><span class="o">.</span><span class="n">GraphicsFormat</span><span class="p">[</span><span class="n">gf_in</span><span class="p">])</span>
+                <span class="n">im_hdr</span> <span class="o">=</span> <span class="n">Codec</span><span class="o">.</span><span class="n">logluv_decode</span><span class="p">(</span><span class="n">im_logluv</span><span class="p">)</span>
+                <span class="n">fsio</span><span class="o">.</span><span class="n">save_image</span><span class="p">(</span><span class="n">im_hdr</span><span class="p">,</span> <span class="n">fp_out</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;unexpected mode&#39;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;unexpected mode&#39;</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;unexpected format&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;saved image to: </span><span class="si">{</span><span class="n">fp_out</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span> 
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;cannot encode/decode: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;unexpected format&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;saved image to: </span><span class="si">{</span><span class="n">fp_out</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span> 
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;cannot encode/decode: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+        
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main_cli</span><span class="p">()</span>
 </pre></div>
 </div>
 </section>

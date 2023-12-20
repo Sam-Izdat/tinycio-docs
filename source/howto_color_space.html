@@ -124,13 +124,13 @@
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tinycio</span> <span class="kn">import</span> <span class="n">ColorImage</span>
 
 <span class="c1"># Load sRGB image from disk</span>
-<span class="n">im_in</span> <span class="o">=</span> <span class="n">ColorImage</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;my/image.png&#39;</span><span class="p">,</span> <span class="n">graphics_format</span><span class="o">=</span><span class="s1">&#39;R8G8B8_UINT&#39;</span><span class="p">,</span> <span class="n">color_space</span><span class="o">=</span><span class="s1">&#39;SRGB&#39;</span><span class="p">)</span>
+<span class="n">im_in</span> <span class="o">=</span> <span class="n">ColorImage</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;my/image.png&#39;</span><span class="p">,</span> <span class="n">graphics_format</span><span class="o">=</span><span class="s1">&#39;UINT8&#39;</span><span class="p">,</span> <span class="n">color_space</span><span class="o">=</span><span class="s1">&#39;SRGB&#39;</span><span class="p">)</span>
 
 <span class="c1"># Convert the image</span>
 <span class="n">im_out</span> <span class="o">=</span> <span class="n">im_in</span><span class="o">.</span><span class="n">to_color_space</span><span class="p">(</span><span class="s1">&#39;ACES2065_1&#39;</span><span class="p">)</span>
 
 <span class="c1"># Save as 32-bit-per-channel EXR file</span>
-<span class="n">im_out</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;my/image.exr&#39;</span><span class="p">,</span> <span class="n">graphics_format</span><span class="o">=</span><span class="s1">&#39;R32G32B32_SFLOAT&#39;</span><span class="p">)</span>
+<span class="n">im_out</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;my/image.exr&#39;</span><span class="p">,</span> <span class="n">graphics_format</span><span class="o">=</span><span class="s1">&#39;SFLOAT32&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>This is functionally equivalent to:</p>
@@ -147,7 +147,7 @@
 <span class="n">im_out</span> <span class="o">=</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">im_in</span><span class="p">,</span> <span class="n">cs_in</span><span class="p">,</span> <span class="n">cs_out</span><span class="p">)</span>
 
 <span class="c1"># Save as 32-bit-per-channel EXR file</span>
-<span class="n">fmt_out</span> <span class="o">=</span> <span class="n">fsio</span><span class="o">.</span><span class="n">GraphicsFormat</span><span class="o">.</span><span class="n">R32G32B32_SFLOAT</span>
+<span class="n">fmt_out</span> <span class="o">=</span> <span class="n">fsio</span><span class="o">.</span><span class="n">GraphicsFormat</span><span class="o">.</span><span class="n">SFLOAT32</span>
 <span class="n">fsio</span><span class="o">.</span><span class="n">save_image</span><span class="p">(</span><span class="n">im_out</span><span class="p">,</span> <span class="s1">&#39;my/image.exr&#39;</span><span class="p">,</span> <span class="n">graphics_format</span><span class="o">=</span><span class="n">fmt_out</span><span class="p">)</span>
 </pre></div>
 </div>

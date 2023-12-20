@@ -115,7 +115,7 @@
 <h1>White balance<a class="headerlink" href="#white-balance" title="Permalink to this heading"></a></h1>
 <p>White balance an image.</p>
 <p class="rubric">Summary:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>usage: white_balance.py [-h] --source-white SOURCE_WHITE --target-white TARGET_WHITE
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>usage: tcio-white-balance [-h] --source-white SOURCE_WHITE --target-white TARGET_WHITE
                         [--color-space] [--igf ] [--ogf ]
                         input output
 
@@ -150,7 +150,7 @@ optional arguments:
 </pre></div>
 </div>
 <p class="rubric">Example usage:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>./white_balance.py<span class="w"> </span>-s<span class="w"> </span>auto<span class="w"> </span>-t<span class="w"> </span>EQUAL_ENERGY<span class="w"> </span>-c<span class="w"> </span>srgb_linear<span class="w"> </span>env_map.exr<span class="w"> </span>env_map_bal.exr
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>tcio-white-balance<span class="w"> </span>-s<span class="w"> </span>auto<span class="w"> </span>-t<span class="w"> </span>EQUAL_ENERGY<span class="w"> </span>-c<span class="w"> </span>srgb_linear<span class="w"> </span>env_map.exr<span class="w"> </span>env_map_bal.exr
 </pre></div>
 </div>
 <p class="rubric">Script:</p>
@@ -161,106 +161,110 @@ optional arguments:
 <span class="kn">from</span> <span class="nn">argparse</span> <span class="kn">import</span> <span class="n">RawTextHelpFormatter</span>
 <span class="kn">from</span> <span class="nn">tinycio</span> <span class="kn">import</span> <span class="n">ColorImage</span><span class="p">,</span> <span class="n">Chromaticity</span>
 
-<span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="vm">__doc__</span><span class="p">,</span> <span class="n">formatter_class</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">RawTextHelpFormatter</span><span class="p">)</span>
-<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;input&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Input image file path&#39;</span><span class="p">)</span>
-<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;output&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Output image file path&#39;</span><span class="p">)</span>
-<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-    <span class="s1">&#39;--source-white&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;-s&#39;</span><span class="p">,</span>
-    <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
-    <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Source white point - can be:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
-        <span class="s1">&#39; - string &quot;auto&quot;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
-        <span class="s1">&#39; - name of standard illuminant as e.g. &quot;DAYLIGHT_NOON&quot;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
-        <span class="s1">&#39; - correlated color temperature as e.g. 4600</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
-        <span class="s1">&#39; - chromaticity xy as e.g. &quot;0.123, 0.321&quot;</span><span class="se">\n</span><span class="s1">&#39;</span>
-    <span class="p">)</span>
-<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-    <span class="s1">&#39;--target-white&#39;</span><span class="p">,</span> 
-    <span class="s1">&#39;-t&#39;</span><span class="p">,</span>
-    <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
-    <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Target white point [as above, except no &quot;auto&quot;]&#39;</span>
-    <span class="p">)</span>
-<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-    <span class="s1">&#39;--color-space&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;-c&#39;</span><span class="p">,</span>
-    <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> 
-    <span class="n">default</span><span class="o">=</span><span class="s1">&#39;srgb&#39;</span><span class="p">,</span>
-    <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
-    <span class="n">choices</span><span class="o">=</span><span class="p">[</span>
-        <span class="s1">&#39;cie_xyz&#39;</span><span class="p">,</span> <span class="s1">&#39;cie_xyy&#39;</span><span class="p">,</span> <span class="s1">&#39;srgb&#39;</span><span class="p">,</span> <span class="s1">&#39;srgb_linear&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;rec709&#39;</span><span class="p">,</span> <span class="s1">&#39;rec2020&#39;</span><span class="p">,</span> <span class="s1">&#39;dci_p3&#39;</span><span class="p">,</span> <span class="s1">&#39;display_p3&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;acescg&#39;</span><span class="p">,</span> <span class="s1">&#39;aces2065_1&#39;</span><span class="p">,</span> <span class="s1">&#39;lms&#39;</span><span class="p">,</span> <span class="s1">&#39;hsl&#39;</span><span class="p">,</span> <span class="s1">&#39;hsv&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;oklab&#39;</span><span class="p">,</span> <span class="s1">&#39;cielab&#39;</span><span class="p">],</span>
-    <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Color space of input and output (default: </span><span class="si">%(default)s</span><span class="s1">) </span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
-        <span class="s1">&#39;CHOICES:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
-        <span class="s1">&#39;    cie_xyz, cie_xyy, srgb, srgb_linear </span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
-        <span class="s1">&#39;    rec709, rec2020, dci_p3, display_p3 </span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
-        <span class="s1">&#39;    acescg, aces2065_1, lms, hsl, hsv </span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
-        <span class="s1">&#39;    oklab, cielab&#39;</span>
-    <span class="p">)</span>
-<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-    <span class="s1">&#39;--igf&#39;</span><span class="p">,</span> 
-    <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> 
-    <span class="n">default</span><span class="o">=</span><span class="s1">&#39;unknown&#39;</span><span class="p">,</span> 
-    <span class="n">const</span><span class="o">=</span><span class="s1">&#39;unknown&#39;</span><span class="p">,</span>
-    <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;?&#39;</span><span class="p">,</span>
-    <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;sfloat16&#39;</span><span class="p">,</span><span class="s1">&#39;sfloat32&#39;</span><span class="p">,</span><span class="s1">&#39;uint8&#39;</span><span class="p">,</span><span class="s1">&#39;uint16&#39;</span><span class="p">,</span><span class="s1">&#39;uint32&#39;</span><span class="p">],</span>
-    <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> 
-    <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Input graphics format (default: </span><span class="si">%(default)s</span><span class="s1">)</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
-        <span class="s1">&#39;CHOICES:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
-        <span class="s1">&#39;    sfloat16, sfloat32 </span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
-        <span class="s1">&#39;    uint8, uint16, uint32 </span><span class="se">\n</span><span class="s1">&#39;</span>
-    <span class="p">)</span>
-<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-    <span class="s1">&#39;--ogf&#39;</span><span class="p">,</span>
-    <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> 
-    <span class="n">default</span><span class="o">=</span><span class="s1">&#39;unknown&#39;</span><span class="p">,</span> 
-    <span class="n">const</span><span class="o">=</span><span class="s1">&#39;unknown&#39;</span><span class="p">,</span>
-    <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;?&#39;</span><span class="p">,</span>
-    <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;sfloat16&#39;</span><span class="p">,</span><span class="s1">&#39;sfloat32&#39;</span><span class="p">,</span><span class="s1">&#39;uint8&#39;</span><span class="p">,</span><span class="s1">&#39;uint16&#39;</span><span class="p">,</span><span class="s1">&#39;uint32&#39;</span><span class="p">],</span>
-    <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
-    <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Output graphics format (default: </span><span class="si">%(default)s</span><span class="s1">)</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
-        <span class="s1">&#39;CHOICES: [same as above]&#39;</span>
-    <span class="p">)</span>
-<span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">main_cli</span><span class="p">():</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="vm">__doc__</span><span class="p">,</span> <span class="n">formatter_class</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">RawTextHelpFormatter</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;input&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Input image file path&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;output&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Output image file path&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;--source-white&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;-s&#39;</span><span class="p">,</span>
+        <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Source white point - can be:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39; - string &quot;auto&quot;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39; - name of standard illuminant as e.g. &quot;DAYLIGHT_NOON&quot;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39; - correlated color temperature as e.g. 4600</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39; - chromaticity xy as e.g. &quot;0.123, 0.321&quot;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;--target-white&#39;</span><span class="p">,</span> 
+        <span class="s1">&#39;-t&#39;</span><span class="p">,</span>
+        <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Target white point [as above, except no &quot;auto&quot;]&#39;</span>
+        <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;--color-space&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;-c&#39;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> 
+        <span class="n">default</span><span class="o">=</span><span class="s1">&#39;srgb&#39;</span><span class="p">,</span>
+        <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="n">choices</span><span class="o">=</span><span class="p">[</span>
+            <span class="s1">&#39;cie_xyz&#39;</span><span class="p">,</span> <span class="s1">&#39;cie_xyy&#39;</span><span class="p">,</span> <span class="s1">&#39;srgb&#39;</span><span class="p">,</span> <span class="s1">&#39;srgb_linear&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;rec709&#39;</span><span class="p">,</span> <span class="s1">&#39;rec2020&#39;</span><span class="p">,</span> <span class="s1">&#39;dci_p3&#39;</span><span class="p">,</span> <span class="s1">&#39;display_p3&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;acescg&#39;</span><span class="p">,</span> <span class="s1">&#39;aces2065_1&#39;</span><span class="p">,</span> <span class="s1">&#39;lms&#39;</span><span class="p">,</span> <span class="s1">&#39;hsl&#39;</span><span class="p">,</span> <span class="s1">&#39;hsv&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;oklab&#39;</span><span class="p">,</span> <span class="s1">&#39;cielab&#39;</span><span class="p">],</span>
+        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Color space of input and output (default: </span><span class="si">%(default)s</span><span class="s1">) </span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39;CHOICES:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39;    cie_xyz, cie_xyy, srgb, srgb_linear </span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39;    rec709, rec2020, dci_p3, display_p3 </span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39;    acescg, aces2065_1, lms, hsl, hsv </span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39;    oklab, cielab&#39;</span>
+        <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;--igf&#39;</span><span class="p">,</span> 
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> 
+        <span class="n">default</span><span class="o">=</span><span class="s1">&#39;unknown&#39;</span><span class="p">,</span> 
+        <span class="n">const</span><span class="o">=</span><span class="s1">&#39;unknown&#39;</span><span class="p">,</span>
+        <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;?&#39;</span><span class="p">,</span>
+        <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;sfloat16&#39;</span><span class="p">,</span><span class="s1">&#39;sfloat32&#39;</span><span class="p">,</span><span class="s1">&#39;uint8&#39;</span><span class="p">,</span><span class="s1">&#39;uint16&#39;</span><span class="p">,</span><span class="s1">&#39;uint32&#39;</span><span class="p">],</span>
+        <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> 
+        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Input graphics format (default: </span><span class="si">%(default)s</span><span class="s1">)</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39;CHOICES:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39;    sfloat16, sfloat32 </span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39;    uint8, uint16, uint32 </span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;--ogf&#39;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> 
+        <span class="n">default</span><span class="o">=</span><span class="s1">&#39;unknown&#39;</span><span class="p">,</span> 
+        <span class="n">const</span><span class="o">=</span><span class="s1">&#39;unknown&#39;</span><span class="p">,</span>
+        <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;?&#39;</span><span class="p">,</span>
+        <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;sfloat16&#39;</span><span class="p">,</span><span class="s1">&#39;sfloat32&#39;</span><span class="p">,</span><span class="s1">&#39;uint8&#39;</span><span class="p">,</span><span class="s1">&#39;uint16&#39;</span><span class="p">,</span><span class="s1">&#39;uint32&#39;</span><span class="p">],</span>
+        <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Output graphics format (default: </span><span class="si">%(default)s</span><span class="s1">)</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39;CHOICES: [same as above]&#39;</span>
+        <span class="p">)</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
 
-<span class="n">fp_in</span>       <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">input</span><span class="p">)</span>
-<span class="n">fp_out</span>      <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
-<span class="n">cs</span>          <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">color_space</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
-<span class="n">gf_in</span>       <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">igf</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
-<span class="n">gf_out</span>      <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">ogf</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+    <span class="n">fp_in</span>       <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">input</span><span class="p">)</span>
+    <span class="n">fp_out</span>      <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
+    <span class="n">cs</span>          <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">color_space</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+    <span class="n">gf_in</span>       <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">igf</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+    <span class="n">gf_out</span>      <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">ogf</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
 
-<span class="n">src_white</span>   <span class="o">=</span> <span class="kc">None</span>
-<span class="n">tgt_white</span>   <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">src_white</span>   <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">tgt_white</span>   <span class="o">=</span> <span class="kc">None</span>
 
-<span class="k">try</span><span class="p">:</span>
-    <span class="k">if</span> <span class="s2">&quot;,&quot;</span> <span class="ow">in</span> <span class="n">args</span><span class="o">.</span><span class="n">source_white</span><span class="p">:</span>
-        <span class="n">src_white</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">source_white</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">src_white</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-            <span class="n">src_white</span> <span class="o">=</span> <span class="n">Chromaticity</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">src_white</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">src_white</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s2">&quot;,&quot;</span> <span class="ow">in</span> <span class="n">args</span><span class="o">.</span><span class="n">source_white</span><span class="p">:</span>
+            <span class="n">src_white</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">source_white</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">src_white</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">src_white</span> <span class="o">=</span> <span class="n">Chromaticity</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">src_white</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">src_white</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;script could not interpret source white&#39;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;script could not interpret source white&#39;</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">src_white</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">source_white</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">src_white</span><span class="o">.</span><span class="n">isnumeric</span><span class="p">():</span> <span class="n">src_white</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">src_white</span><span class="p">)</span>
+            <span class="n">src_white</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">source_white</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">src_white</span><span class="o">.</span><span class="n">isnumeric</span><span class="p">():</span> <span class="n">src_white</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">src_white</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="s2">&quot;,&quot;</span> <span class="ow">in</span> <span class="n">args</span><span class="o">.</span><span class="n">target_white</span><span class="p">:</span>
-        <span class="n">tgt_white</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">target_white</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tgt_white</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-            <span class="n">tgt_white</span> <span class="o">=</span> <span class="n">Chromaticity</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">tgt_white</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">tgt_white</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+        <span class="k">if</span> <span class="s2">&quot;,&quot;</span> <span class="ow">in</span> <span class="n">args</span><span class="o">.</span><span class="n">target_white</span><span class="p">:</span>
+            <span class="n">tgt_white</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">target_white</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">tgt_white</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">tgt_white</span> <span class="o">=</span> <span class="n">Chromaticity</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">tgt_white</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">float</span><span class="p">(</span><span class="n">tgt_white</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;script could not interpret target white&#39;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s1">&#39;script could not interpret target white&#39;</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">tgt_white</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">target_white</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">tgt_white</span><span class="o">.</span><span class="n">isnumeric</span><span class="p">():</span> <span class="n">tgt_white</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">tgt_white</span><span class="p">)</span>
+            <span class="n">tgt_white</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">target_white</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">tgt_white</span><span class="o">.</span><span class="n">isnumeric</span><span class="p">():</span> <span class="n">tgt_white</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">tgt_white</span><span class="p">)</span>
 
-    <span class="n">im</span> <span class="o">=</span> <span class="n">ColorImage</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fp_in</span><span class="p">,</span> <span class="n">color_space</span><span class="o">=</span><span class="n">cs</span><span class="p">,</span> <span class="n">graphics_format</span><span class="o">=</span><span class="n">gf_in</span><span class="p">)</span>
-    <span class="n">im</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">white_balance</span><span class="p">(</span><span class="n">src_white</span><span class="p">,</span> <span class="n">tgt_white</span><span class="p">)</span>
-    <span class="n">im</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">fp_out</span><span class="p">,</span> <span class="n">graphics_format</span><span class="o">=</span><span class="n">gf_out</span><span class="p">)</span>
-<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span> 
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;cannot apply: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span> 
+        <span class="n">im</span> <span class="o">=</span> <span class="n">ColorImage</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fp_in</span><span class="p">,</span> <span class="n">color_space</span><span class="o">=</span><span class="n">cs</span><span class="p">,</span> <span class="n">graphics_format</span><span class="o">=</span><span class="n">gf_in</span><span class="p">)</span>
+        <span class="n">im</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">white_balance</span><span class="p">(</span><span class="n">src_white</span><span class="p">,</span> <span class="n">tgt_white</span><span class="p">)</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">fp_out</span><span class="p">,</span> <span class="n">graphics_format</span><span class="o">=</span><span class="n">gf_out</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span> 
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;cannot apply: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span> 
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main_cli</span><span class="p">()</span>
 </pre></div>
 </div>
 </section>

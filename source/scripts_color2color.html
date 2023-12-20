@@ -114,7 +114,7 @@
 <h1>Color to color<a class="headerlink" href="#color-to-color" title="Permalink to this heading"></a></h1>
 <p>Image-to-image color space conversion and tone mapping.</p>
 <p class="rubric">Summary:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>usage: color2color.py [-h] [--igf ] [--ogf ] [--tonemapper ] [--keep-alpha]
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>usage: tcio-color2color [-h] [--igf ] [--ogf ] [--tonemapper ] [--keep-alpha]
                       input input-color-space output output-color-space
 
 Convert the color space an image, with an optional tone mapping stage.
@@ -148,15 +148,15 @@ optional arguments:
 </pre></div>
 </div>
 <p class="rubric">Example usage:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>./color2color.py<span class="w"> </span>-t<span class="w"> </span>agx<span class="w"> </span>input.tif<span class="w"> </span>cie_xyz<span class="w"> </span>output.png<span class="w"> </span>srgb
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>tcio-color2color<span class="w"> </span>-t<span class="w"> </span>agx<span class="w"> </span>input.tif<span class="w"> </span>cie_xyz<span class="w"> </span>output.png<span class="w"> </span>srgb
 </pre></div>
 </div>
 <p>More explicit example:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>./color2color.py<span class="w"> </span>--igf<span class="w"> </span>uint8<span class="w"> </span>--ogf<span class="w"> </span>sfloat16<span class="w"> </span>--keep-alpha<span class="w"> </span>input.png<span class="w"> </span>srgb<span class="w"> </span>output.tif<span class="w"> </span>aces2065_1
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>tcio-color2color<span class="w"> </span>--igf<span class="w"> </span>uint8<span class="w"> </span>--ogf<span class="w"> </span>sfloat16<span class="w"> </span>--keep-alpha<span class="w"> </span>input.png<span class="w"> </span>srgb<span class="w"> </span>output.tif<span class="w"> </span>aces2065_1
 </pre></div>
 </div>
 <p>Also, note that the ACEScg RRT+ODT will not be applied automatically, so in this case “acescg” needs to be repeated - once for the “output color space” and once for the “tonemapper” option:</p>
-<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>./color2color.py<span class="w"> </span>-t<span class="w"> </span>acescg<span class="w"> </span>input.exr<span class="w"> </span>acescg<span class="w"> </span>output.png<span class="w"> </span>srgb
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>tcio-color2color<span class="w"> </span>-t<span class="w"> </span>acescg<span class="w"> </span>input.exr<span class="w"> </span>acescg<span class="w"> </span>output.png<span class="w"> </span>srgb
 </pre></div>
 </div>
 <p class="rubric">Script:</p>
@@ -168,105 +168,109 @@ optional arguments:
 <span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">from</span> <span class="nn">tinycio</span> <span class="kn">import</span> <span class="n">ColorImage</span><span class="p">,</span> <span class="n">ColorSpace</span><span class="p">,</span> <span class="n">ToneMapping</span><span class="p">,</span> <span class="n">fsio</span>
 
-<span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="vm">__doc__</span><span class="p">,</span> <span class="n">formatter_class</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">RawTextHelpFormatter</span><span class="p">)</span>
-<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;input&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Input image file path&#39;</span><span class="p">)</span>
-<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-    <span class="s1">&#39;ics&#39;</span><span class="p">,</span> 
-    <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> 
-    <span class="n">choices</span><span class="o">=</span><span class="p">[</span>
-        <span class="s1">&#39;cie_xyz&#39;</span><span class="p">,</span> <span class="s1">&#39;cie_xyy&#39;</span><span class="p">,</span> <span class="s1">&#39;srgb&#39;</span><span class="p">,</span> <span class="s1">&#39;srgb_linear&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;rec709&#39;</span><span class="p">,</span> <span class="s1">&#39;rec2020&#39;</span><span class="p">,</span> <span class="s1">&#39;dci_p3&#39;</span><span class="p">,</span> <span class="s1">&#39;display_p3&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;acescg&#39;</span><span class="p">,</span> <span class="s1">&#39;aces2065_1&#39;</span><span class="p">,</span> <span class="s1">&#39;lms&#39;</span><span class="p">,</span> <span class="s1">&#39;hsl&#39;</span><span class="p">,</span> <span class="s1">&#39;hsv&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;oklab&#39;</span><span class="p">,</span> <span class="s1">&#39;cielab&#39;</span><span class="p">],</span>
-    <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;input-color-space&#39;</span><span class="p">,</span> <span class="c1"># because bad formatting is bad :(</span>
-    <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Input color space</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
-        <span class="s1">&#39;CHOICES:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
-        <span class="s1">&#39;    cie_xyz, cie_xyy, srgb, srgb_linear </span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
-        <span class="s1">&#39;    rec709, rec2020, dci_p3, display_p3 </span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
-        <span class="s1">&#39;    acescg, aces2065_1, lms, hsl, hsv </span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
-        <span class="s1">&#39;    oklab, cielab&#39;</span>
-    <span class="p">)</span>
-<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;output&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Output image file path&#39;</span><span class="p">)</span>
-<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-    <span class="s1">&#39;ocs&#39;</span><span class="p">,</span>
-    <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> 
-    <span class="n">choices</span><span class="o">=</span><span class="p">[</span>
-        <span class="s1">&#39;cie_xyz&#39;</span><span class="p">,</span> <span class="s1">&#39;cie_xyy&#39;</span><span class="p">,</span> <span class="s1">&#39;srgb&#39;</span><span class="p">,</span> <span class="s1">&#39;srgb_linear&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;rec709&#39;</span><span class="p">,</span> <span class="s1">&#39;rec2020&#39;</span><span class="p">,</span> <span class="s1">&#39;dci_p3&#39;</span><span class="p">,</span> <span class="s1">&#39;display_p3&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;acescg&#39;</span><span class="p">,</span> <span class="s1">&#39;aces2065_1&#39;</span><span class="p">,</span> <span class="s1">&#39;lms&#39;</span><span class="p">,</span> <span class="s1">&#39;hsl&#39;</span><span class="p">,</span> <span class="s1">&#39;hsv&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;oklab&#39;</span><span class="p">,</span> <span class="s1">&#39;cielab&#39;</span><span class="p">],</span>
-    <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;output-color-space&#39;</span><span class="p">,</span>
-    <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Output color space</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
-        <span class="s1">&#39;CHOICES: [same as above]&#39;</span>  
-    <span class="p">)</span>
-<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-    <span class="s1">&#39;--igf&#39;</span><span class="p">,</span> 
-    <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> 
-    <span class="n">default</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span> 
-    <span class="n">const</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span>
-    <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;?&#39;</span><span class="p">,</span>
-    <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;sfloat16&#39;</span><span class="p">,</span><span class="s1">&#39;sfloat32&#39;</span><span class="p">,</span><span class="s1">&#39;uint8&#39;</span><span class="p">,</span><span class="s1">&#39;uint16&#39;</span><span class="p">,</span><span class="s1">&#39;uint32&#39;</span><span class="p">],</span>
-    <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> 
-    <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Input graphics format (default: </span><span class="si">%(default)s</span><span class="s1">)</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
-        <span class="s1">&#39;CHOICES:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
-        <span class="s1">&#39;    sfloat16, sfloat32 </span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
-        <span class="s1">&#39;    uint8, uint16, uint32 </span><span class="se">\n</span><span class="s1">&#39;</span>
-    <span class="p">)</span>
-<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-    <span class="s1">&#39;--ogf&#39;</span><span class="p">,</span>
-    <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> 
-    <span class="n">default</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span> 
-    <span class="n">const</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span>
-    <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;?&#39;</span><span class="p">,</span>
-    <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;sfloat16&#39;</span><span class="p">,</span><span class="s1">&#39;sfloat32&#39;</span><span class="p">,</span><span class="s1">&#39;uint8&#39;</span><span class="p">,</span><span class="s1">&#39;uint16&#39;</span><span class="p">,</span><span class="s1">&#39;uint32&#39;</span><span class="p">],</span>
-    <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
-    <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Output graphics format (default: </span><span class="si">%(default)s</span><span class="s1">)</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
-        <span class="s1">&#39;CHOICES: [same as above]&#39;</span>
-    <span class="p">)</span>
-<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-    <span class="s1">&#39;--tonemapper&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;-t&#39;</span><span class="p">,</span>
-    <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> 
-    <span class="n">default</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span>
-    <span class="n">const</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span>
-    <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;?&#39;</span><span class="p">,</span>
-    <span class="n">choices</span><span class="o">=</span><span class="p">[</span>
-        <span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="s1">&#39;clamp&#39;</span><span class="p">,</span> <span class="s1">&#39;agx&#39;</span><span class="p">,</span> <span class="s1">&#39;agx_punchy&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;acescg&#39;</span><span class="p">,</span> <span class="s1">&#39;hable&#39;</span><span class="p">,</span> <span class="s1">&#39;reinhard&#39;</span><span class="p">],</span>
-    <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
-    <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Tone mapper (default: </span><span class="si">%(default)s</span><span class="s1">)</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
-        <span class="s1">&#39;CHOICES:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
-        <span class="s1">&#39;    none, clamp, agx, agx_punchy </span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
-        <span class="s1">&#39;    acescg, hable, reinhard&#39;</span>
-    <span class="p">)</span>
-<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--keep-alpha&#39;</span><span class="p">,</span> <span class="s1">&#39;-a&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Preserve alpha channel&#39;</span><span class="p">)</span>
-<span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">main_cli</span><span class="p">():</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="vm">__doc__</span><span class="p">,</span> <span class="n">formatter_class</span><span class="o">=</span><span class="n">argparse</span><span class="o">.</span><span class="n">RawTextHelpFormatter</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;input&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Input image file path&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;ics&#39;</span><span class="p">,</span> 
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> 
+        <span class="n">choices</span><span class="o">=</span><span class="p">[</span>
+            <span class="s1">&#39;cie_xyz&#39;</span><span class="p">,</span> <span class="s1">&#39;cie_xyy&#39;</span><span class="p">,</span> <span class="s1">&#39;srgb&#39;</span><span class="p">,</span> <span class="s1">&#39;srgb_linear&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;rec709&#39;</span><span class="p">,</span> <span class="s1">&#39;rec2020&#39;</span><span class="p">,</span> <span class="s1">&#39;dci_p3&#39;</span><span class="p">,</span> <span class="s1">&#39;display_p3&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;acescg&#39;</span><span class="p">,</span> <span class="s1">&#39;aces2065_1&#39;</span><span class="p">,</span> <span class="s1">&#39;lms&#39;</span><span class="p">,</span> <span class="s1">&#39;hsl&#39;</span><span class="p">,</span> <span class="s1">&#39;hsv&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;oklab&#39;</span><span class="p">,</span> <span class="s1">&#39;cielab&#39;</span><span class="p">],</span>
+        <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;input-color-space&#39;</span><span class="p">,</span> <span class="c1"># because bad formatting is bad :(</span>
+        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Input color space</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39;CHOICES:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39;    cie_xyz, cie_xyy, srgb, srgb_linear </span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39;    rec709, rec2020, dci_p3, display_p3 </span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39;    acescg, aces2065_1, lms, hsl, hsv </span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39;    oklab, cielab&#39;</span>
+        <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;output&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Output image file path&#39;</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;ocs&#39;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> 
+        <span class="n">choices</span><span class="o">=</span><span class="p">[</span>
+            <span class="s1">&#39;cie_xyz&#39;</span><span class="p">,</span> <span class="s1">&#39;cie_xyy&#39;</span><span class="p">,</span> <span class="s1">&#39;srgb&#39;</span><span class="p">,</span> <span class="s1">&#39;srgb_linear&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;rec709&#39;</span><span class="p">,</span> <span class="s1">&#39;rec2020&#39;</span><span class="p">,</span> <span class="s1">&#39;dci_p3&#39;</span><span class="p">,</span> <span class="s1">&#39;display_p3&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;acescg&#39;</span><span class="p">,</span> <span class="s1">&#39;aces2065_1&#39;</span><span class="p">,</span> <span class="s1">&#39;lms&#39;</span><span class="p">,</span> <span class="s1">&#39;hsl&#39;</span><span class="p">,</span> <span class="s1">&#39;hsv&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;oklab&#39;</span><span class="p">,</span> <span class="s1">&#39;cielab&#39;</span><span class="p">],</span>
+        <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;output-color-space&#39;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Output color space</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39;CHOICES: [same as above]&#39;</span>  
+        <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;--igf&#39;</span><span class="p">,</span> 
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> 
+        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span> 
+        <span class="n">const</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span>
+        <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;?&#39;</span><span class="p">,</span>
+        <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;sfloat16&#39;</span><span class="p">,</span><span class="s1">&#39;sfloat32&#39;</span><span class="p">,</span><span class="s1">&#39;uint8&#39;</span><span class="p">,</span><span class="s1">&#39;uint16&#39;</span><span class="p">,</span><span class="s1">&#39;uint32&#39;</span><span class="p">],</span>
+        <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> 
+        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Input graphics format (default: </span><span class="si">%(default)s</span><span class="s1">)</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39;CHOICES:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39;    sfloat16, sfloat32 </span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39;    uint8, uint16, uint32 </span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;--ogf&#39;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> 
+        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span> 
+        <span class="n">const</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span>
+        <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;?&#39;</span><span class="p">,</span>
+        <span class="n">choices</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;sfloat16&#39;</span><span class="p">,</span><span class="s1">&#39;sfloat32&#39;</span><span class="p">,</span><span class="s1">&#39;uint8&#39;</span><span class="p">,</span><span class="s1">&#39;uint16&#39;</span><span class="p">,</span><span class="s1">&#39;uint32&#39;</span><span class="p">],</span>
+        <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Output graphics format (default: </span><span class="si">%(default)s</span><span class="s1">)</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39;CHOICES: [same as above]&#39;</span>
+        <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s1">&#39;--tonemapper&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;-t&#39;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> 
+        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">,</span>
+        <span class="n">const</span><span class="o">=</span><span class="s2">&quot;unknown&quot;</span><span class="p">,</span>
+        <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;?&#39;</span><span class="p">,</span>
+        <span class="n">choices</span><span class="o">=</span><span class="p">[</span>
+            <span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="s1">&#39;clamp&#39;</span><span class="p">,</span> <span class="s1">&#39;agx&#39;</span><span class="p">,</span> <span class="s1">&#39;agx_punchy&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;acescg&#39;</span><span class="p">,</span> <span class="s1">&#39;hable&#39;</span><span class="p">,</span> <span class="s1">&#39;reinhard&#39;</span><span class="p">],</span>
+        <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Tone mapper (default: </span><span class="si">%(default)s</span><span class="s1">)</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39;CHOICES:</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39;    none, clamp, agx, agx_punchy </span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> \
+            <span class="s1">&#39;    acescg, hable, reinhard&#39;</span>
+        <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--keep-alpha&#39;</span><span class="p">,</span> <span class="s1">&#39;-a&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Preserve alpha channel&#39;</span><span class="p">)</span>
+    <span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
 
-<span class="n">fp_in</span>   <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">input</span><span class="p">)</span>
-<span class="n">fp_out</span>  <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
-<span class="n">gf_in</span>   <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">igf</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
-<span class="n">gf_out</span>  <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">ogf</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
-<span class="n">cs_in</span>   <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">ics</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
-<span class="n">cs_out</span>  <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">ocs</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
-<span class="n">tm</span>      <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">tonemapper</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
-<span class="n">alpha</span>   <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">keep_alpha</span>
+    <span class="n">fp_in</span>   <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">input</span><span class="p">)</span>
+    <span class="n">fp_out</span>  <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
+    <span class="n">gf_in</span>   <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">igf</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+    <span class="n">gf_out</span>  <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">ogf</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+    <span class="n">cs_in</span>   <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">ics</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+    <span class="n">cs_out</span>  <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">ocs</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+    <span class="n">tm</span>      <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">tonemapper</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+    <span class="n">alpha</span>   <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">keep_alpha</span>
 
-<span class="k">try</span><span class="p">:</span>
-    <span class="n">im</span><span class="p">,</span> <span class="n">ac</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
-    <span class="k">if</span> <span class="n">alpha</span><span class="p">:</span>
-        <span class="n">im</span> <span class="o">=</span> <span class="n">fsio</span><span class="o">.</span><span class="n">load_image</span><span class="p">(</span><span class="n">fp_in</span><span class="p">,</span> <span class="n">graphics_format</span><span class="o">=</span><span class="n">fsio</span><span class="o">.</span><span class="n">GraphicsFormat</span><span class="p">[</span><span class="n">gf_in</span><span class="p">])</span>
-        <span class="n">ac</span> <span class="o">=</span> <span class="n">im</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span><span class="o">...</span><span class="p">]</span> <span class="k">if</span> <span class="n">im</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span> <span class="k">else</span> <span class="kc">None</span>
-        <span class="n">im</span> <span class="o">=</span> <span class="n">ColorImage</span><span class="p">(</span><span class="n">fsio</span><span class="o">.</span><span class="n">truncate_image</span><span class="p">(</span><span class="n">im</span><span class="p">),</span> <span class="n">color_space</span><span class="o">=</span><span class="n">cs_in</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">im</span> <span class="o">=</span> <span class="n">ColorImage</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fp_in</span><span class="p">,</span> <span class="n">color_space</span><span class="o">=</span><span class="n">cs_in</span><span class="p">,</span> <span class="n">graphics_format</span><span class="o">=</span><span class="n">gf_in</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">im</span><span class="p">,</span> <span class="n">ac</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">alpha</span><span class="p">:</span>
+            <span class="n">im</span> <span class="o">=</span> <span class="n">fsio</span><span class="o">.</span><span class="n">load_image</span><span class="p">(</span><span class="n">fp_in</span><span class="p">,</span> <span class="n">graphics_format</span><span class="o">=</span><span class="n">fsio</span><span class="o">.</span><span class="n">GraphicsFormat</span><span class="p">[</span><span class="n">gf_in</span><span class="p">])</span>
+            <span class="n">ac</span> <span class="o">=</span> <span class="n">im</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span><span class="o">...</span><span class="p">]</span> <span class="k">if</span> <span class="n">im</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span> <span class="k">else</span> <span class="kc">None</span>
+            <span class="n">im</span> <span class="o">=</span> <span class="n">ColorImage</span><span class="p">(</span><span class="n">fsio</span><span class="o">.</span><span class="n">truncate_image</span><span class="p">(</span><span class="n">im</span><span class="p">),</span> <span class="n">color_space</span><span class="o">=</span><span class="n">cs_in</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">im</span> <span class="o">=</span> <span class="n">ColorImage</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">fp_in</span><span class="p">,</span> <span class="n">color_space</span><span class="o">=</span><span class="n">cs_in</span><span class="p">,</span> <span class="n">graphics_format</span><span class="o">=</span><span class="n">gf_in</span><span class="p">)</span>
 
-    <span class="n">im</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">tone_map</span><span class="p">(</span><span class="n">tm</span><span class="p">)</span> <span class="c1"># it&#39;s okay to pass &quot;NONE&quot;</span>
-    <span class="n">im</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">to_color_space</span><span class="p">(</span><span class="n">cs_out</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">ac</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span> <span class="n">im</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">im</span><span class="p">,</span> <span class="n">ac</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-    <span class="n">im</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">fp_out</span><span class="p">,</span> <span class="n">gf_out</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;saved image to: </span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">fp_out</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span> 
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;cannot convert: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span> 
+        <span class="n">im</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">tone_map</span><span class="p">(</span><span class="n">tm</span><span class="p">)</span> <span class="c1"># it&#39;s okay to pass &quot;NONE&quot;</span>
+        <span class="n">im</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">to_color_space</span><span class="p">(</span><span class="n">cs_out</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ac</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span> <span class="n">im</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">im</span><span class="p">,</span> <span class="n">ac</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">im</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">fp_out</span><span class="p">,</span> <span class="n">gf_out</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;saved image to: </span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">realpath</span><span class="p">(</span><span class="n">fp_out</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span> 
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;cannot convert: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span> 
+        
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main_cli</span><span class="p">()</span>
 </pre></div>
 </div>
 </section>
