@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>tinycio &mdash; tinycio a documentation</title>
+  <title>tinycio 0.6.1 &mdash; the docs</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=92fd9be5" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/css/patch.css?v=77628c61" />
@@ -16,7 +16,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=c0846a87"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=4b70c393"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="_static/js/theme.js"></script>
@@ -100,7 +100,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">tinycio</li>
+      <li class="breadcrumb-item active">tinycio 0.6.1</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -110,26 +110,30 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="tinycio">
-<h1>tinycio<a class="headerlink" href="#tinycio" title="Permalink to this heading"></a></h1>
+  <section id="tinycio-version">
+<h1>tinycio 0.6.1<a class="headerlink" href="#tinycio-version" title="Permalink to this heading"></a></h1>
 <p class="rubric">color stuff for people who don’t science too good</p>
 <p>A primitive, lightweight Python color library for PyTorch-involved projects. It implements color space conversion, tone mapping, LUT usage and creation, basic color correction and color balancing, and HDR-LDR encoding/decoding.</p>
 <section id="getting-started">
 <h2>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this heading"></a></h2>
-<ul class="simple">
+<ol class="arabic simple">
 <li><p>Recommended: set up a clean Python environment</p></li>
 <li><p><a class="reference external" href="https://pytorch.org/get-started/locally/">Install PyTorch  as instructed here</a></p></li>
 <li><p>Run <code class="code docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">tinycio</span></code></p></li>
 <li><p>Run <code class="code docutils literal notranslate"><span class="pre">tcio-setup</span></code> (installs freeimage binaries; <a class="reference external" href="https://imageio.readthedocs.io/en/stable/_autosummary/imageio.plugins.freeimage.html#module-imageio.plugins.freeimage">iio docs on fi</a>)</p></li>
-</ul>
+</ol>
 </section>
 <section id="about">
 <h2>About<a class="headerlink" href="#about" title="Permalink to this heading"></a></h2>
 <p>Release version
-0.6.1
-a</p>
+0.6.1 a</p>
+<ul class="simple">
+<li><p><a class="reference external" href="./tinycio.pdf">PDF manual</a></p></li>
+<li><p><a class="reference external" href="https://github.com/Sam-Izdat/tinycio-docs/releases">Previous versions</a></p></li>
+</ul>
 <p class="rubric">Requires</p>
 <ul class="simple">
+<li><p>Python &gt;=3.8</p></li>
 <li><p>PyTorch &gt;=2.0 (earlier versions untested)</p></li>
 <li><p>NumPy &gt;=1.21</p></li>
 <li><p>imageio &gt;=2.9 (with PNG-FI FreeImage plugin)</p></li>
@@ -191,6 +195,45 @@ project like <a class="reference external" href="https://www.colour-science.org/
 <p class="rubric">License</p>
 <p><a class="reference internal" href="source/license.html"><span class="doc">MIT License</span></a> on all original code - see source for details</p>
 </section>
+<section id="how-to">
+<h2>How to<a class="headerlink" href="#how-to" title="Permalink to this heading"></a></h2>
+<p>The <a class="reference internal" href="source/howto_hello.html"><span class="doc">how-to section</span></a> has a brief tutorial on the library’s core functionality.</p>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<p>See: <a class="reference internal" href="source/example_sweeps.html"><span class="doc">examples section</span></a>.</p>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Permalink to this heading"></a></h2>
+<p>See: <a class="reference internal" href="source/tinycio.html"><span class="doc">reference section</span></a>.</p>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="scripts">
+<h2>Scripts<a class="headerlink" href="#scripts" title="Permalink to this heading"></a></h2>
+<p>The library comes with a few bundled CLI scripts:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="source/scripts_color2color.html"><span class="doc">tcio-color2color</span></a></p></li>
+<li><p><a class="reference internal" href="source/scripts_hdr_codec.html"><span class="doc">tcio-hdr-codec</span></a></p></li>
+<li><p><a class="reference internal" href="source/scripts_white_balance.html"><span class="doc">tcio-white-balance</span></a></p></li>
+<li><p><a class="reference internal" href="source/scripts_img2cube.html"><span class="doc">tcio-img2cube</span></a></p></li>
+</ul>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="links">
+<h2>Links<a class="headerlink" href="#links" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/Sam-Izdat/tinycio">GitHub</a></p></li>
+<li><p><a class="reference external" href="https://pypi.org/project/tinycio/">PyPi</a></p></li>
+</ul>
+<div class="toctree-wrapper compound">
+</div>
+</section>
 <section id="special-thanks">
 <h2>Special thanks<a class="headerlink" href="#special-thanks" title="Permalink to this heading"></a></h2>
 <ul class="simple">
@@ -204,16 +247,6 @@ project like <a class="reference external" href="https://www.colour-science.org/
 <li><p>The <a class="reference external" href="https://bottosson.github.io/posts/colorpicker/">OKHSL and OKHSV</a> color space conversions originally by  <a class="reference external" href="https://github.com/holbrookdev">Brian Holbrook</a></p></li>
 <li><p><a class="reference external" href="./_images/wb4k6k12k.jpg">Test photograph</a> from <a class="reference external" href="https://www.pexels.com/&#64;biancasalgado/">Bianca Salgado</a></p></li>
 </ul>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
-<div class="toctree-wrapper compound">
-</div>
 </section>
 </section>
 

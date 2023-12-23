@@ -1,31 +1,38 @@
-.. tinycio documentation master file, created by
-    sphinx-quickstart on Fri Dec  1 17:02:44 2023.
-    You can adapt this file completely to your liking, but it should at least
-    contain the root `toctree` directive.
-
-tinycio
+tinycio |version|
 =======================================
 
 .. rubric:: color stuff for people who don't science too good
 
 A primitive, lightweight Python color library for PyTorch-involved projects. It implements color space conversion, tone mapping, LUT usage and creation, basic color correction and color balancing, and HDR-LDR encoding/decoding. 
 
+.. uncomment for PDF build ("only" directive is ignored):
+
+.. .. toctree::
+..     :hidden:
+
+..     self
+
 Getting started
 ---------------
 
-* Recommended: set up a clean Python environment
-* `Install PyTorch  as instructed here <https://pytorch.org/get-started/locally/>`_
-* Run :code:`pip install tinycio`
-* Run :code:`tcio-setup` (installs freeimage binaries; `iio docs on fi <https://imageio.readthedocs.io/en/stable/_autosummary/imageio.plugins.freeimage.html#module-imageio.plugins.freeimage>`_)
+#. Recommended: set up a clean Python environment
+#. `Install PyTorch  as instructed here <https://pytorch.org/get-started/locally/>`_
+#. Run :code:`pip install tinycio`
+#. Run :code:`tcio-setup` (installs freeimage binaries; `iio docs on fi <https://imageio.readthedocs.io/en/stable/_autosummary/imageio.plugins.freeimage.html#module-imageio.plugins.freeimage>`_)
 
 About 
 -----
 Release version 
-|version|
 |release|
+
+.. only:: html
+
+    * `PDF manual <./tinycio.pdf>`_
+    * `Previous versions <https://github.com/Sam-Izdat/tinycio-docs/releases>`_
 
 .. rubric:: Requires
 
+- Python >=3.8
 - PyTorch >=2.0 (earlier versions untested)
 - NumPy >=1.21
 - imageio >=2.9 (with PNG-FI FreeImage plugin)
@@ -92,19 +99,12 @@ project like `Colour <https://www.colour-science.org/>`_.
 
 :doc:`MIT License <source/license>` on all original code - see source for details
 
+How to
+------
 
-Special thanks
---------------
+.. only:: html
 
-* Certain color space conversions are from `S2CRNet <https://github.com/stefanLeong/S2CRNet>`_, `convert-colors-py <https://github.com/CairX/convert-colors-py>`_ and `seal-3d <https://github.com/windingwind/seal-3d>`_. 
-* CCT calculation is from `colour-science <https://github.com/colour-science/>`_. 
-* The AgX implementation is owed to `Troy James Sobotka <https://github.com/sobotka/AgX-S2O3>`_ and `Liam Collod <https://github.com/MrLixm/AgXc>`_. 
-* Some loss computations are borrowed from `NLUT <https://github.com/semchan/NLUT/tree/main>`_. 
-* Thanks to the `@64 blog <https://64.github.io/tonemapping/>`_ for explaining common tone mapping algorithms. 
-* The white balancing and the von Kries transform were kindly explained by `pbrt <https://pbr-book.org/4ed/Cameras_and_Film/Film_and_Imaging>`_.
-* The `OKLAB <https://bottosson.github.io/posts/oklab/>`_ color space was developed by `Björn Ottosson <https://bottosson.github.io/>`_
-* The `OKHSL and OKHSV <https://bottosson.github.io/posts/colorpicker/>`_ color space conversions originally by  `Brian Holbrook <https://github.com/holbrookdev>`_
-* `Test photograph <./_images/wb4k6k12k.jpg>`_ from `Bianca Salgado <https://www.pexels.com/@biancasalgado/>`_
+    The :doc:`how-to section <source/howto_hello>` has a brief tutorial on the library's core functionality.
 
 .. toctree::
     :maxdepth: 4
@@ -123,6 +123,13 @@ Special thanks
     source/howto_bake_lut
     source/howto_autograde
 
+Examples
+--------
+
+.. only:: html
+
+    See: :doc:`examples section <source/example_sweeps>`.
+
 .. toctree::
     :maxdepth: 4
     :caption: Examples:
@@ -130,6 +137,14 @@ Special thanks
 
     source/example_sweeps
     source/example_image_manip
+
+
+Reference
+---------
+
+.. only:: html
+
+    See: :doc:`reference section <source/tinycio>`.
 
 .. toctree::
     :maxdepth: 2
@@ -142,6 +157,19 @@ Special thanks
     source/license
     genindex
 
+
+Scripts
+-------
+
+.. only:: html
+
+    The library comes with a few bundled CLI scripts:
+
+    * :doc:`tcio-color2color <source/scripts_color2color>`
+    * :doc:`tcio-hdr-codec <source/scripts_hdr_codec>`
+    * :doc:`tcio-white-balance <source/scripts_white_balance>`
+    * :doc:`tcio-img2cube <source/scripts_img2cube>`
+
 .. toctree::
     :maxdepth: 2
     :caption: Scripts:
@@ -152,6 +180,12 @@ Special thanks
     source/scripts_white_balance
     source/scripts_img2cube
 
+Links
+-----
+
+* `GitHub <https://github.com/Sam-Izdat/tinycio>`_
+* `PyPi <https://pypi.org/project/tinycio/>`_
+
 .. toctree::
     :maxdepth: 2
     :caption: Links:
@@ -160,3 +194,32 @@ Special thanks
     GitHub <https://github.com/Sam-Izdat/tinycio>
     PyPi <https://pypi.org/project/tinycio/>
     Docs <https://sam-izdat.github.io/tinycio-docs/>
+
+.. Sibling projects
+.. ----------------
+
+.. * `tinylcm <https://sam-izdat.github.io/tinylcm-docs/>`_
+.. * `tinypbr <https://sam-izdat.github.io/tinypbr-docs/>`_
+.. * `tinytex <https://sam-izdat.github.io/tinytex-docs/>`_
+
+.. .. toctree::
+..     :maxdepth: 2
+..     :caption: Sibling projects:
+..     :hidden:
+
+..     tinylcm <https://sam-izdat.github.io/tinylcm-docs/>
+..     tinypbr <https://sam-izdat.github.io/tinypbr-docs/>
+..     tinytex <https://sam-izdat.github.io/tinytex-docs/>
+
+Special thanks
+--------------
+
+* Certain color space conversions are from `S2CRNet <https://github.com/stefanLeong/S2CRNet>`_, `convert-colors-py <https://github.com/CairX/convert-colors-py>`_ and `seal-3d <https://github.com/windingwind/seal-3d>`_. 
+* CCT calculation is from `colour-science <https://github.com/colour-science/>`_. 
+* The AgX implementation is owed to `Troy James Sobotka <https://github.com/sobotka/AgX-S2O3>`_ and `Liam Collod <https://github.com/MrLixm/AgXc>`_. 
+* Some loss computations are borrowed from `NLUT <https://github.com/semchan/NLUT/tree/main>`_. 
+* Thanks to the `@64 blog <https://64.github.io/tonemapping/>`_ for explaining common tone mapping algorithms. 
+* The white balancing and the von Kries transform were kindly explained by `pbrt <https://pbr-book.org/4ed/Cameras_and_Film/Film_and_Imaging>`_.
+* The `OKLAB <https://bottosson.github.io/posts/oklab/>`_ color space was developed by `Björn Ottosson <https://bottosson.github.io/>`_
+* The `OKHSL and OKHSV <https://bottosson.github.io/posts/colorpicker/>`_ color space conversions originally by  `Brian Holbrook <https://github.com/holbrookdev>`_
+* `Test photograph <./_images/wb4k6k12k.jpg>`_ from `Bianca Salgado <https://www.pexels.com/@biancasalgado/>`_
