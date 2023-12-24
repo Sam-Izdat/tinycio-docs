@@ -174,6 +174,7 @@
 <li class="toctree-l2"><a class="reference internal" href="util.html">util module</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="ref_cs_gfx.html">Color spaces and graphics formats</a></li>
 <li class="toctree-l1"><a class="reference internal" href="about_release_notes.html">Release notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="about_modules.html">Modules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="license.html">License</a></li>
@@ -624,38 +625,7 @@ treated as distinct color spaces. Example:</p>
 <dt class="sig sig-object py" id="tinycio.ColorSpace.Variant">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Variant</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/colorspace.html#ColorSpace.Variant"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.ColorSpace.Variant" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code></p>
-<p>Color space enum. Available options are:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>- UNKNOWN       # no color space specified - flag for &quot;take a guess&quot;
-- NONCOLOR      # non-color data or color space not applicable
-- CIE_XYZ       # CIE 1931 XYZ color space
-- CIE_XYY       # xyY color space derived from above
-- SRGB          # sRGB with gamma curve
-- SRGB_LIN      # scene-linear sRGB/Rec. 709 - no gamma curve
-- REC709        # almost the same as sRGB, different gamma
-- REC2020       # a wide-gamut RGB color space
-- REC2020_LIN   # scene-linear Rec. 2020
-- DCI_P3        # a wide-gamut RGB color space
-- DCI_P3_LIN    # scene-linear DCI-P3
-- DISPLAY_P3    # some apple DCI P3 clone with different gamma, because apple
-- ACESCG        # AP1 primaries; scene-linear, less suitable for color grading
-- ACESCC        # AP1 primaries; logarithmic, more suitable for color grading
-- ACESCCT†      # AP1 primaries; logarithmic, more suitable for color grading
-- ACES2065_1††  # AP0 primaries; scene-linear†††, core ACES color space
-- LMS           # &quot;long, medium, short&quot; / tristimulus
-- OKLAB         # perceptual; Björn Ottosson&#39;s improvement over CIELAB
-- CIELAB        # perceptual; for &quot;characterization of colored surfaces and dyes&quot;
-- CIELUV†††     # perceptual; for &quot;characterization of color displays&quot;
-- HSV           # &quot;hue, saturation, value&quot;; assumed sRGB-relative
-- HSL           # &quot;hue, saturation, lightness&quot;; assumed sRGB-relative
-- OKHSV††††     # perceptually linear HSV based on OKLAB
-- OKHSL††††     # perceptually linear HSL based on OKLAB
-
-†       - not yet implemented
-††      - scene-linear but still bad for rendering - can have negative values
-†††     - currently disabled
-††††    - intended for color picking; not implemented for image tensor conversion
-</pre></div>
-</div>
+<p>Color space enum. For a list of available options, see <a class="reference internal" href="ref_cs_gfx.html#ref-color-spaces"><span class="std std-ref">Color spaces</span></a>.</p>
 </dd></dl>
 
 <dl class="py method">

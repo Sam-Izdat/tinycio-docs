@@ -65,6 +65,7 @@
 <p class="caption" role="heading"><span class="caption-text">Reference:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../source/tinycio.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/ref_cs_gfx.html">Color spaces and graphics formats</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../source/about_release_notes.html">Release notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../source/about_modules.html">Modules</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../source/license.html">License</a></li>
@@ -132,40 +133,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 <div class="viewcode-block" id="ColorSpace.Variant"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.ColorSpace.Variant">[docs]</a>    <span class="k">class</span> <span class="nc">Variant</span><span class="p">(</span><span class="n">IntEnum</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Color space enum. Available options are:        </span>
-
-<span class="sd">        .. highlight:: text</span>
-<span class="sd">        .. code-block:: text</span>
-
-<span class="sd">            - UNKNOWN       # no color space specified - flag for &quot;take a guess&quot;</span>
-<span class="sd">            - NONCOLOR      # non-color data or color space not applicable</span>
-<span class="sd">            - CIE_XYZ       # CIE 1931 XYZ color space</span>
-<span class="sd">            - CIE_XYY       # xyY color space derived from above</span>
-<span class="sd">            - SRGB          # sRGB with gamma curve</span>
-<span class="sd">            - SRGB_LIN      # scene-linear sRGB/Rec. 709 - no gamma curve   </span>
-<span class="sd">            - REC709        # almost the same as sRGB, different gamma</span>
-<span class="sd">            - REC2020       # a wide-gamut RGB color space</span>
-<span class="sd">            - REC2020_LIN   # scene-linear Rec. 2020</span>
-<span class="sd">            - DCI_P3        # a wide-gamut RGB color space</span>
-<span class="sd">            - DCI_P3_LIN    # scene-linear DCI-P3</span>
-<span class="sd">            - DISPLAY_P3    # some apple DCI P3 clone with different gamma, because apple</span>
-<span class="sd">            - ACESCG        # AP1 primaries; scene-linear, less suitable for color grading</span>
-<span class="sd">            - ACESCC        # AP1 primaries; logarithmic, more suitable for color grading</span>
-<span class="sd">            - ACESCCT†      # AP1 primaries; logarithmic, more suitable for color grading </span>
-<span class="sd">            - ACES2065_1††  # AP0 primaries; scene-linear†††, core ACES color space                                </span>
-<span class="sd">            - LMS           # &quot;long, medium, short&quot; / tristimulus</span>
-<span class="sd">            - OKLAB         # perceptual; Björn Ottosson&#39;s improvement over CIELAB</span>
-<span class="sd">            - CIELAB        # perceptual; for &quot;characterization of colored surfaces and dyes&quot;</span>
-<span class="sd">            - CIELUV†††     # perceptual; for &quot;characterization of color displays&quot;</span>
-<span class="sd">            - HSV           # &quot;hue, saturation, value&quot;; assumed sRGB-relative</span>
-<span class="sd">            - HSL           # &quot;hue, saturation, lightness&quot;; assumed sRGB-relative</span>
-<span class="sd">            - OKHSV††††     # perceptually linear HSV based on OKLAB</span>
-<span class="sd">            - OKHSL††††     # perceptually linear HSL based on OKLAB</span>
-
-<span class="sd">            †       - not yet implemented</span>
-<span class="sd">            ††      - scene-linear but still bad for rendering - can have negative values</span>
-<span class="sd">            †††     - currently disabled</span>
-<span class="sd">            ††††    - intended for color picking; not implemented for image tensor conversion</span>
+<span class="sd">        Color space enum. For a list of available options, see :ref:`ref_color_spaces`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">UNKNOWN</span>     <span class="o">=</span> <span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">0</span>  
         <span class="n">NONCOLOR</span>    <span class="o">=</span> <span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">1</span>  
