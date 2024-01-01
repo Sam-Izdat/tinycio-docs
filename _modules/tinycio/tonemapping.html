@@ -15,7 +15,7 @@
   
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=4b70c393"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=d90f1d78"></script>
         <script src="../../_static/doctools.js?v=888ff710"></script>
         <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -167,6 +167,7 @@
 <span class="sd">        space for the chosen tone mapper.</span>
 
 <span class="sd">        .. note::</span>
+
 <span class="sd">            :code:`ACESCG` tone mapping is performed on AP1 primaries and expects input in the </span>
 <span class="sd">            :code:`ACESCG` color space. All other tone mappers expect :code:`SRGB_LIN`.</span>
 <span class="sd">            The :code:`tone_map()` method of :class:`ColorImage` handles this conversion automatically.</span>
@@ -281,9 +282,10 @@
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_aces_fitted</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">im</span><span class="p">:</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Apply ACES Filmic (fitted version) tone mapping.</span>
+<span class="sd">        Apply ACES (fitted version) tone mapping.</span>
 <span class="sd">        </span>
 <span class="sd">        .. note::</span>
+<span class="sd">        </span>
 <span class="sd">            expects [C, H, W] input in ACESCcg color space, return ACEScg image tensor</span>
 
 <span class="sd">        :param torch.Tensor im: Input image tensor.</span>

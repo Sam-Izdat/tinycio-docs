@@ -15,7 +15,7 @@
   
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=4b70c393"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=d90f1d78"></script>
         <script src="../../_static/doctools.js?v=888ff710"></script>
         <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -212,6 +212,7 @@
 <span class="sd">        of the source image matches the target. </span>
 
 <span class="sd">        .. note::</span>
+
 <span class="sd">            Images need to be in *ACEScc* color space.</span>
 
 <span class="sd">        :param im_source: Source image tensor in *ACEScc* color space. Values must be in range [0, 1].</span>
@@ -498,6 +499,7 @@
 <span class="sd">        Bake color correction to a CUBE LUT. </span>
 
 <span class="sd">        .. note::</span>
+<span class="sd">        </span>
 <span class="sd">            Regardless of working color space, the LUT will be limited to a [0, 1] range of values.</span>
 
 <span class="sd">        :param lut_size: Size of the LUT. Range [4, 512].</span>
@@ -609,7 +611,7 @@
 <span class="sd">        :return: True if successful</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">mihr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__range_midtone_color_h</span>
-        <span class="n">misr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__range_color_filter_s</span>
+        <span class="n">misr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__range_midtone_color_s</span>
         <span class="k">assert</span> <span class="n">mihr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">hue</span> <span class="o">&lt;=</span> <span class="n">mihr</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="sa">f</span><span class="s2">&quot;midtone color hue must be in range [</span><span class="si">{</span><span class="n">mihr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">mihr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">]&quot;</span>
         <span class="k">assert</span> <span class="n">misr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">saturation</span> <span class="o">&lt;=</span> <span class="n">misr</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="sa">f</span><span class="s2">&quot;midtone color saturation must be in range [</span><span class="si">{</span><span class="n">misr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">misr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">]&quot;</span>
         <span class="n">midtone_color_srgb</span> <span class="o">=</span> <span class="n">col_okhsv_to_srgb</span><span class="p">(</span><span class="n">Float3</span><span class="p">(</span><span class="n">hue</span><span class="p">,</span> <span class="n">saturation</span><span class="p">,</span> <span class="mf">1.</span><span class="p">))</span>

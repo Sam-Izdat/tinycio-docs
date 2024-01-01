@@ -15,7 +15,7 @@
   
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=4b70c393"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=d90f1d78"></script>
         <script src="../../_static/doctools.js?v=888ff710"></script>
         <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -187,12 +187,14 @@
 <span class="sd">    This is the most hands-off abstraction, as it automatically handles color space conversion as needed.</span>
 
 <span class="sd">    .. note::</span>
+
 <span class="sd">        All transformative methods will create a new :class:`ColorImage` instance without altering the </span>
 <span class="sd">        current state. PyTorch methods and operations will work as expected but will return with </span>
 <span class="sd">        the color space set to UNKNOWN. Exceptions include :code:`.clamp()`, :code:`.lerp()`, </span>
 <span class="sd">        :code:`.minimum()`, and :code:`.maximum()`, which will retain the current state for convenience.</span>
 
 <span class="sd">    .. note:: </span>
+
 <span class="sd">        Assumes size/shape [C, H, W] for both PyTorch tensor or NumPy array inputs.</span>
 
 <span class="sd">    :param param0: [C=3, H, W] sized tensor/array</span>
@@ -426,6 +428,7 @@
 <span class="sd">        Apply tone mapping and return as new :class:`ColorImage`.</span>
 
 <span class="sd">        .. note::</span>
+
 <span class="sd">            Any needed color space conversion will be handled automatically.</span>
 
 <span class="sd">        :param tone_mapper: the tone mapper to use</span>
@@ -468,6 +471,7 @@
 <span class="sd">        White balance the image and return as new :class:`ColorImage`.</span>
 
 <span class="sd">        .. note::</span>
+
 <span class="sd">            Any needed color space conversion will be handled automatically.</span>
 <span class="sd">            </span>
 <span class="sd">        :param source_white: Source white point - can be any of: </span>
@@ -538,6 +542,7 @@
 <span class="sd">    Can be converted to :class:`ColorImage` with :code:`ColorImage(mono_im.repeat(3,1,1))`.</span>
 
 <span class="sd">    .. note:: </span>
+<span class="sd">    </span>
 <span class="sd">        Assumes size/shape [C, H, W] for both PyTorch tensor or NumPy array inputs.</span>
 
 <span class="sd">    :param param0: [C=1, H, W] sized tensor/array</span>

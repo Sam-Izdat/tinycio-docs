@@ -15,7 +15,7 @@
   
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=4b70c393"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=d90f1d78"></script>
         <script src="../../_static/doctools.js?v=888ff710"></script>
         <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -161,7 +161,7 @@
         <span class="n">OKHSL</span>       <span class="o">=</span> <span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">23</span>
 
         <span class="n">SCENE_LINEAR</span>    <span class="o">=</span> <span class="n">SRGB_LIN</span> <span class="o">|</span> <span class="n">REC2020_LIN</span> <span class="o">|</span> <span class="n">DCI_P3_LIN</span> <span class="o">|</span> <span class="n">ACESCG</span> <span class="o">|</span> <span class="n">ACES2065_1</span> <span class="o">|</span> <span class="n">CIE_XYZ</span>
-        <span class="n">PERCEPTUAL</span>      <span class="o">=</span> <span class="n">OKLAB</span> <span class="o">|</span> <span class="n">CIELAB</span> <span class="o">|</span> <span class="n">CIELUV</span>
+        <span class="n">PERCEPTUAL</span>      <span class="o">=</span> <span class="n">OKLAB</span> <span class="o">|</span> <span class="n">CIELAB</span> <span class="o">|</span> <span class="n">CIELUV</span> <span class="o">|</span> <span class="n">OKHSL</span> <span class="o">|</span> <span class="n">OKHSV</span>
         <span class="n">CYLINDRICAL</span>     <span class="o">=</span> <span class="n">HSL</span> <span class="o">|</span> <span class="n">HSV</span> <span class="o">|</span> <span class="n">OKHSL</span> <span class="o">|</span> <span class="n">OKHSV</span>
 
         <span class="n">GAMUT_SRGB</span>      <span class="o">=</span> <span class="n">SRGB</span> <span class="o">|</span> <span class="n">SRGB_LIN</span> <span class="o">|</span> <span class="n">REC709</span> <span class="o">|</span> <span class="n">HSL</span> <span class="o">|</span> <span class="n">HSV</span>
@@ -181,7 +181,7 @@
         <span class="n">WP_CCT_6000</span>     <span class="o">=</span> <span class="n">ACESCG</span> <span class="o">|</span> <span class="n">ACESCC</span> <span class="o">|</span> <span class="n">ACESCCT</span> <span class="o">|</span> <span class="n">ACES2065_1</span>
 
         <span class="n">MODEL_RGB</span>       <span class="o">=</span> <span class="n">SRGB</span> <span class="o">|</span> <span class="n">SRGB_LIN</span> <span class="o">|</span> <span class="n">REC709</span> <span class="o">|</span> <span class="n">REC2020</span> <span class="o">|</span> <span class="n">REC2020_LIN</span> <span class="o">|</span> <span class="n">DCI_P3</span> <span class="o">|</span> <span class="n">DCI_P3_LIN</span> <span class="o">|</span> <span class="n">DISPLAY_P3</span> <span class="o">|</span> \
-            <span class="n">ACESCG</span> <span class="o">|</span> <span class="n">ACESCC</span> <span class="o">|</span> <span class="n">ACESCCT</span> <span class="o">|</span> <span class="n">ACES2065_1</span>
+                        <span class="n">ACESCG</span> <span class="o">|</span> <span class="n">ACESCC</span> <span class="o">|</span> <span class="n">ACESCCT</span> <span class="o">|</span> <span class="n">ACES2065_1</span>
         <span class="n">MODEL_CIE</span>       <span class="o">=</span> <span class="n">CIE_XYZ</span> <span class="o">|</span> <span class="n">CIE_XYY</span> <span class="o">|</span> <span class="n">CIELAB</span> <span class="o">|</span> <span class="n">CIELUV</span>
         <span class="n">MODEL_CAM</span>       <span class="o">=</span> <span class="mi">0</span>
         <span class="n">MODEL_YUV</span>       <span class="o">=</span> <span class="mi">0</span>
@@ -197,14 +197,14 @@
         <span class="c1"># FIXME: LUV doesn&#39;t quite match expected values, needs further testing</span>
 
     <span class="n">mat_xyz_to_srgb</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="p">[</span> <span class="mf">3.2409699419</span><span class="p">,</span><span class="o">-</span><span class="mf">1.5373831776</span><span class="p">,</span><span class="o">-</span><span class="mf">0.4986107603</span><span class="p">],</span>
-        <span class="p">[</span><span class="o">-</span><span class="mf">0.9692436363</span><span class="p">,</span> <span class="mf">1.8759675015</span><span class="p">,</span> <span class="mf">0.0415550574</span><span class="p">],</span>
-        <span class="p">[</span> <span class="mf">0.0556300797</span><span class="p">,</span><span class="o">-</span><span class="mf">0.2039769589</span><span class="p">,</span> <span class="mf">1.0569715142</span><span class="p">]]</span>
+        <span class="p">[</span><span class="mf">3.24096994190452134</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.53738317757009346</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.498610760293003284</span><span class="p">],</span>
+        <span class="p">[</span><span class="o">-</span><span class="mf">0.969243636280879826</span><span class="p">,</span> <span class="mf">1.87596750150772067</span><span class="p">,</span> <span class="mf">0.0415550574071756125</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.0556300796969936084</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.203976958888976564</span><span class="p">,</span> <span class="mf">1.05697151424287856</span><span class="p">]]</span>
 
     <span class="n">mat_srgb_to_xyz</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="p">[</span> <span class="mf">0.4124564</span><span class="p">,</span> <span class="mf">0.3575761</span><span class="p">,</span> <span class="mf">0.1804375</span><span class="p">],</span>
-        <span class="p">[</span> <span class="mf">0.2126729</span><span class="p">,</span> <span class="mf">0.7151522</span><span class="p">,</span> <span class="mf">0.0721750</span><span class="p">],</span>
-        <span class="p">[</span> <span class="mf">0.0193339</span><span class="p">,</span> <span class="mf">0.1191920</span><span class="p">,</span> <span class="mf">0.9503041</span><span class="p">]]</span>
+        <span class="p">[</span><span class="mf">0.412390799265959481</span><span class="p">,</span> <span class="mf">0.357584339383877964</span><span class="p">,</span> <span class="mf">0.180480788401834288</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.212639005871510358</span><span class="p">,</span> <span class="mf">0.715168678767755927</span><span class="p">,</span> <span class="mf">0.072192315360733715</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.0193308187155918507</span><span class="p">,</span> <span class="mf">0.119194779794625988</span><span class="p">,</span> <span class="mf">0.950532152249660581</span><span class="p">]]</span>
 
     <span class="n">mat_srgb_to_acescg</span> <span class="o">=</span> <span class="p">[</span>
         <span class="p">[</span> <span class="mf">0.6130974024</span><span class="p">,</span> <span class="mf">0.3395231462</span><span class="p">,</span> <span class="mf">0.04737945141</span><span class="p">],</span>
@@ -238,15 +238,29 @@
         <span class="p">[</span><span class="o">-</span><span class="mf">0.0420569547</span><span class="p">,</span> <span class="mf">1.04205695</span><span class="p">,</span>   <span class="mf">3.37864801e-11</span><span class="p">],</span>
         <span class="p">[</span><span class="o">-</span><span class="mf">0.0196375546</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0786360454</span><span class="p">,</span> <span class="mf">1.0982736</span><span class="p">]]</span> 
 
+    <span class="c1"># NOTE: No chromatic adaptation</span>
     <span class="n">mat_srgb_to_dcip3</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="p">[</span> <span class="mf">0.86857974</span><span class="p">,</span>   <span class="mf">0.128919139</span><span class="p">,</span>  <span class="mf">0.00250112193</span><span class="p">],</span>
-        <span class="p">[</span> <span class="mf">0.0345404103</span><span class="p">,</span> <span class="mf">0.961811386</span><span class="p">,</span>  <span class="mf">0.00364820339</span><span class="p">],</span>
-        <span class="p">[</span> <span class="mf">0.0167714291</span><span class="p">,</span> <span class="mf">0.0710399976</span><span class="p">,</span> <span class="mf">0.912188574</span><span class="p">]]</span>
+        <span class="p">[</span><span class="mf">0.868579739716132409</span><span class="p">,</span>  <span class="mf">0.128919138460847047</span><span class="p">,</span>  <span class="mf">0.00250112182302054368</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.0345404102543194426</span><span class="p">,</span> <span class="mf">0.961811386361919975</span><span class="p">,</span>  <span class="mf">0.0036482033837605824</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.0167714290414502718</span><span class="p">,</span> <span class="mf">0.0710399977868858352</span><span class="p">,</span> <span class="mf">0.912188573171663893</span><span class="p">]]</span>
 
+    <span class="c1"># NOTE: No chromatic adaptation</span>
     <span class="n">mat_dcip3_to_srgb</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="p">[</span> <span class="mf">1.15751641</span><span class="p">,</span>  <span class="o">-</span><span class="mf">0.154962379</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0025540282</span><span class="p">],</span>
-        <span class="p">[</span><span class="o">-</span><span class="mf">0.0415000715</span><span class="p">,</span> <span class="mf">1.04556792</span><span class="p">,</span>  <span class="o">-</span><span class="mf">0.00406785158</span><span class="p">],</span>
-        <span class="p">[</span><span class="o">-</span><span class="mf">0.018050039</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0785782724</span><span class="p">,</span> <span class="mf">1.09662831</span><span class="p">]]</span>
+        <span class="p">[</span> <span class="mf">1.15751640619975871</span><span class="p">,</span>  <span class="o">-</span><span class="mf">0.154962378073857756</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.00255402812590095854</span><span class="p">],</span>
+        <span class="p">[</span><span class="o">-</span><span class="mf">0.0415000715306859699</span><span class="p">,</span> <span class="mf">1.04556792307969925</span><span class="p">,</span>  <span class="o">-</span><span class="mf">0.00406785154901328463</span><span class="p">],</span>
+        <span class="p">[</span><span class="o">-</span><span class="mf">0.0180500389562539583</span><span class="p">,</span><span class="o">-</span><span class="mf">0.0785782726530290654</span><span class="p">,</span> <span class="mf">1.09662831160928302</span><span class="p">]]</span>
+
+    <span class="c1"># NOTE: No chromatic adaptation</span>
+    <span class="n">mat_dcip3_to_xyz</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">[</span> <span class="mf">0.445169815564552417</span><span class="p">,</span>    <span class="mf">0.277134409206777664</span><span class="p">,</span>  <span class="mf">0.172282669815564564</span><span class="p">],</span>
+        <span class="p">[</span> <span class="mf">0.209491677912730539</span><span class="p">,</span>    <span class="mf">0.721595254161043636</span><span class="p">,</span>  <span class="mf">0.0689130679262258258</span><span class="p">],</span>
+        <span class="p">[</span><span class="o">-</span><span class="mf">3.63410131696985616e-17</span><span class="p">,</span> <span class="mf">0.0470605600539811521</span><span class="p">,</span> <span class="mf">0.907355394361973415</span><span class="p">]]</span>
+
+    <span class="c1"># NOTE: No chromatic adaptation</span>
+    <span class="n">mat_xyz_to_dcip3</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">[</span><span class="mf">2.7253940304917328</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.01800300622718496</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.440163195190036463</span><span class="p">],</span>
+        <span class="p">[</span><span class="o">-</span><span class="mf">0.795168025808764195</span><span class="p">,</span> <span class="mf">1.689732054843624</span><span class="p">,</span> <span class="mf">0.0226471906084774533</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.0412418913957000325</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0876390192158623825</span><span class="p">,</span> <span class="mf">1.10092937864632191</span><span class="p">]]</span>
 
     <span class="n">mat_srgb_to_rec2020</span> <span class="o">=</span> <span class="p">[</span>
         <span class="p">[</span> <span class="mf">0.627403896</span><span class="p">,</span>  <span class="mf">0.329283039</span><span class="p">,</span>  <span class="mf">0.0433130657</span><span class="p">],</span>
@@ -258,13 +272,23 @@
         <span class="p">[</span><span class="o">-</span><span class="mf">0.124550475</span><span class="p">,</span> <span class="mf">1.1328999</span><span class="p">,</span>   <span class="o">-</span><span class="mf">0.00834942258</span><span class="p">],</span>
         <span class="p">[</span><span class="o">-</span><span class="mf">0.0181507633</span><span class="p">,</span><span class="o">-</span><span class="mf">0.100578898</span><span class="p">,</span> <span class="mf">1.11872966</span><span class="p">]]</span>
 
-    <span class="c1"># NOTE: DOES NOT include &quot;D60&quot;/D65 white point conversion</span>
+    <span class="n">mat_rec2020_to_xyz</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">[</span><span class="mf">0.636958048301291</span><span class="p">,</span> <span class="mf">0.144616903586208</span><span class="p">,</span> <span class="mf">0.168880975164172</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.262700212011267</span><span class="p">,</span> <span class="mf">0.677998071518871</span><span class="p">,</span> <span class="mf">0.059301716469862</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">4.99410657446607e-17</span><span class="p">,</span> <span class="mf">0.0280726930490874</span><span class="p">,</span> <span class="mf">1.06098505771079</span><span class="p">]]</span>
+
+    <span class="n">mat_xyz_to_rec2020</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">[</span><span class="mf">1.71665118797127</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.355670783776393</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.25336628137366</span><span class="p">],</span>
+        <span class="p">[</span><span class="o">-</span><span class="mf">0.666684351832489</span><span class="p">,</span> <span class="mf">1.61648123663494</span><span class="p">,</span> <span class="mf">0.0157685458139111</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.0176398574453108</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0427706132578085</span><span class="p">,</span> <span class="mf">0.942103121235474</span><span class="p">]]</span>
+
+    <span class="c1"># NOTE: No chromatic adaptation</span>
     <span class="n">mat_acescg_to_xyz</span> <span class="o">=</span> <span class="p">[</span>
         <span class="p">[</span> <span class="mf">0.66245418</span><span class="p">,</span> <span class="mf">0.13400421</span><span class="p">,</span> <span class="mf">0.15618769</span><span class="p">],</span>
         <span class="p">[</span> <span class="mf">0.27222872</span><span class="p">,</span> <span class="mf">0.67408177</span><span class="p">,</span> <span class="mf">0.05368952</span><span class="p">],</span>
         <span class="p">[</span><span class="o">-</span><span class="mf">0.00557465</span><span class="p">,</span> <span class="mf">0.00406073</span><span class="p">,</span> <span class="mf">1.0103391</span> <span class="p">]]</span>
 
-    <span class="c1"># NOTE: DOES NOT include &quot;D60&quot;/D65 white point conversion</span>
+    <span class="c1"># NOTE: No chromatic adaptation</span>
     <span class="n">mat_xyz_to_acescg</span> <span class="o">=</span> <span class="p">[</span>
         <span class="p">[</span> <span class="mf">1.64102338</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.32480329</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2364247</span> <span class="p">],</span>
         <span class="p">[</span><span class="o">-</span><span class="mf">0.66366286</span><span class="p">,</span>  <span class="mf">1.61533159</span><span class="p">,</span>  <span class="mf">0.01675635</span><span class="p">],</span>
@@ -281,6 +305,18 @@
         <span class="p">[</span> <span class="mf">1.01303000</span><span class="p">,</span> <span class="mf">0.00610531</span><span class="p">,</span><span class="o">-</span><span class="mf">0.01497100</span><span class="p">],</span>
         <span class="p">[</span> <span class="mf">0.00769823</span><span class="p">,</span> <span class="mf">0.99816500</span><span class="p">,</span><span class="o">-</span><span class="mf">0.00503203</span><span class="p">],</span>
         <span class="p">[</span><span class="o">-</span><span class="mf">0.00284131</span><span class="p">,</span> <span class="mf">0.00468516</span><span class="p">,</span> <span class="mf">0.92450700</span><span class="p">]]</span>
+
+    <span class="c1"># NOTE: For CIE XYZ color</span>
+    <span class="n">mat_d65_to_dci</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">[</span><span class="mf">0.976578896646979768</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0154362646984919742</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.016686021704209866</span><span class="p">],</span>
+        <span class="p">[</span><span class="o">-</span><span class="mf">0.0256896658505145926</span><span class="p">,</span> <span class="mf">1.02853916787996963</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.00378517365630504153</span><span class="p">],</span>
+        <span class="p">[</span><span class="o">-</span><span class="mf">0.00570574587417104179</span><span class="p">,</span> <span class="mf">0.0110778657389971485</span><span class="p">,</span> <span class="mf">0.871176159390377409</span><span class="p">]]</span>
+    
+    <span class="c1"># NOTE: For CIE XYZ color</span>
+    <span class="n">mat_dci_to_d65</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">[</span><span class="mf">1.02449672775257752</span><span class="p">,</span> <span class="mf">0.0151635410224165156</span><span class="p">,</span> <span class="mf">0.0196885223342066827</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.0256121933371584198</span><span class="p">,</span> <span class="mf">0.97258630562441342</span><span class="p">,</span> <span class="mf">0.00471635229242730096</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.0063842306500876874</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.012268082736730219</span><span class="p">,</span> <span class="mf">1.14794244517367791</span><span class="p">]]</span>
 
     <span class="n">mat_xyz_to_lms</span> <span class="o">=</span> <span class="p">[</span>
         <span class="p">[</span> <span class="mf">0.8951</span><span class="p">,</span> <span class="mf">0.2664</span><span class="p">,</span><span class="o">-</span><span class="mf">0.1614</span><span class="p">],</span>
@@ -316,7 +352,6 @@
         <span class="p">[</span> <span class="mf">1.00000001</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.10556134</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.06385417</span><span class="p">],</span>
         <span class="p">[</span> <span class="mf">1.00000005</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.08948418</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.29148554</span><span class="p">]]</span>
 
-
 <div class="viewcode-block" id="ColorSpace.convert"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.ColorSpace.convert">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">convert</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">im</span><span class="p">:</span><span class="n">Union</span><span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">ColorImage</span><span class="p">],</span> <span class="n">source</span><span class="p">:</span><span class="n">Variant</span><span class="p">,</span> <span class="n">destination</span><span class="p">:</span><span class="n">Variant</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -325,12 +360,14 @@
 <span class="sd">        Unless otherwise noted or required by specification (e.g. ACES), we assume D65 white point.</span>
 
 <span class="sd">        .. warning::</span>
+
 <span class="sd">            Tone mapping is not included, so converting the color space of HDR values to  </span>
 <span class="sd">            an LDR-designated color space will not automatically reduce dynamic range. For example, </span>
 <span class="sd">            taking an HDR image from :code:`ACESCG` (AP1) to :code:`SRGB` will yield the sRGB </span>
 <span class="sd">            gamma curve, but values outside the required range must still be tone mapped or clamped beforehand.</span>
 
 <span class="sd">        .. warning::</span>
+
 <span class="sd">            Cylindrical transformations (HSL, HSV) should be given input in [0, 1] linear sRGB range </span>
 <span class="sd">            (or equivalent). This is not strictly enforced but input outside this range may yield </span>
 <span class="sd">            unpredictable results or *NaN* values.</span>
@@ -354,7 +391,6 @@
         <span class="k">assert</span> <span class="n">op</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">cs</span><span class="o">.</span><span class="n">DISABLED</span><span class="p">,</span>       <span class="sa">f</span><span class="s2">&quot;Destination color space disabled: </span><span class="si">{</span><span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="p">(</span><span class="n">op</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span>
 
         <span class="n">err_not_implemented</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Color space conversion not implemented: </span><span class="si">{</span><span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="p">(</span><span class="n">op</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span> 
-        <span class="k">if</span> <span class="n">ip</span> <span class="o">&amp;</span> <span class="n">cs</span><span class="o">.</span><span class="n">NON_NEGATIVE</span><span class="p">:</span> <span class="n">im</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">inf</span><span class="p">)</span>
 
         <span class="c1"># Direct path where it matters, loop-de-loop elsewhere</span>
         <span class="k">if</span> <span class="n">ip</span> <span class="o">==</span> <span class="n">cs</span><span class="o">.</span><span class="n">SRGB_LIN</span><span class="p">:</span>
@@ -362,8 +398,8 @@
             <span class="k">elif</span> <span class="n">op</span> <span class="o">==</span> <span class="n">cs</span><span class="o">.</span><span class="n">REC709</span><span class="p">:</span>       <span class="n">im</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">rec709_oetf</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
             <span class="k">elif</span> <span class="n">op</span> <span class="o">==</span> <span class="n">cs</span><span class="o">.</span><span class="n">REC2020</span><span class="p">:</span>      <span class="n">im</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">rec2020_oetf</span><span class="p">(</span><span class="n">mm</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">mat_srgb_to_rec2020</span><span class="p">))</span>
             <span class="k">elif</span> <span class="n">op</span> <span class="o">==</span> <span class="n">cs</span><span class="o">.</span><span class="n">REC2020_LIN</span><span class="p">:</span>  <span class="n">im</span> <span class="o">=</span> <span class="n">mm</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">mat_srgb_to_rec2020</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="n">op</span> <span class="o">==</span> <span class="n">cs</span><span class="o">.</span><span class="n">DCI_P3</span><span class="p">:</span>       <span class="n">im</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">dcip3_oetf</span><span class="p">(</span><span class="n">mm</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">mat_srgb_to_dcip3</span><span class="p">))</span>
-            <span class="k">elif</span> <span class="n">op</span> <span class="o">==</span> <span class="n">cs</span><span class="o">.</span><span class="n">DCI_P3_LIN</span><span class="p">:</span>   <span class="n">im</span> <span class="o">=</span> <span class="n">mm</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">mat_srgb_to_dcip3</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">op</span> <span class="o">==</span> <span class="n">cs</span><span class="o">.</span><span class="n">DCI_P3</span><span class="p">:</span>       <span class="n">im</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">dcip3_oetf</span><span class="p">(</span><span class="n">mm</span><span class="p">(</span><span class="n">mm</span><span class="p">(</span><span class="n">mm</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">mat_srgb_to_xyz</span><span class="p">),</span> <span class="bp">cls</span><span class="o">.</span><span class="n">mat_d65_to_dci</span><span class="p">),</span> <span class="bp">cls</span><span class="o">.</span><span class="n">mat_xyz_to_dcip3</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="n">op</span> <span class="o">==</span> <span class="n">cs</span><span class="o">.</span><span class="n">DCI_P3_LIN</span><span class="p">:</span>   <span class="n">im</span> <span class="o">=</span> <span class="n">mm</span><span class="p">(</span><span class="n">mm</span><span class="p">(</span><span class="n">mm</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">mat_srgb_to_xyz</span><span class="p">),</span> <span class="bp">cls</span><span class="o">.</span><span class="n">mat_d65_to_dci</span><span class="p">),</span> <span class="bp">cls</span><span class="o">.</span><span class="n">mat_xyz_to_dcip3</span><span class="p">)</span>
             <span class="k">elif</span> <span class="n">op</span> <span class="o">==</span> <span class="n">cs</span><span class="o">.</span><span class="n">DISPLAY_P3</span><span class="p">:</span>   <span class="n">im</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">srgb_oetf</span><span class="p">(</span><span class="n">mm</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">mat_srgb_to_displayp3</span><span class="p">))</span>
             <span class="k">elif</span> <span class="n">op</span> <span class="o">==</span> <span class="n">cs</span><span class="o">.</span><span class="n">CIE_XYZ</span><span class="p">:</span>      <span class="n">im</span> <span class="o">=</span> <span class="n">mm</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">mat_srgb_to_xyz</span><span class="p">)</span>
             <span class="k">elif</span> <span class="n">op</span> <span class="o">==</span> <span class="n">cs</span><span class="o">.</span><span class="n">CIE_XYY</span><span class="p">:</span>      <span class="n">im</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_xyz_to_xyy</span><span class="p">(</span><span class="n">mm</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">mat_srgb_to_xyz</span><span class="p">))</span>
@@ -382,13 +418,31 @@
             <span class="k">elif</span> <span class="n">op</span> <span class="o">==</span> <span class="n">cs</span><span class="o">.</span><span class="n">HSV</span><span class="p">:</span>          <span class="n">im</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_rgb_to_hsv</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>                       <span class="n">im</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">srgb_eotf</span><span class="p">(</span><span class="n">im</span><span class="p">),</span> <span class="n">cs</span><span class="o">.</span><span class="n">SRGB_LIN</span><span class="p">,</span> <span class="n">op</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">ip</span> <span class="o">==</span> <span class="n">cs</span><span class="o">.</span><span class="n">REC709</span><span class="p">:</span>           <span class="n">im</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">rec709_eotf</span><span class="p">(</span><span class="n">im</span><span class="p">),</span> <span class="n">cs</span><span class="o">.</span><span class="n">SRGB_LIN</span><span class="p">,</span> <span class="n">op</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">ip</span> <span class="o">==</span> <span class="n">cs</span><span class="o">.</span><span class="n">REC2020</span><span class="p">:</span>          <span class="n">im</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">mm</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">rec2020_eotf</span><span class="p">(</span><span class="n">im</span><span class="p">),</span> <span class="bp">cls</span><span class="o">.</span><span class="n">mat_rec2020_to_srgb</span><span class="p">),</span> <span class="n">cs</span><span class="o">.</span><span class="n">SRGB_LIN</span><span class="p">,</span> <span class="n">op</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">ip</span> <span class="o">==</span> <span class="n">cs</span><span class="o">.</span><span class="n">REC2020_LIN</span><span class="p">:</span>      <span class="n">im</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">mm</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">mat_rec2020_to_srgb</span><span class="p">),</span> <span class="n">cs</span><span class="o">.</span><span class="n">SRGB_LIN</span><span class="p">,</span> <span class="n">op</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">ip</span> <span class="o">==</span> <span class="n">cs</span><span class="o">.</span><span class="n">DCI_P3</span><span class="p">:</span>           <span class="n">im</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">mm</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">dcip3_eotf</span><span class="p">(</span><span class="n">im</span><span class="p">),</span> <span class="bp">cls</span><span class="o">.</span><span class="n">mat_dcip3_to_srgb</span><span class="p">),</span> <span class="n">cs</span><span class="o">.</span><span class="n">SRGB_LIN</span><span class="p">,</span> <span class="n">op</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">ip</span> <span class="o">==</span> <span class="n">cs</span><span class="o">.</span><span class="n">DCI_P3_LIN</span><span class="p">:</span>       <span class="n">im</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">mm</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">mat_dcip3_to_srgb</span><span class="p">),</span> <span class="n">cs</span><span class="o">.</span><span class="n">SRGB_LIN</span><span class="p">,</span> <span class="n">op</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ip</span> <span class="o">==</span> <span class="n">cs</span><span class="o">.</span><span class="n">REC2020</span><span class="p">:</span>          
+            <span class="k">if</span> <span class="n">op</span> <span class="o">==</span> <span class="n">cs</span><span class="o">.</span><span class="n">REC2020_LIN</span><span class="p">:</span>    <span class="n">im</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">rec2020_eotf</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">op</span> <span class="o">==</span> <span class="n">cs</span><span class="o">.</span><span class="n">CIE_XYZ</span><span class="p">:</span>      <span class="n">im</span> <span class="o">=</span> <span class="n">mm</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">rec2020_eotf</span><span class="p">(</span><span class="n">im</span><span class="p">),</span> <span class="bp">cls</span><span class="o">.</span><span class="n">mat_rec2020_to_xyz</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">op</span> <span class="o">==</span> <span class="n">cs</span><span class="o">.</span><span class="n">SRGB_LIN</span><span class="p">:</span>     <span class="n">im</span> <span class="o">=</span> <span class="n">mm</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">rec2020_eotf</span><span class="p">(</span><span class="n">im</span><span class="p">),</span> <span class="bp">cls</span><span class="o">.</span><span class="n">mat_rec2020_to_srgb</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>                       <span class="n">im</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">mm</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">rec2020_eotf</span><span class="p">(</span><span class="n">im</span><span class="p">),</span> <span class="bp">cls</span><span class="o">.</span><span class="n">mat_rec2020_to_srgb</span><span class="p">),</span> <span class="n">cs</span><span class="o">.</span><span class="n">SRGB_LIN</span><span class="p">,</span> <span class="n">op</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ip</span> <span class="o">==</span> <span class="n">cs</span><span class="o">.</span><span class="n">REC2020_LIN</span><span class="p">:</span>      
+            <span class="k">if</span> <span class="n">op</span> <span class="o">==</span> <span class="n">cs</span><span class="o">.</span><span class="n">REC2020</span><span class="p">:</span>        <span class="n">im</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">rec2020_oetf</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">op</span> <span class="o">==</span> <span class="n">cs</span><span class="o">.</span><span class="n">CIE_XYZ</span><span class="p">:</span>      <span class="n">im</span> <span class="o">=</span> <span class="n">mm</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">mat_rec2020_to_xyz</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">op</span> <span class="o">==</span> <span class="n">cs</span><span class="o">.</span><span class="n">SRGB_LIN</span><span class="p">:</span>     <span class="n">im</span> <span class="o">=</span> <span class="n">mm</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">mat_rec2020_to_srgb</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>                       <span class="n">im</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">mm</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">mat_rec2020_to_srgb</span><span class="p">),</span> <span class="n">cs</span><span class="o">.</span><span class="n">SRGB_LIN</span><span class="p">,</span> <span class="n">op</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ip</span> <span class="o">==</span> <span class="n">cs</span><span class="o">.</span><span class="n">DCI_P3</span><span class="p">:</span>           
+            <span class="k">if</span> <span class="n">op</span> <span class="o">==</span> <span class="n">cs</span><span class="o">.</span><span class="n">DCI_P3_LIN</span><span class="p">:</span>     <span class="n">im</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">dcip3_eotf</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">op</span> <span class="o">==</span> <span class="n">cs</span><span class="o">.</span><span class="n">CIE_XYZ</span><span class="p">:</span>      <span class="n">im</span> <span class="o">=</span> <span class="n">mm</span><span class="p">(</span><span class="n">mm</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">dcip3_eotf</span><span class="p">(</span><span class="n">im</span><span class="p">),</span> <span class="bp">cls</span><span class="o">.</span><span class="n">mat_dcip3_to_xyz</span><span class="p">),</span> <span class="bp">cls</span><span class="o">.</span><span class="n">mat_dci_to_d65</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>                       <span class="n">im</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">mm</span><span class="p">(</span><span class="n">mm</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">dcip3_eotf</span><span class="p">(</span><span class="n">im</span><span class="p">),</span> <span class="bp">cls</span><span class="o">.</span><span class="n">mat_dcip3_to_xyz</span><span class="p">),</span> <span class="bp">cls</span><span class="o">.</span><span class="n">mat_dci_to_d65</span><span class="p">),</span> <span class="n">cs</span><span class="o">.</span><span class="n">CIE_XYZ</span><span class="p">,</span> <span class="n">op</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ip</span> <span class="o">==</span> <span class="n">cs</span><span class="o">.</span><span class="n">DCI_P3_LIN</span><span class="p">:</span>       
+            <span class="k">if</span> <span class="n">op</span> <span class="o">==</span> <span class="n">cs</span><span class="o">.</span><span class="n">DCI_P3</span><span class="p">:</span>         <span class="n">im</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">dcip3_oetf</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">op</span> <span class="o">==</span> <span class="n">cs</span><span class="o">.</span><span class="n">CIE_XYZ</span><span class="p">:</span>      <span class="n">im</span> <span class="o">=</span> <span class="n">mm</span><span class="p">(</span><span class="n">mm</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">mat_dcip3_to_xyz</span><span class="p">),</span> <span class="bp">cls</span><span class="o">.</span><span class="n">mat_dci_to_d65</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>                       <span class="n">im</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">mm</span><span class="p">(</span><span class="n">mm</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">mat_dcip3_to_xyz</span><span class="p">),</span> <span class="bp">cls</span><span class="o">.</span><span class="n">mat_dci_to_d65</span><span class="p">),</span> <span class="n">cs</span><span class="o">.</span><span class="n">CIE_XYZ</span><span class="p">,</span> <span class="n">op</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">ip</span> <span class="o">==</span> <span class="n">cs</span><span class="o">.</span><span class="n">DISPLAY_P3</span><span class="p">:</span>       <span class="n">im</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">mm</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">srgb_eotf</span><span class="p">(</span><span class="n">im</span><span class="p">),</span> <span class="bp">cls</span><span class="o">.</span><span class="n">mat_displayp3_to_srgb</span><span class="p">),</span> <span class="n">cs</span><span class="o">.</span><span class="n">SRGB_LIN</span><span class="p">,</span> <span class="n">op</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">ip</span> <span class="o">==</span> <span class="n">cs</span><span class="o">.</span><span class="n">CIE_XYZ</span><span class="p">:</span>
             <span class="k">if</span>   <span class="n">op</span> <span class="o">==</span> <span class="n">cs</span><span class="o">.</span><span class="n">CIE_XYY</span><span class="p">:</span>      <span class="n">im</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_xyz_to_xyy</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">op</span> <span class="o">==</span> <span class="n">cs</span><span class="o">.</span><span class="n">REC2020_LIN</span><span class="p">:</span>  <span class="n">im</span> <span class="o">=</span> <span class="n">mm</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">mat_xyz_to_rec2020</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">op</span> <span class="o">==</span> <span class="n">cs</span><span class="o">.</span><span class="n">REC2020</span><span class="p">:</span>      <span class="n">im</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">rec2020_oetf</span><span class="p">(</span><span class="n">mm</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">mat_xyz_to_rec2020</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="n">op</span> <span class="o">==</span> <span class="n">cs</span><span class="o">.</span><span class="n">DCI_P3_LIN</span><span class="p">:</span>   <span class="n">im</span> <span class="o">=</span> <span class="n">mm</span><span class="p">(</span><span class="n">mm</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">mat_d65_to_dci</span><span class="p">),</span> <span class="bp">cls</span><span class="o">.</span><span class="n">mat_xyz_to_dcip3</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">op</span> <span class="o">==</span> <span class="n">cs</span><span class="o">.</span><span class="n">DCI_P3</span><span class="p">:</span>       <span class="n">im</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">dcip3_oetf</span><span class="p">(</span><span class="n">mm</span><span class="p">(</span><span class="n">mm</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">mat_d65_to_dci</span><span class="p">),</span> <span class="bp">cls</span><span class="o">.</span><span class="n">mat_xyz_to_dcip3</span><span class="p">))</span>
             <span class="k">elif</span> <span class="n">op</span> <span class="o">==</span> <span class="n">cs</span><span class="o">.</span><span class="n">LMS</span><span class="p">:</span>          <span class="n">im</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_xyz_to_lms</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
             <span class="k">elif</span> <span class="n">op</span> <span class="o">==</span> <span class="n">cs</span><span class="o">.</span><span class="n">ACESCG</span><span class="p">:</span>       <span class="n">im</span> <span class="o">=</span> <span class="n">mm</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">_d65_to_d60</span><span class="p">(</span><span class="n">im</span><span class="p">),</span> <span class="bp">cls</span><span class="o">.</span><span class="n">mat_xyz_to_acescg</span><span class="p">)</span>
             <span class="k">elif</span> <span class="n">op</span> <span class="o">==</span> <span class="n">cs</span><span class="o">.</span><span class="n">CIELAB</span><span class="p">:</span>       <span class="n">im</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_xyz_to_cielab</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
@@ -421,8 +475,6 @@
             <span class="k">if</span>   <span class="n">op</span> <span class="o">==</span> <span class="n">cs</span><span class="o">.</span><span class="n">CIE_XYZ</span><span class="p">:</span>      <span class="n">im</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_oklab_to_xyz</span><span class="p">(</span><span class="n">im</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span> <span class="n">im</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">_oklab_to_rgb</span><span class="p">(</span><span class="n">im</span><span class="p">),</span> <span class="n">cs</span><span class="o">.</span><span class="n">SRGB_LIN</span><span class="p">,</span> <span class="n">op</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span> <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="n">err_not_implemented</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">op</span> <span class="o">&amp;</span> <span class="n">cs</span><span class="o">.</span><span class="n">NON_NEGATIVE</span><span class="p">:</span> <span class="n">im</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">inf</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">im</span></div>
 
@@ -563,9 +615,9 @@
         <span class="c1"># LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</span>
         <span class="c1"># OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE</span>
         <span class="c1"># SOFTWARE.        </span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">xyz</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="mf">0.95047</span> <span class="c1"># 0.950489 </span>
-        <span class="n">y</span> <span class="o">=</span> <span class="n">xyz</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">/</span> <span class="mf">1.00000</span> <span class="c1"># 1.000000 </span>
-        <span class="n">z</span> <span class="o">=</span> <span class="n">xyz</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">/</span> <span class="mf">1.08883</span> <span class="c1"># 1.088400 </span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">xyz</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="mf">0.95047</span> 
+        <span class="n">y</span> <span class="o">=</span> <span class="n">xyz</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">/</span> <span class="mf">1.00000</span> 
+        <span class="n">z</span> <span class="o">=</span> <span class="n">xyz</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">/</span> <span class="mf">1.08883</span> 
 
         <span class="n">x</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__pivot_xyz_to_lab</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="n">y</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__pivot_xyz_to_lab</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
@@ -582,6 +634,7 @@
 <span class="sd">        Convert color space from CIELAB to CIE XYZ.</span>
 <span class="sd">        </span>
 <span class="sd">        .. note::</span>
+
 <span class="sd">            Assumes D65 standard illuminant.</span>
 
 <span class="sd">        :param lab: Input CIELAB color space tensor</span>
@@ -627,9 +680,9 @@
         <span class="n">y</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">l</span> <span class="o">&gt;</span> <span class="mf">7.9996248</span><span class="p">,</span> <span class="n">y3</span><span class="p">,</span> <span class="n">l</span> <span class="o">/</span> <span class="mf">903.3</span><span class="p">)</span>
         <span class="n">z</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">z3</span> <span class="o">&gt;</span> <span class="mf">0.008856</span><span class="p">,</span> <span class="n">z3</span><span class="p">,</span> <span class="p">((</span><span class="n">z</span> <span class="o">*</span> <span class="mf">116.0</span><span class="p">)</span> <span class="o">-</span> <span class="mf">16.0</span><span class="p">)</span> <span class="o">/</span> <span class="mf">903.3</span><span class="p">)</span>
 
-        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="mf">0.95047</span> <span class="c1"># 0.950489</span>
-        <span class="n">y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">*</span> <span class="mf">1.00000</span> <span class="c1"># 1.000000</span>
-        <span class="n">z</span> <span class="o">=</span> <span class="n">z</span> <span class="o">*</span> <span class="mf">1.08883</span> <span class="c1"># 1.088840</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="mf">0.95047</span> 
+        <span class="n">y</span> <span class="o">=</span> <span class="n">y</span> <span class="o">*</span> <span class="mf">1.00000</span> 
+        <span class="n">z</span> <span class="o">=</span> <span class="n">z</span> <span class="o">*</span> <span class="mf">1.08883</span>
 
         <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
@@ -638,6 +691,7 @@
 <span class="sd">        Converts CIE XYZ to CIELUV. </span>
 <span class="sd">        </span>
 <span class="sd">        .. note::</span>
+
 <span class="sd">            Assumes D65 standard illuminant.</span>
 
 <span class="sd">        :param image: A pytorch tensor of shape (3, n_pixels_x, n_pixels_y) in which the channels are X, Y, Z</span>
@@ -696,6 +750,7 @@
 <span class="sd">        Converts CIELUV to CIE XYZ. </span>
 <span class="sd">        </span>
 <span class="sd">        .. note::</span>
+
 <span class="sd">            Assumes D65 standard illuminant.</span>
 
 <span class="sd">        :param image: A pytorch tensor of shape (3, n_pixels_x, n_pixels_y) in which the channels are L, U, V</span>
@@ -808,6 +863,7 @@
 <span class="sd">        Transform sRGB image tensor to sRGB-relative HSL. </span>
 <span class="sd">        </span>
 <span class="sd">        .. note::</span>
+
 <span class="sd">            expects non-linear sRGB w/ gamma curve as input</span>
 
 <span class="sd">        :param rgb: Input sRGB image tensor</span>
@@ -864,6 +920,7 @@
 <span class="sd">        Transform sRGB-relative HSL image tensor to sRGB. </span>
 <span class="sd">        </span>
 <span class="sd">        .. note::</span>
+
 <span class="sd">            returns non-linear sRGB w/ gamma curve as output</span>
 
 <span class="sd">        :param hsl: Input HSL image tensor</span>
@@ -915,9 +972,11 @@
 <span class="sd">        Transform sRGB image tensor to sRGB-relative HSV. </span>
 <span class="sd">        </span>
 <span class="sd">        .. note::</span>
+
 <span class="sd">            expects non-linear sRGB w/ gamma curve as input</span>
 
 <span class="sd">        .. warning::</span>
+
 <span class="sd">            input tensor will be clamped to [0, 1] range</span>
 
 <span class="sd">        :param rgb: Input sRGB image tensor</span>
@@ -966,6 +1025,7 @@
 <span class="sd">        Transform sRGB-relative HSV image tensor to sRGB. </span>
 <span class="sd">        </span>
 <span class="sd">        .. note::</span>
+<span class="sd">        </span>
 <span class="sd">            returns non-linear sRGB w/ gamma curve as output</span>
 
 <span class="sd">        :param hsv: Input HSV image tensor</span>
