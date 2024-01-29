@@ -206,6 +206,7 @@
         <span class="p">[</span><span class="mf">0.212639005871510358</span><span class="p">,</span> <span class="mf">0.715168678767755927</span><span class="p">,</span> <span class="mf">0.072192315360733715</span><span class="p">],</span>
         <span class="p">[</span><span class="mf">0.0193308187155918507</span><span class="p">,</span> <span class="mf">0.119194779794625988</span><span class="p">,</span> <span class="mf">0.950532152249660581</span><span class="p">]]</span>
 
+    <span class="c1"># NOTE: Includes &quot;D60&quot;/D65 white point conversion</span>
     <span class="n">mat_srgb_to_acescg</span> <span class="o">=</span> <span class="p">[</span>
         <span class="p">[</span> <span class="mf">0.6130974024</span><span class="p">,</span> <span class="mf">0.3395231462</span><span class="p">,</span> <span class="mf">0.04737945141</span><span class="p">],</span>
         <span class="p">[</span> <span class="mf">0.07019372247</span><span class="p">,</span> <span class="mf">0.916353879</span><span class="p">,</span> <span class="mf">0.01345239847</span><span class="p">],</span>
@@ -223,6 +224,7 @@
         <span class="p">[</span> <span class="mf">0.0897764431</span><span class="p">,</span> <span class="mf">0.813439429</span><span class="p">,</span> <span class="mf">0.0967841284</span><span class="p">],</span>
         <span class="p">[</span> <span class="mf">0.0175411704</span><span class="p">,</span> <span class="mf">0.111546553</span><span class="p">,</span> <span class="mf">0.870912277</span><span class="p">]]</span>
 
+    <span class="c1"># NOTE: Includes &quot;D60&quot;/D65 white point conversion</span>
     <span class="n">mat_aces2065_1_to_srgb</span> <span class="o">=</span> <span class="p">[</span>
         <span class="p">[</span> <span class="mf">2.52168619</span><span class="p">,</span>  <span class="o">-</span><span class="mf">1.13413099</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.387555198</span><span class="p">],</span>
         <span class="p">[</span><span class="o">-</span><span class="mf">0.276479914</span><span class="p">,</span>  <span class="mf">1.37271909</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0962391736</span><span class="p">],</span>
@@ -361,10 +363,11 @@
 
 <span class="sd">        .. warning::</span>
 
-<span class="sd">            Tone mapping is not included, so converting the color space of HDR values to  </span>
-<span class="sd">            an LDR-designated color space will not automatically reduce dynamic range. For example, </span>
-<span class="sd">            taking an HDR image from :code:`ACESCG` (AP1) to :code:`SRGB` will yield the sRGB </span>
-<span class="sd">            gamma curve, but values outside the required range must still be tone mapped or clamped beforehand.</span>
+<span class="sd">            Tone mapping is not automatically included. Thus, converting a wide-gamut color space to one </span>
+<span class="sd">            with a narrower gamut, or converting HDR values to a nominally LDR-designated color space </span>
+<span class="sd">            will not automatically remap out-of-gamut color to in-gamut or reduce dynamic range. </span>
+<span class="sd">            It will likely yield out-of-gamut (positive of negative) or out-of-range values. </span>
+<span class="sd">            These values should still, at some point, be tone mapped or clamped to the desired output range.</span>
 
 <span class="sd">        .. warning::</span>
 
@@ -891,7 +894,7 @@
         <span class="c1"># LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</span>
         <span class="c1"># OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE</span>
         <span class="c1"># SOFTWARE.</span>
-        <span class="n">rgb</span> <span class="o">=</span> <span class="n">rgb</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">rgb</span> <span class="o">=</span> <span class="n">rgb</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
         <span class="n">cmax</span><span class="p">,</span> <span class="n">cmax_idx</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">rgb</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdim</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">cmin</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">rgb</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdim</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">delta</span> <span class="o">=</span> <span class="n">cmax</span> <span class="o">-</span> <span class="n">cmin</span>
@@ -948,7 +951,7 @@
         <span class="c1"># LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</span>
         <span class="c1"># OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE</span>
         <span class="c1"># SOFTWARE.</span>
-        <span class="n">hsl</span> <span class="o">=</span> <span class="n">hsl</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">hsl</span> <span class="o">=</span> <span class="n">hsl</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
         <span class="n">hsl_h</span><span class="p">,</span> <span class="n">hsl_s</span><span class="p">,</span> <span class="n">hsl_l</span> <span class="o">=</span> <span class="n">hsl</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">],</span> <span class="n">hsl</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">hsl</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
         <span class="n">_c</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">torch</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">hsl_l</span> <span class="o">*</span> <span class="mf">2.</span> <span class="o">-</span> <span class="mf">1.</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">hsl_s</span>
         <span class="n">_x</span> <span class="o">=</span> <span class="n">_c</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="n">torch</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">hsl_h</span> <span class="o">*</span> <span class="mf">6.</span> <span class="o">%</span> <span class="mf">2.</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1.</span><span class="p">)</span>
@@ -1004,7 +1007,7 @@
         <span class="c1"># LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</span>
         <span class="c1"># OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE</span>
         <span class="c1"># SOFTWARE.</span>
-        <span class="n">rgb</span> <span class="o">=</span> <span class="n">rgb</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="mf">1.</span><span class="p">)</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">rgb</span> <span class="o">=</span> <span class="n">rgb</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="mf">1.</span><span class="p">)</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
         <span class="n">cmax</span><span class="p">,</span> <span class="n">cmax_idx</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">rgb</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdim</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">cmin</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">rgb</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdim</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">delta</span> <span class="o">=</span> <span class="n">cmax</span> <span class="o">-</span> <span class="n">cmin</span>
@@ -1053,7 +1056,7 @@
         <span class="c1"># LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,</span>
         <span class="c1"># OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE</span>
         <span class="c1"># SOFTWARE.</span>
-        <span class="n">hsv</span> <span class="o">=</span> <span class="n">hsv</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">hsv</span> <span class="o">=</span> <span class="n">hsv</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
         <span class="n">hsv_h</span><span class="p">,</span> <span class="n">hsv_s</span><span class="p">,</span> <span class="n">hsv_l</span> <span class="o">=</span> <span class="n">hsv</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">],</span> <span class="n">hsv</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">],</span> <span class="n">hsv</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
         <span class="n">_c</span> <span class="o">=</span> <span class="n">hsv_l</span> <span class="o">*</span> <span class="n">hsv_s</span>
         <span class="n">_x</span> <span class="o">=</span> <span class="n">_c</span> <span class="o">*</span> <span class="p">(</span><span class="o">-</span> <span class="n">torch</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">hsv_h</span> <span class="o">*</span> <span class="mf">6.</span> <span class="o">%</span> <span class="mf">2.</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1.</span><span class="p">)</span>
@@ -1102,8 +1105,14 @@
 <span class="sd">        im_srgb = TransferFunction.srgb_oetf(im_linear)</span>
 
 <span class="sd">    .. note::</span>
+
 <span class="sd">        These transfer functions are applied automatically by :code:`ColorSpace.convert` when appropriate, </span>
 <span class="sd">        but can instead be used explicitly.</span>
+
+<span class="sd">    .. note::</span>
+
+<span class="sd">        Out-of-gamut values will be accepted, but the values returned may not be well-defined </span>
+<span class="sd">        or meaningful. The goal is only to keep them consistent and out of range.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 <div class="viewcode-block" id="TransferFunction.srgb_eotf"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.TransferFunction.srgb_eotf">[docs]</a>    <span class="nd">@staticmethod</span>
@@ -1115,7 +1124,7 @@
 <span class="sd">        :return: linear sRGB image tensor</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">s1</span> <span class="o">=</span> <span class="n">im</span> <span class="o">/</span> <span class="mf">12.92321</span>
-        <span class="n">s2</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">pow</span><span class="p">((</span><span class="n">im</span> <span class="o">+</span> <span class="mf">0.055</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1.055</span><span class="p">,</span> <span class="mf">12.</span> <span class="o">/</span> <span class="mi">5</span><span class="p">)</span>
+        <span class="n">s2</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">pow</span><span class="p">((</span><span class="n">im</span> <span class="o">+</span> <span class="mf">0.055</span><span class="p">)</span> <span class="o">/</span> <span class="mf">1.055</span><span class="p">,</span> <span class="mf">2.4</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">im</span> <span class="o">&lt;=</span> <span class="mf">0.04045</span><span class="p">,</span> <span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="TransferFunction.srgb_oetf"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.TransferFunction.srgb_oetf">[docs]</a>    <span class="nd">@staticmethod</span>
@@ -1151,7 +1160,7 @@
 <span class="sd">        :return: Rec. 709 image tensor</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">s1</span> <span class="o">=</span> <span class="n">im</span> <span class="o">*</span> <span class="mf">4.5</span>
-        <span class="n">s2</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="mf">.4545</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1.099</span> <span class="o">-</span> <span class="mf">0.099</span>
+        <span class="n">s2</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="mf">1.</span> <span class="o">/</span> <span class="mf">2.2</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1.099</span> <span class="o">-</span> <span class="mf">0.099</span>
         <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">im</span> <span class="o">&lt;=</span> <span class="mf">0.018</span><span class="p">,</span> <span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="TransferFunction.rec2020_eotf"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.TransferFunction.rec2020_eotf">[docs]</a>    <span class="nd">@staticmethod</span>
@@ -1190,7 +1199,7 @@
 <span class="sd">        :param im: DCI P3 image tensor </span>
 <span class="sd">        :return: linear P3 gamut image tensor</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="mf">2.6</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">im</span><span class="p">),</span> <span class="mf">2.6</span><span class="p">)</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">im</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="TransferFunction.dcip3_oetf"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.TransferFunction.dcip3_oetf">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">dcip3_oetf</span><span class="p">(</span><span class="n">im</span><span class="p">:</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span> 
@@ -1200,7 +1209,7 @@
 <span class="sd">        :param im: linear P3 gamut image tensor </span>
 <span class="sd">        :return: DCI P3 image tensor</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="mf">1.</span><span class="o">/</span><span class="mf">2.6</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">im</span><span class="p">),</span> <span class="mf">1.</span><span class="o">/</span><span class="mf">2.6</span><span class="p">)</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">im</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="TransferFunction.log_c_eotf"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.TransferFunction.log_c_eotf">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">log_c_eotf</span><span class="p">(</span><span class="n">im</span><span class="p">:</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
@@ -1240,8 +1249,7 @@
 <span class="sd">        :param im: S-Log encoded image tensor</span>
 <span class="sd">        :return: linear image tensor </span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="mf">10.0</span><span class="p">,</span> <span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="mf">0.616596</span> <span class="o">-</span> <span class="mf">0.03</span><span class="p">)</span> <span class="o">/</span> <span class="mf">0.432699</span><span class="p">))</span> <span class="o">-</span> <span class="mf">0.037584</span></div>
+        <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="mf">10.0</span><span class="p">,</span> <span class="p">((</span><span class="n">im</span> <span class="o">-</span> <span class="mf">0.616596</span> <span class="o">-</span> <span class="mf">0.03</span><span class="p">)</span> <span class="o">/</span> <span class="mf">0.432699</span><span class="p">))</span> <span class="o">-</span> <span class="mf">0.037584</span></div>
 
 <div class="viewcode-block" id="TransferFunction.s_log_oetf"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.TransferFunction.s_log_oetf">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">s_log_oetf</span><span class="p">(</span><span class="n">im</span><span class="p">:</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
@@ -1251,8 +1259,7 @@
 <span class="sd">        :param im: linear image tensor </span>
 <span class="sd">        :return: S-Log encoded image tensor</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">clone</span><span class="p">()</span>
-        <span class="k">return</span> <span class="p">(</span><span class="mf">0.432699</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mf">0.037584</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.616596</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.03</span></div></div>
+        <span class="k">return</span> <span class="p">(</span><span class="mf">0.432699</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">im</span> <span class="o">+</span> <span class="mf">0.037584</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.616596</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.03</span></div></div>
 </pre></div>
 
            </div>

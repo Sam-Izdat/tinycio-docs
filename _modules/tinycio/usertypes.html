@@ -144,10 +144,10 @@
 <span class="sd">    :param option1_param1: y component</span>
 <span class="sd">    :type option1_param1: float</span>
 
-<span class="sd">    :param option2_param0: value of both components</span>
+<span class="sd">    :param option2_param0: Value of both components.</span>
 <span class="sd">    :type option2_param0: float</span>
 
-<span class="sd">    :param option3_param0: 2-component tensor or array </span>
+<span class="sd">    :param option3_param0: 2-component tensor or array.</span>
 <span class="sd">        (a 2D tensor/array image is allowed if the number of pixel values is 1)</span>
 <span class="sd">    :type option3_param0: torch.Tensor | numpy.ndarray | Float2</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -199,7 +199,7 @@
 
 <span class="sd">    :param param0: [C=3, H, W] sized tensor/array</span>
 <span class="sd">    :type param0: torch.Tensor | numpy.ndarray</span>
-<span class="sd">    :param color_space: the color space of the image</span>
+<span class="sd">    :param color_space: Color space of the image.</span>
 <span class="sd">    :type color_space: str | ColorSpace.Variant</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -348,10 +348,10 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Load image from file</span>
 
-<span class="sd">        :param fp: image file path</span>
-<span class="sd">        :param color_space: image color space</span>
+<span class="sd">        :param fp: Image file path.</span>
+<span class="sd">        :param color_space: Image color space.</span>
 <span class="sd">        :type color_space: str | ColorSpace.Variant</span>
-<span class="sd">        :param graphics_format: image graphics format</span>
+<span class="sd">        :param graphics_format: Image graphics format.</span>
 <span class="sd">        :type graphics_format: str | fsio.GraphicsFormat</span>
 <span class="sd">        :return: New :class:`ColorImage` loaded from file.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -390,8 +390,8 @@
 <span class="sd">        .. warning:: </span>
 <span class="sd">            This will overwrite existing files.</span>
 
-<span class="sd">        :param fp: image file path</span>
-<span class="sd">        :param graphics_format: image graphics format</span>
+<span class="sd">        :param fp: Image file path.</span>
+<span class="sd">        :param graphics_format: Image graphics format.</span>
 <span class="sd">        :type graphics_format: str | fsio.GraphicsFormat</span>
 <span class="sd">        :return: True if successful</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -431,7 +431,7 @@
 
 <span class="sd">            Any needed color space conversion will be handled automatically.</span>
 
-<span class="sd">        :param tone_mapper: the tone mapper to use</span>
+<span class="sd">        :param tone_mapper: Tone mapper to use.</span>
 <span class="sd">        :type tone_mapper: str | ToneMapping.Variant</span>
 <span class="sd">        :return: New tone mapped :class:`ColorImage`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -465,8 +465,8 @@
         <span class="k">return</span> <span class="n">ColorImage</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">color_space</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">color_space</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="ColorImage.white_balance"><a class="viewcode-back" href="../../source/tinycio.html#tinycio.ColorImage.white_balance">[docs]</a>    <span class="k">def</span> <span class="nf">white_balance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
-        <span class="n">source_white</span><span class="p">:</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Float2</span><span class="p">,</span> <span class="n">Chromaticity</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">WhiteBalance</span><span class="o">.</span><span class="n">Illuminant</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span> 
-        <span class="n">target_white</span><span class="p">:</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Float2</span><span class="p">,</span> <span class="n">Chromaticity</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">WhiteBalance</span><span class="o">.</span><span class="n">Illuminant</span><span class="p">]</span><span class="o">=</span><span class="n">WhiteBalance</span><span class="o">.</span><span class="n">Illuminant</span><span class="o">.</span><span class="n">NONE</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ColorImage</span><span class="p">:</span>
+        <span class="n">source_white</span><span class="p">:</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Float2</span><span class="p">,</span> <span class="n">Chromaticity</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="n">WhiteBalance</span><span class="o">.</span><span class="n">Illuminant</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">,</span> 
+        <span class="n">target_white</span><span class="p">:</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Float2</span><span class="p">,</span> <span class="n">Chromaticity</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="n">WhiteBalance</span><span class="o">.</span><span class="n">Illuminant</span><span class="p">]</span><span class="o">=</span><span class="n">WhiteBalance</span><span class="o">.</span><span class="n">Illuminant</span><span class="o">.</span><span class="n">NONE</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ColorImage</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        White balance the image and return as new :class:`ColorImage`.</span>
 
@@ -493,7 +493,7 @@
         <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">source_white</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span> <span class="ow">and</span> <span class="n">source_white</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;AUTO&quot;</span><span class="p">:</span>
             <span class="n">source_white</span> <span class="o">=</span> <span class="n">WhiteBalance</span><span class="o">.</span><span class="n">wp_from_image</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">to_color_space</span><span class="p">(</span><span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="o">.</span><span class="n">CIE_XYZ</span><span class="p">))</span>
         <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">source_white</span><span class="p">)</span> <span class="ow">in</span> <span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
-            <span class="n">source_white</span> <span class="o">=</span> <span class="n">WhiteBalance</span><span class="o">.</span><span class="n">wp_from_cct</span><span class="p">(</span><span class="n">source_white</span><span class="p">)</span>
+            <span class="n">source_white</span> <span class="o">=</span> <span class="n">WhiteBalance</span><span class="o">.</span><span class="n">wp_from_cct</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">source_white</span><span class="p">))</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">source_white</span><span class="p">,</span> <span class="n">WhiteBalance</span><span class="o">.</span><span class="n">Illuminant</span><span class="p">):</span>
             <span class="n">source_white</span> <span class="o">=</span> <span class="n">WhiteBalance</span><span class="o">.</span><span class="n">wp_from_illuminant</span><span class="p">(</span><span class="n">source_white</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">source_white</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
@@ -621,9 +621,9 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Convert color value from one color space to another.</span>
 
-<span class="sd">        :param source: color space to convert from</span>
+<span class="sd">        :param source: Color space to convert from.</span>
 <span class="sd">        :type source: str | ColorSpace.Variant</span>
-<span class="sd">        :param destination: color space to convert to</span>
+<span class="sd">        :param destination: Color space to convert to.</span>
 <span class="sd">        :type destination: str | ColorSpace.Variant</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">source</span> <span class="o">==</span> <span class="n">destination</span><span class="p">:</span> <span class="k">return</span> <span class="bp">self</span>
@@ -669,9 +669,9 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Unsqueeze to a [C=3, H, W] sized PyTorch image tensor.</span>
 
-<span class="sd">        :param color_space: the color space of the image</span>
+<span class="sd">        :param color_space: Color space of the image.</span>
 <span class="sd">        :type color_space: str | ColorSpace.Variant</span>
-<span class="sd">        :return: Expanded [C=3, H=1, W=1] float32 &quot;image&quot; tensor</span>
+<span class="sd">        :return: Expanded [C=3, H=1, W=1] float32 &quot;image&quot; tensor.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">color_space</span><span class="p">)</span> <span class="ow">is</span> <span class="nb">str</span><span class="p">:</span> <span class="n">color_space</span> <span class="o">=</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="p">[</span><span class="n">color_space</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()]</span>
         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">color_space</span><span class="p">,</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">Variant</span><span class="p">),</span> <span class="s2">&quot;Invalid color space&quot;</span>
