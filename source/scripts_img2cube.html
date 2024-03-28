@@ -16,7 +16,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=d90f1d78"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=a8da5721"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../_static/js/theme.js"></script>
@@ -115,11 +115,11 @@
 <h1>Image to CUBE LUT<a class="headerlink" href="#image-to-cube-lut" title="Permalink to this heading"></a></h1>
 <p>Create a color grading LUT by aligning the appearance of a source image to that of a target image.</p>
 <p class="rubric">Summary:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>usage: tcio-img2cube [-h] [--save-lut SAVE_LUT] [--save-image SAVE_IMAGE] [--size SIZE]
-                   [--steps STEPS] [--learning-rate LEARNING_RATE] [--loss-fm LOSS_FM]
-                   [--loss-jsd LOSS_JSD] [--loss-ssim LOSS_SSIM] [--empty-lut] [--igfs ]
-                   [--igft ] [--ogf ] [--device ]
-                   source target
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>usage: tcio-img2cube [-h] [--save-image SAVE_IMAGE] [--save-lut SAVE_LUT]
+                     [--size SIZE] [--steps STEPS] [--learning-rate LEARNING_RATE]
+                     [--strength STRENGTH] [--empty-lut] [--igfs ] [--igft ]
+                     [--ogf ] [--device ]
+                     source target
 
 Apply an automatic color grade to an image and/or generate a color grading CUBE LUT
 by aligning the look of a source image to that of a target image.
@@ -139,8 +139,7 @@ optional arguments:
                         Steps (range [0, 10000]) (default: 1000)
   --learning-rate LEARNING_RATE, -r LEARNING_RATE
                         Learning rate (range [0, 1]) (default: 0.003)
-  --strength STRENGTH
-                        Strength of the effect (range [0, 1]) (default: 1.0)
+  --strength STRENGTH   Strength of the effect (range [0, 1]) (default: 1.0)
   --empty-lut           Initialize empty LUT (instead of linear)
   --igfs []             Source image graphics format (default: unknown)
                         CHOICES:

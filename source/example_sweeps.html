@@ -16,7 +16,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=d90f1d78"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=a8da5721"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../_static/js/theme.js"></script>
@@ -172,6 +172,7 @@
     <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Color</span><span class="p">(</span><span class="n">Spectral</span><span class="o">.</span><span class="n">wl_to_srgb_linear</span><span class="p">(</span><span class="n">wl</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span><span class="o">.</span><span class="n">image</span><span class="p">())</span>
 
 <span class="n">out</span> <span class="o">=</span> <span class="n">ColorImage</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">dim</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;SRGB_LIN&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">clamp</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">)</span>
+<span class="n">out</span> <span class="o">*=</span> <span class="mf">0.5</span>
 <span class="n">out</span><span class="o">.</span><span class="n">to_color_space</span><span class="p">(</span><span class="s1">&#39;SRGB&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;../out/sweep_spectrum.png&#39;</span><span class="p">)</span>
 </pre></div>
 </div>

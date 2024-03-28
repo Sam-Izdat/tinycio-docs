@@ -16,7 +16,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=d90f1d78"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=a8da5721"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../_static/js/theme.js"></script>
@@ -1614,7 +1614,7 @@ in increments of 5nm, from 380nm to 780nm.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="tinycio.Spectral.wl_to_srgb">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">wl_to_srgb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/spectral.html#Spectral.wl_to_srgb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.Spectral.wl_to_srgb" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">wl_to_srgb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lum_scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.25</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/spectral.html#Spectral.wl_to_srgb"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.Spectral.wl_to_srgb" title="Permalink to this definition"></a></dt>
 <dd><p>Wavelength (nm) to normalized, approximate sRGB color,
 clamped to [0, 1] range, with sRGB gamma curve.</p>
 <div class="admonition note">
@@ -1627,7 +1627,8 @@ Take the RGB outputs with a grain of salt.</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>wl</strong> (<em>float</em>) – wavelength in nm</p></li>
-<li><p><strong>normalize</strong> – normalize sRGB color</p></li>
+<li><p><strong>normalize</strong> (<em>bool</em>) – normalize sRGB color</p></li>
+<li><p><strong>lum_scale</strong> (<em>float</em>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -1641,13 +1642,14 @@ Take the RGB outputs with a grain of salt.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="tinycio.Spectral.wl_to_srgb_linear">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">wl_to_srgb_linear</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/spectral.html#Spectral.wl_to_srgb_linear"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.Spectral.wl_to_srgb_linear" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">wl_to_srgb_linear</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">normalize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lum_scale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.25</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/spectral.html#Spectral.wl_to_srgb_linear"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.Spectral.wl_to_srgb_linear" title="Permalink to this definition"></a></dt>
 <dd><p>Wavelength (nm) to normalized, approximate linear sRGB color, clamped to [0, 1] range.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>wl</strong> (<em>float</em>) – wavelength in nm</p></li>
-<li><p><strong>normalize</strong> – normalize sRGB color</p></li>
+<li><p><strong>normalize</strong> (<em>bool</em>) – normalize sRGB color</p></li>
+<li><p><strong>lum_scale</strong> (<em>float</em>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
