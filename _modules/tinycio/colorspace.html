@@ -15,7 +15,7 @@
   
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b600fcd5"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=247f223e"></script>
         <script src="../../_static/doctools.js?v=888ff710"></script>
         <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -219,14 +219,14 @@
         <span class="p">[</span><span class="o">-</span><span class="mf">0.02400335681</span><span class="p">,</span><span class="o">-</span><span class="mf">0.1289689761</span><span class="p">,</span> <span class="mf">1.152972333</span><span class="p">]]</span>
 
     <span class="n">mat_aces_rrt_sat</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="p">[</span><span class="mf">0.970889</span><span class="p">,</span> <span class="mf">0.026963</span><span class="p">,</span> <span class="mf">0.002148</span><span class="p">],</span>
-        <span class="p">[</span><span class="mf">0.010889</span><span class="p">,</span> <span class="mf">0.986963</span><span class="p">,</span> <span class="mf">0.002148</span><span class="p">],</span>
-        <span class="p">[</span><span class="mf">0.010889</span><span class="p">,</span> <span class="mf">0.026963</span><span class="p">,</span> <span class="mf">0.962148</span><span class="p">]]</span>
+        <span class="p">[</span><span class="mf">0.9708890</span><span class="p">,</span> <span class="mf">0.0269633</span><span class="p">,</span> <span class="mf">0.00214758</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.0108892</span><span class="p">,</span> <span class="mf">0.9869630</span><span class="p">,</span> <span class="mf">0.00214758</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.0108892</span><span class="p">,</span> <span class="mf">0.0269633</span><span class="p">,</span> <span class="mf">0.96214800</span><span class="p">]]</span>
 
-    <span class="n">mat_aces_rrt_sat_inv</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="p">[</span> <span class="mf">1.03032</span>  <span class="p">,</span> <span class="o">-</span><span class="mf">0.0280865</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0022375</span><span class="p">],</span>
-        <span class="p">[</span><span class="o">-</span><span class="mf">0.0113427</span><span class="p">,</span>  <span class="mf">1.01358</span>  <span class="p">,</span> <span class="o">-</span><span class="mf">0.0022375</span><span class="p">],</span>
-        <span class="p">[</span><span class="o">-</span><span class="mf">0.0113427</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0280865</span><span class="p">,</span>  <span class="mf">1.03943</span><span class="p">]]</span>
+    <span class="n">mat_aces_odt_sat</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">[</span><span class="mf">0.949056</span><span class="p">,</span> <span class="mf">0.0471857</span><span class="p">,</span> <span class="mf">0.00375827</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.019056</span><span class="p">,</span> <span class="mf">0.9771860</span><span class="p">,</span> <span class="mf">0.00375827</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.019056</span><span class="p">,</span> <span class="mf">0.0471857</span><span class="p">,</span> <span class="mf">0.93375800</span><span class="p">]]</span>
 
     <span class="c1"># sRGB =&gt; XYZ =&gt; D65_2_D60 =&gt; AP1 =&gt; RRT_SAT</span>
     <span class="n">mat_srgb_to_ap1_tm</span> <span class="o">=</span> <span class="p">[</span>
@@ -541,8 +541,8 @@
         <span class="k">return</span> <span class="n">mm</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">mat_aces_rrt_sat</span><span class="p">)</span>
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">_ap1_rrt_sat_inv</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">im</span><span class="p">:</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">mm</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">mat_aces_rrt_sat_inv</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_ap1_odt_sat</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">im</span><span class="p">:</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">mm</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">mat_aces_odt_sat</span><span class="p">)</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_xyz_to_lms</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">xyz</span><span class="p">:</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
