@@ -16,7 +16,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=a8da5721"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=c7d5b68c"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../_static/js/theme.js"></script>
@@ -400,15 +400,23 @@ the color space set to UNKNOWN. Exceptions include <code class="code docutils li
 
 <dl class="py method">
 <dt class="sig sig-object py" id="tinycio.ColorImage.tone_map">
-<span class="sig-name descname"><span class="pre">tone_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tone_mapper</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/usertypes.html#ColorImage.tone_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.ColorImage.tone_map" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">tone_map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tone_mapper</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_color_space</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Variant.SRGB_LIN</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/tinycio/usertypes.html#ColorImage.tone_map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tinycio.ColorImage.tone_map" title="Permalink to this definition"></a></dt>
 <dd><p>Apply tone mapping and return as new <a class="reference internal" href="#tinycio.ColorImage" title="tinycio.ColorImage"><code class="xref py py-class docutils literal notranslate"><span class="pre">ColorImage</span></code></a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Any needed color space conversion will be handled automatically.</p>
+<p>Image will be returned and (if the TMO allows) tone mapped in the desired target color space.
+Any needed color space conversion will be handled automatically.</p>
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>tone_mapper</strong> (<em>str</em><em> | </em><a class="reference internal" href="#tinycio.ToneMapping.Variant" title="tinycio.ToneMapping.Variant"><em>ToneMapping.Variant</em></a>) – Tone mapper to use.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tone_mapper</strong> (<em>str</em><em> | </em><a class="reference internal" href="#tinycio.ToneMapping.Variant" title="tinycio.ToneMapping.Variant"><em>ToneMapping.Variant</em></a>) – Tone mapper to use.</p></li>
+<li><p><strong>target_color_space</strong> (<em>str</em><em> | </em><a class="reference internal" href="#tinycio.ColorSpace.Variant" title="tinycio.ColorSpace.Variant"><em>ColorSpace.Variant</em></a>) – The desired color space the image should be tone mapped for.
+Must be a scene-linear RGB color space. The image will be returned in this color space.
+If the TMO requires a different color space, the image will converted after tone mapping.
+Some TMOs may have been designed with linear sRGB in mind and may not perform as expected
+in a different color space.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>New tone mapped <a class="reference internal" href="#tinycio.ColorImage" title="tinycio.ColorImage"><code class="xref py py-class docutils literal notranslate"><span class="pre">ColorImage</span></code></a>.</p>

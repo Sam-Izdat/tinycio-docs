@@ -15,7 +15,7 @@
   
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=a8da5721"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=c7d5b68c"></script>
         <script src="../../_static/doctools.js?v=888ff710"></script>
         <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -160,7 +160,7 @@
         <span class="n">OKHSV</span>       <span class="o">=</span> <span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">22</span>
         <span class="n">OKHSL</span>       <span class="o">=</span> <span class="mi">1</span><span class="o">&lt;&lt;</span><span class="mi">23</span>
 
-        <span class="n">SCENE_LINEAR</span>    <span class="o">=</span> <span class="n">SRGB_LIN</span> <span class="o">|</span> <span class="n">REC2020_LIN</span> <span class="o">|</span> <span class="n">DCI_P3_LIN</span> <span class="o">|</span> <span class="n">ACESCG</span> <span class="o">|</span> <span class="n">ACES2065_1</span> <span class="o">|</span> <span class="n">CIE_XYZ</span>
+        <span class="n">SCENE_LINEAR</span>    <span class="o">=</span> <span class="n">SRGB_LIN</span> <span class="o">|</span> <span class="n">REC2020_LIN</span> <span class="o">|</span> <span class="n">DCI_P3_LIN</span> <span class="o">|</span> <span class="n">ACESCG</span> <span class="o">|</span> <span class="n">ACES2065_1</span> <span class="o">|</span> <span class="n">LMS</span> <span class="o">|</span> <span class="n">CIE_XYZ</span>
         <span class="n">PERCEPTUAL</span>      <span class="o">=</span> <span class="n">OKLAB</span> <span class="o">|</span> <span class="n">CIELAB</span> <span class="o">|</span> <span class="n">CIELUV</span> <span class="o">|</span> <span class="n">OKHSL</span> <span class="o">|</span> <span class="n">OKHSV</span>
         <span class="n">CYLINDRICAL</span>     <span class="o">=</span> <span class="n">HSL</span> <span class="o">|</span> <span class="n">HSV</span> <span class="o">|</span> <span class="n">OKHSL</span> <span class="o">|</span> <span class="n">OKHSV</span>
 
@@ -217,6 +217,29 @@
         <span class="p">[</span> <span class="mf">1.705050993</span><span class="p">,</span>  <span class="o">-</span><span class="mf">0.6217921206</span><span class="p">,</span><span class="o">-</span><span class="mf">0.083258872</span><span class="p">],</span>
         <span class="p">[</span><span class="o">-</span><span class="mf">0.1302564175</span><span class="p">,</span>  <span class="mf">1.140804737</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.01054831907</span><span class="p">],</span>
         <span class="p">[</span><span class="o">-</span><span class="mf">0.02400335681</span><span class="p">,</span><span class="o">-</span><span class="mf">0.1289689761</span><span class="p">,</span> <span class="mf">1.152972333</span><span class="p">]]</span>
+
+    <span class="n">mat_aces_rrt_sat</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">[</span><span class="mf">0.970889</span><span class="p">,</span> <span class="mf">0.026963</span><span class="p">,</span> <span class="mf">0.002148</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.010889</span><span class="p">,</span> <span class="mf">0.986963</span><span class="p">,</span> <span class="mf">0.002148</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.010889</span><span class="p">,</span> <span class="mf">0.026963</span><span class="p">,</span> <span class="mf">0.962148</span><span class="p">]]</span>
+
+    <span class="n">mat_aces_rrt_sat_inv</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">[</span> <span class="mf">1.03032</span>  <span class="p">,</span> <span class="o">-</span><span class="mf">0.0280865</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0022375</span><span class="p">],</span>
+        <span class="p">[</span><span class="o">-</span><span class="mf">0.0113427</span><span class="p">,</span>  <span class="mf">1.01358</span>  <span class="p">,</span> <span class="o">-</span><span class="mf">0.0022375</span><span class="p">],</span>
+        <span class="p">[</span><span class="o">-</span><span class="mf">0.0113427</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0280865</span><span class="p">,</span>  <span class="mf">1.03943</span><span class="p">]]</span>
+
+    <span class="c1"># sRGB =&gt; XYZ =&gt; D65_2_D60 =&gt; AP1 =&gt; RRT_SAT</span>
+    <span class="n">mat_srgb_to_ap1_tm</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">[</span><span class="mf">0.59719</span><span class="p">,</span> <span class="mf">0.35458</span><span class="p">,</span> <span class="mf">0.04823</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.07600</span><span class="p">,</span> <span class="mf">0.90834</span><span class="p">,</span> <span class="mf">0.01566</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.02840</span><span class="p">,</span> <span class="mf">0.13383</span><span class="p">,</span> <span class="mf">0.83777</span><span class="p">]]</span>
+
+    <span class="c1"># ODT_SAT =&gt; XYZ =&gt; D60_2_D65 =&gt; sRGB</span>
+    <span class="n">mat_ap1_to_srgb_tm</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">[</span> <span class="mf">1.60475</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.53108</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.07367</span><span class="p">],</span>
+        <span class="p">[</span><span class="o">-</span><span class="mf">0.10208</span><span class="p">,</span>  <span class="mf">1.10813</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.00605</span><span class="p">],</span>
+        <span class="p">[</span><span class="o">-</span><span class="mf">0.00327</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.07276</span><span class="p">,</span>  <span class="mf">1.07602</span><span class="p">]</span>
+        <span class="p">]</span>
 
     <span class="c1"># NOTE: Includes &quot;D60&quot;/D65 white point conversion</span>
     <span class="n">mat_srgb_to_aces2065_1</span> <span class="o">=</span> <span class="p">[</span>
@@ -512,6 +535,14 @@
         <span class="n">X</span> <span class="o">=</span> <span class="p">(</span><span class="n">Y</span> <span class="o">/</span> <span class="n">y</span><span class="p">)</span> <span class="o">*</span> <span class="n">x</span>
         <span class="n">Z</span> <span class="o">=</span> <span class="p">(</span><span class="n">Y</span> <span class="o">/</span> <span class="n">y</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">-</span> <span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">([</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">Z</span><span class="p">],</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_ap1_rrt_sat</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">im</span><span class="p">:</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">mm</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">mat_aces_rrt_sat</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">_ap1_rrt_sat_inv</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">im</span><span class="p">:</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">mm</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">mat_aces_rrt_sat_inv</span><span class="p">)</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">_xyz_to_lms</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">xyz</span><span class="p">:</span><span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">:</span>

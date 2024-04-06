@@ -16,7 +16,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=a8da5721"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=c7d5b68c"></script>
         <script src="../_static/doctools.js?v=888ff710"></script>
         <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
     <script src="../_static/js/theme.js"></script>
@@ -127,7 +127,7 @@
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tinycio</span> <span class="kn">import</span> <span class="n">ColorImage</span>
 
 <span class="n">im</span> <span class="o">=</span> <span class="n">ColorImage</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;my/hdr_image.tif&#39;</span><span class="p">,</span> <span class="s1">&#39;SRGB_LIN&#39;</span><span class="p">)</span>
-<span class="n">im</span><span class="o">.</span><span class="n">tone_map</span><span class="p">(</span><span class="s1">&#39;AGX_PUNCHY&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;my/ldr_image.tif&#39;</span><span class="p">)</span>
+<span class="n">im</span><span class="o">.</span><span class="n">tone_map</span><span class="p">(</span><span class="s1">&#39;AGX_PUNCHY&#39;</span><span class="p">,</span> <span class="n">target_color_space</span><span class="o">=</span><span class="s1">&#39;SRGB_LIN&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;my/ldr_image.tif&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <hr class="docutils" />
@@ -150,7 +150,7 @@ If you do this manually and step-by-step instead, take note of the inputs expect
 <span class="n">im_ldr</span> <span class="o">=</span> <span class="n">ToneMapping</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">im_ap1</span><span class="p">,</span> <span class="n">tone_mapper</span><span class="o">=</span><span class="n">tm</span><span class="p">)</span>
 
 <span class="c1"># Take image to sRGB and apply the gamma curve</span>
-<span class="n">im_srgb</span> <span class="o">=</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">im_ldr</span><span class="p">,</span> <span class="n">cs_in</span><span class="p">,</span> <span class="n">cs_out</span><span class="p">)</span>
+<span class="n">im_srgb</span> <span class="o">=</span> <span class="n">ColorSpace</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="n">im_ldr</span><span class="p">,</span> <span class="n">cs_tm</span><span class="p">,</span> <span class="n">cs_out</span><span class="p">)</span>
 
 <span class="c1"># Save final image as 24-bit sRGB PNG file</span>
 <span class="n">fsio</span><span class="o">.</span><span class="n">save_image</span><span class="p">(</span><span class="n">im_srgb</span><span class="p">,</span> <span class="s1">&#39;my/ldr_image.png&#39;</span><span class="p">)</span>
